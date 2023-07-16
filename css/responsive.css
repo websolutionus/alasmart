@@ -311,6 +311,14 @@
     /*===============================
         HOME PAHE 3 END
     ===============================*/
+
+    .variant_modal .modal-content {
+        width: 100%;
+    }
+
+    .upload_product_img {
+        height: auto;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199.99px) {
@@ -787,6 +795,72 @@
 
     .wsus__sidebar_pro_info .follow li p {
         font-size: 16px;
+    }
+
+
+    /*===============================
+        AUTHOE EDIT PROFILE START
+    ===============================*/
+    .wsus__author_edit_form {
+        padding: 40px;
+    }
+
+    .wsus__author_edit_profile_bg .edit_heading {
+        padding: 15px 40px;
+    }
+
+    .wsus__author_edit_connect h2 {
+        font-size: 22px;
+    }
+
+    .wsus__author_edit_connect ul li {
+        width: 48%;
+    }
+
+    .wsus__author_edit_photo {
+        padding: 40px 65px 0px 0px;
+    }
+
+    /*===============================
+        AUTHOE EDIT PROFILE END
+    ===============================*/
+
+    /*===============================
+        PROFILE PAYOUT START
+    ===============================*/
+    .wsus__payout_overview_item {
+        padding: 20px;
+    }
+
+    .wsus__payout_overview_item h2 {
+        font-size: 28px;
+    }
+
+    .wsus__payout_overview_item a {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .wsus__payout_overview_item p {
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    .wsus__payout_table table tr th,
+    .wsus__payout_table table tr td {
+        padding: 15px 25px;
+    }
+
+    .variant_modal .modal-content {
+        width: 100%;
+    }
+
+    /*===============================
+        PROFILE PAYOUT END
+    ===============================*/
+
+    .upload_product_img {
+        height: auto;
     }
 }
 
@@ -1477,6 +1551,82 @@
     /*===============================
         HOME PAHE 3 END
     ===============================*/
+
+
+    /*===============================
+        AUTHOE EDIT PROFILE START
+    ===============================*/
+    .wsus__author_edit_form {
+        padding: 30px;
+    }
+
+    .wsus__author_edit_profile_bg .edit_heading {
+        padding: 15px 30px;
+    }
+
+    .wsus__author_edit_connect h2 {
+        font-size: 22px;
+    }
+
+    .wsus__author_edit_connect ul li {
+        width: 48%;
+    }
+
+    .wsus__author_edit_photo {
+        padding: 30px !important;
+    }
+
+    /*===============================
+        AUTHOE EDIT PROFILE END
+    ===============================*/
+
+
+    /*===============================
+        PROFILE PAYOUT START
+    ===============================*/
+    .wsus__payout_overview_item {
+        padding: 20px;
+    }
+
+    .wsus__payout_overview_item h2 {
+        font-size: 28px;
+    }
+
+    .wsus__payout_overview_item a {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .wsus__payout_overview_item p {
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    .wsus__payout_table h2 {
+        font-size: 32px;
+        margin-top: 5px;
+    }
+
+    .wsus__payout_table table tr th,
+    .wsus__payout_table table tr td {
+        padding: 10px 20px;
+    }
+
+    .wsus__payout_table table tr th {
+        font-size: 16px;
+    }
+
+    .variant_modal .modal-content {
+        width: 100%;
+    }
+
+    /*===============================
+        PROFILE PAYOUT END
+    ===============================*/
+
+    .upload_product_img {
+        height: auto;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.99px) {
@@ -2312,6 +2462,66 @@
     /*===============================
         HOME PAHE 3 END
     ===============================*/
+
+
+    /*===============================
+        AUTHOE EDIT PROFILE START
+    ===============================*/
+    .wsus__author_edit_form {
+        padding: 30px;
+    }
+
+    .wsus__author_edit_profile_bg .edit_heading {
+        padding: 15px 30px;
+    }
+
+    .wsus__author_edit_connect h2 {
+        font-size: 22px;
+    }
+
+    .wsus__author_edit_connect ul li {
+        width: 48%;
+    }
+
+    .wsus__author_edit_photo {
+        padding: 30px !important;
+    }
+
+    /*===============================
+        AUTHOE EDIT PROFILE END
+    ===============================*/
+
+    /*===============================
+        PROFILE PAYOUT START
+    ===============================*/
+    .wsus__payout_overview_item p {
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    .wsus__payout_table h2 {
+        font-size: 32px;
+        margin-top: 5px;
+    }
+
+    .wsus__payout_table table tr th,
+    .wsus__payout_table table tr td {
+        padding: 10px 20px;
+    }
+
+    .wsus__payout_table table tr th {
+        font-size: 16px;
+    }
+
+    .variant_modal .modal-content {
+        width: 100%;
+    }
+
+    /*===============================
+        PROFILE PAYOUT END
+    ===============================*/
+
+
 }
 
 @media (max-width: 575.99px) {
@@ -3320,5 +3530,109 @@
     /*===============================
         HOME PAHE 3 END
     ===============================*/
+
+
+    /*===============================
+        AUTHOE EDIT PROFILE START
+    ===============================*/
+    .wsus__author_edit_form {
+        padding: 20px;
+    }
+
+    .wsus__author_edit_profile_bg .edit_heading {
+        padding: 15px 20px;
+    }
+
+    .wsus__author_edit_connect h2 {
+        font-size: 22px;
+    }
+
+    .wsus__author_edit_connect ul li {
+        width: 75%;
+    }
+
+    .wsus__author_edit_photo {
+        padding: 20px !important;
+    }
+
+    /*===============================
+        AUTHOE EDIT PROFILE END
+    ===============================*/
+
+
+    /*===============================
+        PROFILE PAYOUT START
+    ===============================*/
+    .wsus__payout_overview_item {
+        padding: 20px;
+    }
+
+    .wsus__payout_overview_item h2 {
+        font-size: 28px;
+    }
+
+    .wsus__payout_overview_item a {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .wsus__payout_overview_item p {
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    .wsus__payout_table h2 {
+        font-size: 32px;
+        margin-top: 5px;
+    }
+
+    .wsus__payout_table table tr th,
+    .wsus__payout_table table tr td {
+        padding: 10px 20px;
+    }
+
+    .wsus__payout_table table tr th {
+        font-size: 16px;
+    }
+
+    .variant_modal .modal-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    /*===============================
+        PROFILE PAYOUT END
+    ===============================*/
+
+    .variant_price .img {
+        width: 100%;
+        height: auto;
+    }
+
+    .variant_price_2 {
+        text-align: left;
+    }
+
+    .variant_price_2 .common_btn {
+        margin-top: 20px;
+    }
+
+    .variant_price {
+        padding: 20px;
+    }
+
+    .upload_product_text h3 {
+        font-size: 32px;
+    }
+
+    .upload_product_img {
+        width: 100%;
+        height: auto;
+        margin-top: 30px;
+    }
+
+    .wsus__author_edit_form .button_area {
+        justify-content: start;
+    }
 
 }

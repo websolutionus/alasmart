@@ -361,5 +361,12 @@ $(function () {
     });
 
 
+    //=====SUMMER NOTE JS=======
+    $(document).ready(function () {
+        $('.summer_note').summernote();
+    });
+
+
+
 
 });

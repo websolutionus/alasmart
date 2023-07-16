@@ -5883,3 +5883,935 @@ HOME PAGE END
 /*==========================
     HOME PAGE 3 END
 ===========================*/
+
+
+/*==========================
+AUTHOR EDIT PROFILE START
+===========================*/
+.wsus__author_edit_profile {}
+
+.wsus__author_edit_profile_bg {
+    border-radius: 4px;
+    background: #F5F5F5;
+}
+
+.wsus__author_edit_profile_bg .edit_heading {
+    color: var(--colorWhite);
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 4px 4px 0px 0px;
+    background: var(--colorBlack);
+    padding: 23px 60px;
+}
+
+.wsus__author_edit_form {
+    position: relative;
+    padding: 60px;
+}
+
+.wsus__author_edit_form .wsus__comment_single_input {
+    background: none;
+}
+
+.wsus__author_edit_form .nice-select .current {
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.wsus__author_edit_form fieldset {
+    overflow: initial;
+    position: relative;
+}
+
+.wsus__author_edit_form fieldset .eye {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    opacity: .7;
+    cursor: pointer;
+}
+
+.wsus__author_edit_form .nice-select {
+    border: none;
+}
+
+.wsus__author_edit_form h3 {
+    color: var(--colorBlack);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom: 15px;
+}
+
+.wsus__author_edit_form .button_area {
+    justify-content: end;
+}
+
+.wsus__author_edit_form .button_area li {
+    margin-top: 15px;
+}
+
+.wsus__author_edit_form .button_area li .cancel {
+    background: none;
+    color: #EB5757;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-right: 20px;
+}
+
+.wsus__author_edit_connect {
+    margin-top: 75px;
+}
+
+.wsus__author_edit_connect h2 {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dcdcdc;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.wsus__author_edit_connect ul li {
+    margin-top: 20px;
+    width: 32%;
+}
+
+.wsus__author_edit_connect ul li a {
+    display: block;
+    width: 100%;
+    padding: 17px;
+    padding-left: 52px;
+    background-color: #ddd;
+    border-radius: 100px;
+    text-align: center;
+    position: relative;
+    color: var(--colorWhite);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.wsus__author_edit_connect ul li a i {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: var(--colorWhite);
+    color: var(--colorBlack);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+.wsus__author_edit_connect ul li a span {
+    display: block;
+    width: 79%;
+    text-align: center;
+    color: var(--colorBlack);
+}
+
+.wsus__author_edit_connect ul li a.facebook {
+    background: #1877F2;
+}
+
+.wsus__author_edit_connect ul li a.facebook i {
+    color: #1877F2;
+}
+
+.wsus__author_edit_connect ul li a.dribble {
+    background: #EA4C89;
+}
+
+.wsus__author_edit_connect ul li a.dribble i {
+    color: #EA4C89;
+}
+
+.wsus__author_edit_connect ul li a.twitter {
+    background: #1D9BF0;
+}
+
+.wsus__author_edit_connect ul li a.twitter i {
+    color: #1D9BF0;
+}
+
+.wsus__author_edit_connect ul li a.pinterest {
+    background: #BD081C;
+}
+
+.wsus__author_edit_connect ul li a.pinterest i {
+    color: #BD081C;
+}
+
+.wsus__author_edit_connect ul li a.linkedin {
+    background: #0077B6;
+}
+
+.wsus__author_edit_connect ul li a.linkedin i {
+    color: #0077B6;
+}
+
+.wsus__author_edit_connect ul li a.youtube {
+    background: #F00;
+}
+
+.wsus__author_edit_connect ul li a.youtube i {
+    color: #F00;
+}
+
+.wsus__author_edit_photo {
+    padding: 60px 85px 0px 0px;
+    text-align: center;
+}
+
+.wsus__author_edit_photo .img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.wsus__author_edit_photo label {
+    border-radius: 5px;
+    background: #055BFF;
+    display: block;
+    padding: 10px 0px;
+    text-align: center;
+    color: var(--colorWhite);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 30px 0px;
+    cursor: pointer;
+}
+
+.wsus__author_edit_photo label i {
+    margin-right: 5px;
+}
+
+.wsus__author_edit_photo h4 {
+    color: var(--colorBlack);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.wsus__author_edit_photo p {
+    color: var(--paraColor);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    text-align: center;
+}
+
+.wsus__author_edit_photo p span {
+    color: #F00;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/*==========================
+AUTHOR EDIT PROFILE END
+===========================*/
+
+
+/*============================
+    UPLOAD PRODUCT START
+============================*/
+.upload_product {
+    background: #F5F5F5;
+}
+
+.upload_product_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+}
+
+.upload_product_text h3 {
+    font-weight: 700;
+    color: var(--colorBlack);
+    font-size: 42px;
+    line-height: 56.8px;
+}
+
+.upload_product_text h6 {
+    color: var(--colorPrimary);
+    margin: 20px 0px 30px 0px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.upload_form_input .nice-select,
+.upload_product_text .nice-select {
+    width: 100%;
+    background: #F2F2F2;
+    border: 1px solid #BFBFBF;
+    border-radius: 4px;
+    color: #162B49;
+    font-weight: 500;
+    font-size: 16px;
+    height: 55px;
+    line-height: 55px;
+    margin-bottom: 25px;
+}
+
+.upload_product_text h5 {
+    color: var(--colorBlack);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.upload_product_text p {
+    font-weight: 400;
+    font-size: 16px;
+    border-bottom: 1px solid #D9D9D9;
+    margin: 20px 0px 40px 0px;
+    padding-bottom: 25px;
+
+
+    /* Body */
+    line-height: 26px;
+    /* 162.5% */
+}
+
+.upload_product_text ul li .cancel {
+    font-weight: 500;
+    font-size: 18px;
+    color: #EB5757;
+    margin-right: 20px;
+    text-transform: capitalize;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.upload_product_text ul li .cancel:hover {
+    color: #162B49;
+}
+
+.upload_product_img {
+    height: 490px;
+}
+
+/*============================
+    UPLOAD PRODUCT END
+============================*/
+
+/*============================
+    UPLOAD PRODUCT INFO START
+============================*/
+.upload_product_info {
+    background: rgb(22, 43, 73);
+    background: linear-gradient(0deg, rgba(22, 43, 73, 0) 0%, rgb(22 43 73 / 5%) 100%);
+}
+
+.upload_product_info h3 {
+    background: var(--colorBlack);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--colorWhite);
+    padding: 20px 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.upload_product_form {}
+
+.upload_form_input label {
+    display: block;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: var(--paraColor);
+}
+
+.upload_form_input label span {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--colorBlack);
+    margin-left: 10px;
+}
+
+.upload_form_input label span b {
+    font-weight: 400;
+    color: #0049FF;
+}
+
+.upload_form_input input,
+.upload_form_input textarea {
+    background: #FDF9FC;
+    border: 1px solid #E8E8E8;
+    width: 100%;
+    padding: 17px 20px;
+    outline: none;
+    resize: none;
+}
+
+.upload_box {
+    text-align: center;
+    background: #FDF9FC;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 40px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.upload_box label {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--colorBlack);
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload_box label span {
+    color: #0049FF;
+    font-size: 18px;
+    margin-left: 0px;
+}
+
+.upload_box .img {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.upload_form_input .nice-select {
+    background: #FDF9FC;
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+    margin: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.upload_form_input {
+    margin-top: 20px;
+}
+
+.upload_form_input ul li button {
+    color: var(--colorWhite) !important;
+    border: none;
+    box-shadow: none;
+}
+
+.upload_form_input .upload {
+    background: #27AE60;
+    margin-right: 20px;
+}
+
+.upload_form_input .delete {
+    background: #EB5757;
+}
+
+.upload_form_input ul li button:hover {
+    box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.1);
+}
+
+.variant_price {
+    border-radius: 5px;
+    border: 1px solid #E8E8E8;
+    background: var(--colorWhite);
+    padding: 30px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.variant_price h4 {
+    color: var(--colorBlack);
+
+    /* Su */
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.variant_price .img {
+    width: 345px;
+    height: 205px;
+    margin: 50px auto;
+}
+
+.upload_product_form fieldset {
+    overflow: initial;
+}
+
+.upload_product_form fieldset .nice-select {
+    border: none;
+}
+
+.upload_product_form fieldset .nice-select .current {
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.upload_product_form .note-btn-group button {
+    margin-top: 0;
+}
+
+.upload_product_form .wsus__comment_single_input {
+    background: none;
+    margin-bottom: 0;
+    margin-top: 25px;
+}
+
+.upload_product_form .note-editor.note-frame {
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.variant_modal .modal-content {
+    padding: 30px;
+}
+
+.variant_modal .modal-body {
+    padding: 0;
+    padding-top: 25px;
+}
+
+.variant_modal .modal-header {
+    padding: 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #DCDCDC;
+}
+
+.variant_modal .modal-title {
+    color: var(--colorBlack);
+    /* Sub B */
+    font-family: Rubik;
+    font-size: 20px !important;
+    font-weight: 700;
+    /* 160% */
+}
+
+.variant_modal .btn-close {
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    border: 1px solid rgba(55, 69, 87, 0.6);
+    background: var(--colorWhite);
+    opacity: 1;
+    border-radius: 50%;
+    color: rgba(55, 69, 87, 0.6);
+    font-size: 19px;
+    margin-right: 0px;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.variant_modal .btn-close:hover {
+    background: var(--colorBlue);
+    color: var(--colorWhite);
+    border-color: var(--colorBlue);
+}
+
+.variant_modal .btn-close:focus {
+    box-shadow: none;
+}
+
+.variant_modal form label {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--paraColor);
+    display: block;
+    margin-bottom: 7px;
+}
+
+.variant_modal form input {
+    /* margin-bottom: 25px; */
+    /* border-radius: 0; */
+    /* border: 1px solid #E8E8E8; */
+}
+
+.variant_modal .upload_variant_img {
+    padding: 25px 0;
+    text-align: center;
+}
+
+.variant_modal .upload_variant_img .img {
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+}
+
+.variant_modal .upload_variant_img label {
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    color: var(--colorBlack);
+}
+
+.variant_modal .upload_variant_img label b {
+    color: #055BFF;
+    font-weight: 400;
+}
+
+.variant_modal form button {
+    width: 100%;
+    text-align: center;
+}
+
+.variant_price_2 {
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.variant_price_2 .common_btn {
+    margin-bottom: 20px;
+}
+
+.variant_price_2 table {
+    width: 100%;
+}
+
+.variant_price_2 table tr {
+    display: flex;
+    justify-content: space-between;
+    background: #F5F5F5;
+    padding: 17px 17px;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.variant_price_2 table tr .size {
+    width: 40%;
+    min-width: 250px;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--colorBlack);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.variant_price_2 table tr .price {
+    width: 20%;
+    min-width: 120px;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--colorBlack);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.variant_price_2 table tr .button_area {
+    width: 40%;
+    min-width: 410px;
+}
+
+.variant_price_2 table tr .button_area a {
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: capitalize;
+    border-radius: 3px;
+    padding: 7px 16px;
+    margin-left: 10px;
+}
+
+.variant_price_2 table tr .button_area a i {
+    margin-right: 5px;
+}
+
+.variant_price_2 table tr .download_btn {
+    background: #47C36312;
+    color: #48C364;
+}
+
+.variant_price_2 table tr .edit_btn {
+    color: #2046DA;
+    background: #2046DA12;
+}
+
+.variant_price_2 table tr .delete_btn {
+    color: #FB160A;
+    background: #FB160A12;
+}
+
+.variant_price_2 h4 {
+    float: left;
+}
+
+.upload_view {
+    padding: 0 !important;
+}
+
+.upload_view .img {
+    width: 100%;
+    height: 150px;
+    margin: 0;
+}
+
+.upload_product_form input,
+.upload_product_form textarea {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/*============================
+    UPLOAD PRODUCT INFO END
+============================*/
+
+
+/*============================
+    PROFILE PAYOUT START
+============================*/
+.wsus__payout_overview_item {
+    background: url(../images/payout_overview_bg_1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px 40px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.wsus__payout_overview_item.item_2 {
+    background: url(../images/payout_overview_bg_2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wsus__payout_overview_item.item_3 {
+    background: url(../images/payout_overview_bg_3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wsus__payout_overview_item .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.wsus__payout_overview_item p {
+    color: var(--colorWhite);
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 18px;
+}
+
+.wsus__payout_overview_item h2 {
+    color: var(--colorWhite);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 40px;
+}
+
+.wsus__payout_overview_item a {
+    border-radius: 4px;
+    background: #27AE60;
+    color: var(--colorWhite);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 20px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.variant_modal {}
+
+.variant_modal .nice-select {
+    border: none;
+}
+
+.variant_modal fieldset {
+    overflow: initial;
+}
+
+.variant_modal form input {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.variant_modal .nice-select .current {
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.variant_modal .nice-select {
+    font-size: 13px;
+    height: 38px;
+    line-height: 33px;
+}
+
+.withdraw_success {
+    text-align: center;
+}
+
+.withdraw_success .icon {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.withdraw_success h2 {
+    color: var(--colorBlack);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    /* 122.539% */
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.withdraw_success p {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.withdraw_success a {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wsus__payout_table {}
+
+.wsus__payout_table h2 {
+    color: var(--colorBlack);
+
+    /* H1 */
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 56.8px;
+    /* 135.238% */
+    margin-bottom: 25px;
+    margin-top: 55px;
+}
+
+.wsus__payout_table table {
+    margin: 0;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+}
+
+.wsus__payout_table .header_row {
+    background: #e1ebff;
+}
+
+.wsus__payout_table table tr th,
+.wsus__payout_table table tr td {
+    padding: 20px 30px;
+    color: var(--paraColor);
+    font-size: 16px;
+    font-weight: 400;
+    border-bottom-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wsus__payout_table table tr {
+    border: transparent;
+    display: flex;
+}
+
+.wsus__payout_table table tr th {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--colorBlack) !important;
+}
+
+.wsus__payout_table table tr td span {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.383px;
+    padding: 8px 20px;
+    border-radius: 35px;
+    min-width: 110px;
+    display: inline-block;
+    text-align: center;
+}
+
+.wsus__payout_table table tr td .success {
+    color: #219653;
+    background: #CCFDE1;
+}
+
+.wsus__payout_table table tr td .cancel {
+    color: #EB5757;
+    background: #FFCDC8;
+}
+
+.wsus__payout_table table tr td .pending {
+    color: #FF9A33;
+    background: #FFF3DB;
+}
+
+.wsus__payout_table table tr .number {
+    width: 15%;
+    min-width: 110px;
+}
+
+.wsus__payout_table table tr .method {
+    width: 25%;
+    min-width: 180px;
+}
+
+.wsus__payout_table table tr .charge {
+    width: 20%;
+    min-width: 110px;
+}
+
+.wsus__payout_table table tr .amount {
+    width: 25%;
+    min-width: 220px;
+}
+
+.wsus__payout_table table tr .status {
+    width: 15%;
+    min-width: 180px;
+}
+
+/*============================
+    PROFILE PAYOUT END
+============================*/

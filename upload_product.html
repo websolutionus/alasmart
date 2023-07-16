@@ -146,163 +146,44 @@
 
 
     <!--=============================
-        PROFILE DOWNLOAD EMPTY START
+        UPLOAD PRODUCT START
     ==============================-->
-    <section class="wsus__profile pt_130 xs_pt_100 pb_120 xs_pb_80">
-        <div class="wsus__profile_header" style="background: url(images/profile_header_bg.jpg);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="wsus__profile_header_text">
-                            <div class="img wow fadeInLeft" data-wow-duration="1s">
-                                <img src="images/profile_img.png" alt="profile" class="img-fluid w-100">
-                            </div>
-                            <div class="text wow fadeInRight" data-wow-duration="1s">
-                                <h2>Abdullah Mamun</h2>
-                                <p class="join"><span>Joined:</span> 14 Agu, 2022</p>
-                                <p class="skills">PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.</p>
-                                <div class="rating">
-                                    <span>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </span>
-                                    <p>Average rating of 3.0 based on 1 votes</p>
-                                </div>
-                            </div>
-                            <ul class="header_button d-flex flex-wrap">
-                                <li>
-                                    <h4><i class="fas fa-box-full"></i> 511</h4>
-                                    <p>Products</p>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-cloud-download-alt"></i> 188</h4>
-                                    <p>Download</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <section class="upload_product pt_210 xs_pt_180 pb_90 xs_pb_60">
         <div class="container">
-            <ul class="header_menu d-flex flex-wrap">
-                <li><a href="profile_overview.html"><i class="fal fa-layer-group"></i> Overview</a>
-                </li>
-                <li><a href="profile_portfolio.html"><i class="far fa-box"></i> Portfolio</a></li>
-                <li><a class="active" href="profile_download.html"><i class="far fa-download"></i> Download File</a>
-                </li>
-                <li><a href="profile_collection.html"><i class="far fa-folders"></i> Collection</a></li>
-                <li><a href="profile_rating.html"><i class="fas fa-star"></i> Item Rating </a></li>
-                <li><a href="profile_payout.html"><i class="far fa-cogs"></i> Payout </a></li>
-            </ul>
-
-            <div class="row">
-                <div class="col-xl-8 col-lg-8">
-                    <div class="wsus__profile_download_empty">
-                        <h2>Buying Items</h2>
-                        <div class="img">
-                            <img src="images/empty_cart_img.png" alt="empty" class="img-fluid w-100">
-                        </div>
-                        <h3>Your download is empty</h3>
-                        <a href="product.html" class="common_btn">Continue to Shoping</a>
-                    </div>
+            <div class="row justify-content-between">
+                <div class="col-xl-5 col-lg-6 wow fadeInLeft" data-wow-duration="1s">
+                    <form class="upload_product_text">
+                        <h3>Prodcut Upload</h3>
+                        <h6>Select a category for your Product</h6>
+                        <select class="select_js">
+                            <option value="all">Select a Products Catagory</option>
+                            <option value="wordpress">Wordpress</option>
+                            <option value="joomla">Joomla</option>
+                            <option value="shopify">Shopify</option>
+                            <option value="webflow">Webflow</option>
+                            <option value="react">React</option>
+                            <option value="vue">Vue</option>
+                            <option value="HTML">HTML</option>
+                        </select>
+                        <h5>Need help selecting a category?</h5>
+                        <p>A great way to start is by browsing through our categories to see what other authors are
+                            selling.</p>
+                        <ul class="d-flex flex-wrap align-items-center">
+                            <li><a class="cancel" href="#">cancel</a></li>
+                            <li><a class="common_btn" href="#">next</a></li>
+                        </ul>
+                    </form>
                 </div>
-                <div class="col-xl-4 col-lg-4">
-                    <div class="wsus__profile_sidebar">
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_buy_info">
-                            <h3>Selling Info</h3>
-                            <ul class="info">
-                                <li>
-                                    <p><i class="fal fa-cart-plus"></i> Total Sale</p>
-                                    <span>7352</span>
-                                </li>
-                                <li>
-                                    <p><i class="far fa-box"></i> item</p>
-                                    <span>29</span>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-star"></i> Item Rating</p>
-                                    <span><i class="fas fa-star"></i> (43)</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_pro_info mt_30">
-                            <h3>Parsonal Info</h3>
-                            <ul>
-                                <li><span>Contry</span> bangladesh</li>
-                                <li><span>City</span> dhaka</li>
-                                <li><span>Member Since</span> july 2013</li>
-                            </ul>
-                            <ul class="follow d-flex flex-wrap justify-content-between">
-                                <li>
-                                    <h3>732</h3>
-                                    <p>Followers</p>
-                                </li>
-                                <li>
-                                    <h3>96</h3>
-                                    <p>Folllowing</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item profile_sedebar_contact mt_30">
-                            <h3>Contact</h3>
-                            <form>
-                                <div class="wsus__comment_single_input">
-                                    <fieldset>
-                                        <legend>email*</legend>
-                                        <input type="email" placeholder="infoyour@gmail.com">
-                                    </fieldset>
-                                </div>
-                                <div class="wsus__comment_single_input">
-                                    <fieldset>
-                                        <legend>Message*</legend>
-                                        <textarea rows="3" placeholder="Write Message"></textarea>
-                                    </fieldset>
-                                </div>
-                                <button type="submit" class="common_btn">send message</button>
-                            </form>
-                        </div>
-                        <div class="wsus__sidebar_buy_info profile_sedebar_social mt_30">
-                            <h3>Social Profile</h3>
-                            <ul class="d-flex flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Facebook.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Pinterest.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/LinkedIn.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Dribbble.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Twitter.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="col-xl-5 col-lg-6 wow fadeInRight" data-wow-duration="1s">
+                    <div class="upload_product_img">
+                        <img src="images/upload_img.png" alt="upload" class="img-fluid w-100">
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!--=============================
-        PROFILE DOWNLOAD EMPTY END
+        UPLOAD PRODUCT END
     ==============================-->
 
 

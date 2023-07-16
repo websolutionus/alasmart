@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/price_range_style.css">
     <link rel="stylesheet" href="css/price_range_ui.css">
+    <link rel="stylesheet" href="css/summernote.min.css">
 
     <link rel="stylesheet" href="css/spacing.css">
     <link rel="stylesheet" href="css/style.css">
@@ -146,272 +147,235 @@
 
 
     <!--=============================
-        PROFILE DOWNLOAD START
+        UPLOAD PRODUCT INFO START
     ==============================-->
-    <section class="wsus__profile pt_130 xs_pt_100 pb_120 xs_pb_80">
-        <div class="wsus__profile_header" style="background: url(images/profile_header_bg.jpg);">
-            <div class="container">
+    <section class="upload_product_info pt_190 pb_100 xs_pb_70">
+        <div class="container wow fadeInUp" data-wow-duration="1s">
+            <h3>Upload your Product </h3>
+            <form class="upload_product_form">
                 <div class="row">
-                    <div class="col-xl-12">
-                        <div class="wsus__profile_header_text">
-                            <div class="img wow fadeInLeft" data-wow-duration="1s">
-                                <img src="images/profile_img.png" alt="profile" class="img-fluid w-100">
-                            </div>
-                            <div class="text wow fadeInRight" data-wow-duration="1s">
-                                <h2>Abdullah Mamun</h2>
-                                <p class="join"><span>Joined:</span> 14 Agu, 2022</p>
-                                <p class="skills">PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.</p>
-                                <div class="rating">
-                                    <span>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </span>
-                                    <p>Average rating of 3.0 based on 1 votes</p>
+                    <div class="col-xl-6 col-md-6">
+                        <div class="upload_form_input">
+                            <label>Thumbnail Image* <span> ( Size<b>300x300</b>px, Max <b>5mb</b>)</span></label>
+                            <div class="upload_box">
+                                <div class="img">
+                                    <img src="images/upload_1.png" alt="upload icon" class="img-fluid w-100">
                                 </div>
+                                <label for="upload_11">Drag & Drop or <span>Choose File</span> to upload </label>
+                                <input id="upload_11" type="file" hidden>
                             </div>
-                            <ul class="header_button d-flex flex-wrap">
-                                <li>
-                                    <h4><i class="fas fa-box-full"></i> 511</h4>
-                                    <p>Products</p>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-cloud-download-alt"></i> 188</h4>
-                                    <p>Download</p>
-                                </li>
-                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6">
+                        <div class="upload_form_input">
+                            <label>Upload File* <span> (<b>Only ZIP file allowed</b>)</span></label>
+                            <div class="upload_box">
+                                <div class="img">
+                                    <img src="images/upload_2.png" alt="upload icon" class="img-fluid w-100">
+                                </div>
+                                <label for="upload_1">Drag & Drop or <span>Choose File</span> to upload </label>
+                                <input id="upload_1" type="file" hidden>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Category*</legend>
+                                <select class="select_js">
+                                    <option value="">Select Category</option>
+                                    <option value="">japan</option>
+                                    <option value="">thailand</option>
+                                    <option value="">korea</option>
+                                    <option value="">vutan</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Author*</legend>
+                                <select class="select_js">
+                                    <option value="">Select Author</option>
+                                    <option value="">japan</option>
+                                    <option value="">thailand</option>
+                                    <option value="">korea</option>
+                                    <option value="">vutan</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Product Name*</legend>
+                                <input type="text" placeholder="Product Name">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Preview Link*</legend>
+                                <input type="text" placeholder="Preview Link">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Regular Price*</legend>
+                                <input type="text" placeholder="Regular Price">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Extend Price*</legend>
+                                <input type="text" placeholder="Extend Price">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <legend>Description*</legend>
+                            <textarea class="summer_note" rows="8" placeholder="Write Description here"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="variant_price variant_price_2">
+                            <h4>Variant and Price</h4>
+                            <a href="#" class="common_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                                More Variant</a>
+                            <div class="table-responsive">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="size">Size : 52-px - 1024px</td>
+                                            <td class="price">$34.00</td>
+                                            <td class="button_area">
+                                                <a href="#" class="download_btn"><i class="fad fa-arrow-to-bottom"></i>
+                                                    download</a>
+                                                <a href="#" class="edit_btn"><i class="fas fa-edit"></i> edit</a>
+                                                <a href="#" class="delete_btn"><i class="fas fa-trash-alt"></i>
+                                                    delete</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="size">Size : 52-px - 1024px</td>
+                                            <td class="price">$34.00</td>
+                                            <td class="button_area">
+                                                <a href="#" class="download_btn"><i class="fad fa-arrow-to-bottom"></i>
+                                                    download</a>
+                                                <a href="#" class="edit_btn"><i class="fas fa-edit"></i> edit</a>
+                                                <a href="#" class="delete_btn"><i class="fas fa-trash-alt"></i>
+                                                    delete</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="size">Size : 52-px - 1024px</td>
+                                            <td class="price">$34.00</td>
+                                            <td class="button_area">
+                                                <a href="#" class="download_btn"><i class="fad fa-arrow-to-bottom"></i>
+                                                    download</a>
+                                                <a href="#" class="edit_btn"><i class="fas fa-edit"></i> edit</a>
+                                                <a href="#" class="delete_btn"><i class="fas fa-trash-alt"></i>
+                                                    delete</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Tags*</legend>
+                                <input type="text" placeholder="Tags">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Status*</legend>
+                                <select class="select_js">
+                                    <option value="">Active</option>
+                                    <option value="">Deactive</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>SEO Title*</legend>
+                                <input type="text" placeholder="SEO Title">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>SEO Description*</legend>
+                                <textarea rows="4" placeholder="SEO Description"></textarea>
+                            </fieldset>
+                            <button class="common_btn upload" type="submit">upload Product</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <ul class="header_menu d-flex flex-wrap">
-                <li><a href="profile_overview.html"><i class="fal fa-layer-group"></i> Overview</a>
-                </li>
-                <li><a href="profile_portfolio.html"><i class="far fa-box"></i> Portfolio</a></li>
-                <li><a class="active" href="profile_download.html"><i class="far fa-download"></i> Download File</a>
-                </li>
-                <li><a href="profile_collection.html"><i class="far fa-folders"></i> Collection</a></li>
-                <li><a href="profile_rating.html"><i class="fas fa-star"></i> Item Rating </a></li>
-                <li><a href="profile_payout.html"><i class="far fa-cogs"></i> Payout </a></li>
-            </ul>
-
-            <div class="row">
-                <div class="col-xl-8 col-lg-8">
-                    <div class="wsus__profile_download">
-                        <h2>Buying Items</h2>
-                        <div class="wsus__download_item">
-                            <div class="wsus__download_item_left">
-                                <div class="img">
-                                    <img src="images/purchase-item-thumb.png" alt="download" class="img-fluid w-100">
-                                </div>
-                                <div class="text">
-                                    <a href="#">NFTMAX- NFT React Admin Dashboard Template</a>
-                                    <p>Item by QuomodoTheme</p>
-                                    <h4>$338.76</h4>
-                                </div>
-                            </div>
-                            <div class="wsus__download_item_right">
-                                <a class="common_btn" href="#">Download File</a>
-                                <p data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="wsus__download_item">
-                            <div class="wsus__download_item_left">
-                                <div class="img">
-                                    <img src="images/purchase-item-thumb2.png" alt="download" class="img-fluid w-100">
-                                </div>
-                                <div class="text">
-                                    <a href="#">NFTMAX- NFT React Admin Dashboard Template</a>
-                                    <p>Item by QuomodoTheme</p>
-                                    <h4>$338.76</h4>
-                                </div>
-                            </div>
-                            <div class="wsus__download_item_right">
-                                <a class="common_btn" href="#">Download File</a>
-                                <p data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="wsus__download_item">
-                            <div class="wsus__download_item_left">
-                                <div class="img">
-                                    <img src="images/purchase-item-thumb3.png" alt="download" class="img-fluid w-100">
-                                </div>
-                                <div class="text">
-                                    <a href="#">NFTMAX- NFT React Admin Dashboard Template</a>
-                                    <p>Item by QuomodoTheme</p>
-                                    <h4>$338.76</h4>
-                                </div>
-                            </div>
-                            <div class="wsus__download_item_right">
-                                <a class="common_btn" href="#">Download File</a>
-                                <p data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- rating modal end -->
-                        <div class="wsus__rating_moadl_area">
-                            <div class="modal fade" id="exampleModal2" tabindex="-1"
-                                aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="text">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel2">Review
-                                                            thhis Item
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Your Rating</p>
-                                                        <p>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </p>
-                                                        <form>
-                                                            <label>Comment*</label>
-                                                            <textarea rows="7"
-                                                                placeholder="Type your message here"></textarea>
-                                                            <button type="submit" class="common_btn">Save
-                                                                Review</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="img">
-                                                    <img src="images/rating_modal_img.jpg" alt="rating"
-                                                        class="img-fluid w-100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- rating modal end -->
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4">
-                    <div class="wsus__profile_sidebar">
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_buy_info">
-                            <h3>Selling Info</h3>
-                            <ul class="info">
-                                <li>
-                                    <p><i class="fal fa-cart-plus"></i> Total Sale</p>
-                                    <span>7352</span>
-                                </li>
-                                <li>
-                                    <p><i class="far fa-box"></i> item</p>
-                                    <span>29</span>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-star"></i> Item Rating</p>
-                                    <span><i class="fas fa-star"></i> (43)</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_pro_info mt_30">
-                            <h3>Parsonal Info</h3>
-                            <ul>
-                                <li><span>Contry</span> bangladesh</li>
-                                <li><span>City</span> dhaka</li>
-                                <li><span>Member Since</span> july 2013</li>
-                            </ul>
-                            <ul class="follow d-flex flex-wrap justify-content-between">
-                                <li>
-                                    <h3>732</h3>
-                                    <p>Followers</p>
-                                </li>
-                                <li>
-                                    <h3>96</h3>
-                                    <p>Folllowing</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item profile_sedebar_contact mt_30">
-                            <h3>Contact</h3>
-                            <form>
-                                <div class="wsus__comment_single_input">
-                                    <fieldset>
-                                        <legend>email*</legend>
-                                        <input type="email" placeholder="infoyour@gmail.com">
-                                    </fieldset>
-                                </div>
-                                <div class="wsus__comment_single_input">
-                                    <fieldset>
-                                        <legend>Message*</legend>
-                                        <textarea rows="3" placeholder="Write Message"></textarea>
-                                    </fieldset>
-                                </div>
-                                <button type="submit" class="common_btn">send message</button>
-                            </form>
-                        </div>
-                        <div class="wsus__sidebar_buy_info profile_sedebar_social mt_30">
-                            <h3>Social Profile</h3>
-                            <ul class="d-flex flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Facebook.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Pinterest.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/LinkedIn.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Dribbble.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/Twitter.png" alt="icon" class="img-fluid w-100">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
+
+    <!-- variant modal start -->
+    <div class="modal fade variant_modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Variant</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Variant Name*</legend>
+                                <input type="text" placeholder="Variant Name">
+                            </fieldset>
+                        </div>
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Price*</legend>
+                                <input type="text" placeholder="Price">
+                            </fieldset>
+                        </div>
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>Upload Image</legend>
+                                <div class="upload_variant_img">
+                                    <div class="img">
+                                        <img src="images/upload_1.png" alt="upload" class="img-fluid w-100">
+                                    </div>
+                                    <label for="upload_file">Drag & Drop or <b>Choose File</b> to upload </label>
+                                    <input type="file" id="upload_file" hidden>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <button class="common_btn" type="submit">Save Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- variant modal end -->
     <!--=============================
-        PROFILE DOWNLOAD END
+        UPLOAD PRODUCT INFO END
     ==============================-->
 
 
@@ -582,6 +546,7 @@
     <script src="js/price_range_ui.min.js"></script>
     <!--isotope js-->
     <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/summernote.min.js"></script>
 
     <!--main/custom js-->
     <script src="js/main.js"></script>
