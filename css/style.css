@@ -356,6 +356,14 @@ button {
     margin-top: 3px;
 }
 
+.wsus__multi_language li a.user img {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
 .droap_language {
     position: absolute;
     min-width: 100px;
@@ -377,7 +385,7 @@ button {
 .droap_language li a {
     margin: 0;
     display: block;
-    padding: 15px 15px;
+    padding: 12px 15px;
     border-bottom: 1px solid #ffffff47;
     line-height: initial;
     transition: all linear .3s;
@@ -385,6 +393,7 @@ button {
     -moz-transition: all linear .3s;
     -ms-transition: all linear .3s;
     -o-transition: all linear .3s;
+    font-size: 12px;
 }
 
 .droap_language li:last-child a {
@@ -400,6 +409,100 @@ button {
     transform: scale(1);
     opacity: 1;
     visibility: visible;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+
+.user_droap_menu {
+    border-radius: 3px;
+    background: #FFF;
+    box-shadow: 0px 15px 86px 0px rgba(0, 0, 0, 0.18);
+    position: absolute;
+    top: 140%;
+    right: -25px;
+    width: 170px;
+    border: 2px solid var(--colorPrimary);
+    transform: scaleY(.5);
+    transform-origin: top;
+    opacity: .3;
+    visibility: hidden;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.user_droap_menu::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #055BFF;
+    top: -15px;
+    right: 23px;
+}
+
+.user_droap_menu li a {
+    color: #162B49;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: initial;
+    padding: 12px 15px;
+    border-bottom: 1px solid #E8E8E8;
+    display: block;
+    margin: 0;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.user_droap_menu li a i {
+    margin-left: 0;
+    margin-right: 10px;
+    color: #6C798B;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
+.user_droap_menu li a:hover,
+.user_droap_menu li a:hover i {
+    color: #055BFF;
+    background: #e9f0ff;
+}
+
+.user_droap_menu li p {
+    padding: 0px 15px;
+    color: var(--paraColor);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-top: 4px;
+}
+
+.user_droap_menu li h2 {
+    padding: 0px 15px;
+    color: var(--b, #333);
+    font-family: Rubik;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.wsus__multi_language li:hover .user_droap_menu {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
