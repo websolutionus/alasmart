@@ -52,7 +52,7 @@
 
     .wsus__categorie_area {
         width: 97.5%;
-        padding: 45px 40px 70px 40px;
+        /* padding: 45px 40px 70px 40px; */
     }
 
     .wsus__categories .prevArrow,
@@ -359,20 +359,20 @@
     .wsus__categories_item {
         width: 190px;
         height: 190px;
+        margin: 70px auto 70px auto;
     }
 
     .wsus__categorie_area {
         width: 97.5%;
-        padding: 45px 40px 70px 40px;
     }
 
     .wsus__categories .prevArrow,
     .wsus__categories .nextArrow {
-        right: -52px;
+        right: -80px;
     }
 
     .wsus__categories .prevArrow {
-        left: -52px;
+        left: -80px;
         right: auto;
     }
 
@@ -952,7 +952,6 @@
     }
 
     .wsus__categories_item {
-        margin: 25px auto 0 auto;
         width: 180px;
         height: 180px;
     }
@@ -1747,13 +1746,13 @@
     }
 
     .wsus__categorie_area {
-        padding: 0px 25px 25px 25px;
+        padding: 0 10px;
         position: relative;
         width: 100%;
     }
 
     .wsus__categories_item {
-        margin: 25px auto 0 auto;
+        margin: 70px auto 70px auto;
     }
 
     .wsus__categories {
@@ -2642,12 +2641,12 @@
     }
 
     .wsus__categorie_area {
-        padding: 0px 25px 25px 25px;
+        padding: 0;
         position: relative;
     }
 
     .wsus__categories_item {
-        margin: 25px auto 0 auto;
+        margin: 70px auto 70px auto;
     }
 
     .wsus__categories {

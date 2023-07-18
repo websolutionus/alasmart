@@ -106,7 +106,7 @@ $(function () {
     $('.testi_slider').slick({
         slidesToShow: 2,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         dots: true,
         arrows: false,

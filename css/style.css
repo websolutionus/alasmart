@@ -80,7 +80,7 @@ button {
     --paraColor: #616161;
     --colorBlack: #333333;
     --colorWhite: #ffffff;
-    --ratingColor: #FFA800;
+    --ratingColor: #FFC107;
     --colorYellow: #F2C94C;
     --gradientColor: linear-gradient(126.79deg, #1100FF 0%, #0086FF 100.67%);
     --boxShadow: 0px 6px 60px 5px rgba(0, 0, 0, 0.08);
@@ -165,7 +165,7 @@ button {
 .wsus__section_heading h5 {
     font-size: 20px;
     color: var(--colorPrimary);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 400;
     text-align: center;
 }
@@ -881,7 +881,7 @@ button {
 
 .wsus__categorie_area {
     background: var(--colorWhite);
-    padding: 45px 70px 70px 70px;
+    padding: 0 70px;
     border-radius: 5px;
     position: absolute;
     top: -175px;
@@ -893,7 +893,7 @@ button {
     background: var(--colorWhite);
     text-align: center;
     border-radius: 50%;
-    margin: 25px 12px 0px 12px;
+    margin: 70px 12px 70px 12px;
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
     -moz-transition: all linear .3s;
@@ -906,6 +906,11 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.wsus__categories_item:hover {
+    margin-top: 60px;
+    box-shadow: 0px 4px 84px rgb(0 0 0 / 10%);
 }
 
 .wsus__categories_item .icon {
@@ -922,11 +927,6 @@ button {
     text-transform: capitalize;
     margin-top: 25px;
     margin-bottom: 5px;
-}
-
-.wsus__categories_item:hover {
-    margin-top: 15px;
-    box-shadow: 0px 4px 84px rgb(0 0 0 / 10%);
 }
 
 .wsus__categories .prevArrow,
@@ -1020,6 +1020,14 @@ button {
 
 .wsus__gallery_item_overlay li a:hover {
     color: var(--colorPrimary);
+}
+
+.wsus__gallery_item_overlay li:last-child a {
+    background: #FEB101;
+}
+
+.wsus__gallery_item_overlay li:last-child a:hover {
+    color: var(--colorWhite);
 }
 
 .wsus__gallery_item_text {
@@ -1380,9 +1388,15 @@ button {
 
 .wsus__why_choose_item h4 {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 25px;
     margin-top: 30px;
     text-align: center;
+    margin-bottom: 18px;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
 }
 
 .wsus__why_choose_item p {
@@ -1394,7 +1408,7 @@ button {
 /* testimonial start */
 .wsus__testimonial_item {
     background: var(--colorWhite);
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.07);
     border-radius: 5px;
     padding: 30px;
     position: relative;
@@ -1406,11 +1420,11 @@ button {
     position: absolute;
     content: "\f10d";
     font-family: "font awesome 5 free";
-    font-size: 46px;
+    font-size: 80px;
     font-weight: 600;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 5px;
+    right: 30px;
+    transform: rotate(180deg);
     color: rgba(0, 0, 0, 0.09);
 }
 
@@ -1419,16 +1433,18 @@ button {
 }
 
 .wsus__testimonial_item .description {
-    text-align: center;
-    padding: 70px 0px 45px 0px;
+    padding: 20px 0px 35px 0px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 30px;
+    /* 166.667% */
 }
 
 .wsus__testimonial_item .rating {
     color: var(--ratingColor);
     font-size: 20px;
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
+    letter-spacing: 1.5px;
 }
 
 .wsus__testimonial_footer {
@@ -1527,7 +1543,7 @@ button {
     margin-bottom: 15px;
 }
 
-.wsts__blog_2_text ul li,
+.wsus__blog_2_text ul li,
 .wsus__blog_1_text ul li {
     font-weight: 400;
     font-size: 16px;
@@ -1535,17 +1551,18 @@ button {
     margin-right: 40px;
 }
 
-.wsts__blog_2_text ul li i,
+.wsus__blog_2_text ul li i,
 .wsus__blog_1_text ul li i {
     margin-right: 5px;
+    color: var(--colorPrimary);
 }
 
-.wsts__blog_2_text ul li:last-child,
+.wsus__blog_2_text ul li:last-child,
 .wsus__blog_1_text ul li:last-child {
     margin: 0;
 }
 
-.wsts__blog_2_text a,
+.wsus__blog_2_text a,
 .wsus__blog_1_text a {
     font-weight: 700;
     font-size: 20px;
@@ -1561,29 +1578,29 @@ button {
     overflow: hidden;
 }
 
-.wsts__blog_2_text a:hover,
+.wsus__blog_2_text a:hover,
 .wsus__blog_1_text a:hover {
     color: var(--colorPrimary);
 }
 
-.wsts__blog_2 {
+.wsus__blog_2 {
     margin-top: 25px;
 }
 
-.wsts__blog_2_img {
+.wsus__blog_2_img {
     height: 166px;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.wsts__blog_2_text {
+.wsus__blog_2_text {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
 }
 
-.wsts__blog_2_text ul {
+.wsus__blog_2_text ul {
     border-top: 1px solid #E6E6E6;
     padding-top: 15px;
     margin-top: 15px;
@@ -1896,6 +1913,12 @@ HOME PAGE END
     font-size: 42px;
     margin-top: 20px;
     margin-bottom: 40px;
+    line-height: 56px;
+}
+
+.wsus__about_us_text h2 b {
+    font-weight: 700;
+    color: #162B49;
 }
 
 .wsus__about_us_text p {
@@ -2175,6 +2198,10 @@ HOME PAGE END
 
 .wsus__why_choose_2 .wsus__why_choose_item:hover .img::after {
     opacity: 1;
+}
+
+.wsus__why_choose_2 .wsus__why_choose_item:hover h4 {
+    color: var(--colorBlue);
 }
 
 /* why choose 2 end */
@@ -2482,6 +2509,8 @@ HOME PAGE END
 
 .wsus__pro_description p {
     margin-top: 20px;
+    line-height: 26px;
+    /* 162.5% */
 }
 
 .wsus__pro_description ul,
@@ -3155,6 +3184,7 @@ HOME PAGE END
     padding-left: 0;
     width: 30%;
     min-width: 300px;
+    vertical-align: middle;
 }
 
 .wsus__cart_area table tr .img {
@@ -3178,8 +3208,8 @@ HOME PAGE END
 
 .wsus__cart_area table tr .img a {
     border: 4px solid #fcecf3;
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
 }
 
 .wsus__cart_area table tr .description h3 {
@@ -3187,6 +3217,7 @@ HOME PAGE END
     font-size: 20px;
     color: var(--colorBlack);
     text-transform: capitalize;
+    line-height: 32px;
 }
 
 .wsus__cart_area table tr .description p {
