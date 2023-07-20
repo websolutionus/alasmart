@@ -1,4 +1,4 @@
-@media (min-width: 1400px) and (max-width: 1599.99px) {
+@media (min-width: 1400px) and (max-width: 1px) {
 
     .wsus__banner_img {
         margin-left: 100px;
@@ -22,7 +22,7 @@
     }
 }
 
-@media (min-width: 1200px) and (max-width: 1399.99px) {
+@media (min-width: 1200px) and (max-width: 1399px) {
 
     /*===============================
         HOME PAGE START
@@ -52,7 +52,6 @@
 
     .wsus__categorie_area {
         width: 97.5%;
-        /* padding: 45px 40px 70px 40px; */
     }
 
     .wsus__categories .prevArrow,
@@ -321,7 +320,7 @@
     }
 }
 
-@media (min-width: 992px) and (max-width: 1199.99px) {
+@media (min-width: 992px) and (max-width: 1199px) {
 
     /*===============================
         HOME PAGE START
@@ -862,9 +861,23 @@
     .upload_product_img {
         height: auto;
     }
+
+    .wsus__trending_theme_item_img {
+        width: 100%;
+        height: 240px;
+    }
+
+    .wsus__trending_theme_item_text {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .wsus__trending_theme_item_text ul {
+        margin-top: 20px;
+    }
 }
 
-@media (min-width: 768px) and (max-width: 991.99px) {
+@media (min-width: 768px) and (max-width: 991px) {
 
     /*===============================
         HOME PAGE START
@@ -1406,11 +1419,25 @@
     }
 
     .wsus__trending_theme_item_text {
-        width: 68%;
+        width: 59%;
     }
 
-    .wsus__trending_theme_item {
-        padding: 20px;
+    .wsus__trending_theme_item_text .title {
+        font-size: 18px;
+    }
+
+    .wsus__trending_theme_item_img {
+        width: 110px;
+        height: 145px;
+        margin-right: 10px;
+    }
+
+    .wsus__trending_theme_item_text ul {
+        margin-top: 15px;
+    }
+
+    .wsus__trending_theme_item_text ul li {
+        margin-top: 10px;
     }
 
     .wsus__trending_theme_single_text .title {
@@ -1628,7 +1655,7 @@
     }
 }
 
-@media (min-width: 576px) and (max-width: 767.99px) {
+@media (min-width: 576px) and (max-width: 767px) {
 
     /*===============================
         HOME PAGE START
@@ -2523,7 +2550,7 @@
 
 }
 
-@media (max-width: 575.99px) {
+@media (max-width: 575px) {
 
     /*===============================
         HOME PAGE START
@@ -3353,16 +3380,20 @@
     }
 
     .wsus__trending_theme_item_text {
-        width: 100%;
-        margin-top: 20px;
+        width: 55%;
     }
 
     .wsus__trending_theme_item_text ul {
-        margin-top: 5px;
+        margin-top: 20px;
     }
 
-    .wsus__trending_theme_item {
-        padding: 20px;
+    .wsus__trending_theme_item_text ul li {
+        margin-top: 10px;
+    }
+
+    .wsus__trending_theme_item_img {
+        width: 115px;
+        height: 160px;
     }
 
     .wsus__trending_theme_single_text .title {

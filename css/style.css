@@ -1392,6 +1392,7 @@ button {
     margin-top: 30px;
     text-align: center;
     margin-bottom: 18px;
+    line-height: 32px;
     transition: all linear .3s;
     -webkit-transition: all linear .3s;
     -moz-transition: all linear .3s;
@@ -1547,8 +1548,8 @@ button {
 .wsus__blog_1_text ul li {
     font-weight: 400;
     font-size: 16px;
-    color: #505050;
     margin-right: 40px;
+    color: var(--paraColor);
 }
 
 .wsus__blog_2_text ul li i,
@@ -3178,6 +3179,7 @@ HOME PAGE END
 .wsus__cart_area table tr th,
 .wsus__cart_area table tr td {
     padding: 20px 30px;
+    vertical-align: middle;
 }
 
 .wsus__cart_area table tr .description {
@@ -3223,7 +3225,7 @@ HOME PAGE END
 .wsus__cart_area table tr .description p {
     font-size: 14px;
     color: var(--colorBlue);
-    margin-top: 5px;
+    margin-top: 10px;
     font-weight: 400;
 }
 
@@ -3239,15 +3241,15 @@ HOME PAGE END
 .wsus__cart_area table tr .action a {
     font-size: 16px;
     color: var(--paraColor);
-    transition: 0.15s ease;
-    -webkit-transition: 0.15s ease;
-    -moz-transition: 0.15s ease;
-    -ms-transition: 0.15s ease;
-    -o-transition: 0.15s ease;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
 }
 
 .wsus__cart_area table tr .action a:hover {
-    color: var(--colorPrimary);
+    color: red;
 }
 
 .wsus__cart_coupone {
@@ -3898,7 +3900,7 @@ HOME PAGE END
     font-size: 16px;
     font-weight: 400;
     padding: 13px 25px;
-    background: #f7e8f2;
+    background: #EFF3F8;
     border-radius: 3px;
     margin-right: 10px;
     margin-top: 10px;
