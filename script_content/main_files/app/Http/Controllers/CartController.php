@@ -129,16 +129,7 @@ class CartController extends Controller
     }
 
     public function cartView(){
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $active_theme = 'layout';
         $setting=Setting::first();
         $carts=Cart::content();
         $product_arr=[];
@@ -150,12 +141,12 @@ class CartController extends Controller
         foreach($products as $product){
             $category_arr[]=$product->category_id;
         }
-        $products=Product::with('category', 'author', 'variants')->whereIn('category_id', $category_arr)->whereNotIn('id', $product_arr)->where('status', 1)->get()->take(3);
+        $related_products=Product::with('category', 'author', 'variants')->whereIn('category_id', $category_arr)->whereNotIn('id', $product_arr)->where('status', 1)->get()->take(3);
         return view('cart_view')->with([
             'active_theme' => $active_theme,
             'setting' => $setting,
             'carts' => $carts,
-            'products' =>$products,
+            'related_products' =>$related_products,
         ]);
     }
 
@@ -245,17 +236,7 @@ class CartController extends Controller
                 $is_id=in_array($user_id, $author_id_arr);
                 
                 if(!$is_id){
-                    $razorpay = RazorpayPayment::first();
-                    $selected_theme = Session::get('selected_theme');
-                    if ($selected_theme == 'theme_one'){
-                        $active_theme = 'layout';
-                    }elseif($selected_theme == 'theme_two'){
-                        $active_theme = 'layout2';
-                    }elseif($selected_theme == 'theme_three'){
-                        $active_theme = 'layout3';
-                    }else{
-                        $active_theme = 'layout';
-                    }
+                    $active_theme = 'layout';
                     $setting=Setting::first();
                     $carts=Cart::content();
                     $cartQty=Cart::count();
@@ -269,7 +250,7 @@ class CartController extends Controller
                     foreach($products as $product){
                         $category_arr[]=$product->category_id;
                     }
-                    $products=Product::with('category', 'author', 'variants')->whereIn('category_id', $category_arr)->whereNotIn('id', $product_arr)->where('status', 1)->get()->take(3);
+                    $related_products=Product::with('category', 'author', 'variants')->whereIn('category_id', $category_arr)->whereNotIn('id', $product_arr)->where('status', 1)->get()->take(3);
                     $paypal = PaypalPayment::first();
                     $stripe = StripePayment::first();
                     $razorpay = RazorpayPayment::first();
@@ -288,7 +269,7 @@ class CartController extends Controller
                         'paypal' => $paypal,
                         'stripe' => $stripe,
                         'razorpay' => $razorpay,
-                        'products' => $products,
+                        'related_products' => $related_products,
                         'paystack' => $paystack,
                         'mollie' => $mollie,
                         'instamojo' => $instamojo,

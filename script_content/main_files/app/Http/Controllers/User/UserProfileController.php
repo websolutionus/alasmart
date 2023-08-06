@@ -48,16 +48,8 @@ class UserProfileController extends Controller
         $stats=CountryState::where('status', 1)->get();
         $cities=City::where('status', 1)->get();
         $setting = Setting::first();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
 
         return view('user.dashboard')->with([
             'active_theme' => $active_theme,
@@ -77,16 +69,8 @@ class UserProfileController extends Controller
         $countries=Country::where('status', 1)->get();
         $stats=CountryState::where('status', 1)->get();
         $cities=City::where('status', 1)->get();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
 
         return view('user.portfolio')->with([
             'active_theme' => $active_theme,
@@ -108,7 +92,7 @@ class UserProfileController extends Controller
         $cities=City::where('status', 1)->get();
         $orders=Order::where('user_id', $user->id)->where('order_status', 1)->get();
 
-        $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(10);
+        $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(2);
         
         $selected_theme = Session::get('selected_theme');
         if ($selected_theme == 'theme_one'){
@@ -421,7 +405,6 @@ class UserProfileController extends Controller
         $product->preview_link = $request->preview_link;
         $product->regular_price = $request->regular_price;
         $product->category_id = $request->category;
-        $product->preview_link = $request->preview_link;
         $product->description = $request->description;
         $product->tags = $request->tags;
         $product->status = 0;
@@ -1078,8 +1061,6 @@ class UserProfileController extends Controller
         
         $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
         if($isReview > 0){
-            // $message = trans('user_validation.You have already submited review');
-            // return response()->json(['status' => 0, 'message' => $message]);
             $notification = trans('user_validation.You have already submited review');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);

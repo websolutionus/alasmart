@@ -659,16 +659,7 @@ class HomeController extends Controller
 
         $seo_setting = SeoSetting::where('id', 5)->first();
 
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $active_theme = 'layout';
 
         return view('product')->with([
             'active_theme' => $active_theme,
@@ -704,16 +695,8 @@ class HomeController extends Controller
         $total_sale=OrderItem::where('Product_id', $product->id)->get()->count();
         $script_content = ScriptContent::first();
         $recaptchaSetting = GoogleRecaptcha::first();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
 
         return view('product_detail')->with([
             'active_theme' => $active_theme,
@@ -1209,6 +1192,7 @@ class HomeController extends Controller
 
         return response()->json(['status' => 1, 'message' => $notification]);
     }
+
     public function productComment(Request $request){
         if(Auth::guard('web')->check()){
             $rules = [
@@ -1238,6 +1222,42 @@ class HomeController extends Controller
             $notification = trans('Please login your account');
             return response()->json(['status' => 0, 'message' => $notification]);
         } 
+    }
+
+    public function productReview(Request $request){
+        if(Auth::guard('web')->check()){
+            $rules = [
+                'rating'=>'required',
+                'review'=>'required',
+                'g-recaptcha-response'=>new Captcha()
+            ];
+            $customMessages = [
+                'rating.required' => trans('user_validation.Rating is required'),
+                'review.required' => trans('user_validation.Review is required'),
+            ];
+            $this->validate($request, $rules,$customMessages);
+
+            $user = Auth::guard('web')->user();
+
+            $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
+            if($isReview > 0){
+                $notification = trans('user_validation.You have already submited review');
+                return response()->json(['status' => 0, 'message' => $notification]);
+            }
+            
+            $review = new Review();
+            $review->user_id = $user->id;
+            $review->rating = $request->rating;
+            $review->review = $request->review;
+            $review->product_id = $request->product_id;
+            $review->author_id = $request->author_id;
+            $review->save();
+            $notification = trans('user_validation.Review Submited successfully');
+            return response()->json(['status' => 1, 'message' => $notification]);
+        }else{
+            $notification = trans('Please login your account');
+            return response()->json(['status' => 0, 'message' => $notification]);
+        }
     }
 
     

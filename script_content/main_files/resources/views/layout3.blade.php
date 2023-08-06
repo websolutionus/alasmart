@@ -48,7 +48,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="products.html">Products <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link" href="{{ route('products') }}">Products <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
                             <li><a href="{{ route('about-us') }}">about us</a></li>
                             <li><a href="{{ route('become-author-page') }}">become an author</a></li>

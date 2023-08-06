@@ -123,7 +123,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="products.html">Products <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link" href="{{ route('products') }}">">Products <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
                             <li><a href="product_details.html">product details</a></li>
                         </ul>

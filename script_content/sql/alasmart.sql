@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2023 at 02:07 PM
+-- Generation Time: Aug 06, 2023 at 02:31 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -169,7 +169,7 @@ CREATE TABLE `ads` (
 --
 
 INSERT INTO `ads` (`id`, `image`, `link`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'uploads/website-images/ad--2023-05-24-01-48-41-9174.jpg', 'https://codecanyon.net/user/websolutionus', 1, '2023-05-24 07:33:19', '2023-06-26 10:14:43');
+(1, 'uploads/website-images/ad--2023-08-03-02-14-16-6983.jpg', 'https://codecanyon.net/user/websolutionus', 1, '2023-05-24 07:33:19', '2023-08-03 08:14:17');
 
 -- --------------------------------------------------------
 
@@ -616,6 +616,13 @@ CREATE TABLE `coupons` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `coupon_name`, `coupon_discount`, `coupon_validity`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'EID SPASIAL', 10, '2023-08-08', 1, '2023-08-06 05:51:38', '2023-08-06 05:51:38');
 
 -- --------------------------------------------------------
 
@@ -1116,8 +1123,8 @@ INSERT INTO `custom_paginations` (`id`, `page_name`, `qty`, `created_at`, `updat
 (1, 'Blog Page', 8, NULL, '2023-07-29 08:08:21'),
 (4, 'Blog Comment', 4, NULL, '2022-09-15 03:06:58'),
 (6, 'Product Page', 6, NULL, '2023-06-12 05:12:35'),
-(7, 'Product Comment', 10, '2023-06-12 09:44:44', '2023-06-12 09:44:44'),
-(8, 'Product Review', 10, '2023-06-12 09:44:44', '2023-06-12 09:44:44');
+(7, 'Product Comment', 10, '2023-06-12 09:44:44', '2023-08-05 05:23:28'),
+(8, 'Product Review', 10, '2023-06-12 09:44:44', '2023-08-05 05:23:28');
 
 -- --------------------------------------------------------
 
@@ -1743,7 +1750,12 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `order_id`, `user_id`, `name`, `email`, `phone`, `total_amount`, `payment_method`, `payment_status`, `transection_id`, `currency_icon`, `country_code`, `currency_code`, `currency_rate`, `order_status`, `order_approval_date`, `order_date`, `order_month`, `order_year`, `cart_qty`, `created_at`, `updated_at`) VALUES
 (1, 624492, 1, 'John doe', 'user@gmail.com', '22-402-666', 494, 'Stripe', 'success', 'txn_3NN8JqBsmz7k2BTD23d7lnYY', NULL, 'US', 'usd', 1, '1', NULL, '2023-06-26', '06', '2023', 6, '2023-06-26 05:50:41', '2023-06-26 05:50:41'),
 (2, 747778, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 788, 'Stripe', 'success', 'txn_3NN8bxBsmz7k2BTD3zTlb6Or', NULL, 'US', 'usd', 1, '1', NULL, '2023-06-26', '06', '2023', 7, '2023-06-26 06:09:18', '2023-06-26 06:09:18'),
-(3, 182227, 3, 'Harding Rosa', 'user3@gmail.com', '123-874-8922', 463, 'Stripe', 'success', 'txn_3NN8oTBsmz7k2BTD38MZjfr7', NULL, 'US', 'usd', 1, '1', NULL, '2023-06-26', '06', '2023', 6, '2023-06-26 06:22:14', '2023-06-26 06:22:14');
+(3, 182227, 3, 'Harding Rosa', 'user3@gmail.com', '123-874-8922', 463, 'Stripe', 'success', 'txn_3NN8oTBsmz7k2BTD38MZjfr7', NULL, 'US', 'usd', 1, '1', NULL, '2023-06-26', '06', '2023', 6, '2023-06-26 06:22:14', '2023-06-26 06:22:14'),
+(4, 772686, 1, 'John doe', 'user@gmail.com', '22-402-666', 110, 'sslcommerz', 'pending', '64cf40bb0b21b', '$', 'US', 'USD', 1, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(5, 677609, 1, 'John doe', 'user@gmail.com', '22-402-666', 110, 'sslcommerz', 'pending', '64cf4aa11bfe8', '$', 'US', 'USD', 1, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(6, 464041, 1, 'John doe', 'user@gmail.com', '22-402-666', 110, 'sslcommerz', 'pending', '64cf4b639c62a', '$', 'US', 'USD', 1, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(7, 898548, 1, 'John doe', 'user@gmail.com', '22-402-666', 39, 'sslcommerz', 'success', '64cf4c55afc71', '$', 'US', 'USD', 1, '1', NULL, '0', '0', '0', 1, NULL, NULL),
+(8, 641317, 1, 'John doe', 'user@gmail.com', '22-402-666', 39, 'Stripe', 'success', 'txn_3Nc1TYBsmz7k2BTD14RtWyRx', NULL, 'US', 'usd', 1, '1', NULL, '2023-08-06', '08', '2023', 1, '2023-08-06 07:34:10', '2023-08-06 07:34:10');
 
 -- --------------------------------------------------------
 
@@ -1790,7 +1802,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `author_id`, `user_id
 (16, 3, 23, 1, 3, 'script', 'extend price', NULL, NULL, 90, '1', '2023-06-26 06:22:14', '2023-06-26 06:22:14'),
 (17, 3, 22, 1, 3, 'script', 'regular price', NULL, NULL, 70, '1', '2023-06-26 06:22:14', '2023-06-26 06:22:14'),
 (18, 3, 16, 2, 3, 'video', NULL, 41, 'MP4 - 720p', 61, '1', '2023-06-26 06:22:14', '2023-06-26 06:22:14'),
-(19, 3, 15, 2, 3, 'video', NULL, 39, 'MP4 - 720p', 35, '1', '2023-06-26 06:22:14', '2023-06-26 06:22:14');
+(19, 3, 15, 2, 3, 'video', NULL, 39, 'MP4 - 720p', 35, '1', '2023-06-26 06:22:14', '2023-06-26 06:22:14'),
+(20, 8, 5, 3, 1, 'video', NULL, 28, 'Resolution MP4 - 360p', 39, '1', '2023-08-06 07:34:10', '2023-08-06 07:34:10');
 
 -- --------------------------------------------------------
 
@@ -2100,7 +2113,9 @@ INSERT INTO `product_comments` (`id`, `product_id`, `user_id`, `name`, `email`, 
 (9, 22, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 'San Diego, California, United State.', 'Every time I use this product, I am reminded of the impeccable attention to detail that went into its creation. It&#039;s like owning a work of art that enhances my daily routine.', 1, '2023-06-26 06:47:16', '2023-06-26 06:50:32'),
 (10, 21, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 'San Diego, California, United State.', 'The rich, velvety texture of this product is a delight to touch. Its smoothness adds an extra layer of indulgence, creating a truly sensorial experience.', 1, '2023-06-26 06:47:54', '2023-06-26 06:50:30'),
 (11, 20, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 'San Diego, California, United State.', 'This product embodies a harmonious fusion of modern design and timeless charm. It effortlessly balances contemporary aesthetics with a classic touch.', 1, '2023-06-26 06:49:04', '2023-06-26 06:50:29'),
-(12, 19, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 'San Diego, California, United State.', 'From its flawless functionality to its striking aesthetics, this product is a testament to the seamless union of form and purpose. It&#039;s a joy to use and behold.', 0, '2023-06-26 06:50:10', '2023-06-26 06:50:10');
+(12, 19, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 'San Diego, California, United State.', 'From its flawless functionality to its striking aesthetics, this product is a testament to the seamless union of form and purpose. It&#039;s a joy to use and behold.', 0, '2023-06-26 06:50:10', '2023-06-26 06:50:10'),
+(13, 24, 1, 'John doe', 'user@gmail.com', '22-402-666', 'California, Los Angeles', 'Test message', 1, '2023-08-05 04:53:57', '2023-08-05 04:54:16'),
+(14, 19, 1, 'John doe', 'user@gmail.com', '22-402-666', 'California, Los Angeles', 'fgsfsdfsdf', 0, '2023-08-05 05:46:45', '2023-08-05 05:46:45');
 
 -- --------------------------------------------------------
 
@@ -2388,7 +2403,8 @@ INSERT INTO `reviews` (`id`, `product_id`, `order_id`, `variant_id`, `user_id`, 
 (7, 21, 2, NULL, 2, 1, 'I cannot express how much I adore this beautifully crafted leather handbag. The attention to detail, premium materials, and timeless design make it a true statement piece that I receive compliments on everywhere I go.', 5, 1, '2023-06-26 06:14:42', '2023-06-26 06:14:54'),
 (8, 24, 3, NULL, 3, 1, 'I cannot express how much I adore this beautifully crafted leather handbag. The attention to detail, premium materials, and timeless design make it a true statement piece that I receive compliments on everywhere I go.', 5, 1, '2023-06-26 06:24:01', '2023-06-26 06:25:07'),
 (9, 23, 3, NULL, 3, 1, 'I am blown away by the performance of this high-definition 4K smart TV. The stunning visuals, vibrant colors, and immersive sound transport me to another world every time I watch my favorite movies and shows.', 5, 1, '2023-06-26 06:24:21', '2023-06-26 06:25:06'),
-(10, 22, 3, NULL, 3, 1, 'This ergonomic office chair has completely transformed my work-from-home experience.', 3, 1, '2023-06-26 06:24:52', '2023-06-26 06:25:05');
+(10, 22, 3, NULL, 3, 1, 'This ergonomic office chair has completely transformed my work-from-home experience.', 3, 1, '2023-06-26 06:24:52', '2023-06-26 06:25:05'),
+(15, 5, 8, 28, 1, 3, 'Test review', 4, 1, '2023-08-06 12:21:07', '2023-08-06 12:21:15');
 
 -- --------------------------------------------------------
 
@@ -3544,7 +3560,7 @@ ALTER TABLE `country_states`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `currencies`
@@ -3688,13 +3704,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `our_teams`
@@ -3748,7 +3764,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_discounts`
@@ -3808,7 +3824,7 @@ ALTER TABLE `refund_requests`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `script_contents`

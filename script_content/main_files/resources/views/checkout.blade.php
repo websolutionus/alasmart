@@ -9,41 +9,22 @@
 @endsection
 
 @section('frontend-content')
-
     <!--=============================
         BREADCRUMB START
     ==============================-->
-    <section class="wsus__breadcrumb">
+    <section class="wsus__breadcrumb" style="background: url({{ asset('frontend/images/breadcrumb_bg.jpg') }});">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <h1>{{__('checkout')}}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{__('Home')}}</a></li>
-                            <li class="breadcrumb-item">{{__('Checkout')}}</li>
-                        </ol>
-                    </nav>
+                <div class="col-12">
+                    <div class="wsus__breadcrumb_text">
+                        <h1>{{__('check out')}}</h1>
+                        <ul class="d-flex flex-wrap">
+                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
+                            <li><a href="javascript:;">{{__('check out')}}</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="breadcrumb_animi_area">
-            <ul class="bg_animation breadcrumb_animi">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-            </ul>
-            <ul class="bg_animation bg_animation_r breadcrumb_animi breadcrumb_animi_r">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-            </ul>
         </div>
     </section>
     <!--=============================
@@ -54,17 +35,17 @@
     <!--=============================
         CHECKOUT START
     ==============================-->
-    <section class="wsus__checkout pt_100">
+    <section class="wsus__checkout pt_120 xs_pt_80 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
-                    <div class="wsus__checkout_text mt_40 wow fadeInUp" data-wow-duration="1s">
+                    <div class="wsus__checkout_text">
                         <h3>{{__('Select your payment method')}}</h3>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             @if ($stripe->status == 1)
                             <li class="nav-item">
-                                <button class="nav-link"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                  <img src="{{ asset($stripe->image) }}" alt="visa" class="img-fluis w-100">
+                                <button class="nav-link active" data-bs-toggle="modal" data-bs-target="#stripeModal">
+                                    <img src="{{ asset($stripe->image) }}" alt="stripe" class="img-fluis w-100">
                                 </button>
                             </li>
                             @endif
@@ -76,7 +57,7 @@
                                     <input type="hidden" name="cart_qty" value="{{ $cartQty }}">
                                 </form>
                                 <button class="nav-link" id="paypal" data-bs-toggle="pill">
-                                    <img src="{{ asset($paypal->image) }}" alt="skrill" class="img-fluis w-100">
+                                    <img src="{{ asset($paypal->image) }}" alt="paypal" class="img-fluis w-100">
                                 </button>
                             </li>
                             @endif
@@ -144,7 +125,7 @@
                             @if ($flutterwave->status == 1)
                             <li class="nav-item">
                                 <button class="nav-link" onclick="flutterwavePayment()" data-bs-toggle="pill">
-                                    <img src="{{ asset('frontend') }}/images/pay_method_7.png" alt="Degmark" class="img-fluis w-100">
+                                    <img src="{{ asset($flutterwave->logo) }}" alt="Degmark" class="img-fluis w-100">
                                 </button>
                             </li>
                             @endif
@@ -170,6 +151,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__checkout_sidebar" id="sticky_sidebar">
                         <h3>{{__('Order Summary')}}</h3>
@@ -177,9 +159,7 @@
                             @foreach ($carts as $cart)
                             <li>
                                 <div class="img">
-                                    <a href="{{ route('product-detail', $cart->options->slug) }}">
-                                        <img src="{{ asset($cart->options->image) }}" alt="checkout" class="img-fluid w-100">
-                                    </a>
+                                    <img src="{{ asset($cart->options->image) }}" alt="checkout" class="img-fluid w-100">
                                 </div>
                                 <div class="text">
                                     <a href="{{ route('product-detail', $cart->options->slug) }}">{{ html_decode($cart->name) }}</a>
@@ -195,7 +175,7 @@
                         <div class="wsus__checkout_sidebar_price">
                             <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $cartTotal }}</span> </p>
                             <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
-                            <p class="total">{{__('Total')}} <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
+                            <p class="total">{{__('Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
                         </div>
                         @else
                         <div class="wsus__checkout_sidebar_price">
@@ -213,66 +193,66 @@
         CHECKOUT END
     ==============================-->
 
-
     <!--=============================
         RELATED PRODICT START
     ==============================-->
-    <section class="wsus__related_product mt_100 pt_95 pb_245">
+    <section class="wsus__related_product wsus__galley_2 pt_115 xs_pt_75 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
-                <div class="col-xl-7 m-auto wow fadeInUp" data-wow-duration="1s">
+                <div class="col-xl-7 col-lg-8">
                     <div class="wsus__section_heading mb_15">
-                        <h5>{{__('Save time withd software')}}.</h5>
+                        <h5>{{__('Save time with pre-installed software')}}.</h5>
                         <h2>{{__('Related Products')}}.</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @forelse ($products as $product)
-                    <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-duration="1s">
-                        <div class="wsus__gallery_item">
-                            <div class="wsus__gallery_item_img">
-                                <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
-                                <p><span>{{ $setting->currency_icon }}</span>{{ html_decode($product->regular_price) }}</p>
-                                <ul class="wsus__gallery_item_overlay">
-                                    <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                    <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
-                                </ul>
-                            </div>
-                            <div class="wsus__gallery_item_text">
-                                <p>{{__('By')}}<span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
-                                <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
-                                <ul class="d-flex flex-wrap justify-content-between">
-                                    @php
-                                        $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
-                                        $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                        $variant=App\Models\ProductVariant::where('product_id', $product->id)->first();
-                                    @endphp
-                                    <li><span><i class="fas fa-download"></i> {{ $sale }} {{__('Sale')}}</span></li>
-                                    <li>
-                                        <p>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </p>
-                                        <p class="product-review">
-                                            @for($i = 0; $i < $review; $i++)
-                                            <i class="fas fa-star"></i>
-                                            @endfor
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+                @forelse ($related_products as $product)
+                <div class="col-xl-4 col-md-6">
+                    <div class="wsus__gallery_item">
+                        <div class="wsus__gallery_item_img">
+                            <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
+                            <ul class="wsus__gallery_item_overlay">
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                            </ul>
+                        </div>
+                        <div class="wsus__gallery_item_text">
+                            @php
+                                $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
+                                $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
+                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
+                            @endphp
+                            <p class="rating">
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ $review == 0 ? 0 : $review }})</span>
+                            </p>
+                            @if ($review > 0)
+                            <p class="rating featured-review-rating">
+                                @for ($i = 0; $i < $review; $i++)
+                                <i class="fas fa-star"></i>
+                                @endfor
+                            </p>
+                            @endif
+                            <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
+                            <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                            <span class="download"><i class="fas fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                         </div>
                     </div>
+                </div>
                 @empty
-                    <div class="col-12 text-center text-danger mt-5">
-                        <h2 class="mt-5">{{__('Product Not Found')}}</h2>
-                    </div>
+                <div class="col-12 text-center text-danger mt-5">
+                    <h2 class="mt-5">{{__('Product Not Found')}}</h2>
+                </div>
                 @endforelse
             </div>
+            <a href="{{ route('products') }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     <!--=============================
@@ -281,7 +261,7 @@
     {{-- stripe modal --}}
     <!-- Button trigger modal -->
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="stripeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -350,42 +330,42 @@
   </div>
 
   {{-- start bank payment modal --}}
-  <div class="wsus__payment_modal modal fade" id="bankPayment" data-bs-backdrop="static" data-bs-keyboard="false"
-  tabindex="-1" aria-labelledby="bankPaymentLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="bankPaymentLabel">{{__('user.Bank Payment')}}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <form method="POST" action="{{ route('bank-payment') }}">
-                  @csrf
-                  <div class="row">
-                      <div class="col-xl-12 mb-4">
-                          <p>{!! clean(nl2br($bankPayment->account_info)) !!}</p>
-                      </div>
+    <div class="wsus__payment_modal modal fade" id="bankPayment" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="bankPaymentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bankPaymentLabel">{{__('user.Bank Payment')}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('bank-payment') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xl-12 mb-4">
+                                <p>{!! clean(nl2br($bankPayment->account_info)) !!}</p>
+                            </div>
 
-                      <div class="col-xl-12">
-                          <textarea required cols="3" rows="3" name="tnx_info"  placeholder="{{__('user.Type your transaction information')}}"></textarea>
-                        <input type="hidden" name="total_amount" value="{{ $cartTotal }}">
-                        <input type="hidden" name="cart_qty" value="{{ $cartQty }}">
-                      </div>
+                            <div class="col-xl-12">
+                                <textarea required cols="3" rows="3" name="tnx_info"  placeholder="{{__('user.Type your transaction information')}}"></textarea>
+                                <input type="hidden" name="total_amount" value="{{ $cartTotal }}">
+                                <input type="hidden" name="cart_qty" value="{{ $cartQty }}">
+                            </div>
 
-                  </div>
+                        </div>
 
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('user.Close')}}</button>
-              <button type="submit" class="btn btn-danger">{{__('user.Submit')}}</button>
-          </div>
-          </form>
-      </div>
-  </div>
-</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('user.Close')}}</button>
+                    <button type="submit" class="btn btn-danger">{{__('user.Submit')}}</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {{-- end bank payment --}}
 @endsection
-@section('frontend_js')
+@push('frontend_js')
 <script>
     "use strict";
     $(document).ready(function(){
@@ -602,4 +582,4 @@ function payWithPaystack(){
     }
 </script>
 {{-- end flutterwave payment --}}
-@endsection
+@endpush

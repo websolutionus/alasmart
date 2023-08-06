@@ -11,38 +11,36 @@
 @section('frontend-content')
 
     <!--=============================
-        PROFILE POERFOLIO START
+        PROFILE PORTFOLIO START
     ==============================-->
-    <section class="wsus__profile pt_150">
-        <div class="container">
-            {{-- start header section --}}
-            @include('user.inc.profile_header')
-            {{-- end header section --}}
+    <section class="wsus__profile pt_130 xs_pt_100 pb_120 xs_pb_80">
+        
+        @include('user.inc.profile_header')
 
             <div class="row">
                 <div class="col-xl-8 col-lg-8">
-                    <div class="wsus__profile_portfolio mt_15">
+                    <div class="wsus__profile_portfolio">
                         <div class="row">
                             @forelse ($products as $product)
-                            <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-duration="1s">
+                            <div class="col-xl-6 col-md-6">
                                 <div class="wsus__gallery_item">
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
-                                        <p><span>{{ $setting->currency_icon }}</span>{{ html_decode($product->regular_price) }}</p>
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a href="{{ route('product-edit', $product->id) }}">{{__('Edit')}}</a></li>
+                                            <li><a href="{{ route('product-edit', $product->id) }}">{{__('user.Edit')}}</a></li>
                                             <li><a data-bs-toggle="modal" data-bs-target="#dataDelete" onclick="deleteData({{ $product->id }})" href="javascript:;">{{__('Delete')}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="wsus__gallery_item_text">
-                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                                        <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                                         <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
+                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
-                                                $sale=App\Models\OrderItem::where(['product_id' => $product->id, 'author_id' => $user->id])->get()->count();
+                                                $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
+                                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                                             @endphp
-                                            <li><a href="#"><i class="fas fa-download"></i> {{ $sale }} {{__('Sale')}}</a></li>
                                             <li>
                                                 <p>
                                                     <i class="far fa-star"></i>
@@ -50,13 +48,19 @@
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
+                                                    <span>({{ $review == 0 ? 0 : $review }})</span>
                                                 </p>
-                                            
-                                                <p class="product-review">
+                                                @if ($review > 0)
+                                                <p class="product-review-rating">
                                                     @for ($i = 0; $i < $review; $i++)
                                                     <i class="fas fa-star"></i>
                                                     @endfor
                                                 </p>
+                                                @endif
+                                            </li>
+                                            <li>
+                                                <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
+                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -68,56 +72,23 @@
                             </div>
                             @endforelse
                         </div>
-                        <div class="row">
-                            <div class="wsus__pagination mt_50">
-                                <div class="col-12">
-                                    {{ $products->links('custom_pagination') }}
-                                </div>
+                        @if ($products->hasPages())
+                            <div class="wsus__pagination mt_25">
+                                {{ $products->links('custom_pagination') }}
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
-                {{-- information --}}
-                @php
-                    $order_item=App\Models\OrderItem::where('author_id', $user->id)->get()->count();
-                    $total_product=App\Models\Product::where(['author_id' => $user->id, 'status' => 1])->get()->count();
-                    $total_review=App\Models\Review::where(['author_id' => $user->id, 'status' => 1])->get()->count();
-                @endphp
-                <div class="col-xl-4 col-lg-4 wow fadeInRight" data-wow-duration="1s">
-                    <div class="wsus__profile_sidebar">
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_buy_info mt_30">
-                            <h3>{{__('Selling Info')}}</h3>
-                            <ul class="info">
-                                <li>
-                                    <p><i class="fal fa-cart-plus"></i> {{__('Total Sale')}}</p>
-                                    <span>{{ $order_item }}</span>
-                                </li>
-                                <li>
-                                    <p><i class="far fa-box"></i> {{__('Item')}}</p>
-                                    <span>{{ $total_product }}</span>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-star"></i> {{__('Item Rating')}}</p>
-                                    <span><i class="fas fa-star"></i> ({{ $total_review }})</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_pro_info mt_30">
-                            <h3>{{__('Personal Info')}}</h3>
-                            <ul>
-                                <li><span>{{__('Country')}}</span> {{ $user->country ? $user->country->name : '' }}</li>
-                                <li><span>{{__('City')}}</span> {{ $user->country ? $user->city->name : ''}}</li>
-                                <li><span>{{__('Member Since')}}</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="col-xl-4 col-lg-4">
+                    @include('user.inc.user_information')
                 </div>
             </div>
         </div>
     </section>
     <!--=============================
-        PROFILE POERFOLIO END
+        PROFILE PORTFOLIO END
     ==============================-->
+
 
     <div class="modal fade" id="dataDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -139,7 +110,7 @@
         </div>
       </div>
 @endsection
-@section('frontend_js')
+@push('frontend_js')
 <script>
     (function($) {
         "use strict";
@@ -187,4 +158,4 @@
         $("#deleteForm").attr("action",'{{ url("delete-product") }}'+"/"+id)
     }
 </script>
-@endsection
+@endpush

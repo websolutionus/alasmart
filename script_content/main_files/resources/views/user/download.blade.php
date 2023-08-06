@@ -9,105 +9,122 @@
 @endsection
 
 @section('frontend-content')
+    <!--=============================
+        PROFILE DOWNLOAD START
+    ==============================-->
+    <section class="wsus__profile pt_130 xs_pt_100 pb_120 xs_pb_80">
 
-
-    <section class="wsus__profile pt_150">
-        <div class="container">
-            {{-- start header section --}}
-            @include('user.inc.profile_header')
-            {{-- end header section --}}
+        @include('user.inc.profile_header')
 
             <div class="row">
                 <div class="col-xl-8 col-lg-8">
-                    @if ($order_items->count() > 0)
-                    <div class="wsus__profile_download mt_40">
+                    <div class="wsus__profile_download">
                         <h2>{{__('Buying Items')}}</h2>
+
                         @foreach ($order_items as $item)
-                        @if ($item->order->order_status == 1)
-                        <div class="wsus__download_item wow fadeInUp" data-wow-duration="1s">
-                            <div class="wsus__download_item_left">
-                                <div class="img">
-                                    <img src="{{ asset($item->product->thumbnail_image) }}" alt="download" class="img-fluid w-100">
-                                </div>
-                                <div class="text">
-                                    <a href="{{ route('product-detail', $item->product->slug) }}">{{ html_decode($item->product->name) }}</a>
-                                    <p>{{__('Item by')}} {{ html_decode($item->author->name) }}</p>
-                                    @if ($item->variant_id!=null)
-                                    <p>{{ html_decode($item->variant->variant_name) }}</p>  
-                                    @endif
-                                    @if ($item->price_type!=null)
-                                    <p>{{ $item->price_type }}</p> 
-                                    @endif
-                                    <h4>{{ $setting->currency_icon }}{{ html_decode($item->price) }}</h4>
-                                </div>
-                            </div>
-                            <div class="wsus__download_item_right">
-                                @if ($item->product_type=='script')
+                            @if ($item->order->order_status == 1)
+                                <div class="wsus__download_item">
+                                    <div class="wsus__download_item_left">
+                                        <div class="img">
+                                            <img src="{{ asset($item->product->thumbnail_image) }}" alt="download" class="img-fluid w-100">
+                                        </div>
+                                        <div class="text">
+                                            <a href="{{ route('product-detail', $item->product->slug) }}">{{ html_decode($item->product->name) }}</a>
+                                            <p>{{__('Item by')}} {{ html_decode($item->author->name) }}</p>
+                                            @if ($item->variant_id!=null)
+                                            <p>{{ html_decode($item->variant->variant_name) }}</p>
+                                            @endif
+                                            @if ($item->price_type!=null)
+                                            <p>{{ ucfirst($item->price_type) }}</p>
+                                            @endif
+                                            <h4>{{ $setting->currency_icon }}{{ html_decode($item->price) }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="wsus__download_item_right">
+                                        @if ($item->product_type=='script')
                                         <a class="common_btn" href="{{ route('download-script', $item->product->id) }}">{{__('Download File')}}</a>
-                                @else
-                                    @if ($item->variant)
-                                        <a class="common_btn" href="{{ route('download-variant', $item->variant->id) }}">{{__('Download File')}}</a>
-                                    @endif
-                                @endif
-                                @php
-                                    $review=App\Models\Review::where(['product_id' => $item->product->id, 'status' => 1])->get()->average('rating');
-                                @endphp
-                                <p data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $item->product->id }}">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </p>
-                                <p class="rating" data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $item->product->id }}">
-                                    @for ($i = 0; $i < $review; $i++)
-                                    <i class="fas fa-star collection-review"></i>
-                                    @endfor
-                                </p>
-                            </div>
-                        </div>
-                        @endif
+                                        @else
+                                            @if ($item->variant)
+                                                <a class="common_btn" href="{{ route('download-variant', $item->variant->id) }}">{{__('Download File')}}</a>
+                                            @endif
+                                        @endif
+                                        @php
+                                            $review=App\Models\Review::where(['product_id' => $item->product->id, 'status' => 1])->get()->average('rating');
+                                        @endphp
+                                        <p data-bs-toggle="modal" data-bs-target="#review{{ $item->product->id }}">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </p>
+                                        <p class="download-product-rating" data-bs-toggle="modal" data-bs-target="#review{{ $item->product->id }}">
+                                            @for ($i = 0; $i < $review; $i++)
+                                            <i class="fas fa-star text-warning"></i>
+                                            @endfor
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
 
+                        @if ($order_items->hasPages())
                         <div class="row">
                             {{ $order_items->links('custom_pagination') }}
                         </div>
+                        @endif
 
                         <!-- rating modal end -->
                         <div class="wsus__rating_moadl_area">
                             @foreach ($order_items as $item)
-                            <div class="modal fade" id="exampleModal2{{ $item->product->id }}" tabindex="-1"
+                            <div class="modal fade" id="review{{ $item->product->id }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('Review this Item')}}</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>{{__('Your Rating')}}</p>
-                                        <p class="rating1">
-                                            <i class="far fa-star text-dark s1"></i>
-                                            <i class="far fa-star text-dark s2"></i>
-                                            <i class="far fa-star text-dark s3"></i>
-                                            <i class="far fa-star text-dark s4"></i>
-                                            <i class="far fa-star text-dark s5"></i>
-                                        </p>
-                                        <form id="reviewForm" action="{{ route('product-review') }}" method="POST">
-                                            @csrf
-                                            <label>{{__('Comment')}}*</label>
-                                            <input type="hidden" class="star" name="rating" value="">
-                                            <input type="hidden" id="product_id" name="product_id" value="{{ $item->product->id }}">
-                                            <input type="hidden" id="order_id" name="order_id" value="{{ $item->order->id }}">
-                                            @if ($item->product->product_type!='script' && $item->variant)
-                                              <input type="hidden" id="variant_id" name="variant_id" value="{{ $item->variant->id }}">
-                                            @endif
-                                            <input type="hidden" id="author_id" name="author_id" value="{{ $item->author->id }}">
-                                            <textarea rows="7" name="review" placeholder="Type your message here"></textarea>
-                                            <button type="submit" id="submitBtn" class="common_btn" type="submit">{{__('Save Review')}}</button>
-                                            <button class="common_btn d-none" id="showSpain"><i class="fas fa-spinner fa-spin"></i></button>
-                                        </form>
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="text">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('Review
+                                                        this Item')}}
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>{{__('Your Rating')}}</p>
+                                                    <p>
+                                                        <i class="far fa-star text-dark s1"></i>
+                                                        <i class="far fa-star text-dark s2"></i>
+                                                        <i class="far fa-star text-dark s3"></i>
+                                                        <i class="far fa-star text-dark s4"></i>
+                                                        <i class="far fa-star text-dark s5"></i>
+                                                    </p>
+                                                    <form id="reviewForm" action="{{ route('user-product-review') }}" method="POST">
+                                                        @csrf
+                                                        <label>{{__('Comment')}}*</label>
+                                                        <input type="hidden" class="star" name="rating" value="">
+                                                        <input type="hidden" id="product_id" name="product_id" value="{{ $item->product->id }}">
+                                                        <input type="hidden" id="order_id" name="order_id" value="{{ $item->order->id }}">
+                                                        @if ($item->product->product_type!='script' && $item->variant)
+                                                        <input type="hidden" id="variant_id" name="variant_id" value="{{ $item->variant->id }}">
+                                                        @endif
+                                                        <input type="hidden" id="author_id" name="author_id" value="{{ $item->author->id }}">
+                                                        
+                                                        <textarea rows="7" name="review"
+                                                            placeholder="{{__('Type your message here')}}"></textarea>
+                                                        <button type="submit" class="common_btn">{{__('Save
+                                                            Review')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="img">
+                                                <img src="{{ asset('frontend/images/rating_modal_img.jpg') }}" alt="rating"
+                                                    class="img-fluid w-100">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,53 +132,10 @@
                             @endforeach
                         </div>
                         <!-- rating modal end -->
-
                     </div>
-                    @else
-                    <div class="wsus__profile_download_empty mt_40">
-                        <h2>{{__('Buying Items')}}</h2>
-                        <div class="img">
-                            <img src="{{ asset('frontend/images/empty_download.png') }}" alt="empty download" class="img-fluid w-100">
-                        </div>
-                        <h3>{{__('Your download is empty')}}</h3>
-                        <a class="common_btn2" href="{{ route('products') }}">{{__('Continue to Shopping')}}</a>
-                    </div>
-                    @endif
                 </div>
-                {{-- information --}}
-                @php
-                    $order_item=App\Models\OrderItem::where('author_id', $user->id)->get()->count();
-                    $total_product=App\Models\Product::where(['author_id' => $user->id, 'status' => 1])->get()->count();
-                    $total_review=App\Models\Review::where(['author_id' => $user->id, 'status' => 1])->get()->count();
-                @endphp
-                <div class="col-xl-4 col-lg-4 wow fadeInRight" data-wow-duration="1s">
-                    <div class="wsus__profile_sidebar">
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_buy_info mt_30">
-                            <h3>{{__('Selling Info')}}</h3>
-                            <ul class="info">
-                                <li>
-                                    <p><i class="fal fa-cart-plus"></i> {{__('Total Sale')}}</p>
-                                    <span>{{ $order_item }}</span>
-                                </li>
-                                <li>
-                                    <p><i class="far fa-box"></i> {{__('Item')}}</p>
-                                    <span>{{ $total_product }}</span>
-                                </li>
-                                <li>
-                                    <p><i class="fas fa-star"></i> {{__('Item Rating')}}</p>
-                                    <span><i class="fas fa-star"></i> ({{ $total_review }})</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wsus__profile_sedebar_item wsus__sidebar_pro_info mt_30">
-                            <h3>{{__('Personal Info')}}</h3>
-                            <ul>
-                                <li><span>{{__('Country')}}</span> {{ $user->country ? $user->country->name : '' }}</li>
-                                <li><span>{{__('City')}}</span> {{ $user->country ? $user->city->name : ''}}</li>
-                                <li><span>{{__('Member Since')}}</span>  {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="col-xl-4 col-lg-4">
+                    @include('user.inc.user_information')
                 </div>
             </div>
         </div>
@@ -170,7 +144,7 @@
         PROFILE DOWNLOAD END
     ==============================-->
 @endsection
-@section('frontend_js')
+@push('frontend_js')
 <script>
     "use strict";
     $(document).ready(function(){
@@ -265,4 +239,4 @@
 
 
 </script>
-@endsection
+@endpush

@@ -1,9 +1,9 @@
 $(document).ready(function () {
-
+	
 	$('#price-range-submit').hide();
 
 	$("#min_price,#max_price").on('change', function () {
-
+        
 		$('#price-range-submit').show();
 
 		var min_price_range = parseInt($("#min_price").val());
@@ -22,7 +22,6 @@ $(document).ready(function () {
 
 
 	$("#min_price,#max_price").on("paste keyup", function () {
-
 		$('#price-range-submit').show();
 
 		var min_price_range = parseInt($("#min_price").val());
@@ -45,13 +44,18 @@ $(document).ready(function () {
 
 
 	$(function () {
+
+		let min_price=$('#get_min_price').val();
+		let max_price=$('#get_max_price').val();
+		let product_max_price=$('#product_max_price').val();
+
 		$("#slider-range").slider({
 			range: true,
 			orientation: "horizontal",
 			min: 0,
-			max: 1000,
-			values: [0, 1000],
-			step: 100,
+			max: product_max_price,
+			values: [min_price, max_price],
+			step: 10,
 
 			slide: function (event, ui) {
 				if (ui.values[0] == ui.values[1]) {
@@ -69,11 +73,20 @@ $(document).ready(function () {
 	});
 
 	$("#slider-range,#price-range-submit").click(function () {
-
 		var min_price = $('#min_price').val();
 		var max_price = $('#max_price').val();
-
+		
 		$("#searchResults").text("Here List of products will be shown which are cost between " + min_price + " " + "and" + " " + max_price + ".");
 	});
+
+	
+
+	$('#slider-range').on('click', function(){
+		let min_price = $('#min_price').val();
+		let max_price = $('#max_price').val();
+		$('#filter_min_price').val(min_price);
+		$('#filter_max_price').val(max_price);
+	})
+
 
 });

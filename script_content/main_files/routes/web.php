@@ -125,6 +125,7 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('/blog/{slug}', [HomeController::class, 'single_blog'])->name('blog');
     Route::post('/blog-comment', [HomeController::class, 'blogComment'])->name('blog-comment');
     Route::post('/product-comment', [HomeController::class, 'productComment'])->name('product-comment');
+    Route::post('/product-review', [HomeController::class, 'productReview'])->name('product-review');
     Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
     Route::get('/terms-and-conditions', [HomeController::class, 'termsAndCondition'])->name('terms-and-conditions');
     Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -189,7 +190,8 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('download', [UserProfileController::class, 'download'])->name('download');
     Route::get('collection', [UserProfileController::class, 'collection'])->name('collection');
     Route::get('rating', [UserProfileController::class, 'rating'])->name('rating');
-    Route::post('/product-review', [UserProfileController::class, 'productReview'])->name('product-review');
+
+    Route::post('/user-product-review', [UserProfileController::class, 'productReview'])->name('user-product-review');
 
     Route::get('seller-profile/{slug}', [AuthorProfileController::class, 'profile'])->name('author-profile');
     Route::get('seller-portfolio/{slug}', [AuthorProfileController::class, 'portfolio'])->name('author-portfolio');
