@@ -29,6 +29,11 @@
                                 </div>
 
                                 <div class="form-group col-12">
+                                  <label>{{__('Link')}} <span class="text-danger">*</span></label>
+                                  <input class="form-control" name="link" value="{{ $discount->link }}" type="text">
+                                </div>
+
+                                <div class="form-group col-12">
                                     <label>{{__('End Time')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control datetimepicker_mask" value="{{ $discount->end_time }}" name="end_time" autocomplete="off">
                                 </div>

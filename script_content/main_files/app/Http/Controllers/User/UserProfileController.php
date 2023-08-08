@@ -122,17 +122,9 @@ class UserProfileController extends Controller
         $countries=Country::where('status', 1)->get();
         $stats=CountryState::where('status', 1)->get();
         $cities=City::where('status', 1)->get();
-        $wishlists=Wishlist::with('product')->where('user_id', $user->id)->paginate(9);
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $wishlists=Wishlist::with('product')->where('user_id', $user->id)->paginate(6);
+        
+        $active_theme = 'layout';
 
         return view('user.collection')->with([
             'active_theme' => $active_theme,
@@ -175,16 +167,8 @@ class UserProfileController extends Controller
     public function select_product_type(){
         $user = Auth::guard('web')->user();
         $productType = ProductTypePage::first();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
 
         return view('user.select_product_type')->with([
             'active_theme' => $active_theme,
@@ -203,16 +187,8 @@ class UserProfileController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
         $user = Auth::guard('web')->user();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
 
         if(!$request->product_type){
             $notification = trans('Something went wrong');
@@ -336,6 +312,7 @@ class UserProfileController extends Controller
         $product->regular_price = $request->regular_price;
         $product->extend_price = $request->extend_price;
         $product->description = $request->description;
+        $tag_content = '';
         $product->tags = $request->tags;
         $product->status = 0;
         $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
@@ -424,18 +401,11 @@ class UserProfileController extends Controller
     public function edit($id){
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
+        //return $product;
         $product_variants = ProductVariant::where('product_id', $id)->get();
         $setting=Setting::first();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+
+        $active_theme = 'layout';
 
         if(!$product->product_type){
             $notification = trans('Something went wrong');
@@ -710,17 +680,7 @@ class UserProfileController extends Controller
 
     public function product_variant($id){
         $user = Auth::guard('web')->user();
-        $product = Product::find($id);
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $active_theme = 'layout';
         return view('user.product_variant')->with([
             'active_theme' => $active_theme,
         ]);
@@ -781,6 +741,15 @@ class UserProfileController extends Controller
     }
 
 
+    public function profileEdit(){
+        $user = Auth::guard('web')->user();
+        $active_theme = 'layout';
+        return view('user.profile_edit')->with([
+            'active_theme' => $active_theme,
+            'user' => $user,
+        ]);
+    }
+
 
     public function updateProfile(Request $request){
         $user = Auth::guard('web')->user();
@@ -788,9 +757,6 @@ class UserProfileController extends Controller
             'name'=>'required',
             'designation'=>'required',
             'phone'=>'required',
-            'country_id'=>'required',
-            'state_id'=>'required',
-            'city_id'=>'required',
             'address'=>'required',
             'about_me'=>'required',
             'my_skill'=>'required',
@@ -799,9 +765,6 @@ class UserProfileController extends Controller
             'name.required' => trans('user_validation.Name is required'),
             'designation.required' => trans('Designation is required'),
             'phone.required' => trans('user_validation.Phone is required'),
-            'country_id.required' => trans('Country name is required'),
-            'state_id.required' => trans('State name is required'),
-            'city_id.required' => trans('City name is required'),
             'address.required' => trans('user_validation.Address is required'),
             'about_me.required' => trans('About is required'),
             'my_skill.required' => trans('Skill is required'),
@@ -811,9 +774,9 @@ class UserProfileController extends Controller
         $user->name = $request->name;
         $user->designation = $request->designation;
         $user->phone = $request->phone;
-        $user->country_id = $request->country_id;
-        $user->state_id = $request->state_id;
-        $user->city_id = $request->city_id;
+        $user->country = $request->country;
+        $user->state = $request->state;
+        $user->city = $request->city;
         $user->address = $request->address;
         $user->about_me = $request->about_me;
         $user->my_skill = $request->my_skill;
@@ -850,6 +813,15 @@ class UserProfileController extends Controller
         //return response()->json(['status' => 'success', 'message' => $notification, 'image_upload' => $image_upload, 'user' => $user]);
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
+    }
+
+    public function changePassword(){
+        $user = Auth::guard('web')->user();
+        $active_theme = 'layout';
+        return view('user.change_password')->with([
+            'active_theme' => $active_theme,
+            'user' => $user,
+        ]);
     }
 
     public function updatePassword(Request $request){

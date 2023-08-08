@@ -6978,6 +6978,29 @@ AUTHOR EDIT PROFILE END
 .download-product-rating {
     margin-top: -45px;
 }
+
+.product_icon img{
+    width: 70px !important;
+}
+
+.variant_delete_modal .btn-close {
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    border: 1px solid rgba(55, 69, 87, 0.6);
+    background: var(--colorWhite);
+    opacity: 1;
+    border-radius: 50%;
+    color: rgba(55, 69, 87, 0.6);
+    font-size: 19px;
+    margin-right: 0px;
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
 /*============================
     Devloper custom css end
 ============================*/

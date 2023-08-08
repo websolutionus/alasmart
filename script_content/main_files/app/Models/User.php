@@ -53,18 +53,6 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Vendor::class);
     }
 
-    public function city(){
-        return $this->belongsTo(City::class);
-    }
-
-    public function state(){
-        return $this->belongsTo(CountryState::class);
-    }
-
-    public function country(){
-        return $this->belongsTo(Country::class);
-    }
-
 
     public function getJWTIdentifier()
     {
@@ -75,7 +63,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
-
 
 }

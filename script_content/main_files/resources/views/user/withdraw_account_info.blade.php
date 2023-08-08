@@ -1,4 +1,4 @@
-<div class="card" id="method_des">
+<div class="card mb-3" id="method_des">
     <div class="card-body">
             <h6>{{__('Withdraw Limit')}} : {{ $setting->currency_icon }}{{ $method->min_amount }} - {{ $setting->currency_icon }}{{ $method->max_amount }}</h6>
             <h6 class="mt-2">{{__('Withdraw charge')}} : {{ $method->withdraw_charge }}%</h6>

@@ -16,7 +16,7 @@ $(function () {
     //=======COUNTDOWN======   
     var d = new Date(),
         countUpDate = new Date();
-    d.setDate(d.getDate() + 96);
+    d.setDate(d.getDate() + 11);
 
     simplyCountdown('.simply-countdown-one', {
         year: d.getFullYear(),

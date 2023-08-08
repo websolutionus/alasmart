@@ -197,7 +197,9 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('seller-portfolio/{slug}', [AuthorProfileController::class, 'portfolio'])->name('author-portfolio');
 
     Route::get('/user/logout', [LoginController::class, 'userLogout'])->name('user.logout');
-     Route::post('update-profile', [UserProfileController::class, 'updateProfile'])->name('update-profile');
+    Route::get('profile-edit', [UserProfileController::class, 'profileEdit'])->name('profile-edit');
+    Route::post('update-profile', [UserProfileController::class, 'updateProfile'])->name('update-profile');
+    Route::get('change-password', [UserProfileController::class, 'changePassword'])->name('change-password');
     Route::post('update-password', [UserProfileController::class, 'updatePassword'])->name('update-password');
     Route::get('download-script/{id}', [UserProfileController::class, 'download_script'])->name('download-script');
     Route::get('download-variant/{id}', [UserProfileController::class, 'download_variant'])->name('download-variant');

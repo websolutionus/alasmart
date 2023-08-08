@@ -277,24 +277,34 @@
                             <h3>{{__('Auther Profile')}}</h3>
                             <div class="wsus__sidebar_author_text">
                                 <div class="img">
-                                    <img src="{{ asset('frontend/images/authorLogo.png') }}" alt="author" class="img-fluid w-100">
+                                    @if($product->author->image!=null)
+                                    <img src="{{ asset($product->author->image) }}" alt="author" class="img-fluid w-100">
+                                    @elseif($product->author->provider=='google')
+                                    <img src="{{ asset($product->author->provider_avatar) }}" alt="author" class="img-fluid w-100">
+                                    @else
+                                    <img src="{{ asset($setting->default_avatar) }}" alt="author" class="img-fluid w-100">
+                                    @endif
                                 </div>
                                 <div class="text">
-                                    <h4>Design Craft</h4>
-                                    <p>Signup- 23july 2022,</p>
+                                    <h4>{{ html_decode($product->author->name) }}</h4>
+                                    <p>{{__('Signup')}} - {{ Carbon\Carbon::parse($product->author->created_at)->format('F Y') }}</p>
                                 </div>
                             </div>
                             <ul class="d-flex flex-wrap justify-content-center">
+                                @php
+                                    $total_sold=App\Models\OrderItem::where('author_id', $product->author->id)->get()->count();
+                                    $total_product=App\Models\Product::where(['author_id' => $product->author->id, 'status' => 1])->get()->count();
+                                @endphp
                                 <li>
-                                    <h4>85</h4>
-                                    <p>products</p>
+                                    <h4>{{ $total_product }}</h4>
+                                    <p>{{__('products')}}</p>
                                 </li>
                                 <li>
-                                    <h4>255</h4>
-                                    <p>sales</p>
+                                    <h4>{{ $total_sold }}</h4>
+                                    <p>{{__('sales')}}</p>
                                 </li>
                             </ul>
-                            <button class="common_btn"><i class="fal fa-stars"></i> Level 3</button>
+                            <a class="common_btn" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('View Profile')}}</a>
                         </div>
 
                         <div class="wsus__sidebar_pro_info mt_30">

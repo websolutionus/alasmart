@@ -8,13 +8,13 @@
 @endsection
 
 @section('frontend-content')
-<!--=============================
+    <!--=============================
         UPLOAD PRODUCT INFO START
     ==============================-->
-    <section class="upload_product_info pt_190">
+    <section class="upload_product_info pt_190 pb_100 xs_pb_70">
         <div class="container wow fadeInUp" data-wow-duration="1s">
             <h3>{{__('Upload your Product')}} </h3>
-            <form action="{{ route('product-store') }}" method="POST" enctype="multipart/form-data" class="upload_product_form">
+            <form class="upload_product_form" action="{{ route('product-store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-xl-6 col-md-6">
@@ -22,10 +22,10 @@
                             <label>{{__('Thumbnail Image')}}*</label>
                             <div class="upload_box">
                                 <div class="img">
-                                    <img src="{{ asset('frontend') }}/images/upload_1.png" alt="upload icon" class="img-fluid w-100">
+                                    <img src="{{ asset('frontend/images/upload_1.png') }}" alt="upload icon" class="img-fluid w-100">
                                 </div>
                                 <label for="upload_11">{{__('Please')}} <span>{{__('Choose File')}}</span> {{__('to upload')}} </label>
-                                <input id="upload_11" type="file" name="thumb_image" hidden>
+                                <input id="upload_11" name="thumb_image" type="file" hidden>
                             </div>
                         </div>
                     </div>
@@ -34,87 +34,108 @@
                             <label>{{__('Upload File')}}* <span> (<b>{{__('Only ZIP file allowed')}}</b>)</span></label>
                             <div class="upload_box">
                                 <div class="img">
-                                    <img src="{{ asset('frontend') }}/images/upload_2.png" alt="upload icon" class="img-fluid w-100">
+                                    <img src="{{ asset('frontend/images/upload_2.png') }}" alt="upload icon" class="img-fluid w-100">
                                 </div>
                                 <label for="upload_1">{{__('Please')}} <span>{{__('Choose File')}}</span> {{__('to upload')}} </label>
-                                <input id="upload_1" type="file" name="upload_file" accept=".zip" hidden>
+                                <input id="upload_1" name="upload_file" accept=".zip" type="file" hidden>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Product icon')}}*</label>
-                            <input type="file" name="product_icon">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Product icon')}}*</legend>
+                                <input type="file" name="product_icon">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Category')}}*</label>
-                            <select class="select_js" name="category">
-                                <option value="">{{__('Select Catagory')}}</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Category')}}*</legend>
+                                <select class="select_js" name="category">
+                                    <option value="">{{__('Select Category')}}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Product Name')}}*</label>
-                            <input type="text" id="name" name="name" value="{{ old('name') }}">
-                            <input type="hidden" name="product_type" value="{{ $product_type }}">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Product Name')}}*</legend>
+                                <input type="text" id="name" name="name" value="{{ old('name') }}">
+                                <input type="hidden" name="product_type" value="{{ $product_type }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Slug')}}*</label>
-                            <input type="text" id="slug" name="slug" value="{{ old('slug') }}">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Slug')}}*</legend>
+                                <input type="text" id="slug" name="slug" value="{{ old('slug') }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Preview Link')}}*</label>
-                            <input type="text" name="preview_link">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Preview link')}}*</legend>
+                                <input type="text" name="preview_link" value="{{ old('preview_link') }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-xl-6">
-                        <div class="upload_form_input">
-                            <label>{{__('Regular Price')}}*</label>
-                            <input type="text" name="regular_price" value="{{ old('regular_price') }}">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Regular price')}}*</legend>
+                                <input type="text" name="regular_price" value="{{ old('regular_price') }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-xl-6">
-                        <div class="upload_form_input">
-                            <label>{{__('Extend Price')}}*</label>
-                            <input type="text" name="extend_price" value="{{ old('extend_price') }}">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Extend price')}}*</legend>
+                                <input type="text" name="extend_price" value="{{ old('extend_price') }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('Description')}}*</label>
+                        <div class="wsus__comment_single_input">
+                            <legend>{{__('Description')}}*</legend>
                             <textarea id="editor" name="description" rows="8">{{ old('description') }}</textarea>
                         </div>
                     </div>
-
-                    <div class="col-12 mt-3">
-                        <label>{{__('Tags')}}* ({{'Press the comma for new tag'}})</label><br>
-                        <input type="text" class="form-control" data-role="tagsinput" name="tags" value="{{ old('tags') }}">
-                    </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('SEO Title')}}*</label>
-                            <input type="text" name="seo_title" value="{{ old('seo_title') }}">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('Tags')}}* {{__('Press the comma for new tag')}}</legend>
+                                <input type="text" data-role="tagsinput" name="tags" value="{{ old('tags') }}">
+                            </fieldset>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <label>{{__('SEO Description')}}*</label>
-                            <textarea rows="5" name="seo_description">{{ old('seo_description') }}</textarea>
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('SEO title')}}*</legend>
+                                <input type="text" name="seo_title" value="{{ old('seo_title') }}">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
+                            <fieldset>
+                                <legend>{{__('SEO description')}}*</legend>
+                                <textarea rows="4" name="seo_description">{{ old('seo_description') }}</textarea>
+                            </fieldset>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="upload_others_feature">
+                    <div class="col-12">
+                        <div class="wsus__comment_single_input">
                             <div class="row">
                                 <div class="col-12">
                                     <h4>{{__('Others feature')}}</h4>
@@ -132,17 +153,14 @@
                                     <label for="documentation" class="mr-3" >{{__('Documentation')}}</label>
                                 </div>
                                 <div class="col-12">
-                                <input type="checkbox" name="layout" id="layout"> <label for="layout" class="mr-3" >{{__('Responsive')}}</label>
+                                    <input type="checkbox" name="layout" id="layout"> <label for="layout" class="mr-3" >{{__('Responsive')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12">
-                        <div class="upload_form_input">
-                            <ul class="d-flex flex-wrap mt_15">
-                                <li><button class="common_btn upload" type="submit">{{__('upload Product')}}</button></li>
-                            </ul>
+                        <div class="wsus__comment_single_input">
+                            <button class="common_btn upload" type="submit">{{__('upload Product')}}</button>
                         </div>
                     </div>
                 </div>
@@ -153,7 +171,7 @@
         UPLOAD PRODUCT INFO END
     ==============================-->
 @endsection
-@section('frontend_js')
+@push('frontend_js')
     
 <script>
     (function($) {
@@ -184,4 +202,4 @@
                 .replace(/ +/g,'-');
     }
 </script>
-@endsection
+@endpush

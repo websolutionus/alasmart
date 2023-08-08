@@ -53,12 +53,14 @@ class ProductController extends Controller
     public function update_product_discount(Request $request){
         $rules = [
             'title'=>'required',
+            'link'=>'required',
             'offer'=>'required',
             'end_time'=>'required',
         ];
 
         $customMessages = [
             'title.required' => trans('Title is required'),
+            'link.required' => trans('Link is required'),
             'offer.required' => trans('Offer is required'),
             'end_time.required' => trans('End time is required'),
         ];
@@ -68,6 +70,7 @@ class ProductController extends Controller
 
         $discount->title = $request->title;
         $discount->offer = $request->offer;
+        $discount->link = $request->link;
         $discount->end_time = $request->end_time;
         $discount->status = $request->status;
         $discount->save();
