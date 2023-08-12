@@ -173,15 +173,15 @@
                         </ul>
                         @if (Session::has('coupon'))
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $cartTotal }}</span> </p>
+                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
                             <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
                             <p class="total">{{__('Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
                         </div>
                         @else
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $cartTotal }}</span> </p>
+                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
                             <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} 0</span> </p>
-                            <p class="total">{{__('Total')}} <span>{{ $setting->currency_icon }}{{ $cartTotal }}</span> </p>
+                            <p class="total">{{__('Total')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
                         </div>
                         @endif
                     </div>
@@ -221,7 +221,6 @@
                             @php
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                             @endphp
                             <p class="rating">
                                 <i class="far fa-star"></i>
@@ -576,9 +575,6 @@ function payWithPaystack(){
             logo: "{{ asset($flutterwave->logo) }}",
             },
         });
-
-
-
     }
 </script>
 {{-- end flutterwave payment --}}

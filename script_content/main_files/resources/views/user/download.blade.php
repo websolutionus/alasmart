@@ -85,8 +85,7 @@
                                         <div class="col-xl-6">
                                             <div class="text">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('Review
-                                                        this Item')}}
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('Review this Item')}}
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
@@ -113,16 +112,14 @@
                                                         
                                                         <textarea rows="7" name="review"
                                                             placeholder="{{__('Type your message here')}}"></textarea>
-                                                        <button type="submit" class="common_btn">{{__('Save
-                                                            Review')}}</button>
+                                                        <button type="submit" class="common_btn">{{__('Save Review')}}</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="img">
-                                                <img src="{{ asset('frontend/images/rating_modal_img.jpg') }}" alt="rating"
-                                                    class="img-fluid w-100">
+                                                <img src="{{ asset('frontend/images/rating_modal_img.jpg') }}" alt="rating" class="img-fluid w-100">
                                             </div>
                                         </div>
                                     </div>
@@ -235,8 +232,5 @@
             });
         });
     })(jQuery);
-
-
-
 </script>
 @endpush

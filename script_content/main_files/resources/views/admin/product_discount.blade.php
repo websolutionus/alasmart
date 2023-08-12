@@ -35,7 +35,7 @@
 
                                 <div class="form-group col-12">
                                     <label>{{__('End Time')}} <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control datetimepicker_mask" value="{{ $discount->end_time }}" name="end_time" autocomplete="off">
+                                    <input type="date" class="form-control" value="{{ $discount->end_time }}" name="end_time" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" autocomplete="off">
                                 </div>
 
                                 <div class="form-group col-12">

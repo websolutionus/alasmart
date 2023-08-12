@@ -189,7 +189,6 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('portfolio', [UserProfileController::class, 'portfolio'])->name('portfolio');
     Route::get('download', [UserProfileController::class, 'download'])->name('download');
     Route::get('collection', [UserProfileController::class, 'collection'])->name('collection');
-    Route::get('rating', [UserProfileController::class, 'rating'])->name('rating');
 
     Route::post('/user-product-review', [UserProfileController::class, 'productReview'])->name('user-product-review');
 

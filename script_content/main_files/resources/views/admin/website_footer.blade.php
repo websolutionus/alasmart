@@ -40,13 +40,8 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Community')}} <span class="text-danger">*</span></label>
-                                    <input type="text" name="community" class="form-control" value="{{ $footer->community }}">
-                                </div>
-
-                                <div class="form-group col-12">
-                                    <label>{{__('Community link')}} <span class="text-danger">*</span></label>
-                                    <input type="text" name="community_link" class="form-control" value="{{ $footer->community_link }}">
+                                    <label>{{__('Description')}} <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="description" id="" cols="30" rows="5">{{ $footer->description }}</textarea>
                                 </div>
                             </div>
                             <div class="row">

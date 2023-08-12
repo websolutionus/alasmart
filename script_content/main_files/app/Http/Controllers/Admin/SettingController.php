@@ -24,6 +24,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Schedule;
 use App\Models\TawkChat;
+use App\Models\Template;
 use App\Models\Wishlist;
 use App\Models\OrderItem;
 use App\Models\CustomPage;
@@ -31,8 +32,8 @@ use App\Models\FooterLink;
 use App\Models\PopularTag;
 use App\Models\Subscriber;
 use App\Models\BlogComment;
-use App\Models\PopularPost;
 
+use App\Models\PopularPost;
 use App\Models\Testimonial;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -43,9 +44,9 @@ use App\Models\ScriptContent;
 use App\Models\TicketMessage;
 use App\Models\ContactMessage;
 use App\Models\GoogleAnalytic;
+
+
 use App\Models\ProductComment;
-
-
 use App\Models\ProductVariant;
 use App\Models\WithdrawMethod;
 use App\Models\CompleteRequest;
@@ -95,6 +96,7 @@ class SettingController extends Controller
         User::truncate();
         WithdrawMethod::truncate();
         Wishlist::truncate();
+        Template::truncate();
 
 
         // pending ----

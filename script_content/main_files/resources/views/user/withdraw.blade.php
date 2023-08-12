@@ -24,7 +24,7 @@
                         </div>
                         <p>{{__('Current Balance')}}</p>
                         <h2>{{ $setting->currency_icon }}{{ $current_balance }}</h2>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">Withdraw</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">{{__('Withdraw')}}</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">

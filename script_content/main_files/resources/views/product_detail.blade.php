@@ -62,6 +62,12 @@
                                     aria-controls="pills-contact" aria-selected="false"><i class="far fa-star"></i>
                                     {{__('user.Review')}} ({{ $productReviews->count() }})</button>
                             </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button onclick="addWishlist({{ $product->id }})"><i class="far fa-heart" aria-hidden="true"></i>
+                                    {{__('Wishlist')}}</button>
+                            </li>
+
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
@@ -191,7 +197,7 @@
                                         <i class="fas fa-star s3"></i>
                                         <i class="fas fa-star s4"></i>
                                         <i class="fas fa-star s5"></i>
-                                        <span class="total_star">(0)</span>
+                                        <span class="total_star">(0.0)</span>
                                     </p>
                                     <div class="row">
                                         <div class="col-xl-12">
@@ -238,8 +244,8 @@
                             @if ($product->product_type == 'script')
                             <div class="select_licance">
                                 <select class="select_js" name="price_type" id="price_type">
-                                    <option value="regular price">{{__('Regular License')}}</option>
-                                    <option value="extend price">{{__('extended License')}}</option>
+                                    <option value="regular price">{{__('Regular Price')}}</option>
+                                    <option value="extend price">{{__('extend Price')}}</option>
                                 </select>
                             </div>
 
@@ -263,7 +269,7 @@
                             <input type="hidden" value="{{ $product->author->name }}" id="author_name">
                             <input type="hidden" value="{{ $product->author->id }}" id="author_id">
                             <ul class="button_area d-flex flex-wrap {{ $product->product_type=='script' ? '':'mt-3' }}">
-                                <li><a class="live" target="__blank" href="{{ $product->preview_link }}">{{__('Live Proview')}}</a></li>
+                                <li><a class="live" target="__blank" href="{{ $product->preview_link }}">{{__('Live Preview')}}</a></li>
                                 <li><a class="common_btn" href="javascript:;" onclick="addToCard({{ $product->id }})">{{__('add to cart')}}</a></li>
                             </ul>
                             <ul class="sell_rating mt_20 d-flex flex-wrap justify-content-between">
@@ -274,7 +280,7 @@
                         </div>
 
                         <div class="wsus__sidebar_author_info mt_30">
-                            <h3>{{__('Auther Profile')}}</h3>
+                            <h3>{{__('Author Profile')}}</h3>
                             <div class="wsus__sidebar_author_text">
                                 <div class="img">
                                     @if($product->author->image!=null)
@@ -310,7 +316,7 @@
                         <div class="wsus__sidebar_pro_info mt_30">
                             <h3>{{__('product Info')}}</h3>
                             <ul>
-                                <li><span>{{__('Relesaed')}}</span> {{ Carbon\Carbon::parse($product->created_at)->format('F d,Y') }}</li>
+                                <li><span>{{__('Released')}}</span> {{ Carbon\Carbon::parse($product->created_at)->format('F d,Y') }}</li>
                                 <li><span>{{__('Updated')}}</span> {{ Carbon\Carbon::parse($product->updated_at)->format('F d,Y') }}</li>
                                 <li><span>{{__('File Type')}}</span> {{ $product->product_type }}</li>
                                 <li><span>{{__('High Resolution')}}</span> {{ $product->high_resolution == 1 ? 'Yes' : 'No' }}</li>
@@ -372,7 +378,6 @@
                             @php
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                             @endphp
                             <p class="rating">
                                 <i class="far fa-star"></i>
@@ -582,7 +587,7 @@
             $('.star').val('');
             $('.star').val(1);
             $('.total_star').text('');
-            $('.total_star').text('('+1+')');
+            $('.total_star').text('('+1+'.0)');
         });
         $('.s2').on('click', function(){
             $('.s3, .s4, .s5').removeClass('fas fa-star text-warning');
@@ -592,7 +597,7 @@
             $('.star').val('');
             $('.star').val(2);
             $('.total_star').text('');
-            $('.total_star').text('('+2+')');
+            $('.total_star').text('('+2+'.0)');
         });
         $('.s3').on('click', function(){
             $('.s4, .s5').removeClass('fas fa-star text-warning');
@@ -602,7 +607,7 @@
             $('.star').val('');
             $('.star').val(3);
             $('.total_star').text('');
-            $('.total_star').text('('+3+')');
+            $('.total_star').text('('+3+'.0)');
         });
         $('.s4').on('click', function(){
             $('.s5').removeClass('fas fa-star text-warning');
@@ -612,7 +617,7 @@
             $('.star').val('');
             $('.star').val(4);
             $('.total_star').text('');
-            $('.total_star').text('('+4+')');
+            $('.total_star').text('('+4+'.0)');
         });
         $('.s5').on('click', function(){
             $('.s1, .s2, .s3, .s4, .s5').removeClass('fas fa-star');
@@ -620,7 +625,7 @@
             $('.star').val('');
             $('.star').val(5);
             $('.total_star').text('');
-            $('.total_star').text('('+5+')');
+            $('.total_star').text('('+5+'.0)');
         });
     })
 </script>

@@ -26,7 +26,7 @@
                                     <img src="{{ asset('frontend/images/upload_1.png') }}" alt="upload icon" class="img-fluid w-100">
                                 </div>
                                 <label for="upload_11">{{__('Please')}} <span>{{__('Choose File')}}</span> {{__('to upload')}} </label>
-                                <input id="upload_11" name="thumb_image" type="file" hidden>
+                                <input id="upload_11" name="thumb_image" type="file" hidden >
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <fieldset>
-                                <legend>{{__('Tags')}}*   {{__('Press the comma for new tag')}}</legend>
+                                <legend>{{__('Tags')}}* {{__('Press the comma for new tag')}}</legend>
                                 <input type="text" data-role="tagsinput" name="tags" value="{{ html_decode($product->tags) }}">
                             </fieldset>
                         </div>
@@ -159,17 +159,14 @@
                             <div class="img">
                                 <img src="{{ asset('frontend/images/variant_img.png') }}" alt="variant" class="img-fluid w-100">
                             </div>
-                            <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#store_product_variant">{{__('Add New
-                                Variant &
-                                Price')}}</a>
+                            <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#store_product_variant">{{__('Add New & Price')}}</a>
                         </div>
                     </div>
                     @else
                     <div class="col-12">
                         <div class="variant_price variant_price_2">
                             <h4>{{__('Variant and Price')}}</h4>
-                            <a href="#" class="common_btn" data-bs-toggle="modal" data-bs-target="#store_product_variant">{{__('Add
-                                More Variant')}}</a>
+                            <a href="#" class="common_btn" data-bs-toggle="modal" data-bs-target="#store_product_variant">{{__('Add More Variant')}}</a>
                             <div class="table-responsive">
                                 <table>
                                     <tbody>

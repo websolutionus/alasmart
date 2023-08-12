@@ -1,7 +1,10 @@
-$(function () {
+$(function (){
 
     "use strict";
-
+    let end_year = $('#end_year').val();
+    let end_month = $('#end_month').val();
+    let end_day = $('#end_day').val();
+    
     //======MENU FIX========
     if ($('.main_menu').offset() != undefined) {
         $(window).bind('scroll', function () {
@@ -13,16 +16,13 @@ $(function () {
         });
     }
 
-    //=======COUNTDOWN======   
-    var d = new Date(),
-        countUpDate = new Date();
-    d.setDate(d.getDate() + 11);
-
+    //=======COUNTDOWN======
+    
+    
     simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: true
+        year: end_year,
+        month: end_month,
+        day: end_day,
     });
 
 

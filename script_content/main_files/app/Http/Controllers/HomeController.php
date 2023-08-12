@@ -231,7 +231,7 @@ class HomeController extends Controller
         }
 
         $trending_products = Product::with('category','author')->where(['status' => 1, 'trending_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($trending_control->qty);
-        
+
         $total_row = $trending_products->count() / 4;
         
         $trending_content = $contents->where('id', 7)->first();
@@ -239,8 +239,12 @@ class HomeController extends Controller
         $trending_section = (object) array(
             'visibility' => $trending_visibility,
             'title' => $trending_content->title,
+            'trending_offer_title1' => $homepage->trending_offer_title1,
+            'trending_offer_title2' => $homepage->trending_offer_title2,
+            'trending_offer_link' => $homepage->trending_offer_link,
+            'trending_offer_image' => $homepage->trending_offer_image,
             'description' => $trending_content->description,
-            'total_row' => $total_row,
+            'trending_products' => $trending_products,
         );
 
         // end trending area
@@ -463,8 +467,7 @@ class HomeController extends Controller
         $home3_blog_content = $contents->where('id', 5)->first();
 
         $home3_blogs = Blog::with('category', 'admin')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home3_blog_control->qty);
-        
-        //return $home1_blogs;
+
 
         $home3_blog_section = (object) array(
             'visibility' => $home3_blog_visibility,
@@ -650,6 +653,7 @@ class HomeController extends Controller
         }
         
         $products = $products->where('status', 1)->latest()->paginate($paginateQty);
+        $products = $products->appends($request->all());
         
         if($get_max_product_price){
             $product_max_price = $get_max_product_price->regular_price;

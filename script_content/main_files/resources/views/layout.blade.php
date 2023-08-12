@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/summernote.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-tagsinput.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/tagify.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/select2.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/spacing.css') }}">
@@ -53,8 +52,17 @@
                     <div class="wsus__topbar_countdown d-flex flex-wrap align-items-center">
                         @php
                             $discount =  App\Models\ProductDiscount::first();
+                            $today = Carbon\Carbon::now();
+                            $end_time = $discount->end_time;
+                            $end_year = date('Y', strtotime($end_time));
+                            $end_month = date('m', strtotime($end_time));
+                            $end_day = date('d', strtotime($end_time));
                         @endphp
-                        <p><span>{{ $discount->offer }}% </span> {{ $discount->title }}</p>
+
+                        <p><a target="__blank" href="{{ $discount->link }}"><span>{{ $discount->offer }}% </span> {{ $discount->title }}</a></p>
+                        <input type="hidden" id="end_year" value="{{ $end_year }}">
+                        <input type="hidden" id="end_month" value="{{ $end_month }}">
+                        <input type="hidden" id="end_day" value="{{ $end_day }}">
                         <div class="simply-countdown simply-countdown-one"></div>
                     </div>
                 </div>
@@ -62,10 +70,22 @@
                     <div class="wsus__topbar_language">
                         <ul class="wsus__multi_language d-flex flrx-wrap">
                             <li>
-                                <a href="{{ route('collection') }}">{{__('Collection')}}</i></a>
+                                <a href="javascript:;">{{__('USD')}} <i class="far fa-chevron-down"></i></a>
+                                <ul class="droap_language">
+                                    <li><a href="javascript:;">{{__('BDT')}}</a></li>
+                                    <li><a href="javascript:;">{{__('EUR')}}</a></li>
+                                    <li><a href="javascript:;">{{__('AED')}}</a></li>
+                                    <li><a href="javascript:;">{{__('GBP')}}</a></li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="{{ route('download') }}">{{__('Download file')}}</a>
+                                <a href="javascript:;">{{__('English')}} <i class="far fa-chevron-down"></i></a>
+                                <ul class="droap_language">
+                                    <li><a href="javascript:;">{{__('Japanes')}}</a></li>
+                                    <li><a href="javascript:;">{{__('Chines')}}</a></li>
+                                    <li><a href="javascript:;">{{__('Arabic')}}</a></li>
+                                    <li><a href="javascript:;">{{__('Hindi')}}</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a class="user" href="{{ route('dashboard') }}">
@@ -170,12 +190,14 @@
                                 $route = route('home',['theme' => 1]);
                             }
                         @endphp
-                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">Home <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('Home')}} <i class="far fa-chevron-down"></i></a>
+                        @if ($setting->selected_theme==0)
                         <ul class="wsus__droap_menu">
                             <li><a class="active" href="{{ route('home',['theme' => 1]) }}">{{__('home one')}}</a></li>
                             <li><a href="{{ route('home',['theme' => 2]) }}">{{__('home two')}}</a></li>
                             <li><a href="{{ route('home',['theme' => 3]) }}">{{__('home three')}}</a></li>
                         </ul>
+                        @endif
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products') }}">{{__('Products')}}</a>
@@ -183,17 +205,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:;">{{__('Pages')}} <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
-                            <li><a href="{{ route('about-us') }}">{{__('about us')}}</a></li>
-                            <li><a href="{{ route('become-author-page') }}">{{__('become an author')}}</a></li>
+                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('about us')}}</a></li>
+                            <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('become an author')}}</a></li>
 
                             @if ($setting->blog_left_right == 0)
-                            <li><a href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('blog leftbar')}}</a></li>
-                            <li><a href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('blog rightbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'leftbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('blog leftbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'rightbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('blog rightbar')}}</a></li>
                             @endif
 
-                            <li><a href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
-                            <li><a href="{{ route('privacy-policy') }}">{{__('privacy policy')}}</a></li>
-                            <li><a href="{{ route('terms-and-conditions') }}">{{__('terms and condition')}}</a></li>
+                            <li><a class="{{ Route::is('faq') ? 'active':'' }}" href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
+                            <li><a class="{{ Route::is('privacy-policy') ? 'active':'' }}" href="{{ route('privacy-policy') }}">{{__('privacy policy')}}</a></li>
+                            <li><a class="{{ Route::is('terms-and-conditions') ? 'active':'' }}" href="{{ route('terms-and-conditions') }}">{{__('terms and condition')}}</a></li>
 
                             @php
                                 $pages = App\Models\CustomPage::where('status', 1)->get();
@@ -244,7 +266,7 @@
                         <p>{{ $setting->subscriber_description }}</p>
                         <form id="footerTopSubscriberForm">
                             @csrf
-                            <input type="text" name="email" placeholder="Enter your email address">
+                            <input type="text" name="email" placeholder="{{__('Enter your email address')}}">
                             <button class="common_btn" id="footerTopSubSubmitBtn" type="submit">{{__('Subscribe')}}</button>
                             <button class="common_btn d-none" id="footerTopSubShowSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                         </form>
@@ -283,7 +305,7 @@
                         </div>
                         <form id="fsubscriberForm">
                             @csrf
-                            <input type="text" name="email" placeholder="Enter your email address">
+                            <input type="text" name="email" placeholder="{{__('Enter your email address')}}">
                             <button class="common_btn" id="fsubSubmitBtn" type="submit">{{__('Subscribe')}}</button>
                             <button class="common_btn d-none" id="fsubShowSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                         </form>
@@ -295,14 +317,10 @@
             <div class="row justify-content-between">
                 <div class="col-xl-4 col-md-4 col-lg-4">
                     <div class="wsus__footer_content">
-                        <a class="footer_logo" href="index.html">
+                        <a class="footer_logo" href="{{ route('home') }}">
                             <img src="{{ asset($setting->footer_logo) }}" alt="Alsmart" class="img-fluid w-100">
                         </a>
-                        <p class="description">{{__('We don’t take ourselves too seriously seriously enough
-                            ensure we’re creating the best product and experienc
-                            our customer. I feel like help company name the same.
-                            Our best-in-class WordPres solution with additional as
-                            Corporate clients and leisure travelers')}}.</p>
+                        <p class="description">{{ $footer->description }}</p>
                     </div>
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-2">
@@ -429,7 +447,6 @@
     <script src="{{ asset('frontend/js/summernote.min.js') }}"></script>
 
     <script src="{{ asset('frontend/js/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/tagify.js') }}"></script>
     <script src="{{ asset('backend/js/select2.min.js') }}"></script>
 
     <!--main/custom js-->
@@ -627,15 +644,13 @@
                         { value: 'Email', title: 'Email' },
                     ]
                 });
-                $('.tags').tagify();
             });
         })(jQuery);
     
     </script>
     
     <script>
-        "use strict";
-        //wishlist start
+            //wishlist start
             function addWishlist(product_id){
                 $.ajax({
                     headers: {

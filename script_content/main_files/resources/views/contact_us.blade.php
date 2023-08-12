@@ -42,19 +42,19 @@
                 <div class="col-xl-4 col-md-6 col-lg-4">
                     <div class="wsus__contact_single_info">
                         <span><i class="fas fa-phone-alt"></i></span>
-                        <a>{!!  nl2br($contact->phone) !!}</a>
+                        <a>{!! nl2br($contact->phone) !!}</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-lg-4">
                     <div class="wsus__contact_single_info">
                         <span><i class="fas fa-envelope"></i></span>
-                        <a>{!!  nl2br($contact->email) !!}</a>
+                        <a>{!! nl2br($contact->email) !!}</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-lg-4">
                     <div class="wsus__contact_single_info">
                         <span><i class="fas fa-map-marker-alt"></i></span>
-                        <a>{!!  nl2br($contact->address) !!}</a>
+                        <a>{!! nl2br($contact->address) !!}</a>
                     </div>
                 </div>
             </div>

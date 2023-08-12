@@ -25,7 +25,7 @@
                                 <option value="{{ $category->slug }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" placeholder="{{__('Search your products')}}...">
+                            <input type="text" name="keyword" placeholder="{{__('Search your products')}}...">
                             <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('Search')}}</button>
                         </form>
                         <ul class="wsus__banner_counter d-flex flex-wrap">
@@ -134,7 +134,6 @@
                                 @php
                                     $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                     $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                    $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                                 @endphp
                                 <li>
                                     <p>
@@ -154,7 +153,6 @@
                                     @endif
                                 </li>
                                 <li>
-                                    <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                     <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                 </li>
                             </ul>

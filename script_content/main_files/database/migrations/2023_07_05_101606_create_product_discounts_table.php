@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('offer');
-            $table->datetime('end_time');
+            $table->date('end_time');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

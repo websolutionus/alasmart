@@ -79,10 +79,9 @@ class PaypalController extends Controller
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
-        // $service = Service::where(['slug' => $slug, 'approve_by_admin' => 1, 'status' => 1, 'is_banned' => 0])->first();
-         $user = Auth::guard('web')->user();
-        // $order_info = Session::get('order_info');
-        // $provider_id = $service->provider_id;
+
+        $user = Auth::guard('web')->user();
+
         $client_id = $user->id;
         $total_price = $request->total_amount;
 
@@ -129,8 +128,6 @@ class PaypalController extends Controller
 
         // get paymentlink
         $approvalUrl = $payment->getApprovalLink();
-
-        //Session::put('service', $service);
 
         session()->put('total_amount',$total_price);
         session()->put('cart_qty',$request->cart_qty);

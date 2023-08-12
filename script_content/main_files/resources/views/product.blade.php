@@ -41,7 +41,7 @@
                 <div class="col-xxl-6 col-xl-6 col-md-7 col-lg-6">
                     <div class="wsus__product_page_search">
                         <form id="search_form">
-                            <input type="text" name="keyword" id="search_keyword" placeholder="{{__('Search your products')}}...">
+                            <input type="text" name="keyword" id="search_keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('Search your products')}}...">
                             <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('user.Search')}}</button>
                         </form>
                     </div>
@@ -80,7 +80,6 @@
                                         @php
                                             $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                             $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                            $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                                         @endphp
                                         <li>
                                             <p>
@@ -100,7 +99,6 @@
                                             @endif
                                         </li>
                                         <li>
-                                            <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                             <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                         </li>
                                     </ul>
@@ -137,9 +135,9 @@
                                 <p>{{__('user.Price')}}: <span>{{ $setting->currency_icon }}</span></p>
                                 <div class="range_main_price d-flex">
                                     <input type="text" oninput="validity.valid||(value='0');" id="min_price"
-                                        class="price-range-field" />
+                                        class="price-range-field" readonly />
                                     <input type="text" oninput="validity.valid||(value='1000');" id="max_price"
-                                        class="price-range-field" />
+                                        class="price-range-field" readonly />
                                 </div>
                             </div>
                             <input type="hidden" id="filter_min_price" name="min_price" value="0">

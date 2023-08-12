@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="col-12">
                                         <ul class="button_area d-flex flex-wrap align-items-center">
-                                            <li><button type="reset" class="cancel">{{__('cancel')}}</button></li>
+                                            <li><a href="{{ url()->previous() }}" class="cancel">{{__('cancel')}}</a></li>
                                             <li><button type="submit" class="common_btn">{{__('Save and change')}} </button></li>
                                         </ul>
                                     </div>

@@ -171,16 +171,7 @@ class LoginController extends Controller
         
         $recaptchaSetting = GoogleRecaptcha::first();
 
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $active_theme = 'layout';
 
         return view('reset_password')->with([
             'active_theme' => $active_theme,

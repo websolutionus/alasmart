@@ -16,8 +16,8 @@
                 <div class="col-xl-10 col-md-10 m-auto">
                     <div class="wsus__banner_text_2 wow fadeInUp" data-wow-duration="1s">
                         <h1>{{ $intro_section->content->home1_title  }}</h1>
-                        <form>
-                            <input type="text" placeholder="Search your products...">
+                        <form action="{{ route('products') }}" method="GET">
+                            <input type="text" name="keyword" placeholder="{{__('Search your products')}}...">
                             <i class="far fa-search"></i>
                             <button class="common_btn" type="submit">{{__('Search')}}</button>
                         </form>
@@ -132,7 +132,6 @@
                                 @php
                                     $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                     $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                    $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                                 @endphp
                                 <li>
                                     <p>
@@ -152,7 +151,6 @@
                                     @endif
                                 </li>
                                 <li>
-                                    <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                     <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                 </li>
                             </ul>
@@ -190,35 +188,58 @@
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__trending_theme_slider_area">
                         <div class="row trendy_slider">
-                            @for ($i = 0; $i < $trending_section->total_row; $i++)
+
                             @php
-                                $trending_products = App\Models\Product::with('category','author')->where(['status' => 1, 'trending_item' => 1])->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take(4);
+                                $loop_count = count($trending_section->trending_products) / 4;
+                                $latest_index = 0;
+                                $is_break = false;
                             @endphp
-                            <div class="col-12">
-                                <div class="row">
-                                    @foreach ($trending_products as $product)
-                                    <div class="col-xl-6 col-md-6">
-                                        <div class="wsus__trending_theme_item">
-                                            <div class="wsus__trending_theme_item_img">
-                                                <img src="{{ asset('frontend/images/trendy_theme_img_1.jpg') }}" alt="img"
-                                                    class="img-fluid w-100">
-                                            </div>
-                                            <div class="wsus__trending_theme_item_text">
-                                                <a class="title" href="#">App landing page</a>
-                                                <p><span>By</span> QuomodoSoft</p>
-                                                <ul class="d-flex flex-wrap justify-content-between align-items-center">
-                                                    <li>
-                                                        <span><i class="far fa-heart"></i> 171</span>
-                                                        <span><i class="far fa-download"></i> 33 Sele</span>
-                                                    </li>
-                                                    <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
+
+                            @for ($i = 0; $i<$loop_count; $i++)
+                                @php
+                                    $current_index = 1;
+                                    $number_of_item = 1;
+                                @endphp
+                                <div class="col-12">
+                                    <div class="row">
+                                        
+                                        @foreach ($trending_section->trending_products as $trending_index => $trending_product)
+                                            @if ($latest_index <= $trending_index)
+                                                @if ($number_of_item <= 4)
+                                                    <div class="col-xl-6 col-md-6">
+                                                        <div class="wsus__trending_theme_item">
+                                                            <div class="wsus__trending_theme_item_img">
+                                                                <img src="{{ asset($trending_product->thumbnail_image) }}" alt="img"
+                                                                    class="img-fluid w-100">
+                                                            </div>
+                                                            <div class="wsus__trending_theme_item_text">
+                                                                <a class="title" href="{{ route('product-detail', $trending_product->slug) }}">{{ html_decode($trending_product->name) }}</a>
+                                                                <p><span>{{__('By')}}</span> {{ html_decode($trending_product->author->name) }}</p>
+                                                                <ul class="d-flex flex-wrap justify-content-between align-items-center">
+                                                                    @php
+                                                                        $sale=App\Models\OrderItem::where(['product_id' => $trending_product->id])->get()->count();
+                                                                    @endphp
+                                                                    <li>
+                                                                        <span><i class="far fa-download"></i> {{ $sale  }} {{__('Sele')}}</span>
+                                                                    </li>
+                                                                    <li><a href="{{ route('product-detail', $trending_product->slug) }}"><i class="far fa-shopping-cart"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    @php
+                                                        $latest_index = $trending_index;
+                                                    @endphp
+                                                @endif
+
+                                                @php
+                                                    $number_of_item ++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    @endforeach
                                 </div>
-                            </div>
                             @endfor
                         </div>
                     </div>
@@ -226,12 +247,12 @@
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__trending_theme_single">
                         <div class="wsus__trending_theme_single_img">
-                            <img src="{{ asset('frontend/images/trendy_theme_img_5.jpg') }}" alt="trendy theme" class="img-fluid w-100">
+                            <img src="{{ asset($trending_section->trending_offer_image) }}" alt="trendy theme" class="img-fluid w-100">
                         </div>
                         <div class="wsus__trending_theme_single_text">
-                            <p>Lifetime update support.</p>
-                            <a class="title" href="#">Get all Element for only $59!</a>
-                            <a class="common_btn" href="#">Purchase Now</a>
+                            <p>{{ $trending_section->trending_offer_title1 }}</p>
+                            <a class="title" href="#">{{ $trending_section->trending_offer_title2 }}</a>
+                            <a class="common_btn" target="_blank" href="{{ $trending_section->trending_offer_link }}">{{__('Purchase Now')}}</a>
                         </div>
                     </div>
                 </div>

@@ -240,7 +240,12 @@ class CartController extends Controller
                     $setting=Setting::first();
                     $carts=Cart::content();
                     $cartQty=Cart::count();
-                    $cartTotal=str_replace(',', '', Cart::total());
+                    $subTotal = str_replace(',', '', Cart::total());
+                    if(Session::has('coupon')){
+                        $cartTotal = Session()->get('coupon')['total_amount'];
+                    }else{
+                        $cartTotal = str_replace(',', '', Cart::total());
+                    }
                     $product_arr=[];
                     foreach($carts as $cart){
                         $product_arr[]=$cart->id;
@@ -265,6 +270,7 @@ class CartController extends Controller
                         'setting' => $setting,
                         'carts' => $carts,
                         'cartQty' => $cartQty,
+                        'subTotal' => $subTotal,
                         'cartTotal' => $cartTotal,
                         'paypal' => $paypal,
                         'stripe' => $stripe,

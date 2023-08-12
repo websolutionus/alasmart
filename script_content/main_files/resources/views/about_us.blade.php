@@ -244,30 +244,4 @@
     <!--=============================
         ABOUT US END
     ==============================-->
-
-    @if ($our_teem_section->visibility)
-
-    @endif
-    @if ($why_choose_us->visibility)
-
-     @endif
-    
-    
-
-
-
-    @if ($partner_visbility)
-
-    @endif
-
-
-    @if ($mobile_app->visibility)
-
-    @endif
-
-
-    @if ($blog_section->visibility)
-
-    @endif
-    
 @endsection

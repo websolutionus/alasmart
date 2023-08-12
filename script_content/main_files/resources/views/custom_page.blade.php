@@ -8,41 +8,22 @@
 
 @section('frontend-content')
 
-
- <!--=============================
+    <!--=============================
         BREADCRUMB START
     ==============================-->
-    <section class="wsus__breadcrumb">
+    <section class="wsus__breadcrumb" style="background: url({{ asset('frontend/images/breadcrumb_bg.jpg') }});">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <h1>{{ $page->page_name }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{__('Home')}}</a></li>
-                            <li class="breadcrumb-item">{{ $page->page_name }}</li>
-                        </ol>
-                    </nav>
+                <div class="col-12">
+                    <div class="wsus__breadcrumb_text">
+                        <h1>{{ $page->page_name }}</h1>
+                        <ul class="d-flex flex-wrap">
+                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
+                            <li><a href="javascritp:;">{{ $page->page_name }}</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="breadcrumb_animi_area">
-            <ul class="bg_animation breadcrumb_animi">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-            </ul>
-            <ul class="bg_animation bg_animation_r breadcrumb_animi breadcrumb_animi_r">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-            </ul>
         </div>
     </section>
     <!--=============================
@@ -53,10 +34,10 @@
     <!--=============================
         CUSTOM PAGE AND CONDITION START
     ==============================-->
-    <section class="wsus__terms_condition pt_45">
+    <section class="wsus__terms_condition mt_70 xs_mt_30 pb_115 xs_pb_75">
         <div class="container">
             <div class="row">
-                <div class="col-12 wow fadeInUp" data-wow-duration="1s">
+                <div class="col-12 col-xl-12 wow fadeInUp" data-wow-duration="1s">
                     <div class="wsus__terms_condition_text">
                         {!! clean($page->description) !!}
                     </div>
@@ -67,4 +48,5 @@
     <!--=============================
         CUSTOM PAGE AND CONDITION END
     ==============================-->
+
 @endsection

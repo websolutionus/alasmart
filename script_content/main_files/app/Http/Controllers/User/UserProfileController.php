@@ -93,17 +93,8 @@ class UserProfileController extends Controller
         $orders=Order::where('user_id', $user->id)->where('order_status', 1)->get();
 
         $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(2);
-        
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+
+        $active_theme = 'layout';
 
         return view('user.download')->with([
             'active_theme' => $active_theme,
@@ -143,25 +134,6 @@ class UserProfileController extends Controller
        $notification = trans('Successfully deleted');
        $notification = array('messege'=>$notification,'alert-type'=>'success');
        return redirect()->back()->with($notification);
-    }
-
-    public function rating(){
-        $user = Auth::guard('web')->user();
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
-
-        return view('user.rating')->with([
-            'active_theme' => $active_theme,
-            'user' => $user,
-        ]);
     }
 
     public function select_product_type(){
@@ -250,6 +222,7 @@ class UserProfileController extends Controller
             'category'=>'required',
             'name'=>'required',
             'slug'=>'required|unique:products',
+            'preview_link'=>'required',
             'regular_price'=>'required|numeric',
             'extend_price'=>'required|numeric',
             'description'=>'required',
@@ -267,6 +240,7 @@ class UserProfileController extends Controller
             'name.required' => trans('Name is required'),
             'slug.required' => trans('Slug is required'),
             'slug.unique' => trans('Slug already exist'),
+            'preview_link.required' => trans('Preview link is required'),
             'regular_price.required' => trans('Regular price is required'),
             'extend_price.required' => trans('Extend price is required'),
             'extend_price.numeric' => trans('Extend price should be numeric value'),
@@ -476,6 +450,7 @@ class UserProfileController extends Controller
             'category'=>'required',
             'name'=>'required',
             'slug'=>'required|unique:products,slug,'.$id,
+            'preview_link'=>'required',
             'regular_price'=>'required|numeric',
             'extend_price'=>'required|numeric',
             'description'=>'required',
@@ -491,6 +466,7 @@ class UserProfileController extends Controller
             'name.required' => trans('Name is required'),
             'slug.required' => trans('Slug is required'),
             'slug.unique' => trans('Slug already exist'),
+            'preview_link.required' => trans('Preview link is required'),
             'regular_price.required' => trans('Regular price is required'),
             'extend_price.required' => trans('Extend price is required'),
             'extend_price.numeric' => trans('Extend price should be numeric value'),
@@ -810,7 +786,6 @@ class UserProfileController extends Controller
 
 
         $notification = trans('user_validation.Update Successfully');
-        //return response()->json(['status' => 'success', 'message' => $notification, 'image_upload' => $image_upload, 'user' => $user]);
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -845,13 +820,11 @@ class UserProfileController extends Controller
             $user->save();
 
             $notification = 'Password change successfully';
-            //return response()->json(['status' => 'success' , 'message' => $notification],200);
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
 
         }else{
             $notification = trans('user_validation.Current password does not match');
-            //return response()->json(['status' => 'faild' , 'message' => $notification],403);
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -1047,8 +1020,6 @@ class UserProfileController extends Controller
         $review->variant_id = $request->variant_id;
         $review->author_id = $request->author_id;
         $review->save();
-        // $message = trans('user_validation.Review Submited successfully');
-        // return response()->json(['status' => 1, 'message' => $message]);
         $notification = trans('user_validation.Review Submited successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
@@ -1056,16 +1027,9 @@ class UserProfileController extends Controller
     }
 
     public function payment_success(){
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        
+        $active_theme = 'layout';
+        
         return view('user.payment_success')->with([
             'active_theme' => $active_theme,
         ]);

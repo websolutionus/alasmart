@@ -115,7 +115,6 @@
                             @php
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                             @endphp
                             <p class="rating">
                                 <i class="far fa-star"></i>

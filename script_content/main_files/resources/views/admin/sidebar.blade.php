@@ -59,14 +59,7 @@
 
           <li class="{{ Route::is('admin.coupon.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.coupon.index') }}"><i class="fas fa-th-large"></i> <span>{{__('Coupon')}}</span></a></li>
 
-          <li class="nav-item dropdown {{  Route::is('admin.provider') || Route::is('admin.send-email-to-all-provider') || Route::is('admin.send-email-to-provider') || Route::is('admin.pending-provider') || Route::is('admin.provider-show') ? 'active' : '' }}">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>{{__('Sellers')}}</span></a>
-            <ul class="dropdown-menu">
-
-                <li class="{{ Route::is('admin.provider') || Route::is('admin.provider-show') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.provider') }}">{{__('Seller List')}}</a></li>
-
-            </ul>
-          </li>
+          <li class="{{  Route::is('admin.provider') || Route::is('admin.send-email-to-all-provider') || Route::is('admin.send-email-to-provider') || Route::is('admin.pending-provider') || Route::is('admin.provider-show') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.provider') }}"><i class="fas fa-users"></i> <span>{{__('Sellers')}}</span></a></li>
 
           <li class="nav-item dropdown {{  Route::is('admin.customer-list') || Route::is('admin.customer-show') || Route::is('admin.pending-customer-list') || Route::is('admin.send-email-to-all-customer') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>{{__('admin.Users')}}</span></a>
@@ -141,7 +134,7 @@
 
 
           <li class="nav-item dropdown {{ Route::is('admin.footer.*') || Route::is('admin.social-link.*') || Route::is('admin.footer-link.*') || Route::is('admin.second-col-footer-link') || Route::is('admin.third-col-footer-link') ? 'active' : '' }}">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i><span>{{__('Header & Footer')}}</span></a>
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i><span>{{__('Footer')}}</span></a>
 
             <ul class="dropdown-menu">
                 <li class="{{ Route::is('admin.footer.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.footer.index') }}">{{__('admin.Footer')}}</a></li>

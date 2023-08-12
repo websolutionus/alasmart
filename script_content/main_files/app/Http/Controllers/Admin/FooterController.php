@@ -22,20 +22,17 @@ class FooterController extends Controller
     public function update(Request $request, $id){
         $rules = [
             'copyright' =>'required',
-            'community' =>'required',
-            'community_link' =>'required',
+            'description' =>'required',
         ];
         $customMessages = [
             'copyright.required' => trans('admin_validation.Copyright is required'),
-            'community.required' => trans('Community is required'),
-            'community_link.required' => trans('Community link is required'),
+            'description.required' => trans('Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
         $footer = Footer::first();
         $footer->copyright = $request->copyright;
-        $footer->community = $request->community;
-        $footer->community_link = $request->community_link;
+        $footer->description = $request->description;
         $footer->save();
         if($request->card_image){
             $old_logo=$footer->payment_image;
