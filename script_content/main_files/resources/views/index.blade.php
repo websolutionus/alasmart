@@ -1,8 +1,6 @@
 @extends('layout')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
-@endsection
-@section('title')
     <meta name="description" content="{{ $seo_setting->seo_description }}">
 @endsection
 @section('frontend-content')
@@ -15,27 +13,27 @@
             <div class="row">
                 <div class="col-xl-10 col-md-10 m-auto">
                     <div class="wsus__banner_text_2 wow fadeInUp" data-wow-duration="1s">
-                        <h1>{{ $intro_section->content->home1_title  }}</h1>
+                        <h1>{{ $intro_section->content->sliderlangfrontend->home1_title  }}</h1>
                         <form action="{{ route('products') }}" method="GET">
-                            <input type="text" name="keyword" placeholder="{{__('Search your products')}}...">
+                            <input type="text" name="keyword" placeholder="{{__('user.Search your products')}}...">
                             <i class="far fa-search"></i>
-                            <button class="common_btn" type="submit">{{__('Search')}}</button>
+                            <button class="common_btn" type="submit">{{__('user.Search')}}</button>
                         </form>
                         <ul class="wsus__banner_counter_2 d-flex flex-wrap justify-content-center mt_40">
                             <li>
                                 <span class="counter">{{ $intro_section->content->total_product }}</span>
-                                <span>{{__('k')}}+</span>
-                                {{__('Prodcuts')}}
+                                <span>{{__('user.k')}}+</span>
+                                {{__('user.Prodcuts')}}
                             </li>
                             <li>
                                 <span class="counter">{{ $intro_section->content->total_user }}</span>
-                                <span>{{__('k')}}+</span>
-                                {{__('Users')}}
+                                <span>{{__('user.k')}}+</span>
+                                {{__('user.Users')}}
                             </li>
                             <li>
                                 <span class="counter">{{ $intro_section->content->total_sold }}</span>
                                 <span>+</span>
-                                {{__('Million Sells')}}
+                                {{__('user.Million Sells')}}
                             </li>
                         </ul>
                     </div>
@@ -69,7 +67,7 @@
                         <div class="icon">
                             <img src="{{ asset($category->icon) }}" alt="category" class="img-fluid w-100">
                         </div>
-                        <h3><a href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a></h3>
+                        <h3><a href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->catlangfrontend->name }}</a></h3>
                         @php
                             $product = App\Models\Product::where('category_id', $category->id)->get();
                         @endphp
@@ -106,7 +104,7 @@
                     <div class="gallery_filter d-flex flex-wrap mb_5">
                         <button class=" active" data-filter="*">{{__('All Categories')}}</button>
                         @foreach ($product_section->categories as $category)
-                        <button data-filter=".{{ $category->id }}">{{ $category->name }}</button>
+                        <button data-filter=".{{ $category->id }}">{{ $category->catlangfrontend->name }}</button>
                         @endforeach
                     </div>
                 </div>
@@ -119,15 +117,15 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
-                            <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             <ul class="d-flex flex-wrap justify-content-between">
                                 @php
                                     $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
@@ -151,7 +149,7 @@
                                     @endif
                                 </li>
                                 <li>
-                                    <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                    <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -179,8 +177,8 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-8">
                     <div class="wsus__section_heading heading_left  mb_50">
-                        <h5>Save time with pre-installed software.</h5>
-                        <h2>Trending Themes</h2>
+                        <h5>{{ $trending_section->title }}</h5>
+                        <h2>{{ $trending_section->description }}</h2>
                     </div>
                 </div>
             </div>
@@ -213,14 +211,14 @@
                                                                     class="img-fluid w-100">
                                                             </div>
                                                             <div class="wsus__trending_theme_item_text">
-                                                                <a class="title" href="{{ route('product-detail', $trending_product->slug) }}">{{ html_decode($trending_product->name) }}</a>
-                                                                <p><span>{{__('By')}}</span> {{ html_decode($trending_product->author->name) }}</p>
+                                                                <a class="title" href="{{ route('product-detail', $trending_product->slug) }}">{{ html_decode($trending_product->productlangfrontend->name) }}</a>
+                                                                <p><span>{{__('user.By')}}</span> {{ html_decode($trending_product->author->name) }}</p>
                                                                 <ul class="d-flex flex-wrap justify-content-between align-items-center">
                                                                     @php
                                                                         $sale=App\Models\OrderItem::where(['product_id' => $trending_product->id])->get()->count();
                                                                     @endphp
                                                                     <li>
-                                                                        <span><i class="far fa-download"></i> {{ $sale  }} {{__('Sele')}}</span>
+                                                                        <span><i class="far fa-download"></i> {{ $sale  }} {{__('user.Sale')}}</span>
                                                                     </li>
                                                                     <li><a href="{{ route('product-detail', $trending_product->slug) }}"><i class="far fa-shopping-cart"></i></a></li>
                                                                 </ul>
@@ -252,7 +250,7 @@
                         <div class="wsus__trending_theme_single_text">
                             <p>{{ $trending_section->trending_offer_title1 }}</p>
                             <a class="title" href="#">{{ $trending_section->trending_offer_title2 }}</a>
-                            <a class="common_btn" target="_blank" href="{{ $trending_section->trending_offer_link }}">{{__('Purchase Now')}}</a>
+                            <a class="common_btn" target="_blank" href="{{ $trending_section->trending_offer_link }}">{{__('user.Purchase Now')}}</a>
                         </div>
                     </div>
                 </div>
@@ -336,8 +334,8 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
@@ -361,16 +359,16 @@
                             </p>
                              @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
-                            <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
-                            <span class="download"><i class="far fa-download"></i>{{ $sale }} {{__('Sale')}}</span>
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                            <span class="download"><i class="far fa-download"></i>{{ $sale }} {{__('user.Sale')}}</span>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
-            <a href="{{ route('products', ['featured' => 1]) }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+            <a href="{{ route('products', ['featured' => 1]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     <!--=============================
@@ -400,9 +398,9 @@
                         <div class="icon">
                             <img src="{{ asset($template->image) }}" alt="template" class="img-fluid w-100">
                         </div>
-                        <h4>{{ $template->title }}</h4>
-                        <p>{{ $template->description }}</p>
-                        <a target="__blank" href="{{ $template->link }}">{{__('learn more')}} <i class="far fa-long-arrow-right"></i></a>
+                        <h4>{{ $template->templatelangfrontend->title }}</h4>
+                        <p>{{ $template->templatelangfrontend->description }}</p>
+                        <a target="__blank" href="{{ $template->link }}">{{__('user.Learn More')}} <i class="far fa-long-arrow-right"></i></a>
                     </div>
                 </div>
                 @endforeach
@@ -484,7 +482,7 @@
                 <div class="col-12">
                     <div class="wsus__go_offer">
                         <p>{{ $partner_section->offer_title1 }} <span>{{ $partner_section->offer_title2 }}</span></p>
-                        <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('Go to Offer page')}}</a>
+                        <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('user.Go to Offer page')}}</a>
                     </div>
                 </div>
             </div>
@@ -521,14 +519,14 @@
                             <ul class="d-flex flex-wrap">
                                 <li>
                                     <i class="far fa-user"></i>
-                                    {{__('By')}} {{ $blog->admin->name }}
+                                    {{__('user.By')}} {{ $blog->admin->name }}
                                 </li>
                                 <li>
                                     <i class="far fa-calendar-alt"></i>
                                     {{ \Carbon\Carbon::parse($blog->created_at)->format('d M Y') }}
                                 </li>
                             </ul>
-                            <a href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a>
+                            <a href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                         </div>
                     </div>
                 </div>

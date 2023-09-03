@@ -1,8 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{ $page->page_name }}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{ $page->page_name }}">
 @endsection
 
@@ -16,10 +14,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{ $page->page_name }}</h1>
+                        <h1>{{ $page->customlangfrontend->page_name }}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascritp:;">{{ $page->page_name }}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="javascritp:;">{{ $page->customlangfrontend->page_name }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,7 +37,7 @@
             <div class="row">
                 <div class="col-12 col-xl-12 wow fadeInUp" data-wow-duration="1s">
                     <div class="wsus__terms_condition_text">
-                        {!! clean($page->description) !!}
+                        {!! clean($page->customlangfrontend->description) !!}
                     </div>
                 </div>
             </div>

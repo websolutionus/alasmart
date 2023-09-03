@@ -163,8 +163,8 @@
                                 <input type="file" name="image" hidden id="author_photo">
                                 <label for="author_photo"><i class="fal fa-upload"></i> {{__('Upload a Picture')}}</label>
                                 <h4>{{__('Upload Your Image')}}</h4>
-                                <p>{{__('Choose a image PNG, JPEG, PDF')}}</p>
-                                <p><span>{{__('Note')}}:</span> {{__('Max File Size 10MB')}}</p>
+                                <p>{{__('Choose a image PNG, JPEG, JPG')}}</p>
+                                <p><span>{{__('Note')}}:</span> {{__('Max File Size 2MB')}}</p>
                             </div>
                         </div>
                     </div>

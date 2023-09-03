@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\OurTeam;
-use Image;
-use File;
 use Str;
+use File;
+use Image;
+use App\Models\OurTeam;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use App\Models\OurTeamLanguage;
+use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
 {
@@ -18,7 +20,8 @@ class TeamController extends Controller
 
     public function index()
     {
-        $teams = OurTeam::all();
+        $teams = OurTeam::with('teamlangfrontend')->get();
+
         return view('admin.team',compact('teams'));
     }
 
@@ -53,8 +56,7 @@ class TeamController extends Controller
                 ->save(public_path().'/'.$image_name);
         }
 
-        $team->name = $request->name;
-        $team->designation = $request->designation;
+        
         $team->image = $image_name;
         $team->status = $request->status;
         $team->facebook = $request->facebook;
@@ -62,26 +64,40 @@ class TeamController extends Controller
         $team->instagram = $request->instagram;
         $team->save();
 
+        $languages = Language::get();
+        foreach($languages as $language){
+            $team_language = new OurTeamLanguage();
+            $team_language->team_id = $team->id;
+            $team_language->lang_code = $language->lang_code;
+            $team_language->name = $request->name;
+            $team_language->designation = $request->designation;
+            $team_language->save();
+        }
+
         $notification = trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.our-team.index')->with($notification);
     }
 
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $team = OurTeam::find($id);
-        return view('admin.edit_team',compact('team'));
+        $languages = Language::get();
+        $team_language = OurTeamLanguage::where(['team_id' => $team->id, 'lang_code' => $request->lang_code])->first();
+        return view('admin.edit_team',compact('team', 'languages', 'team_language'));
     }
 
 
     public function update(Request $request, $id)
     {
         $team = OurTeam::find($id);
+        $team_language = OurTeamLanguage::where(['team_id' => $team->id, 'lang_code' => $request->lang_code])->first();
+
         $rules = [
             'name' => 'required',
             'designation' => 'required',
-            'status' => 'required',
+            'status' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'name.required' => trans('admin_validation.Name is required'),
@@ -103,17 +119,33 @@ class TeamController extends Controller
             }
         }
 
-        $team->name = $request->name;
-        $team->designation = $request->designation;
-        $team->status = $request->status;
-        $team->facebook = $request->facebook;
-        $team->twitter = $request->twitter;
-        $team->instagram = $request->instagram;
+        
+        if(session()->get('admin_lang') == $request->lang_code){
+            $team->status = $request->status;
+        }
+
+        if($request->facebook){
+            $team->facebook = $request->facebook;
+        }
+
+        if($request->twitter){
+            $team->twitter = $request->twitter;
+        }
+
+        if($request->instagram){
+            $team->instagram = $request->instagram;
+        }
+
         $team->save();
+
+
+        $team_language->name = $request->name;
+        $team_language->designation = $request->designation;
+        $team_language->save();
 
         $notification = trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.our-team.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
 
@@ -126,6 +158,8 @@ class TeamController extends Controller
         if($existing_image){
             if(File::exists(public_path().'/'.$existing_image))unlink(public_path().'/'.$existing_image);
         }
+
+        $team_language = OurTeamLanguage::where('team_id', $id)->delete();
 
         $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

@@ -53,10 +53,10 @@
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('Category')}}*</legend>
-                                <select class="select_js" name="category">
+                                <select class="select2" name="category">
                                     <option value="">{{__('Select Category')}}</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->catlangfrontend->name }}</option>
                                     @endforeach
                                 </select>
                             </fieldset>

@@ -22,6 +22,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Currency;
+use App\Models\Language;
 use App\Models\Schedule;
 use App\Models\TawkChat;
 use App\Models\Template;
@@ -31,21 +32,23 @@ use App\Models\CustomPage;
 use App\Models\FooterLink;
 use App\Models\PopularTag;
 use App\Models\Subscriber;
-use App\Models\BlogComment;
 
+use App\Models\BlogComment;
+use App\Models\FaqLanguage;
 use App\Models\PopularPost;
 use App\Models\Testimonial;
 use App\Models\BlogCategory;
+use App\Models\BlogLanguage;
 use Illuminate\Http\Request;
 use App\Models\CookieConsent;
 use App\Models\FacebookPixel;
 use App\Models\RefundRequest;
 use App\Models\ScriptContent;
+
+
 use App\Models\TicketMessage;
 use App\Models\ContactMessage;
 use App\Models\GoogleAnalytic;
-
-
 use App\Models\ProductComment;
 use App\Models\ProductVariant;
 use App\Models\WithdrawMethod;
@@ -53,13 +56,18 @@ use App\Models\CompleteRequest;
 use App\Models\FacebookComment;
 use App\Models\GoogleRecaptcha;
 use App\Models\MessageDocument;
+use App\Models\ProductLanguage;
+use App\Models\CategoryLanguage;
 use App\Models\CustomPagination;
 use App\Models\FooterSocialLink;
 use App\Models\ProviderWithdraw;
 use App\Models\PusherCredentail;
+use App\Models\TemplateLanguage;
 use App\Models\AppointmentSchedule;
 use App\Http\Controllers\Controller;
+use App\Models\BlogCategoryLanguage;
 use App\Models\SocialLoginInformation;
+use Session;
 
 class SettingController extends Controller
 {
@@ -70,16 +78,21 @@ class SettingController extends Controller
 
     public function clearDatabase(){
         Blog::truncate();
+        BlogLanguage::truncate();
         PopularPost::truncate();
         PopularTag::truncate();
         BlogCategory::truncate();
+        BlogCategoryLanguage::truncate();
         BlogComment::truncate();
         Category::truncate();
+        CategoryLanguage::truncate();
         ContactMessage::truncate();
         Faq::truncate();
+        FaqLanguage::truncate();
         FooterLink::truncate();
         FooterSocialLink::truncate();
         Product::truncate();
+        ProductLanguage::truncate();
         ProductVariant::truncate();
         ProductComment::truncate();
         Message::truncate();
@@ -97,6 +110,10 @@ class SettingController extends Controller
         WithdrawMethod::truncate();
         Wishlist::truncate();
         Template::truncate();
+        TemplateLanguage::truncate();
+        CustomPage::truncate();
+
+
 
 
         // pending ----
@@ -109,6 +126,20 @@ class SettingController extends Controller
             }
         }
 
+        $languages = Language::where('id', '!=', 1)->get();
+        foreach($languages as $language){
+
+            $path = base_path().'/lang'.'/'.$language->lang_code;
+            if (File::exists($path)) {
+                File::deleteDirectory($path);
+            }
+            
+            $language->delete();
+        }
+
+        $language = Language::first();
+        $language->is_default = 'Yes';
+        $language->save();
 
         $folderPath = public_path('uploads/custom-images');
         $response = File::deleteDirectory($folderPath);
@@ -117,6 +148,8 @@ class SettingController extends Controller
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
+
+        Session::forget('front_lang');
 
         $notification = trans('admin_validation.Database Cleared Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -177,7 +210,6 @@ class SettingController extends Controller
 
     public function updateGeneralSetting(Request $request){
         $rules = [
-            'layout' => 'required',
             'lg_header' => 'required',
             'sm_header' => 'required',
             'currency_name' => 'required',
@@ -186,7 +218,6 @@ class SettingController extends Controller
             'selected_theme' => 'required',
         ];
         $customMessages = [
-            'layout.required' => trans('admin_validation.Layout is required'),
             'lg_header.required' => trans('admin_validation.Sidebar large header is required'),
             'sm_header.required' => trans('admin_validation.Sidebar small header is required'),
             'currency_name.required' => trans('admin_validation.Currency name is required'),
@@ -197,7 +228,6 @@ class SettingController extends Controller
 
         $setting = Setting::first();
         $setting->selected_theme = $request->selected_theme;
-        $setting->text_direction = $request->layout;
         $setting->blog_left_right = $request->blog_left_right;
         $setting->sidebar_lg_header = $request->lg_header;
         $setting->sidebar_sm_header = $request->sm_header;

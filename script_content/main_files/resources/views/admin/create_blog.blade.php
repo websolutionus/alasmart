@@ -51,7 +51,7 @@
                                     <select name="category" class="form-control select2" id="category">
                                         <option value="">{{__('admin.Select Category')}}</option>
                                         @foreach ($categories as $category)
-                                            <option {{ $category->id == old('category') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option {{ $category->id == old('category') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->blogcategorylanguageadmin->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -36,7 +36,7 @@
                                 @foreach ($categories as $index => $category)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->blogcategorylanguageadmin ? $category->blogcategorylanguageadmin->category_name : '' }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>
                                             @if($category->status == 1)
@@ -52,7 +52,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                        <a href="{{ route('admin.blog-category.edit',$category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.blog.category.edit', ['edit_id' => $category->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         @if ($category->blogs()->count() == 0)
                                             <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $category->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         @else

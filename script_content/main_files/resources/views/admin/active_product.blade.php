@@ -36,12 +36,12 @@
                                 @foreach ($active_products as $index => $product)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td><a href="{{ route('admin.product.edit',$product->id) }}">{{ html_decode($product->name) }}</a></td>
+                                        <td><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => 'en']) }}">{{ html_decode($product->productlangadmin->name) }}</a></td>
                                         @php
                                             $total_sold=App\Models\OrderItem::where('Product_id', $product->id)->get()->count();
                                         @endphp
                                         <td>{{ $total_sold }}</td>
-                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->category->catlangadmin->name }}</td>
 
 
                                         <td>
@@ -52,7 +52,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                        <a href="{{ route('admin.product.edit',$product->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.product.edit', ['product' => $product->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
                                         @php
                                             $order_item = App\Models\OrderItem::where('product_id', $product->id)->first();

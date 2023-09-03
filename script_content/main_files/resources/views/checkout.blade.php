@@ -1,11 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Checkout')}}</title>
-@endsection
-
-@section('meta')
-    <meta name="description" content="{{__('Checkout')}}">
+    <title>{{__('user.Check Out')}}</title>
+    <meta name="description" content="{{__('user.Check Out')}}">
 @endsection
 
 @section('frontend-content')
@@ -17,10 +14,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('check out')}}</h1>
+                        <h1>{{__('user.Check Out')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('check out')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Check Out')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,7 +37,7 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__checkout_text">
-                        <h3>{{__('Select your payment method')}}</h3>
+                        <h3>{{__('user.Select your payment method')}}</h3>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             @if ($stripe->status == 1)
                             <li class="nav-item">
@@ -154,7 +151,7 @@
 
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__checkout_sidebar" id="sticky_sidebar">
-                        <h3>{{__('Order Summary')}}</h3>
+                        <h3>{{__('user.Order Summary')}}</h3>
                         <ul>
                             @foreach ($carts as $cart)
                             <li>
@@ -163,7 +160,7 @@
                                 </div>
                                 <div class="text">
                                     <a href="{{ route('product-detail', $cart->options->slug) }}">{{ html_decode($cart->name) }}</a>
-                                    <p>{{__('Item by')}} {{ html_decode($cart->options->author) }}</p>
+                                    <p>{{__('user.Item by')}} {{ html_decode($cart->options->author) }}</p>
                                     <p>{{ $cart->options->size ? html_decode($cart->options->size):'' }}</p>
                                     <p> {{ $cart->options->price_type ? ucfirst(html_decode($cart->options->price_type)):''}}</p>
                                     <h3>{{ $setting->currency_icon }}{{ html_decode($cart->price) }}</h3>
@@ -173,15 +170,15 @@
                         </ul>
                         @if (Session::has('coupon'))
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
-                            <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
-                            <p class="total">{{__('Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
+                            <p>{{__('user.Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
+                            <p class="total">{{__('user.Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
                         </div>
                         @else
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
-                            <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} 0</span> </p>
-                            <p class="total">{{__('Total')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} 0</span> </p>
+                            <p class="total">{{__('user.Total')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
                         </div>
                         @endif
                     </div>
@@ -201,8 +198,8 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-8">
                     <div class="wsus__section_heading mb_15">
-                        <h5>{{__('Save time with pre-installed software')}}.</h5>
-                        <h2>{{__('Related Products')}}.</h2>
+                        <h5>{{__('user.Save time with pre-installed software')}}.</h5>
+                        <h2>{{__('user.Related Products')}}.</h2>
                     </div>
                 </div>
             </div>
@@ -238,20 +235,20 @@
                             </p>
                             @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
-                            <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             <span class="download"><i class="fas fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                         </div>
                     </div>
                 </div>
                 @empty
-                <div class="col-12 text-center text-danger mt-5">
-                    <h2 class="mt-5">{{__('Product Not Found')}}</h2>
+                <div class="col-12 text-center mt-5">
+                    <h2 class="mt-5 text-danger">{{__('user.Product Not Found')}}</h2>
                 </div>
                 @endforelse
             </div>
-            <a href="{{ route('products') }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+            <a href="{{ route('products') }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     <!--=============================
@@ -264,7 +261,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{__('Pay via Stripe')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{__('user.Pay via Stripe')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -280,7 +277,7 @@
             <div class="row">
                 <div class="col-md-12 mt-2">
                     <div class="form-group">
-                        <label for="card_number">{{__('Card Number')}}*</label>
+                        <label for="card_number">{{__('user.Card Number')}}*</label>
                         <input autocomplete='off' class='form-control card-number' size='20'
                         type='text' name="card_number" autocomplete="off">
                         <input type="hidden" name="total_amount" value="{{ $cartTotal }}">
@@ -289,7 +286,7 @@
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="form-group">
-                        <label for="month">{{__('Month')}}*</label>
+                        <label for="month">{{__('user.Month')}}*</label>
                         <input input
                         class='form-control card-expiry-month' size='2'
                         type='text' name="month" autocomplete="off">
@@ -297,14 +294,14 @@
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="form-group">
-                        <label for="year">{{__('Year')}}*</label>
+                        <label for="year">{{__('user.Year')}}*</label>
                         <input class='form-control card-expiry-year' size='4'
                         type='text' name="year" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-12 my-4">
                     <div class="form-group">
-                        <label for="cvc">{{__('CVC')}}*</label>
+                        <label for="cvc">{{__('user.CVC')}}*</label>
                         <input autocomplete='off'
                         class='form-control card-cvc' size='4'
                         type='text' name="cvc" autocomplete="off">
@@ -313,14 +310,14 @@
               </div>
               <div class='row'>
                 <div class='col-md-12 error d-none'>
-                    <div class='alert-danger alert'>{{__('Please correct the errors and try
+                    <div class='alert-danger alert'>{{__('user.Please correct the errors and try
                         again')}}.</div>
                 </div>
             </div>
             
            <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('Cancel')}}</button>
-            <button class="btn btn-primary btn-block" type="submit">{{__('Payment')}}</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('user.Cancel')}}</button>
+            <button class="btn btn-primary btn-block" type="submit">{{__('user.Payment')}}</button>
           </div>
           </form>
         </div>

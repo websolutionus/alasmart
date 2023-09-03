@@ -28,6 +28,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Homepage;
+use App\Models\Language;
 use App\Models\Schedule;
 use App\Models\Template;
 use App\Models\HowItWork;
@@ -41,13 +42,14 @@ use App\Models\BlogComment;
 use App\Models\ContactPage;
 use App\Models\PopularPost;
 use App\Models\Testimonial;
+
+
 use App\Models\BecomeAuthor;
-
-
 use App\Models\BlogCategory;
 use App\Models\CountryState;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
+use App\Models\PrivacyPolicy;
 use App\Models\ScriptContent;
 use App\Mail\UserRegistration;
 use App\Models\ContactMessage;
@@ -98,12 +100,12 @@ class HomeController extends Controller
             }
         }
 
-        $slider=Slider::first();
-        $categories=Category::where('status', 1)->latest()->get();
+        $slider=Slider::with('sliderlangfrontend')->first();
+        $categories=Category::with('catlangfrontend')->where('status', 1)->latest()->get();
         $setting = Setting::first();
-        $products=Product::where('status', 1)->limit(6)->get();
+        $products=Product::with('productlangfrontend')->where('status', 1)->limit(6)->get();
 
-        $contents = SectionContent::all();
+        $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
         $setting = Setting::first();
         $seo_setting = SeoSetting::where('id', 1)->first();
@@ -115,9 +117,9 @@ class HomeController extends Controller
         $intro = $control->where('id', 1)->first();
         if($intro->status == 1) $intro_visibility = true;
 
-        $intro_slider = Slider::first();
+        $intro_slider = Slider::with('sliderlangfrontend')->first();
 
-        $intro_categories = Category::where('status',1)->get();
+        $intro_categories = Category::with('catlangfrontend')->where('status',1)->get();
 
         $intro_section = (object) array(
             'visibility' => $intro_visibility,
@@ -138,8 +140,8 @@ class HomeController extends Controller
         $category_content = $contents->where('id', 1)->first();
         $category_section = (object) array(
             'visibility' => $category_visibility,
-            'title' => $category_content->title,
-            'description' => $category_content->description,
+            'title' => $category_content->contentlangfrontend->title,
+            'description' => $category_content->contentlangfrontend->description,
             'categories' => $intro_categories,
         );
 
@@ -151,19 +153,19 @@ class HomeController extends Controller
             $product_section_visibility = true;
         }
 
-        $gallery_categories = Category::where(['product_gallery' => 1, 'status' => 1])->get();
+        $gallery_categories = Category::with('catlangfrontend')->where(['product_gallery' => 1, 'status' => 1])->get();
 
         $product_id = [];
         foreach($gallery_categories as $category){
             $product_id[] = $category->id;
         }
-        $products = Product::with('category','author')->whereIn('category_id', $product_id)->where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($product_control->qty);
+        $products = Product::with('category','author','productlangfrontend')->whereIn('category_id', $product_id)->where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($product_control->qty);
         
         $product_section_content = $contents->where('id', 2)->first();
         $product_section = (object) array(
             'visibility' => $product_section_visibility,
-            'title' => $product_section_content->title,
-            'description' => $product_section_content->description,
+            'title' => $product_section_content->contentlangfrontend->title,
+            'description' => $product_section_content->contentlangfrontend->description,
             'products' => $products,
             'categories' => $gallery_categories,
         );
@@ -179,18 +181,18 @@ class HomeController extends Controller
 
         $special_offer = (object) array(
             'visibility' => $offer_visibility,
-            'title1' => $homepage->offer_title1,
-            'title2' => $homepage->offer_title2,
+            'title1' => $homepage->homelangfrontend->offer_title1,
+            'title2' => $homepage->homelangfrontend->offer_title2,
             'link' => $homepage->offer_link,
             'home1_background' => $homepage->offer_home1_background,
             'home1_foreground1' => $homepage->offer_home1_foreground1,
             'home1_foreground2' => $homepage->offer_home1_foreground2,
             'home2_background' => $homepage->offer_home2_background,
             'home3_background' => $homepage->offer_home3_background,
-            'home3_item1_title' => $homepage->offer_home3_item1_title,
-            'home3_item2_title' => $homepage->offer_home3_item2_title,
-            'home3_item1_description' => $homepage->offer_home3_item1_description,
-            'home3_item2_description' => $homepage->offer_home3_item2_description,
+            'home3_item1_title' => $homepage->homelangfrontend->offer_home3_item1_title,
+            'home3_item2_title' => $homepage->homelangfrontend->offer_home3_item2_title,
+            'home3_item1_description' => $homepage->homelangfrontend->offer_home3_item1_description,
+            'home3_item2_description' => $homepage->homelangfrontend->offer_home3_item2_description,
             'home3_item1_link' => $homepage->offer_home3_item1_link,
             'home3_item2_link' => $homepage->offer_home3_item2_link,
         );
@@ -204,18 +206,18 @@ class HomeController extends Controller
             $popular_trending_visibility = true;
         }
 
-        $popular_products = Product::where(['status' => 1, 'popular_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin','popular_item')->get()->take($popular_trending_control->qty);
+        $popular_products = Product::with('productlangfrontend')->where(['status' => 1, 'popular_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin','popular_item')->get()->take($popular_trending_control->qty);
         
-        $trending_products = Product::where(['status' => 1, 'trending_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin','trending_item')->get()->take($popular_trending_control->qty);
+        $trending_products = Product::with('productlangfrontend')->where(['status' => 1, 'trending_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin','trending_item')->get()->take($popular_trending_control->qty);
 
-        $new_products = Product::where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin')->get()->take($popular_trending_control->qty);
+        $new_products = Product::with('productlangfrontend')->where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin')->get()->take($popular_trending_control->qty);
 
         $popular_trending_content = $contents->where('id', 3)->first();
         
         $popular_trending = (object) array(
             'visibility' => $popular_trending_visibility,
-            'title' => $popular_trending_content->title,
-            'description' => $popular_trending_content->description,
+            'title' => $popular_trending_content->contentlangfrontend->title,
+            'description' => $popular_trending_content->contentlangfrontend->description,
             'popular_products' => $popular_products,
             'trending_products' => $trending_products,
             'new_products' => $new_products,
@@ -230,7 +232,7 @@ class HomeController extends Controller
             $trending_visibility = true;
         }
 
-        $trending_products = Product::with('category','author')->where(['status' => 1, 'trending_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($trending_control->qty);
+        $trending_products = Product::with('category','author','productlangfrontend')->where(['status' => 1, 'trending_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($trending_control->qty);
 
         $total_row = $trending_products->count() / 4;
         
@@ -238,12 +240,12 @@ class HomeController extends Controller
         
         $trending_section = (object) array(
             'visibility' => $trending_visibility,
-            'title' => $trending_content->title,
-            'trending_offer_title1' => $homepage->trending_offer_title1,
-            'trending_offer_title2' => $homepage->trending_offer_title2,
+            'title' => $trending_content->contentlangfrontend->title,
+            'trending_offer_title1' => $homepage->homelangfrontend->trending_offer_title1,
+            'trending_offer_title2' => $homepage->homelangfrontend->trending_offer_title2,
             'trending_offer_link' => $homepage->trending_offer_link,
             'trending_offer_image' => $homepage->trending_offer_image,
-            'description' => $trending_content->description,
+            'description' => $trending_content->contentlangfrontend->description,
             'trending_products' => $trending_products,
         );
 
@@ -256,7 +258,7 @@ class HomeController extends Controller
             $new_product_visibility = true;
         }
 
-        $new_products = Product::where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin')->get()->take($new_product_control->qty);
+        $new_products = Product::with('productlangfrontend')->where(['status' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','product_icon','regular_price','status','approve_by_admin')->get()->take($new_product_control->qty);
         
         
         
@@ -264,8 +266,8 @@ class HomeController extends Controller
         
         $new_product_section = (object) array(
             'visibility' => $new_product_visibility,
-            'title' => $new_product_content->title,
-            'description' => $new_product_content->description,
+            'title' => $new_product_content->contentlangfrontend->title,
+            'description' => $new_product_content->contentlangfrontend->description,
             'new_products' => $new_products,
         );
 
@@ -278,13 +280,13 @@ class HomeController extends Controller
             $featured_visibility = true;
         }
 
-        $featured_products = Product::with('category','author')->where(['status' => 1, 'featured_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($featured_control->qty);
+        $featured_products = Product::with('category','author','productlangfrontend')->where(['status' => 1, 'featured_item' => 1])->orderBy('id','desc')->select('id','name','slug','product_type','thumbnail_image','regular_price','preview_link','category_id','author_id','status','approve_by_admin')->get()->take($featured_control->qty);
         
         $featured_content = $contents->where('id', 6)->first();
         $featured_section = (object) array(
             'visibility' => $featured_visibility,
-            'title' => $featured_content->title,
-            'description' => $featured_content->description,
+            'title' => $featured_content->contentlangfrontend->title,
+            'description' => $featured_content->contentlangfrontend->description,
             'products' => $featured_products,
         );
 
@@ -297,13 +299,13 @@ class HomeController extends Controller
             $template_visibility = true;
         }
 
-        $templates = Template::where(['status' => 1])->orderBy('id','desc')->get();
+        $templates = Template::with('templatelangfrontend')->where(['status' => 1])->orderBy('id','desc')->get();
         
         $template_content = $contents->where('id', 10)->first();
         $template_section = (object) array(
             'visibility' => $template_visibility,
-            'title' => $template_content->title,
-            'description' => $template_content->description,
+            'title' => $template_content->contentlangfrontend->title,
+            'description' => $template_content->contentlangfrontend->description,
             'templates' => $templates,
         );
 
@@ -318,24 +320,24 @@ class HomeController extends Controller
         }
         $why_choose_us = (object) array(
             'visibility' => $why_choose_visibility,
-            'title1' => $homepage->why_choose_title1,
-            'title2' => $homepage->why_choose_title2,
+            'title1' => $homepage->homelangfrontend->why_choose_title1,
+            'title2' => $homepage->homelangfrontend->why_choose_title2,
             'icon1' => $homepage->why_choose_item1_icon,
-            'item_title1' => $homepage->why_choose_item1_title,
+            'item_title1' => $homepage->homelangfrontend->why_choose_item1_title,
             'icon2' => $homepage->why_choose_item2_icon,
-            'item_title2' => $homepage->why_choose_item2_title,
+            'item_title2' => $homepage->homelangfrontend->why_choose_item2_title,
             'icon3' => $homepage->why_choose_item3_icon,
-            'item_title3' => $homepage->why_choose_item3_title,
+            'item_title3' => $homepage->homelangfrontend->why_choose_item3_title,
             'background_image' => $homepage->why_choose_home2_background,
             'home3_icon1' => $homepage->why_choose_home3_item1_icon,
             'home3_icon2' => $homepage->why_choose_home3_item2_icon,
             'home3_icon3' => $homepage->why_choose_home3_item3_icon,
-            'home3_title1' => $homepage->why_choose_home3_item1_title,
-            'home3_title2' => $homepage->why_choose_home3_item2_title,
-            'home3_title3' => $homepage->why_choose_home3_item3_title,
-            'home3_description1' => $homepage->why_choose_home3_item1_desc,
-            'home3_description2' => $homepage->why_choose_home3_item2_desc,
-            'home3_description3' => $homepage->why_choose_home3_item3_desc,
+            'home3_title1' => $homepage->homelangfrontend->why_choose_home3_item1_title,
+            'home3_title2' => $homepage->homelangfrontend->why_choose_home3_item2_title,
+            'home3_title3' => $homepage->homelangfrontend->why_choose_home3_item3_title,
+            'home3_description1' => $homepage->homelangfrontend->why_choose_home3_item1_desc,
+            'home3_description2' => $homepage->homelangfrontend->why_choose_home3_item2_desc,
+            'home3_description3' => $homepage->homelangfrontend->why_choose_home3_item3_desc,
 
         );
 
@@ -349,12 +351,12 @@ class HomeController extends Controller
         }
 
         $testimonial_content = $contents->where('id', 4)->first();
-        $testimonials = Testimonial::select('id','name','image','designation', 'rating', 'comment','status')->where('status',1)->get()->take($testimonial_control->qty);
+        $testimonials = Testimonial::with('testimoniallangfrontend')->where('status',1)->get()->take($testimonial_control->qty);
 
         $testimonial_section = (object) array(
             'visibility' => $testimonial_visibility,
-            'title' => $testimonial_content->title,
-            'description' => $testimonial_content->description,
+            'title' => $testimonial_content->contentlangfrontend->title,
+            'description' => $testimonial_content->contentlangfrontend->description,
             'testimonials' => $testimonials,
         );
         // testimonial section end
@@ -372,11 +374,11 @@ class HomeController extends Controller
  
          $partner_section = (object) array(
              'visibility' => $partner_visbility,
-             'title' => $partner_content->title,
-             'description' => $partner_content->description,
+             'title' => $partner_content->contentlangfrontend->title,
+             'description' => $partner_content->contentlangfrontend->description,
              'partners' => $partners,
-             'offer_title1' => $homepage->offer_title1,
-             'offer_title2' => $homepage->offer_title2,
+             'offer_title1' => $homepage->homelangfrontend->offer_title1,
+             'offer_title2' => $homepage->homelangfrontend->offer_title2,
              'offer_link' => $homepage->offer_link,
          );
 
@@ -392,14 +394,14 @@ class HomeController extends Controller
 
         $mobile_app = (object) array(
             'visibility' => $mobile_app_section_visbility,
-            'title1' => $homepage->app_title1,
-            'title2' => $homepage->app_title2,
-            'title3' => $homepage->app_title3,
-            'description' => $homepage->app_description,
-            'home2_title' => $homepage->app_home2_title,
-            'home2_description' => $homepage->app_home2_desc,
-            'home3_title' => $homepage->app_home3_title,
-            'home3_description' => $homepage->app_home3_desc,
+            'title1' => $homepage->homelangfrontend->app_title1,
+            'title2' => $homepage->homelangfrontend->app_title2,
+            'title3' => $homepage->homelangfrontend->app_title3,
+            'description' => $homepage->homelangfrontend->app_description,
+            'home2_title' => $homepage->homelangfrontend->app_home2_title,
+            'home2_description' => $homepage->homelangfrontend->app_home2_desc,
+            'home3_title' => $homepage->homelangfrontend->app_home3_title,
+            'home3_description' => $homepage->homelangfrontend->app_home3_desc,
             'play_store_link' => $homepage->app_play_store_link,
             'apple_store_link' => $homepage->app_apple_store_link,
             'home1_foreground' => $homepage->app_home1_foreground,
@@ -421,14 +423,14 @@ class HomeController extends Controller
 
         $home1_blog_content = $contents->where('id', 5)->first();
 
-        $home1_blogs = Blog::with('category')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home1_blog_control->qty);
+       $home1_blogs = Blog::with('category', 'bloglanguagefrontend')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home1_blog_control->qty);
         
-        
+
 
         $home1_blog_section = (object) array(
             'visibility' => $home1_blog_visibility,
-            'title' => $home1_blog_content->title,
-            'description' => $home1_blog_content->description,
+            'title' => $home1_blog_content->contentlangfrontend->title,
+            'description' => $home1_blog_content->contentlangfrontend->description,
             'blogs' => $home1_blogs,
         );
 
@@ -441,18 +443,18 @@ class HomeController extends Controller
 
         $home2_blog_content = $contents->where('id', 5)->first();
 
-        $home2_blogs = Blog::with('category')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home2_blog_control->qty);
+        $home2_blogs = Blog::with('category', 'bloglanguagefrontend')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home2_blog_control->qty);
 
-        $featured_blog = Blog::with('category')->where(['status' => 1, 'show_featured' => 1])->first();
+        $featured_blog = Blog::with('category', 'bloglanguagefrontend')->where(['status' => 1, 'show_featured' => 1])->first();
         
         if($featured_blog == null){
-            $featured_blog = Blog::with('category')->where(['status' => 1])->orderBy('id','desc')->first();
+            $featured_blog = Blog::with('category', 'bloglanguagefrontend')->where(['status' => 1])->orderBy('id','desc')->first();
         }
 
         $home2_blog_section = (object) array(
             'visibility' => $home2_blog_visibility,
-            'title' => $home2_blog_content->title,
-            'description' => $home2_blog_content->description,
+            'title' => $home2_blog_content->contentlangfrontend->title,
+            'description' => $home2_blog_content->contentlangfrontend->description,
             'blogs' => $home2_blogs,
             'blog' => $featured_blog,
         );
@@ -466,13 +468,13 @@ class HomeController extends Controller
 
         $home3_blog_content = $contents->where('id', 5)->first();
 
-        $home3_blogs = Blog::with('category', 'admin')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home3_blog_control->qty);
+        $home3_blogs = Blog::with('category', 'admin', 'bloglanguagefrontend')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($home3_blog_control->qty);
 
 
         $home3_blog_section = (object) array(
             'visibility' => $home3_blog_visibility,
-            'title' => $home3_blog_content->title,
-            'description' => $home3_blog_content->description,
+            'title' => $home3_blog_content->contentlangfrontend->title,
+            'description' => $home3_blog_content->contentlangfrontend->description,
             'blogs' => $home3_blogs,
         );
 
@@ -497,10 +499,10 @@ class HomeController extends Controller
             'home2_icon2' => $homepage->counter_icon6,
             'home2_icon3' => $homepage->counter_icon7,
             'home2_icon4' => $homepage->counter_icon8,
-            'counter1_title' => $homepage->counter1_title,
-            'counter2_title' => $homepage->counter2_title,
-            'counter3_title' => $homepage->counter3_title,
-            'counter4_title' => $homepage->counter4_title,
+            'counter1_title' => $homepage->homelangfrontend->counter1_title,
+            'counter2_title' => $homepage->homelangfrontend->counter2_title,
+            'counter3_title' => $homepage->homelangfrontend->counter3_title,
+            'counter4_title' => $homepage->homelangfrontend->counter4_title,
             'counter1_value' => $homepage->counter1_value,
             'counter2_value' => $homepage->counter2_value,
             'counter3_value' => $homepage->counter3_value,
@@ -616,20 +618,20 @@ class HomeController extends Controller
         }
 
         $setting = Setting::first();
-        $categories=Category::where('status', 1)->get()->take(6);
-        $all_category=Category::where('status', 1)->get();
+        $categories=Category::with('catlangfrontend')->where('status', 1)->get();
+        $all_category=Category::with('catlangfrontend')->where('status', 1)->get();
         $ad=Ad::first();
 
         $paginateQty = CustomPagination::whereId('6')->first()->qty;
 
-        $products = Product::with('category','author');
+        $products = Product::with('category','author','productlangfrontend');
 
         if($request->tag){
             $products = $products->where('tags','LIKE','%'.$request->tag.'%')->orWhere('description','LIKE','%'.$request->tag.'%');
         }
 
         if($request->category){
-            $category=Category::where('slug', $request->category)->first();
+            $category=Category::with('catlangfrontend')->where('slug', $request->category)->first();
             $category_id=$category->id;
             $products = $products->where('category_id', $category_id)->select('id','name','product_type','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin');
         }
@@ -648,10 +650,13 @@ class HomeController extends Controller
             $products = $products->where('product_type', $request->sorting)->select('id','name','product_type','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin');
         }
 
-        if($request->keyword){
-            $products = $products->where('name','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%');
-        }
         
+        if($request->keyword){
+            $products = $products->whereHas('productlangfrontend',function($query) use ($request){
+                $query->where('name','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%'); 
+            });
+        }
+
         $products = $products->where('status', 1)->latest()->paginate($paginateQty);
         $products = $products->appends($request->all());
         
@@ -688,9 +693,9 @@ class HomeController extends Controller
 
         $paginateReviewQty = CustomPagination::whereId('8')->first()->qty;
 
-        $product = Product::with('category','author')->where('slug', $slug)->first();
+        $product = Product::with('category','author','productlangfrontend')->where('slug', $slug)->first();
         
-        $related_products=Product::with('category','author')->where('category_id', $product->category_id)->where('status', 1)->whereNot('id', $product->id)->take(3)->get();
+        $related_products=Product::with('category','author','productlangfrontend')->where('category_id', $product->category_id)->where('status', 1)->whereNot('id', $product->id)->take(3)->get();
         $setting = Setting::first();
         $variants=ProductVariant::where('product_id', $product->id)->get();
         $first_variant=ProductVariant::where('product_id', $product->id)->first();
@@ -721,10 +726,10 @@ class HomeController extends Controller
 
     public function become_author(){
         $active_theme = 'layout';
-        $contents = SectionContent::all();
+        $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
         $setting = Setting::first();
-        $become_author=BecomeAuthor::first();
+        $become_author=BecomeAuthor::with('becomelangfrontend')->first();
 
          // our teem section start
          $our_teem_control = $control->where('id', 35)->first();
@@ -734,12 +739,12 @@ class HomeController extends Controller
              $our_teem_visibility = true;
          }
          $teem_content = $contents->where('id', 9)->first();
-         $our_teems = OurTeam::where('status',1)->get()->take($our_teem_control->qty);
+         $our_teems = OurTeam::with('teamlangfrontend')->where('status',1)->get()->take($our_teem_control->qty);
  
          $our_teem_section = (object) array(
              'visibility' => $our_teem_visibility,
-             'title' => $teem_content->title,
-             'description' => $teem_content->description,
+             'title' => $teem_content->contentlangfrontend->title,
+             'description' => $teem_content->contentlangfrontend->description,
              'our_teems' => $our_teems,
          );
          // our teem section end
@@ -753,12 +758,12 @@ class HomeController extends Controller
              $category_visibility = true;
          }
          
-         $categories = Category::where('status',1)->get()->take($category_control->qty);
+         $categories = Category::with('catlangfrontend')->where('status',1)->get()->take($category_control->qty);
          $category_content = $contents->where('id', 1)->first();
          $category_section = (object) array(
              'visibility' => $category_visibility,
-             'title' => $category_content->title,
-             'description' => $category_content->description,
+             'title' => $category_content->contentlangfrontend->title,
+             'description' => $category_content->contentlangfrontend->description,
              'categories' => $categories,
          );
  
@@ -816,11 +821,11 @@ class HomeController extends Controller
 
 
     public function aboutUs(){
-        $contents = SectionContent::all();
+        $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
         $setting = Setting::first();
         $seo_setting = SeoSetting::where('id', 2)->first();
-        $homepage = Homepage::first();
+        $homepage = Homepage::with('homelangfrontend')->first();
         
          // our teem section start
          $our_teem_control = $control->where('id', 35)->first();
@@ -829,16 +834,16 @@ class HomeController extends Controller
              $our_teem_visibility = true;
          }
          $teem_content = $contents->where('id', 9)->first();
-         $our_teems = OurTeam::where('status',1)->get()->take($our_teem_control->qty);
+         $our_teems = OurTeam::with('teamlangfrontend')->where('status',1)->get()->take($our_teem_control->qty);
  
          $our_teem_section = (object) array(
              'visibility' => $our_teem_visibility,
-             'title' => $teem_content->title,
-             'description' => $teem_content->description,
+             'title' => $teem_content->contentlangfrontend->title,
+             'description' => $teem_content->contentlangfrontend->description,
              'our_teems' => $our_teems,
-             'offer_title1' => $homepage->about_offer_title1,
-             'offer_title2' => $homepage->about_offer_title2,
-             'offer_title3' => $homepage->about_offer_title3,
+             'offer_title1' => $homepage->homelangfrontend->about_offer_title1,
+             'offer_title2' => $homepage->homelangfrontend->about_offer_title2,
+             'offer_title3' => $homepage->homelangfrontend->about_offer_title3,
              'offer_link' => $homepage->about_offer_link,
              'offer_background' => $homepage->about_offer_background,
          );
@@ -857,10 +862,10 @@ class HomeController extends Controller
             'home1_icon2' => $homepage->counter_icon2,
             'home1_icon3' => $homepage->counter_icon3,
             'home1_icon4' => $homepage->counter_icon4,
-            'counter1_title' => $homepage->counter1_title,
-            'counter2_title' => $homepage->counter2_title,
-            'counter3_title' => $homepage->counter3_title,
-            'counter4_title' => $homepage->counter4_title,
+            'counter1_title' => $homepage->homelangfrontend->counter1_title,
+            'counter2_title' => $homepage->homelangfrontend->counter2_title,
+            'counter3_title' => $homepage->homelangfrontend->counter3_title,
+            'counter4_title' => $homepage->homelangfrontend->counter4_title,
             'counter1_value' => $homepage->counter1_value,
             'counter2_value' => $homepage->counter2_value,
             'counter3_value' => $homepage->counter3_value,
@@ -876,17 +881,17 @@ class HomeController extends Controller
         }
         $why_choose_us = (object) array(
             'visibility' => $why_choose_visibility,
-            'title1' => $homepage->why_choose_title1,
-            'title2' => $homepage->why_choose_title2,
+            'title1' => $homepage->homelangfrontend->why_choose_title1,
+            'title2' => $homepage->homelangfrontend->why_choose_title2,
             'item_icon1' => $homepage->why_choose_home3_item1_icon,
             'item_icon2' => $homepage->why_choose_home3_item2_icon,
             'item_icon3' => $homepage->why_choose_home3_item3_icon,
-            'item_title1' => $homepage->why_choose_home3_item1_title,
-            'item_title2' => $homepage->why_choose_home3_item2_title,
-            'item_title3' => $homepage->why_choose_home3_item3_title,
-            'item_description1' => $homepage->why_choose_home3_item1_desc,
-            'item_description2' => $homepage->why_choose_home3_item2_desc,
-            'item_description3' => $homepage->why_choose_home3_item3_desc,
+            'item_title1' => $homepage->homelangfrontend->why_choose_home3_item1_title,
+            'item_title2' => $homepage->homelangfrontend->why_choose_home3_item2_title,
+            'item_title3' => $homepage->homelangfrontend->why_choose_home3_item3_title,
+            'item_description1' => $homepage->homelangfrontend->why_choose_home3_item1_desc,
+            'item_description2' => $homepage->homelangfrontend->why_choose_home3_item2_desc,
+            'item_description3' => $homepage->homelangfrontend->why_choose_home3_item3_desc,
 
         );
         // end why choose us
@@ -899,12 +904,12 @@ class HomeController extends Controller
          }
  
          $testimonial_content = $contents->where('id', 4)->first();
-         $testimonials = Testimonial::select('id','name', 'rating', 'image','designation','comment','status')->where('status',1)->get()->take($testimonial_control->qty);
+         $testimonials = Testimonial::with('testimoniallangfrontend')->where('status',1)->get()->take($testimonial_control->qty);
  
          $testimonial_section = (object) array(
              'visibility' => $testimonial_visibility,
-             'title' => $testimonial_content->title,
-             'description' => $testimonial_content->description,
+             'title' => $testimonial_content->contentlangfrontend->title,
+             'description' => $testimonial_content->contentlangfrontend->description,
              'testimonials' => $testimonials,
          );
          // testimonial section end
@@ -956,12 +961,12 @@ class HomeController extends Controller
          }
  
          $blog_content = $contents->where('id', 5)->first();
-         $blogs = Blog::with('category')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($blog_control->qty);
+         $blogs = Blog::with('category', 'bloglanguagefrontend')->where(['status' => 1, 'show_homepage' => 1])->orderBy('id','desc')->get()->take($blog_control->qty);
      
          $blog_section = (object) array(
              'visibility' => $blog_visibility,
-             'title' => $blog_content->title,
-             'description' => $blog_content->description,
+             'title' => $blog_content->contentlangfrontend->title,
+             'description' => $blog_content->contentlangfrontend->description,
              'blogs' => $blogs,
          );
  
@@ -971,9 +976,9 @@ class HomeController extends Controller
         
         $active_theme = 'layout';
         
-        $about_us=AboutUs::first();
+        $about_us=AboutUs::with('aboutlangfrontend')->first();
         $homepage = Homepage::first();
-        $testimonials=Testimonial::where('status', 1)->latest()->get();
+        $testimonials=Testimonial::with('testimoniallangfrontend')->where('status', 1)->latest()->get();
         return view('about_us')->with([
             'active_theme' => $active_theme,
             'about_us' => $about_us,
@@ -1060,24 +1065,30 @@ class HomeController extends Controller
 
         $paginateQty = CustomPagination::whereId('1')->first()->qty;
 
-        $blogs = Blog::with('category', 'admin')->where(['status' => 1])->orderBy('id','desc');
+        $blogs = Blog::with('category', 'admin', 'bloglanguagefrontend')->where(['status' => 1])->orderBy('id','desc');
 
         if($request->category){
             $category = BlogCategory::where('slug', $request->category)->first();
             $blogs = $blogs->where('blog_category_id', $category->id);
         }
 
+
         if($request->tag){
-            $blogs = $blogs->where('tag','LIKE','%'.$request->tag.'%');
+            $blogs = $blogs->whereHas('bloglanguagefrontend',function($query) use ($request){
+                $query->where('tag','LIKE','%'.$request->tag.'%'); 
+            });
         }
 
         if($request->keyword){
-            $blogs = $blogs->where('title','LIKE','%'.$request->keyword.'%')
-                            ->orWhere('description','LIKE','%'.$request->keyword.'%');
+            $blogs = $blogs->whereHas('bloglanguagefrontend',function($query) use ($request){
+                $query->where('title','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%'); 
+            });
         }
 
         $blogs = $blogs->paginate($paginateQty);
         $blogs=$blogs->appends($request->all());
+
+        //return $blogs;
 
         $setting = Setting::first();
         
@@ -1101,9 +1112,9 @@ class HomeController extends Controller
         foreach($popularBlogs as $popularBlog){
             $popular_arr[] = $popularBlog->blog_id;
         }
-        $popular_blogs = Blog::select('id','title','image','slug','status','created_at')->where(['status' => 1])->orderBy('id','desc')->whereIn('id', $popular_arr)->get()->take(6);
+        $popular_blogs = Blog::with('category', 'bloglanguagefrontend')->select('id','image','slug','status','created_at')->where(['status' => 1])->orderBy('id','desc')->whereIn('id', $popular_arr)->get()->take(6);
 
-        $categories = BlogCategory::where(['status' => 1])->orderBy('name','asc')->get();
+        $categories = BlogCategory::with('blogcategorylanguagefrontend')->where(['status' => 1])->orderBy('name','asc')->get();
         $popular_tags=PopularTag::latest()->get();
 
         $active_theme = 'layout';
@@ -1124,7 +1135,7 @@ class HomeController extends Controller
 
 
     public function single_blog($slug){
-        $blog = Blog::with('category', 'admin')->where('slug', $slug)->first();
+        $blog = Blog::with('category', 'admin', 'bloglanguagefrontend')->where('slug', $slug)->first();
         $tags=json_decode($blog->tag);
         $category_id=$blog->blog_category_id;
         $blog_pagiante_qty = CustomPagination::whereId('4')->first()->qty;
@@ -1137,10 +1148,10 @@ class HomeController extends Controller
         foreach($popularBlogs as $popularBlog){
             $popular_arr[] = $popularBlog->blog_id;
         }
-        $popular_blogs = Blog::select('id','title','image','slug','status','created_at')->where(['status' => 1])->orderBy('id','desc')->whereIn('id', $popular_arr)->where('id', '!=', $blog->id)->get()->take(6);
+        $popular_blogs = Blog::with('category', 'bloglanguagefrontend')->select('id','image','slug','status','created_at')->where(['status' => 1])->orderBy('id','desc')->whereIn('id', $popular_arr)->where('id', '!=', $blog->id)->get()->take(6);
 
 
-        $related_blogs = Blog::with('admin')->where('status', 1)->where('blog_category_id', '=', $category_id)->where('id', '!=', $blog->id)->latest()->get()->take(3);
+        $related_blogs = Blog::with('admin', 'bloglanguagefrontend')->where('status', 1)->where('blog_category_id', '=', $category_id)->where('id', '!=', $blog->id)->latest()->get()->take(3);
         $setting = Setting::first();
         $subscriber = (object) array(
             'title' => $setting->subscriber_title,
@@ -1267,7 +1278,7 @@ class HomeController extends Controller
     
     public function faq(){
 
-        $faqs = Faq::orderBy('id','desc')->where('status',1)->get();
+        $faqs = Faq::with('faqlangfrontend')->orderBy('id','desc')->where('status',1)->get();
 
         $recaptchaSetting = GoogleRecaptcha::first();
 
@@ -1282,7 +1293,7 @@ class HomeController extends Controller
 
     public function termsAndCondition(){
         $terms_conditions = TermsAndCondition::first();
-        $terms_conditions = $terms_conditions->terms_and_condition;
+        $terms_conditions = $terms_conditions->termslangfrontend->terms_and_condition;
 
         $active_theme = 'layout';
 
@@ -1293,8 +1304,8 @@ class HomeController extends Controller
     }
 
     public function privacyPolicy(){
-        $privacyPolicy = TermsAndCondition::first();
-        $privacyPolicy = $privacyPolicy->privacy_policy;
+        $privacyPolicy = PrivacyPolicy::with('privacylangfrontend')->first();
+        $privacyPolicy = $privacyPolicy->privacylangfrontend->privacy_policy;
 
         $active_theme = 'layout';
 
@@ -1306,18 +1317,8 @@ class HomeController extends Controller
 
 
     public function customPage($slug){
-        $page = CustomPage::where(['slug' => $slug, 'status' => 1])->first();
-
-        $selected_theme = Session::get('selected_theme');
-        if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
-        }elseif($selected_theme == 'theme_two'){
-            $active_theme = 'layout2';
-        }elseif($selected_theme == 'theme_three'){
-            $active_theme = 'layout3';
-        }else{
-            $active_theme = 'layout';
-        }
+        $page = CustomPage::with('customlangfrontend')->where(['slug' => $slug, 'status' => 1])->first();
+        $active_theme = 'layout';
 
         return view('custom_page')->with([
             'active_theme' => $active_theme,
@@ -1376,5 +1377,11 @@ class HomeController extends Controller
         return response()->download($filepath);
     }
 
+
+    public function language_change(Request $request){
+        session()->forget('front_lang');
+        Session::put('front_lang', $request->front_lang);
+        return redirect()->back();
+    }
 
 }

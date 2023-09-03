@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\ContactPage;
-use Image;
 use File;
+use Image;
+use App\Models\Language;
+use App\Models\ContactPage;
+use Illuminate\Http\Request;
+use App\Models\ContactPageLanguage;
+use App\Http\Controllers\Controller;
+
 class ContactPageController extends Controller
 {
     public function __construct()
@@ -14,21 +17,24 @@ class ContactPageController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index(){
+    public function index(Request $request){
         $contact = ContactPage::first();
-        return view('admin.contact_page', compact('contact'));
+        $languages = Language::get();
+        $contact_language = ContactPageLanguage::where(['contact_id' => $contact->id, 'lang_code' => $request->lang_code])->first();
+
+        return view('admin.contact_page', compact('contact', 'languages', 'contact_language'));
     }
 
     public function update(Request $request, $id){
         $rules = [
-            'email' => 'required',
+            'email' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'address' => 'required',
             'phone' => 'required',
             'title1' => 'required',
             'time' => 'required',
             'off_day' => 'required',
             'title2' => 'required',
-            'google_map' => 'required',
+            'google_map' => session()->get('admin_lang') == $request->lang_code ? 'required':''
         ];
         $customMessages = [
             'email.required' => trans('admin_validation.Email is required'),
@@ -43,15 +49,18 @@ class ContactPageController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $contact = ContactPage::find($id);
-        $contact->title1 = $request->title1;
-        $contact->title2 = $request->title2;
-        $contact->time = $request->time;
-        $contact->off_day = $request->off_day;
-        $contact->email = $request->email;
-        $contact->address = $request->address;
-        $contact->phone = $request->phone;
-        $contact->map = $request->google_map;
-        $contact->save();
+        $contact_language = ContactPageLanguage::where(['contact_id' => $contact->id, 'lang_code' => $request->lang_code])->first();
+
+        if($request->email){
+            $contact->email = $request->email;
+            $contact->save();
+        }
+
+        if($request->google_map){
+            $contact->map = $request->google_map;
+            $contact->save();
+        }
+        
 
         if($request->image){
             $exist_banner = $contact->image;
@@ -67,6 +76,13 @@ class ContactPageController extends Controller
             }
         }
         
+        $contact_language->title1 = $request->title1;
+        $contact_language->title2 = $request->title2;
+        $contact_language->time = $request->time;
+        $contact_language->off_day = $request->off_day;
+        $contact_language->address = $request->address;
+        $contact_language->phone = $request->phone;
+        $contact_language->save();
 
         $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

@@ -2,8 +2,6 @@
 @section('title')
     <title>{{ $blog->title }}</title>
     <title>{{ $blog->seo_title }}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{ $blog->seo_description }}">
 @endsection
 
@@ -48,8 +46,8 @@
                             <li><i class="far fa-comment-lines"></i> {{ $blog_comments->count() }} {{__('Comments')}}</li>
                         </ul>
                         <div class="wsus__blog_details_text">
-                            <h2>{{ $blog->title }}</h2>
-                            {!! clean($blog->description) !!}
+                            <h2>{{ $blog->bloglanguagefrontend->title }}</h2>
+                            {!! clean($blog->bloglanguagefrontend->description) !!}
                         </div>
                         <div class="wsus__blog_tags_and_share d-flex flex-wrap justify-content-between">
                             <ul class="tags d-flex flex-wrap align-items-center">
@@ -177,9 +175,9 @@
                             <ul>
                                 @foreach ($categories as $category)
                                 @php
-                                    $total_blog = App\Models\Blog::where(['blog_category_id' => $category->id, 'status' => 1])->count();
+                                    $total_blog = App\Models\Blog::with('blogcategorylanguagefrontend')->where(['blog_category_id' => $category->id, 'status' => 1])->count();
                                 @endphp
-                                <li><a href="{{ route('blogs', ['category' => $category->slug] ) }}">{{ $category->name }} <span>({{ $total_blog }})</span></a></li>
+                                <li><a href="{{ route('blogs', ['category' => $category->slug] ) }}">{{ $category->blogcategorylanguagefrontend->category_name }} <span>({{ $total_blog }})</span></a></li>
                                 @endforeach
                             </ul>
                         </div>

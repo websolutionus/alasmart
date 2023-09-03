@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use File;
+use App\Models\Language;
 use App\Models\ProductItem;
 use Illuminate\Http\Request;
+use App\Models\ProductItemLanguage;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
@@ -15,11 +17,14 @@ class ProductItemController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $productItem = ProductItem::first();
+        $languages = Language::get();
 
-        return view('admin.product_item', compact('productItem'));
+        $product_item_language = ProductItemLanguage::where(['item_id' => $productItem->id, 'lang_code' => $request->lang_code])->first();
+
+        return view('admin.product_item', compact('productItem', 'languages', 'product_item_language'));
     }
 
 
@@ -27,6 +32,8 @@ class ProductItemController extends Controller
     public function update(Request $request, $id)
     {
         $productItem = ProductItem::find($id);
+
+        $product_item_language = ProductItemLanguage::where(['item_id' => $productItem->id, 'lang_code' => $request->lang_code])->first();
 
         $rules = [
             'script_title'=>'required',
@@ -50,15 +57,15 @@ class ProductItemController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $productItem->script_title = $request->script_title;
-        $productItem->script_description = $request->script_description;
-        $productItem->image_title = $request->image_title;
-        $productItem->image_description = $request->image_description;
-        $productItem->video_title = $request->video_title;
-        $productItem->video_description = $request->video_description;
-        $productItem->audio_title = $request->audio_title;
-        $productItem->audio_description = $request->audio_description;
-        $productItem->save();
+        $product_item_language->script_title = $request->script_title;
+        $product_item_language->script_description = $request->script_description;
+        $product_item_language->image_title = $request->image_title;
+        $product_item_language->image_description = $request->image_description;
+        $product_item_language->video_title = $request->video_title;
+        $product_item_language->video_description = $request->video_description;
+        $product_item_language->audio_title = $request->audio_title;
+        $product_item_language->audio_description = $request->audio_description;
+        $product_item_language->save();
 
         if($request->script_image){
             $exist_banner = $productItem->script_image;

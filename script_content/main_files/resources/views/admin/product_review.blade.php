@@ -37,7 +37,7 @@
                                 @foreach ($productReviews as $index => $productReview)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td><a href="{{ route('admin.product.edit', $productReview->product->id) }}">{{ html_decode($productReview->product->name) }}</a></td>
+                                        <td><a href="{{ route('admin.product.edit', $productReview->product->id) }}">{{ html_decode($productReview->product->productlangadmin->name) }}</a></td>
                                         <td>{{ html_decode($productReview->review) }}</td>
                                         <td> <a class="btn btn-success btn-sm" href="{{ route('product-detail',$productReview->product->slug) }}">{{__('admin.view')}}</a></td>
                                         <td>

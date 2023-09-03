@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Footer;
-use Image;
 use File;
+use Image;
+use App\Models\Footer;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use App\Models\FooterLanguage;
+use App\Http\Controllers\Controller;
+
 class FooterController extends Controller
 {
     public function __construct()
@@ -14,9 +17,14 @@ class FooterController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index(){
+    public function index(Request $request){
         $footer = Footer::first();
-        return view('admin.website_footer', compact('footer'));
+
+        $languages = Language::get();
+
+        $footer_language = FooterLanguage::where(['footer_id' => $footer->id, 'lang_code' => $request->lang_code])->first();
+        
+        return view('admin.website_footer', compact('footer', 'languages', 'footer_language'));
     }
 
     public function update(Request $request, $id){
@@ -31,9 +39,12 @@ class FooterController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $footer = Footer::first();
-        $footer->copyright = $request->copyright;
-        $footer->description = $request->description;
-        $footer->save();
+        $footer_language = FooterLanguage::where(['footer_id' => $footer->id, 'lang_code' => $request->lang_code])->first();
+        
+        $footer_language->copyright = $request->copyright;
+        $footer_language->description = $request->description;
+        $footer_language->save();
+        
         if($request->card_image){
             $old_logo=$footer->payment_image;
             $image=$request->card_image;

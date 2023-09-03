@@ -40,7 +40,7 @@
                                     <select name="category" class="form-control select2" id="category">
                                         <option value="">{{__('Select Category')}}</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->catlangadmin->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

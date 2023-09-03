@@ -2985,3 +2985,20 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   100% {
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0.0; } }
+
+.lang_list_top{
+  overflow: hidden;
+}
+
+.lang_list_top ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.lang_list_top li {
+  float: left;
+}
+.lang_list_top li a {
+  display: block;
+  padding: 8px;
+}

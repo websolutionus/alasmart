@@ -29,7 +29,7 @@
                                             <img src="{{ asset($item->product->thumbnail_image) }}" alt="download" class="img-fluid w-100">
                                         </div>
                                         <div class="text">
-                                            <a href="{{ route('product-detail', $item->product->slug) }}">{{ html_decode($item->product->name) }}</a>
+                                            <a href="{{ route('product-detail', $item->product->slug) }}">{{ html_decode($item->product->productlangfrontend->name) }}</a>
                                             <p>{{__('Item by')}} {{ html_decode($item->author->name) }}</p>
                                             @if ($item->variant_id!=null)
                                             <p>{{ html_decode($item->variant->variant_name) }}</p>

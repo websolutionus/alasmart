@@ -12,19 +12,38 @@
 
           <div class="section-body">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="card">
                   <div class="card-body">
                     <ul class="nav nav-pills flex-column">
-                      <li class="nav-item"><a href="{{ route('admin.product.edit', $product->id) }}" class="nav-link active">{{__('Basic Information')}}</a></li>
+                      <li class="nav-item"><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => 'en']) }}" class="nav-link active">{{__('Basic Information')}}</a></li>
 
                       <li class="nav-item"><a href="{{ route('admin.product-variant', $product->id) }}" class="nav-link">{{__('Variant and price')}}</a></li>
 
                     </ul>
                   </div>
                 </div>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                      <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                      <hr>
+                      <ul class="lang_list">
+                          @foreach ($languages as $language)
+                          <li><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                          @endforeach
+                      </ul>
+
+                      <div class="alert alert-danger" role="alert">
+                          @php
+                              $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
+                          @endphp
+                          <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                      </div> 
+                    </div>
+                  </div>
               </div>
-              <div class="col-md-9">
+              <div class="col-md-8">
                   <div class="card" id="settings-card">
                     <div class="card-header">
                       <h4>{{__('Basic Information')}}</h4>
@@ -35,6 +54,7 @@
                             @method('PUT')
                             <div class="row">
 
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Existing thumnail')}}</label>
                                     <div>
@@ -65,7 +85,7 @@
                                     <select name="category" class="form-control select2" id="category">
                                         <option value="">{{__('Select Category')}}</option>
                                         @foreach ($categories as $category)
-                                            <option {{ $product->category_id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option {{ $product->category_id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->catlangadmin->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -80,16 +100,15 @@
                                     </select>
                                 </div>
 
+                                @endif
+
                                 <div class="form-group col-12">
                                     <label>{{__('Name')}} <span class="text-danger">*</span></label>
-                                    <input type="text" id="name" class="form-control"  name="name" value="{{ html_decode($product->name) }}">
+                                    <input type="text" id="name" class="form-control"  name="name" value="{{ html_decode($product_language->name) }}">
+                                    <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>{{__('Slug')}} <span class="text-danger">*</span></label>
-                                    <input type="text" id="slug" class="form-control"  name="slug" value="{{ html_decode($product->slug) }}">
-                                </div>
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Preview link')}} <span class="text-danger">*</span></label>
                                    <input type="text" class="form-control" name="preview_link" value="{{ html_decode($product->preview_link) }}">
@@ -99,17 +118,19 @@
                                     <label>{{__('Regular price')}} <span class="text-danger">*</span></label>
                                    <input type="text" class="form-control" name="regular_price" value="{{ html_decode($product->regular_price) }}">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-12">
                                     <label>{{__('Description')}} <span class="text-danger">*</span></label>
-                                    <textarea name="description" id="" cols="30" rows="10" class="summernote">{{ html_decode($product->description) }}</textarea>
+                                    <textarea name="description" id="" cols="30" rows="10" class="summernote">{{ html_decode($product_language->description) }}</textarea>
                                 </div>
 
                                 <div class="form-group col-12">
                                     <label>{{__('Tags')}} <span class="text-danger">*</span> ({{__('Press the comma for new tag')}})</label><br>
-                                    <input type="text" class="form-control" data-role="tagsinput" name="tags" value="{{ html_decode($product->tags) }}">
+                                    <input type="text" class="form-control" data-role="tagsinput" name="tags" value="{{ html_decode($product_language->tags) }}">
                                 </div>
 
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
@@ -117,16 +138,19 @@
                                         <option {{ $product->status == 0 ? 'selected' : '' }} value="0">{{__('Inactive')}}</option>
                                     </select>
                                 </div>
+                                @endif
 
                                 <div class="form-group col-12">
                                     <label>{{__('SEO Title')}}</label>
-                                   <input type="text" class="form-control" name="seo_title" value="{{ html_decode($product->seo_title) }}">
+                                   <input type="text" class="form-control" name="seo_title" value="{{ html_decode($product_language->seo_title) }}">
                                 </div>
 
                                 <div class="form-group col-12">
                                     <label>{{__('SEO Description')}}</label>
-                                    <textarea name="seo_description" id="" cols="30" rows="10" class="form-control text-area-5">{{ html_decode($product->seo_description) }}</textarea>
+                                    <textarea name="seo_description" id="" cols="30" rows="10" class="form-control text-area-5">{{ html_decode($product_language->seo_description) }}</textarea>
                                 </div>
+
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Highlight')}}</label>
                                     <div>
@@ -145,6 +169,7 @@
                                         <input {{ $product->layout == 1 ? 'checked' : '' }} type="checkbox" name="layout" id="layout"> <label for="layout" class="mr-3" >{{__('Responsive')}}</label>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-12">

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Str;
+use File;
+use App\Models\Language;
 use App\Models\Template;
 use Illuminate\Http\Request;
+use App\Models\TemplateLanguage;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use File;
 
 class TemplateController extends Controller
 {
@@ -18,7 +20,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $templates = Template::latest()->get();
+        $templates = Template::with('templatelangadmin')->latest()->get();
         return view('admin.template', compact('templates'));
     }
 
@@ -66,12 +68,21 @@ class TemplateController extends Controller
                 ->save(public_path().'/'.$image_name);
         }
 
-        $template->title = $request->title;
-        $template->description = $request->description;
+        
         $template->image = $image_name;
         $template->link = $request->link;
         $template->status = $request->status;
         $template->save();
+
+        $languages = Language::get();
+        foreach($languages as $language){
+            $template_language = new TemplateLanguage();
+            $template_language->template_id = $template->id;
+            $template_language->lang_code = $language->lang_code;
+            $template_language->title = $request->title;
+            $template_language->description = $request->description;
+            $template_language->save();
+        }
 
         $notification = trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
@@ -95,10 +106,12 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $template =  Template::findOrFail($id);
-        return view('admin.edit_template', compact('template'));
+        $languages = Language::get();
+        $template_language = TemplateLanguage::where(['template_id' => $template->id, 'lang_code' => $request->lang_code])->first();
+        return view('admin.edit_template', compact('template', 'languages', 'template_language'));
     }
 
     /**
@@ -114,7 +127,7 @@ class TemplateController extends Controller
         $rules = [
             'title' => 'required',
             'description' => 'required',
-            'link' => 'required',
+            'link' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
 
         $customMessages = [
@@ -125,6 +138,7 @@ class TemplateController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $template = Template::findOrFail($id);
+        $template_language = TemplateLanguage::where(['template_id' => $template->id, 'lang_code' => $request->lang_code])->first();
 
         if($request->image){
             $existing_image = $template->image;
@@ -140,15 +154,27 @@ class TemplateController extends Controller
                 }
         }
 
-        $template->title = $request->title;
-        $template->description = $request->description;
-        $template->link = $request->link;
-        $template->status = $request->status;
+        
+        if($request->link){
+            $template->link = $request->link;
+        }
+        
+
+        if(session()->get('admin_lang') == $request->lang_code){
+            $template->status = $request->status;
+        }
+
         $template->save();
+
+
+        $template_language->title = $request->title;
+        $template_language->description = $request->description;
+
+        $template_language->save();
 
         $notification = trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.template.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -166,6 +192,8 @@ class TemplateController extends Controller
         if($existing_image){
             if(File::exists(public_path().'/'.$existing_image))unlink(public_path().'/'.$existing_image);
         }
+
+        $template_language = TemplateLanguage::where('template_id', $id)->delete();
 
         $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

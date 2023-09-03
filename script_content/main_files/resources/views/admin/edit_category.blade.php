@@ -18,6 +18,28 @@
             <a href="{{ route('admin.category.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.Category List')}}</a>
             <div class="row mt-4">
                 <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                        <hr>
+                        <div class="lang_list_top">
+                            <ul class="lang_list">
+                                @foreach ($languages as $language)
+                                <li><a href="{{ route('admin.category.edit', ['category' => $category->id, 'lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-danger" role="alert">
+                            @php
+                                $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
+                            @endphp
+                            <p>{{__('Your editing mode')}} : <b>{{ request()->get('lang_code') ? $current_language->lang_name:'English' }}</b></p> 
+                        </div> 
+                      </div>
+                    </div>
+                </div>
+                <div class="col-12">
                   <div class="card">
                     <div class="card-body">
                         <form action="{{ route('admin.category.update',$category->id) }}" method="POST" enctype="multipart/form-data">
@@ -25,6 +47,7 @@
                             @method('PUT')
                             <div class="row">
 
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Existing Icon')}}</label>
                                     <div>
@@ -36,15 +59,15 @@
                                     <label>{{__('admin.Icon')}}</label>
                                     <input type="file" class="form-control-file"  name="icon">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Name')}} <span class="text-danger">*</span></label>
-                                    <input type="text" id="name" class="form-control"  name="name" value="{{ $category->name }}">
+                                    <input type="text" id="name" class="form-control"  name="name" value="{{ $category_language->name }}">
+
+                                    <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                                 </div>
-                                <div class="form-group col-12">
-                                    <label>{{__('admin.Slug')}} <span class="text-danger">*</span></label>
-                                    <input type="text" id="slug" class="form-control"  name="slug" value="{{ $category->slug }}">
-                                </div>
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Show product gallery')}} <span class="text-danger">*</span></label>
                                     <select name="product_gallery" class="form-control">
@@ -59,6 +82,7 @@
                                         <option {{ $category->status==0 ? 'selected': '' }}  value="0">{{__('admin.InActive')}}</option>
                                     </select>
                                 </div>
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-12">

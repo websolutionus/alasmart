@@ -13,12 +13,35 @@
           <div class="section-body">
             <div class="row mt-4">
                 <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                        <hr>
+                        <div class="lang_list_top">
+                            <ul class="lang_list">
+                                @foreach ($languages as $language)
+                                <li><a href="{{ route('admin.counter', ['lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-danger mt-2" role="alert">
+                            @php
+                                $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
+                            @endphp
+                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                        </div> 
+                      </div>
+                    </div>
+                </div>
+                <div class="col-12">
                   <div class="card">
                     <div class="card-body">
                         <form action="{{ route('admin.update-counter') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
+                            <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                             @php
                                 $home1= false;
                                 if($setting->selected_theme == 0 || $setting->selected_theme == 1){
@@ -26,7 +49,7 @@
                                 }
                             @endphp
 
-
+                            @if (session()->get('admin_lang') == request()->get('lang_code'))
                             <div class="row mt-4">
                                 @if ($home1)
                                 <div class="col-12">
@@ -39,6 +62,7 @@
                                     <hr>
                                 </div>
                                 @endif
+                               
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>{{__('Item one icon')}}</label>
@@ -95,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @endif
                             @php
                                 $home2= false;
                                 if($setting->selected_theme == 0 || $setting->selected_theme == 2){
@@ -104,122 +128,128 @@
                             @endphp
 
                             @if ($home2)
-                            <div class="row">
-                                <div class="col-12">
-                                    <h6 class="home_border">{{__('admin.Home Two')}}</h6>
-                                    <hr>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label for="">{{__('Background')}}</label>
-                                    <div>
-                                        <img class="w_300_h_150" src="{{ asset($counter->home2_background) }}" alt="">
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="home_border">{{__('admin.Home Two')}}</h6>
+                                        <hr>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-12">
-                                    <label for="">{{__('New background')}}</label>
-                                    <input type="file" name="home2_background" class="form-control-file">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>{{__('Item one icon')}}</label>
-                                        <div>
-                                            <img class="icon_w100" src="{{ asset($counter->counter_icon5) }}" alt="">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>{{__('New icon')}} </label>
-                                        <input type="file" class="form-control-file" name="counter_icon5">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
                                     <div class="form-group col-12">
-                                        <label>{{__('Item two icon')}}</label>
+                                        <label for="">{{__('Background')}}</label>
                                         <div>
-                                            <img class="icon_w100" src="{{ asset($counter->counter_icon6) }}" alt="">
+                                            <img class="w_300_h_150" src="{{ asset($counter->home2_background) }}" alt="">
                                         </div>
                                     </div>
 
                                     <div class="form-group col-12">
-                                        <label>{{__('New icon')}} </label>
-                                        <input type="file" class="form-control-file" name="counter_icon6">
+                                        <label for="">{{__('New background')}}</label>
+                                        <input type="file" name="home2_background" class="form-control-file">
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group col-12">
-                                        <label>{{__('Item three icon')}}</label>
-                                        <div>
-                                            <img class="icon_w100" src="{{ asset($counter->counter_icon7) }}" alt="">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>{{__('Item one icon')}}</label>
+                                            <div>
+                                                <img class="icon_w100" src="{{ asset($counter->counter_icon5) }}" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>{{__('New icon')}} </label>
+                                            <input type="file" class="form-control-file" name="counter_icon5">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group col-12">
+                                            <label>{{__('Item two icon')}}</label>
+                                            <div>
+                                                <img class="icon_w100" src="{{ asset($counter->counter_icon6) }}" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-12">
+                                            <label>{{__('New icon')}} </label>
+                                            <input type="file" class="form-control-file" name="counter_icon6">
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-12">
-                                        <label>{{__('New icon')}} </label>
-                                        <input type="file" class="form-control-file" name="counter_icon7">
-                                    </div>
-                                </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group col-12">
+                                            <label>{{__('Item three icon')}}</label>
+                                            <div>
+                                                <img class="icon_w100" src="{{ asset($counter->counter_icon7) }}" alt="">
+                                            </div>
+                                        </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group col-12">
-                                        <label>{{__('Item four icon')}}</label>
-                                        <div>
-                                            <img class="icon_w100" src="{{ asset($counter->counter_icon8) }}" alt="">
+                                        <div class="form-group col-12">
+                                            <label>{{__('New icon')}} </label>
+                                            <input type="file" class="form-control-file" name="counter_icon7">
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-12">
-                                        <label>{{__('New icon')}} </label>
-                                        <input type="file" class="form-control-file" name="counter_icon8">
+                                    <div class="col-md-3">
+                                        <div class="form-group col-12">
+                                            <label>{{__('Item four icon')}}</label>
+                                            <div>
+                                                <img class="icon_w100" src="{{ asset($counter->counter_icon8) }}" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-12">
+                                            <label>{{__('New icon')}} </label>
+                                            <input type="file" class="form-control-file" name="counter_icon8">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <hr>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <hr>
-                                </div>
-                            </div>
+                                @endif
                             @endif
 
                             <div class="row mt-3">
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter one quantity')}} <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control"  name="counter1_value" value="{{ $counter->counter1_value }}">
                                 </div>
-
+                                @endif
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter one title')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="counter1_title" class="form-control"  name="counter1_title" value="{{ $counter->counter1_title }}">
                                 </div>
 
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter two quantity')}} <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control"  name="counter2_value" value="{{ $counter->counter2_value }}">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter two title')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="counter2_title" class="form-control"  name="counter2_title" value="{{ $counter->counter2_title }}">
                                 </div>
 
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter three quantity')}} <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control"  name="counter3_value" value="{{ $counter->counter3_value }}">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter three title')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="counter3_title" class="form-control"  name="counter3_title" value="{{ $counter->counter3_title }}">
                                 </div>
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter four quantity')}} <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control"  name="counter4_value" value="{{ $counter->counter4_value }}">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-md-6">
                                     <label>{{__('Counter four title')}} <span class="text-danger">*</span></label>

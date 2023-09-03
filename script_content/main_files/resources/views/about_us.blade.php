@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
-@endsection
-
-@section('title')
     <meta name="description" content="{{ $seo_setting->seo_description }}">
 @endsection
 
@@ -18,10 +15,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('About Us')}}</h1>
+                        <h1>{{__('user.About Us')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('about us')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.About Us')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,16 +38,16 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6">
                     <div class="wsus__about_us_text">
-                        <h5>{{ $about_us->title }}</h5>
-                        <h2>{{ $about_us->header1 }} <b>{{ $about_us->header2 }}</b> {{ $about_us->header3 }}</h2>
-                        {!! clean($about_us->about_us ) !!}
+                        <h5>{{ $about_us->aboutlangfrontend->title }}</h5>
+                        <h2>{{ $about_us->aboutlangfrontend->header1 }} <b>{{ $about_us->aboutlangfrontend->header2 }}</b> {{ $about_us->aboutlangfrontend->header3 }}</h2>
+                        {!! clean($about_us->aboutlangfrontend->about_us ) !!}
                         <div class="wsus__about_text_img d-flex flex-wrap align-items-center">
                             <div class="img">
                                 <img src="{{ asset($about_us->image) }}" alt="about" class="img-fluid w-100">
                             </div>
                             <div class="text">
-                                <h3>{{ $about_us->name }}</h3>
-                                <p>{{ $about_us->desgination }}</p>
+                                <h3>{{ $about_us->aboutlangfrontend->name }}</h3>
+                                <p>{{ $about_us->aboutlangfrontend->desgination }}</p>
                             </div>
                             <div class="signature">
                                 <img src="{{ asset($about_us->signature) }}" alt="about" class="img-fluid w-100">
@@ -87,8 +84,8 @@
                             <div class="img">
                                 <img src="{{ asset($our_team->image) }}" alt="team" class="img-fluid w-100">
                             </div>
-                            <h3>{{ $our_team->name }}</h3>
-                            <p>{{ $our_team->designation }}</p>
+                            <h3>{{ $our_team->teamlangfrontend->name }}</h3>
+                            <p>{{ $our_team->teamlangfrontend->designation }}</p>
                             <ul>
                                 <li><a href="{{ $our_team->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="{{ $our_team->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
@@ -102,7 +99,7 @@
             <div class="wsus__purchase" style="background: url({{ asset($our_teem_section->offer_background) }});">
                 <h3>{{ $our_teem_section->offer_title1 }} <span>{{ $our_teem_section->offer_title2 }}</span></h3>
                 <p>{{ $our_teem_section->offer_title3 }}</p>
-                <a target="_blank" href="{{ $our_teem_section->offer_link }}">{{__('Purchase Here')}}</a>
+                <a target="_blank" href="{{ $our_teem_section->offer_link }}">{{__('user.Purchase Here')}}</a>
             </div>
         </div>
     </section>
@@ -168,7 +165,7 @@
                 @foreach ($testimonial_section->testimonials as $testimonial)
                 <div class="col-xl-6">
                     <div class="wsus__testimonial_item">
-                        <p class="description">{{ $testimonial->comment }}</p>
+                        <p class="description">{{ $testimonial->testimoniallangfrontend->comment }}</p>
                         <p class="rating">
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
@@ -186,8 +183,8 @@
                                 <img src="{{ asset($testimonial->image) }}" alt="testimonial" class="img-fluid w-100">
                             </div>
                             <div class="text">
-                                <h4>{{ $testimonial->name }}</h4>
-                                <p>{{ $testimonial->designation }}</p>
+                                <h4>{{ $testimonial->testimoniallangfrontend->name }}</h4>
+                                <p>{{ $testimonial->testimoniallangfrontend->designation }}</p>
                             </div>
                         </div>
                     </div>

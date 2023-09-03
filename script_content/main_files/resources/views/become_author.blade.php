@@ -1,11 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Become author')}}</title>
-@endsection
-
-@section('title')
-    <meta name="description" content="{{__('Become author')}}">
+    <title>{{__('user.Become author')}}</title>
+    <meta name="description" content="{{__('user.Become author')}}">
 @endsection
 
 @section('frontend-content')
@@ -19,8 +16,8 @@
                 <div class="row justify-content-between">
                     <div class="col-xxl-6 col-xl-6 col-md-7">
                         <div class="wsus__become_author_text">
-                            <h2>{{ $become_author->title }}</h2>
-                            <a href="{{ route('contact-us') }}" class="common_btn">{{__('Become an Author')}}</a>
+                            <h2>{{ $become_author->becomelangfrontend->title }}</h2>
+                            <a href="{{ route('contact-us') }}" class="common_btn">{{__('user.Become an Author')}}</a>
                         </div>
                     </div>
                     <div class="col-xxl-4 col-xl-5 col-md-5">
@@ -40,7 +37,7 @@
                             <div class="img">
                                 <img src="{{ asset($become_author->icon1) }}" alt="icon" class="img-fluid w-100">
                             </div>
-                            <h4>{{ $become_author->item1 }}</h4>
+                            <h4>{{ $become_author->becomelangfrontend->item1 }}</h4>
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-lg-4">
@@ -48,7 +45,7 @@
                             <div class="img">
                                 <img src="{{ asset($become_author->icon2) }}" alt="icon" class="img-fluid w-100">
                             </div>
-                            <h4>{{ $become_author->item2 }}</h4>
+                            <h4>{{ $become_author->becomelangfrontend->item2 }}</h4>
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-lg-4">
@@ -56,7 +53,7 @@
                             <div class="img">
                                 <img src="{{ asset($become_author->icon3) }}" alt="icon" class="img-fluid w-100">
                             </div>
-                            <h4>{{ $become_author->item3 }}</h4>
+                            <h4>{{ $become_author->becomelangfrontend->item3 }}</h4>
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-lg-4">
@@ -64,7 +61,7 @@
                             <div class="img">
                                 <img src="{{ asset($become_author->icon4) }}" alt="icon" class="img-fluid w-100">
                             </div>
-                            <h4>{{ $become_author->item4 }}</h4>
+                            <h4>{{ $become_author->becomelangfrontend->item4 }}</h4>
                         </div>
                     </div>
                 </div>
@@ -76,16 +73,16 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6">
                         <div class="wsus__about_us_text">
-                            <h5>{{ $become_author->header1 }}</h5>
-                            <h2>{{ $become_author->header2 }}</h2>
-                            {!! clean($become_author->description) !!}
+                            <h5>{{ $become_author->becomelangfrontend->header1 }}</h5>
+                            <h2>{{ $become_author->becomelangfrontend->header2 }}</h2>
+                            {!! clean($become_author->becomelangfrontend->description) !!}
                             <div class="wsus__about_text_img d-flex flex-wrap align-items-center">
                                 <div class="img">
                                     <img src="{{ asset('frontend/images/about_text_img.png') }}" alt="about" class="img-fluid w-100">
                                 </div>
                                 <div class="text">
-                                    <h3>{{ $become_author->name }}</h3>
-                                    <p>{{ $become_author->desgination }}</p>
+                                    <h3>{{ $become_author->becomelangfrontend->name }}</h3>
+                                    <p>{{ $become_author->becomelangfrontend->desgination }}</p>
                                 </div>
                                 <div class="signature">
                                     <img src="{{ asset($become_author->signature) }}" alt="about" class="img-fluid w-100">
@@ -122,8 +119,8 @@
                                     <div class="img">
                                         <img src="{{ asset($our_team->image) }}" alt="team" class="img-fluid w-100">
                                     </div>
-                                    <h3>{{ $our_team->name }}</h3>
-                                    <p>{{ $our_team->designation }}</p>
+                                    <h3>{{ $our_team->teamlangfrontend->name }}</h3>
+                                    <p>{{ $our_team->teamlangfrontend->designation }}</p>
                                     <ul>
                                         <li><a href="{{ $our_team->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
                                         <li><a href="{{ $our_team->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>

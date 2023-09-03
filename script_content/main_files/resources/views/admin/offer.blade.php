@@ -13,12 +13,34 @@
           <div class="section-body">
             <div class="row mt-4">
                 <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                        <hr>
+                        <div class="lang_list_top">
+                            <ul class="lang_list">
+                                @foreach ($languages as $language)
+                                <li><a href="{{ route('admin.offer', ['lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-danger mt-2" role="alert">
+                            @php
+                                $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
+                            @endphp
+                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                        </div> 
+                      </div>
+                    </div>
+                </div>
+                <div class="col-12">
                   <div class="card">
                     <div class="card-body">
                         <form action="{{ route('admin.update-offer') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-
+                            <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                             @php
                                 $home2= false;
                                 if($setting->selected_theme == 0 || $setting->selected_theme == 2){
@@ -41,11 +63,13 @@
                                     <label>{{__('Title two')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="title2" value="{{ $offer->title2 }}">
                                 </div>
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Link')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="link" value="{{ $offer->link }}">
                                 </div>
+                                @endif
+
                             </div>
                             @endif
 
@@ -57,7 +81,7 @@
                                         <h6 class="home_border">{{__('admin.Home Three')}}</h6>
                                         <hr>
                                     </div>
-
+                                    @if (session()->get('admin_lang') == request()->get('lang_code'))
                                     <div class="form-group col-12">
                                         <label for="">{{__('Existing Background')}}</label>
                                         <div>
@@ -69,6 +93,7 @@
                                         <label for="">{{__('admin.New Background')}}</label>
                                         <input type="file" name="home3_background" class="form-control-file">
                                     </div>
+                                    @endif
                                 </div>
 
                             <div class="row">
@@ -82,10 +107,12 @@
                                     <textarea class="form-control" name="home3_item1_description" id="" cols="30" rows="10">{{ $offer->home3_item1_description }}</textarea>
                                 </div>
 
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Item one link')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="home3_item1_link" value="{{ $offer->home3_item1_link }}">
                                 </div>
+                                @endif
                             </div>
 
 
@@ -101,11 +128,12 @@
                                     <label>{{__('Item two description')}} <span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="home3_item2_description" id="" cols="30" rows="10">{{ $offer->home3_item2_description }}</textarea>
                                 </div>
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Item two link')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="home3_item2_link" value="{{ $offer->home3_item2_link }}">
                                 </div>
+                                @endif
                             </div>
 
                             @endif
@@ -115,6 +143,7 @@
                                     <h6 class="home_border">{{__('About Us')}}</h6>
                                     <hr>
                                 </div>
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label for="">{{__('Existing image')}}</label>
                                     <div>
@@ -126,6 +155,7 @@
                                     <label for="">{{__('New image')}}</label>
                                     <input type="file" name="about_offer_background" class="form-control-file">
                                 </div>
+                                @endif
 
                                 <div class="form-group col-12">
                                     <label for="">{{__('Title one')}} <span class="text-danger">*</span></label>
@@ -141,11 +171,12 @@
                                     <label for="">{{__('Title three')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="about_offer_title3" class="form-control" value="{{ $offer->about_offer_title3 }}">
                                 </div>
-
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label for="">{{__('Link')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="about_offer_link" class="form-control" value="{{ $offer->about_offer_link }}">
                                 </div>
+                                @endif
                             </div>
 
                             <div class="row">

@@ -27,7 +27,7 @@
                                 <select name="blog_id" id="" class="form-control select2" required>
                                     <option value="">{{__('admin.Select Blog')}}</option>
                                     @foreach ($blogs as $blog)
-                                        <option value="{{ $blog->id }}">{{ $blog->title }}</option>
+                                        <option value="{{ $blog->id }}">{{ $blog->bloglanguageadmin->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,8 +58,8 @@
                                 @foreach ($popularBlogs as $index => $popularBlog)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $popularBlog->blog->title }}</td>
-                                        <td>{{ $popularBlog->blog->category->name }}</td>
+                                        <td>{{ $popularBlog->blog->bloglanguageadmin->title }}</td>
+                                        <td>{{ $popularBlog->blog->category->blogcategorylanguageadmin->category_name }}</td>
                                         <td><img src="{{ asset($popularBlog->blog->image) }}" width="80px" class="rounded-circle" alt=""></td>
                                         <td>
                                             @if($popularBlog->status == 1)

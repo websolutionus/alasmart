@@ -9,14 +9,12 @@ use Hash;
 use Slug;
 use Image;
 use Session;
-use App\Models\City;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Ticket;
 
 use App\Rules\Captcha;
-use App\Models\Country;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
@@ -24,7 +22,6 @@ use App\Models\Wishlist;
 use App\Models\OrderItem;
 use App\Events\SellerToUser;
 
-use App\Models\CountryState;
 use Illuminate\Http\Request;
 use App\Models\RefundRequest;
 use App\Models\TicketMessage;
@@ -40,10 +37,6 @@ class AuthorProfileController extends Controller
     public function profile($slug){
 
         $user = User::where('user_name', $slug)->first();
-
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
         $setting = Setting::first();
         $recaptchaSetting = GoogleRecaptcha::first();
         
@@ -52,9 +45,6 @@ class AuthorProfileController extends Controller
         return view('user.author_profile')->with([
             'active_theme' => $active_theme,
             'user' => $user,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
             'recaptchaSetting' => $recaptchaSetting,
         ]);
@@ -64,10 +54,8 @@ class AuthorProfileController extends Controller
 
         $setting = Setting::first();
         $user = User::where('user_name', $slug)->first();
-        $products = Product::with('category','author')->where(['author_id' => $user->id, 'status' => 1])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
+        $products = Product::with('category','author','productlangfrontend')->where(['author_id' => $user->id, 'status' => 1])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
+        
         $recaptchaSetting = GoogleRecaptcha::first();
         
         $active_theme = 'layout';
@@ -76,9 +64,6 @@ class AuthorProfileController extends Controller
             'active_theme' => $active_theme,
             'user' => $user,
             'products' => $products,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
             'recaptchaSetting' => $recaptchaSetting,
         ]);

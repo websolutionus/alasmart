@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Session;
+use App\Models\Language;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -19,5 +21,21 @@ class Product extends Model
 
     public function variants(){
         return $this->hasMany(ProductVariant::class);
+    }
+
+    public function productlangfrontend()
+    {
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        return $this->belongsTo(ProductLanguage::class, 'id', 'product_id')->where('lang_code', $front_lang);
+    }
+
+    public function productlangadmin()
+    {
+        $admin_lang = Session::get('admin_lang');
+        return $this->belongsTo(ProductLanguage::class, 'id', 'product_id')->where('lang_code', $admin_lang);
     }
 }

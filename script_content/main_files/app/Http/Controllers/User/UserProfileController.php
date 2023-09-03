@@ -9,22 +9,20 @@ use Hash;
 use Slug;
 use Image;
 use Session;
-use App\Models\City;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Ticket;
 
 use App\Rules\Captcha;
-use App\Models\Country;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Wishlist;
 use App\Models\OrderItem;
-use App\Events\SellerToUser;
 
-use App\Models\CountryState;
+use App\Events\SellerToUser;
 use Illuminate\Http\Request;
 use App\Models\RefundRequest;
 use App\Models\TicketMessage;
@@ -32,6 +30,7 @@ use App\Models\ProductVariant;
 use App\Models\BreadcrumbImage;
 use App\Models\GoogleRecaptcha;
 use App\Models\MessageDocument;
+use App\Models\ProductLanguage;
 use App\Models\ProductTypePage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -44,9 +43,6 @@ class UserProfileController extends Controller
     }
     public function dashboard(){
         $user = Auth::guard('web')->user();
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
         $setting = Setting::first();
         
         $active_theme = 'layout';
@@ -54,9 +50,6 @@ class UserProfileController extends Controller
         return view('user.dashboard')->with([
             'active_theme' => $active_theme,
             'user' => $user,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
         ]);
     }
@@ -65,10 +58,9 @@ class UserProfileController extends Controller
         $setting = Setting::first();
 
         $user = Auth::guard('web')->user();
-        $products = Product::with('category','author')->where(['author_id' => $user->id])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
+        $products = Product::with('category','author','productlangfrontend')->where(['author_id' => $user->id])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
+        
+        
         
         $active_theme = 'layout';
 
@@ -76,9 +68,6 @@ class UserProfileController extends Controller
             'active_theme' => $active_theme,
             'user' => $user,
             'products' => $products,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
         ]);
     }
@@ -87,9 +76,6 @@ class UserProfileController extends Controller
         $setting = Setting::first();
 
         $user = Auth::guard('web')->user();
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
         $orders=Order::where('user_id', $user->id)->where('order_status', 1)->get();
 
         $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(2);
@@ -100,19 +86,14 @@ class UserProfileController extends Controller
             'active_theme' => $active_theme,
             'user' => $user,
             'order_items' => $order_items,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
         ]);
     }
 
     public function collection(){
+
         $setting = Setting::first();
         $user = Auth::guard('web')->user();
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
         $wishlists=Wishlist::with('product')->where('user_id', $user->id)->paginate(6);
         
         $active_theme = 'layout';
@@ -121,9 +102,6 @@ class UserProfileController extends Controller
             'active_theme' => $active_theme,
             'user' => $user,
             'wishlists' => $wishlists,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
         ]);
     }
@@ -279,23 +257,30 @@ class UserProfileController extends Controller
         
         $product->product_type = $request->product_type;
         $product->author_id = $user->id;
-        $product->name = $request->name;
         $product->slug = $request->slug;
         $product->category_id = $request->category;
         $product->preview_link = $request->preview_link;
         $product->regular_price = $request->regular_price;
         $product->extend_price = $request->extend_price;
-        $product->description = $request->description;
-        $tag_content = '';
-        $product->tags = $request->tags;
         $product->status = 0;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product->high_resolution = $request->high_resolution ? 1 : 0;
         $product->cross_browser = $request->cross_browser ? 1 : 0;
         $product->documentation = $request->documentation ? 1 : 0;
         $product->layout = $request->layout ? 1 : 0;
         $product->save();
+
+        $languages = Language::get();
+        foreach($languages as $language){
+            $product_language = new ProductLanguage();
+            $product_language->product_id = $product->id;
+            $product_language->lang_code = $language->lang_code;
+            $product_language->name = $request->name;
+            $product_language->description = $request->description;
+            $product_language->tags = $request->tags;
+            $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+            $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+            $product_language->save();
+        }
 
         $notification = trans('Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -351,36 +336,48 @@ class UserProfileController extends Controller
         }
         $product->product_type = $request->product_type;
         $product->author_id = $user->id;
-        $product->name = $request->name;
         $product->slug = $request->slug;
         $product->preview_link = $request->preview_link;
         $product->regular_price = $request->regular_price;
         $product->category_id = $request->category;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
         $product->status = 0;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product->high_resolution = $request->high_resolution ? 1 : 0;
         $product->cross_browser = $request->cross_browser ? 1 : 0;
         $product->documentation = $request->documentation ? 1 : 0;
         $product->layout = $request->layout ? 1 : 0;
         $product->save();
 
+        $languages = Language::get();
+        foreach($languages as $language){
+            $product_language = new ProductLanguage();
+            $product_language->product_id = $product->id;
+            $product_language->lang_code = $language->lang_code;
+            $product_language->name = $request->name;
+            $product_language->description = $request->description;
+            $product_language->tags = $request->tags;
+            $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+            $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+            $product_language->save();
+        }
+
         $notification = trans('Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('product-edit', $product->id)->with($notification);
+        return redirect()->route('product-edit', ['id' => $product->id, 'lang_code' => 'en'])->with($notification);
     }
 
-    public function edit($id){
+    public function edit(Request $request, $id){
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
+        $languages = Language::get();
         //return $product;
         $product_variants = ProductVariant::where('product_id', $id)->get();
         $setting=Setting::first();
 
+
         $active_theme = 'layout';
 
+        
         if(!$product->product_type){
             $notification = trans('Something went wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
@@ -390,9 +387,10 @@ class UserProfileController extends Controller
         if($product->product_type == 'script'){
             $categories = Category::where('status', 1)->get();
             $product_type = $product->product_type;
-
             return view('user.edit_product')->with([
                 'active_theme' => $active_theme,
+                'product_language' => $product_language,
+                'languages' => $languages,
                 'categories' => $categories,
                 'product_type' => $product_type,
                 'product' => $product,
@@ -407,6 +405,8 @@ class UserProfileController extends Controller
 
             return view('user.edit_image_product')->with([
                 'active_theme' => $active_theme,
+                'product_language' => $product_language,
+                'languages' => $languages,
                 'categories' => $categories,
                 'product_type' => $product_type,
                 'product' => $product,
@@ -420,6 +420,8 @@ class UserProfileController extends Controller
 
             return view('user.edit_image_product')->with([
                 'active_theme' => $active_theme,
+                'product_language' => $product_language,
+                'languages' => $languages,
                 'categories' => $categories,
                 'product_type' => $product_type,
                 'product' => $product,
@@ -433,6 +435,8 @@ class UserProfileController extends Controller
 
             return view('user.edit_image_product')->with([
                 'active_theme' => $active_theme,
+                'product_language' => $product_language,
+                'languages' => $languages,
                 'categories' => $categories,
                 'product_type' => $product_type,
                 'product' => $product,
@@ -447,15 +451,14 @@ class UserProfileController extends Controller
     public function update(Request $request, $id){
 
         $rules = [
-            'category'=>'required',
+            'category'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
-            'slug'=>'required|unique:products,slug,'.$id,
-            'preview_link'=>'required',
-            'regular_price'=>'required|numeric',
-            'extend_price'=>'required|numeric',
+            'preview_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'regular_price'=>session()->get('front_lang') == $request->lang_code ? 'required|numeric':'',
+            'extend_price'=>session()->get('front_lang') == $request->lang_code ? 'required|numeric':'',
             'description'=>'required',
             'tags'=>'required',
-            'product_type'=>'required',
+            'product_type'=>session()->get('front_lang') == $request->lang_code ?'required':'',
         ];
 
         $customMessages = [
@@ -464,8 +467,6 @@ class UserProfileController extends Controller
             'download_link.required' => trans('Download link is required'),
             'category.required' => trans('Category is required'),
             'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
             'preview_link.required' => trans('Preview link is required'),
             'regular_price.required' => trans('Regular price is required'),
             'extend_price.required' => trans('Extend price is required'),
@@ -478,65 +479,71 @@ class UserProfileController extends Controller
 
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
+        
+        if(session()->get('front_lang') == $request->lang_code){
+            if($request->thumb_image){
+                $old_image = $product->thumbnail_image;
+                $extention = $request->thumb_image->getClientOriginalExtension();
+                $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->thumb_image)
+                    ->save(public_path().'/'.$image_name);
+                $product->thumbnail_image = $image_name;
 
-        if($request->thumb_image){
-            $old_image = $product->thumbnail_image;
-            $extention = $request->thumb_image->getClientOriginalExtension();
-            $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->thumb_image)
-                ->save(public_path().'/'.$image_name);
-            $product->thumbnail_image = $image_name;
-
-            if($old_image){
-                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                if($old_image){
+                    if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                }
             }
-        }
 
-        if($request->product_icon){
-            $old_icon = $product->product_icon;
-            $extention = $request->product_icon->getClientOriginalExtension();
-            $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->product_icon)
-                ->save(public_path().'/'.$image_name);
-            $product->product_icon = $image_name;
+            if($request->product_icon){
+                $old_icon = $product->product_icon;
+                $extention = $request->product_icon->getClientOriginalExtension();
+                $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->product_icon)
+                    ->save(public_path().'/'.$image_name);
+                $product->product_icon = $image_name;
 
-            if($old_icon){
-                if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+                if($old_icon){
+                    if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+                }
             }
-        }
 
-        if($request->file('upload_file')){
-            $old_download_file = $product->download_file;
-            $extention = $request->upload_file->getClientOriginalExtension();
-            $image_name = 'Script'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $request->upload_file->move(public_path('uploads/custom-images/'),$image_name);
-            $product->download_file = $image_name;
+            if($request->file('upload_file')){
+                $old_download_file = $product->download_file;
+                $extention = $request->upload_file->getClientOriginalExtension();
+                $image_name = 'Script'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $request->upload_file->move(public_path('uploads/custom-images/'),$image_name);
+                $product->download_file = $image_name;
+                $product->save();
+
+                if($old_download_file){
+                    if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file))unlink(public_path().'/uploads/custom-images/'.$old_download_file);
+                }
+            }
+
+            $product->product_type = $request->product_type;
+            $product->author_id = $user->id;
+            $product->slug = $request->slug;
+            $product->category_id = $request->category;
+            $product->preview_link = $request->preview_link;
+            $product->regular_price = $request->regular_price;
+            $product->extend_price = $request->extend_price;
+            $product->high_resolution = $request->high_resolution ? 1 : 0;
+            $product->cross_browser = $request->cross_browser ? 1 : 0;
+            $product->documentation = $request->documentation ? 1 : 0;
+            $product->layout = $request->layout ? 1 : 0;
             $product->save();
-
-            if($old_download_file){
-                if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file))unlink(public_path().'/uploads/custom-images/'.$old_download_file);
-            }
         }
 
-        $product->product_type = $request->product_type;
-        $product->author_id = $user->id;
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->category_id = $request->category;
-        $product->preview_link = $request->preview_link;
-        $product->regular_price = $request->regular_price;
-        $product->extend_price = $request->extend_price;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
-        $product->high_resolution = $request->high_resolution ? 1 : 0;
-        $product->cross_browser = $request->cross_browser ? 1 : 0;
-        $product->documentation = $request->documentation ? 1 : 0;
-        $product->layout = $request->layout ? 1 : 0;
-        $product->save();
+
+        $product_language->name = $request->name;
+        $product_language->description = $request->description;
+        $product_language->tags = $request->tags;
+        $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+        $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+        $product_language->save();
 
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -546,21 +553,18 @@ class UserProfileController extends Controller
 
     public function image_product_update(Request $request, $id){
         $rules = [
-            'category'=>'required',
+            'category'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
-            'slug'=>'required|unique:products,slug,'.$id,
-            'preview_link'=>'required',
-            'regular_price'=>'required',
+            'preview_link'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
+            'regular_price'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'description'=>'required',
             'tags'=>'required',
-            'product_type'=>'required',
+            'product_type'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
         ];
 
         $customMessages = [
             'category.required' => trans('Category is required'),
             'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
             'preview_link.required' => trans('Preview link is required'),
             'regular_price.required' => trans('Regular price is required'),
             'description.required' => trans('Description is required'),
@@ -570,49 +574,55 @@ class UserProfileController extends Controller
 
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
 
-        if($request->thumb_image){
-            $old_image = $product->thumbnail_image;
-            $extention = $request->thumb_image->getClientOriginalExtension();
-            $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->thumb_image)
-                ->save(public_path().'/'.$image_name);
-            $product->thumbnail_image = $image_name;
+        if(session()->get('front_lang') == $request->lang_code){
+            if($request->thumb_image){
+                $old_image = $product->thumbnail_image;
+                $extention = $request->thumb_image->getClientOriginalExtension();
+                $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->thumb_image)
+                    ->save(public_path().'/'.$image_name);
+                $product->thumbnail_image = $image_name;
 
-            if($old_image){
-                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                if($old_image){
+                    if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                }
             }
+
+            if($request->product_icon){
+                $old_icon = $product->product_icon;
+                $extention = $request->product_icon->getClientOriginalExtension();
+                $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->product_icon)
+                    ->save(public_path().'/'.$image_name);
+                $product->product_icon = $image_name;
+
+                if($old_icon){
+                    if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+                }
+            }
+            $product->author_id = $user->id;
+            $product->slug = $request->slug;
+            $product->preview_link = $request->preview_link;
+            $product->regular_price = $request->regular_price;
+            $product->category_id = $request->category;
+            $product->tags = $request->tags;
+            $product->high_resolution = $request->high_resolution ? 1 : 0;
+            $product->cross_browser = $request->cross_browser ? 1 : 0;
+            $product->documentation = $request->documentation ? 1 : 0;
+            $product->layout = $request->layout ? 1 : 0;
+            $product->save();
         }
 
-        if($request->product_icon){
-            $old_icon = $product->product_icon;
-            $extention = $request->product_icon->getClientOriginalExtension();
-            $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->product_icon)
-                ->save(public_path().'/'.$image_name);
-            $product->product_icon = $image_name;
-
-            if($old_icon){
-                if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
-            }
-        }
-        $product->author_id = $user->id;
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->preview_link = $request->preview_link;
-        $product->regular_price = $request->regular_price;
-        $product->category_id = $request->category;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
-        $product->high_resolution = $request->high_resolution ? 1 : 0;
-        $product->cross_browser = $request->cross_browser ? 1 : 0;
-        $product->documentation = $request->documentation ? 1 : 0;
-        $product->layout = $request->layout ? 1 : 0;
-        $product->save();
+        $product_language->name = $request->name;
+        $product_language->description = $request->description;
+        $product_language->tags = $request->tags;
+        $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+        $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+        $product_language->save();
 
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -676,8 +686,11 @@ class UserProfileController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $variant = ProductVariant::find($id);
+        //dd($request->all());
+        //return $request->file('file_name');
 
         if($request->file('file_name')){
+            //return 1;
             $old_download_file = $variant->file_name;
             $extention = $request->file_name->getClientOriginalExtension();
             $image_name = 'Script'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
@@ -736,6 +749,7 @@ class UserProfileController extends Controller
             'address'=>'required',
             'about_me'=>'required',
             'my_skill'=>'required',
+            'image' => 'file|mimes:png,jpg,jpeg|max:2048',
         ];
         $customMessages = [
             'name.required' => trans('user_validation.Name is required'),
@@ -744,6 +758,8 @@ class UserProfileController extends Controller
             'address.required' => trans('user_validation.Address is required'),
             'about_me.required' => trans('About is required'),
             'my_skill.required' => trans('Skill is required'),
+            'image.mimes' => trans('File type must be: png, jpg,jpeg'),
+            'image.max' => trans('Maximum file size 2MB'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -857,43 +873,13 @@ class UserProfileController extends Controller
 
     public function myProfile(){
         $user = Auth::guard('web')->user();
-        $countries = Country::orderBy('name','asc')->where('status',1)->get();
-        $states = CountryState::orderBy('name','asc')->where(['status' => 1, 'country_id' => $user->country_id])->get();
-        $cities = City::orderBy('name','asc')->where(['status' => 1, 'country_state_id' => $user->state_id])->get();
-
         $setting = Setting::first();
         $default_avatar = array(
             'image' => $setting->default_avatar
         );
         $default_avatar = (object) $default_avatar;
-        return view('user.my_profile', compact('user','countries','cities','states','default_avatar'));
+        return view('user.my_profile', compact('user','default_avatar'));
     }
-
-
-
-    public function stateByCountry($id){
-        $states = CountryState::where(['status' => 1, 'country_id' => $id])->get();
-        $response='<option value="0">Select a State</option>';
-        if($states->count() > 0){
-            foreach($states as $state){
-                $response .= "<option value=".$state->id.">".$state->name."</option>";
-            }
-        }
-        return response()->json(['states'=>$response]);
-    }
-
-    public function cityByState($id){
-        $cities = City::where(['status' => 1, 'country_state_id' => $id])->get();
-        $response='<option value="0">Select a City</option>';
-        if($cities->count() > 0){
-            foreach($cities as $city){
-                $response .= "<option value=".$city->id.">".$city->name."</option>";
-            }
-        }
-        return response()->json(['cities'=>$response]);
-    }
-
-
 
     public function addToWishlist($id){
         $user = Auth::guard('web')->user();
@@ -1040,11 +1026,17 @@ class UserProfileController extends Controller
         return response()->download($filepath);
     }
 
+    public function download_existing_variant_file($file_name){
+        $filepath= public_path() . "/uploads/custom-images/".$file_name;
+        return response()->download($filepath);
+    }
+
     public function delete_product($id){
         $order_item = OrderItem::where('product_id', $id)->first();
         if(!$order_item){
             $product = Product::findOrFail($id);
             $product->delete();
+            $product_language = ProductLanguage::where('product_id', $id)->delete();
             if($product->thumbnail_image){
                 $old_image = $product->thumbnail_image;
                 if($old_image){

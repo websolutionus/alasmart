@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\MaintainanceText;
+use File;
+use Image;
 use App\Models\Setting;
-use App\Models\BannerImage;
+use App\Models\Language;
 use App\Models\SeoSetting;
+use App\Models\BannerImage;
+use Illuminate\Http\Request;
 use App\Models\SectionContent;
 use App\Models\SectionControl;
-use Image;
-use File;
+use App\Models\SettingLanguage;
+use App\Models\MaintainanceText;
+use App\Http\Controllers\Controller;
+use App\Models\SectionContentLanguage;
+
 class ContentController extends Controller
 {
     public function __construct()
@@ -78,12 +82,15 @@ class ContentController extends Controller
 
 
 
-    public function subscriberSection(){
-        $setting = Setting::first();
+    public function subscriberSection(Request $request){
+        $setting = Setting::with('settinglangadmin')->first();
+        $languages = Language::get();
+        $setting_language = SettingLanguage::where(['setting_id' => $setting->id, 'lang_code' => $request->lang_code])->first();
+
 
         $subscriber = array(
-            'title' => $setting->subscriber_title,
-            'description' => $setting->subscriber_description,
+            'title' => $setting_language->subscriber_title,
+            'description' => $setting_language->subscriber_description,
             'image' => $setting->subscriber_image,
             'background_image' => $setting->subscription_bg,
             'home2_background_image' => $setting->home2_subscription_bg,
@@ -94,7 +101,7 @@ class ContentController extends Controller
 
         $selected_theme = $setting->selected_theme;
 
-        return view('admin.subscriber_section',compact('subscriber','selected_theme'));
+        return view('admin.subscriber_section',compact('subscriber','selected_theme', 'languages'));
     }
 
     public function updateSubscriberSection(Request $request){
@@ -109,9 +116,11 @@ class ContentController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $setting = Setting::first();
-        $setting->subscriber_title = $request->title;
-        $setting->subscriber_description = $request->description;
-        $setting->save();
+        $setting_language = SettingLanguage::where(['setting_id' => $setting->id, 'lang_code' => $request->lang_code])->first();
+        
+        $setting_language->subscriber_title = $request->title;
+        $setting_language->subscriber_description = $request->description;
+        $setting_language->save();
 
         if($request->background_image){
             $old_image = $setting->subscription_bg;
@@ -162,25 +171,41 @@ class ContentController extends Controller
     }
 
 
-    public function sectionContent(){
-        $contents = SectionContent::all();
+    public function sectionContent(Request $request){
+        $contents = SectionContent::with('contentlangadmin')->get();
 
-        return view('admin.section_content',compact('contents'));
+        $content_id = [];
+        foreach($contents as $content){
+            $content_id[] = $content->id;
+        }
+
+        $languages = Language::get();
+
+        $section_content_languages = SectionContentLanguage::whereIn('content_id', $content_id)->where('lang_code', $request->lang_code)->get();
+        
+        return view('admin.section_content',compact('contents', 'languages', 'section_content_languages'));
     }
 
 
     public function updateSectionContent(Request $request, $id){
         $rules = [
+            'section_name' => $request->section_name ? 'required':'',
             'title' => 'required',
             'description' => 'required',
         ];
         $customMessages = [
+            'section_name.required' => trans('Section name is required'),
             'title.required' => trans('admin_validation.Title is required'),
             'description.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $section = SectionContent::find($id);
+        $section = SectionContentLanguage::find($id);
+
+        if($request->section_name){
+            $section->section_name = $request->section_name;
+        }
+
         $section->title = $request->title;
         $section->description = $request->description;
         $section->save();

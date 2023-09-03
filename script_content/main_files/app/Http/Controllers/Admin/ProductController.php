@@ -8,12 +8,16 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\ProductItem;
 use Illuminate\Http\Request;
 use App\Models\ScriptContent;
 use App\Models\ProductVariant;
 use App\Models\ProductDiscount;
+use App\Models\ProductLanguage;
 use App\Http\Controllers\Controller;
+use App\Models\ScriptContentLanguage;
+use App\Models\ProductDiscountLanguage;
 
 class ProductController extends Controller
 {
@@ -24,38 +28,41 @@ class ProductController extends Controller
 
     public function index(Request $request){
         if($request->author_id){
-            $products = Product::with('category')->where('author_id',$request->author_id)->orderBy('id','desc')->get();
+            $products = Product::with('category', 'productlangadmin')->where('author_id',$request->author_id)->orderBy('id','desc')->get();
         }else{
-            $products = Product::with('category')->orderBy('id','desc')->get();
+            $products = Product::with('category', 'productlangadmin')->orderBy('id','desc')->get();
         }
 
         return view('admin.product', compact('products'));
     }
 
     public function active_product(){
-        $active_products = Product::with('category')->where('status', 1)->orderBy('id','desc')->get();
+        $active_products = Product::with('category', 'productlangadmin')->where('status', 1)->orderBy('id','desc')->get();
         return view('admin.active_product', compact('active_products'));
 
     }
 
     public function pending_product(){
     
-        $pending_products = Product::with('category')->where('status', 0)->orderBy('id','desc')->get();
+        $pending_products = Product::with('category', 'productlangadmin')->where('status', 0)->orderBy('id','desc')->get();
         return view('admin.pending_product', compact('pending_products'));
 
     }
 
-    public function product_discount(){
+    public function product_discount(Request $request){
         $discount = ProductDiscount::first();
-        return view('admin.product_discount', compact('discount'));
+        $languages = Language::get();
+        $product_discount_language = ProductDiscountLanguage::where(['discount_id' => $discount->id, 'lang_code' => $request->lang_code])->first();
+
+        return view('admin.product_discount', compact('discount', 'languages', 'product_discount_language'));
     }
 
     public function update_product_discount(Request $request){
         $rules = [
             'title'=>'required',
-            'link'=>'required',
-            'offer'=>'required',
-            'end_time'=>'required',
+            'link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'offer'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'end_time'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
 
         $customMessages = [
@@ -67,22 +74,42 @@ class ProductController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $discount = ProductDiscount::first();
+        $product_discount_language = ProductDiscountLanguage::where(['discount_id' => $discount->id, 'lang_code' => $request->lang_code])->first();
 
-        $discount->title = $request->title;
-        $discount->offer = $request->offer;
-        $discount->link = $request->link;
-        $discount->end_time = $request->end_time;
-        $discount->status = $request->status;
+        
+        if($request->offer){
+            $discount->offer = $request->offer;
+        }
+
+        if($request->link){
+            $discount->link = $request->link;
+        }
+
+        if($request->end_time){
+            $discount->end_time = $request->end_time;
+        }
+        
+        if (session()->get('admin_lang') == $request->lang_code) {
+            $discount->status = $request->status;
+        }
+        
         $discount->save();
+        
+        $product_discount_language->title = $request->title;
+        $product_discount_language->save();
 
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
-    public function package_content(){
+    public function package_content(Request $request){
+
         $package_content = ScriptContent::first();
-        return view('admin.package_content', compact('package_content'));
+        $languages = Language::get();
+        $package_content_language = ScriptContentLanguage::where(['script_id' => $package_content->id, 'lang_code' => $request->lang_code])->first();
+
+        return view('admin.package_content', compact('package_content', 'languages', 'package_content_language'));
     }
     
     public function update_package_content(Request $request){
@@ -97,10 +124,11 @@ class ProductController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $content = ScriptContent::first();
-        $content->regular_content = $request->regular_content;
-        $content->extend_content = $request->extend_content;
-        $content->save();
+        $package_content = ScriptContent::first();
+        $content_language = ScriptContentLanguage::where(['script_id' => $package_content->id, 'lang_code' => $request->lang_code])->first();
+        $content_language->regular_content = $request->regular_content;
+        $content_language->extend_content = $request->extend_content;
+        $content_language->save();
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
@@ -118,7 +146,7 @@ class ProductController extends Controller
         }
 
         if($request->product_type == 'script'){
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $request->product_type;
 
@@ -126,21 +154,21 @@ class ProductController extends Controller
 
         }elseif($request->product_type == 'image'){
 
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $request->product_type;
 
             return view('admin.create_image_product', compact('categories', 'authors','product_type'));
         }elseif($request->product_type == 'video'){
 
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $request->product_type;
 
             return view('admin.create_image_product', compact('categories', 'authors','product_type'));
         }elseif($request->product_type == 'audio'){
 
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $request->product_type;
 
@@ -223,17 +251,13 @@ class ProductController extends Controller
         
         $product->product_type = $request->product_type;
         $product->author_id = $request->author;
-        $product->name = $request->name;
+
         $product->slug = $request->slug;
         $product->category_id = $request->category;
         $product->preview_link = $request->preview_link;
         $product->regular_price = $request->regular_price;
         $product->extend_price = $request->extend_price;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
         $product->status = $request->status;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product->popular_item = $request->popular_item ? 1 : 0;
         $product->trending_item = $request->trending_item ? 1 : 0;
         $product->featured_item = $request->featured_item ? 1 : 0;
@@ -242,6 +266,20 @@ class ProductController extends Controller
         $product->documentation = $request->documentation ? 1 : 0;
         $product->layout = $request->layout ? 1 : 0;
         $product->save();
+
+        $languages = Language::get();
+        foreach($languages as $language){
+            $product_language = new ProductLanguage();
+            $product_language->product_id = $product->id;
+            $product_language->lang_code = $language->lang_code;
+            $product_language->name = $request->name;
+            $product_language->description = $request->description;
+            $product_language->tags = $request->tags;
+            $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+            $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+            $product_language->save();
+        }
+
 
         $notification = trans('Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -302,17 +340,12 @@ class ProductController extends Controller
         }
         $product->product_type = $request->product_type;
         $product->author_id = $request->author;
-        $product->name = $request->name;
         $product->slug = $request->slug;
         $product->preview_link = $request->preview_link;
         $product->regular_price = $request->regular_price;
         $product->category_id = $request->category;
         $product->preview_link = $request->preview_link;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
         $product->status = $request->status;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product->popular_item = $request->popular_item ? 1 : 0;
         $product->trending_item = $request->trending_item ? 1 : 0;
         $product->featured_item = $request->featured_item ? 1 : 0;
@@ -322,61 +355,72 @@ class ProductController extends Controller
         $product->layout = $request->layout ? 1 : 0;
         $product->save();
 
+        $languages = Language::get();
+        foreach($languages as $language){
+            $product_language = new ProductLanguage();
+            $product_language->product_id = $product->id;
+            $product_language->lang_code = $language->lang_code;
+            $product_language->name = $request->name;
+            $product_language->description = $request->description;
+            $product_language->tags = $request->tags;
+            $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+            $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+            $product_language->save();
+        }
+
         $notification = trans('Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.product-variant', $product->id)->with($notification);
     }
 
-    public function edit($id){
+    public function edit(Request $request,$id){
 
         $product = Product::find($id);
-
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
+        $languages = Language::get();
         if($product->product_type == 'script'){
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $product->product_type;
 
-            return view('admin.edit_product', compact('categories', 'authors','product_type','product'));
+            return view('admin.edit_product', compact('categories', 'authors','product_type','product','languages','product_language'));
 
         }elseif($product->product_type == 'image'){
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $product->product_type;
 
-            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product'));
+            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product','languages','product_language'));
 
         }elseif($product->product_type == 'video'){
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $product->product_type;
 
-            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product'));
+            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product','languages','product_language'));
 
         }elseif($product->product_type == 'audio'){
-            $categories = Category::where('status', 1)->get();
+            $categories = Category::with('catlangadmin')->where('status', 1)->get();
             $authors = User::where('status', 1)->orderBy('name', 'asc')->get();
             $product_type = $product->product_type;
 
-            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product'));
+            return view('admin.edit_image_product', compact('categories', 'authors','product_type','product','languages','product_language'));
         }
-
-
-
     }
 
     public function update(Request $request, $id){
 
         $rules = [
-            'author'=>'required',
-            'category'=>'required',
+            'author'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'category'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
-            'slug'=>'required|unique:products,slug,'.$id,
-            'regular_price'=>'required|numeric',
-            'extend_price'=>'required|numeric',
+            'preview_link'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'regular_price'=> session()->get('admin_lang') == $request->lang_code ? 'required|numeric':'',
+            'extend_price'=> session()->get('admin_lang') == $request->lang_code ? 'required|numeric':'',
             'description'=>'required',
             'tags'=>'required',
-            'status'=>'required',
-            'product_type'=>'required',
+            'status'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'product_type'=> session()->get('admin_lang') == $request->lang_code ?'required':'',
         ];
 
         $customMessages = [
@@ -399,88 +443,91 @@ class ProductController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $product = Product::find($id);
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
 
-        if($request->thumb_image){
-            $old_image = $product->thumbnail_image;
-            $extention = $request->thumb_image->getClientOriginalExtension();
-            $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->thumb_image)
-                ->save(public_path().'/'.$image_name);
-            $product->thumbnail_image = $image_name;
-
-            if($old_image){
-                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+        if(session()->get('admin_lang') == $request->lang_code){
+            if($request->thumb_image){
+                $old_image = $product->thumbnail_image;
+                $extention = $request->thumb_image->getClientOriginalExtension();
+                $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->thumb_image)
+                    ->save(public_path().'/'.$image_name);
+                $product->thumbnail_image = $image_name;
+    
+                if($old_image){
+                    if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                }
             }
-        }
-
-        if($request->product_icon){
-            $old_icon = $product->product_icon;
-            $extention = $request->product_icon->getClientOriginalExtension();
-            $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->product_icon)
-                ->save(public_path().'/'.$image_name);
-            $product->product_icon = $image_name;
-
-            if($old_icon){
-                if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+    
+            if($request->product_icon){
+                $old_icon = $product->product_icon;
+                $extention = $request->product_icon->getClientOriginalExtension();
+                $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->product_icon)
+                    ->save(public_path().'/'.$image_name);
+                $product->product_icon = $image_name;
+    
+                if($old_icon){
+                    if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+                }
             }
-        }
-
-        if($request->file('upload_file')){
-            $old_download_file = $product->download_file;
-            $extention = $request->upload_file->getClientOriginalExtension();
-            $image_name = 'Script'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $request->upload_file->move(public_path('uploads/custom-images/'),$image_name);
-            $product->download_file = $image_name;
+    
+            if($request->file('upload_file')){
+                $old_download_file = $product->download_file;
+                $extention = $request->upload_file->getClientOriginalExtension();
+                $image_name = 'Script'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $request->upload_file->move(public_path('uploads/custom-images/'),$image_name);
+                $product->download_file = $image_name;
+                $product->save();
+    
+                if($old_download_file){
+                    if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file))unlink(public_path().'/uploads/custom-images/'.$old_download_file);
+                }
+            }
+    
+            $product->product_type = $request->product_type;
+            $product->author_id = $request->author;
+            $product->category_id = $request->category;
+            $product->preview_link = $request->preview_link;
+            $product->regular_price = $request->regular_price;
+            $product->extend_price = $request->extend_price;
+            $product->status = $request->status;
+            $product->popular_item = $request->popular_item ? 1 : 0;
+            $product->trending_item = $request->trending_item ? 1 : 0;
+            $product->featured_item = $request->featured_item ? 1 : 0;
+            $product->high_resolution = $request->high_resolution ? 1 : 0;
+            $product->cross_browser = $request->cross_browser ? 1 : 0;
+            $product->documentation = $request->documentation ? 1 : 0;
+            $product->layout = $request->layout ? 1 : 0;
             $product->save();
-
-            if($old_download_file){
-                if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file))unlink(public_path().'/uploads/custom-images/'.$old_download_file);
-            }
         }
 
-        $product->product_type = $request->product_type;
-        $product->author_id = $request->author;
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->category_id = $request->category;
-        $product->preview_link = $request->preview_link;
-        $product->regular_price = $request->regular_price;
-        $product->extend_price = $request->extend_price;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
-        $product->status = $request->status;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
-        $product->popular_item = $request->popular_item ? 1 : 0;
-        $product->trending_item = $request->trending_item ? 1 : 0;
-        $product->featured_item = $request->featured_item ? 1 : 0;
-        $product->high_resolution = $request->high_resolution ? 1 : 0;
-        $product->cross_browser = $request->cross_browser ? 1 : 0;
-        $product->documentation = $request->documentation ? 1 : 0;
-        $product->layout = $request->layout ? 1 : 0;
-        $product->save();
-
+        $product_language->name = $request->name;
+        $product_language->description = $request->description;
+        $product_language->tags = $request->tags;
+        $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+        $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+        $product_language->save();
+        
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.product.index')->with($notification);
+        return redirect()->back()->with($notification);
 
     }
 
     public function image_product_update(Request $request, $id){
         $rules = [
-            'author'=>'required',
-            'category'=>'required',
+            'author'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'category'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
-            'slug'=>'required|unique:products,slug,'.$id,
-            'preview_link'=>'required',
-            'regular_price'=>'required',
+            'preview_link'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'regular_price'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'description'=>'required',
             'tags'=>'required',
-            'status'=>'required',
-            'product_type'=>'required',
+            'status'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'product_type'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
 
         $customMessages = [
@@ -498,53 +545,57 @@ class ProductController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $product = Product::find($id);
-
-        if($request->thumb_image){
-            $old_image = $product->thumbnail_image;
-            $extention = $request->thumb_image->getClientOriginalExtension();
-            $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->thumb_image)
-                ->save(public_path().'/'.$image_name);
-            $product->thumbnail_image = $image_name;
-
-            if($old_image){
-                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+        $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
+        
+        if(session()->get('admin_lang') == $request->lang_code){
+            if($request->thumb_image){
+                $old_image = $product->thumbnail_image;
+                $extention = $request->thumb_image->getClientOriginalExtension();
+                $image_name = 'thumb_image'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->thumb_image)
+                    ->save(public_path().'/'.$image_name);
+                $product->thumbnail_image = $image_name;
+    
+                if($old_image){
+                    if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+                }
             }
+    
+            if($request->product_icon){
+                $old_icon = $product->product_icon;
+                $extention = $request->product_icon->getClientOriginalExtension();
+                $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image_name = 'uploads/custom-images/'.$image_name;
+                Image::make($request->product_icon)
+                    ->save(public_path().'/'.$image_name);
+                $product->product_icon = $image_name;
+    
+                if($old_icon){
+                    if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
+                }
+            }
+            $product->author_id = $request->author;
+            $product->preview_link = $request->preview_link;
+            $product->regular_price = $request->regular_price;
+            $product->category_id = $request->category;
+            $product->status = $request->status;
+            $product->popular_item = $request->popular_item ? 1 : 0;
+            $product->trending_item = $request->trending_item ? 1 : 0;
+            $product->featured_item = $request->featured_item ? 1 : 0;
+            $product->high_resolution = $request->high_resolution ? 1 : 0;
+            $product->cross_browser = $request->cross_browser ? 1 : 0;
+            $product->documentation = $request->documentation ? 1 : 0;
+            $product->layout = $request->layout ? 1 : 0;
+            $product->save();
         }
 
-        if($request->product_icon){
-            $old_icon = $product->product_icon;
-            $extention = $request->product_icon->getClientOriginalExtension();
-            $image_name = 'product_icon'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $image_name = 'uploads/custom-images/'.$image_name;
-            Image::make($request->product_icon)
-                ->save(public_path().'/'.$image_name);
-            $product->product_icon = $image_name;
-
-            if($old_icon){
-                if(File::exists(public_path().'/'.$old_icon))unlink(public_path().'/'.$old_icon);
-            }
-        }
-        $product->author_id = $request->author;
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->preview_link = $request->preview_link;
-        $product->regular_price = $request->regular_price;
-        $product->category_id = $request->category;
-        $product->description = $request->description;
-        $product->tags = $request->tags;
-        $product->status = $request->status;
-        $product->seo_title = $request->seo_title ? $request->seo_title : $request->name;
-        $product->seo_description = $request->seo_description ? $request->seo_description : $request->name;
-        $product->popular_item = $request->popular_item ? 1 : 0;
-        $product->trending_item = $request->trending_item ? 1 : 0;
-        $product->featured_item = $request->featured_item ? 1 : 0;
-        $product->high_resolution = $request->high_resolution ? 1 : 0;
-        $product->cross_browser = $request->cross_browser ? 1 : 0;
-        $product->documentation = $request->documentation ? 1 : 0;
-        $product->layout = $request->layout ? 1 : 0;
-        $product->save();
+        $product_language->name = $request->name;
+        $product_language->description = $request->description;
+        $product_language->tags = $request->tags;
+        $product_language->seo_title = $request->seo_title ? $request->seo_title : $request->name;
+        $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
+        $product_language->save();
 
         $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -720,6 +771,8 @@ class ProductController extends Controller
                 }
             }
         }
+
+        $product_language = ProductLanguage::where('product_id', $id)->delete();
 
         $notification = trans('Deleted successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

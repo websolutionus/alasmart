@@ -4,12 +4,9 @@ namespace App\Http\Controllers\User;
 
 use Auth;
 use Session;
-use App\Models\City;
 use App\Models\Order;
-use App\Models\Country;
 use App\Models\Setting;
 use App\Models\OrderItem;
-use App\Models\CountryState;
 use Illuminate\Http\Request;
 use App\Models\WithdrawMethod;
 use App\Models\ProviderWithdraw;
@@ -37,10 +34,6 @@ class WithdrawController extends Controller
     public function index(){
         $user = Auth::guard('web')->user();
         $author = $user;
-        
-        $countries=Country::where('status', 1)->get();
-        $stats=CountryState::where('status', 1)->get();
-        $cities=City::where('status', 1)->get();
         $setting = Setting::first();
         $withdraw_methods=WithdrawMethod::where('status', 1)->get();
         $withdraws = ProviderWithdraw::where('user_id',$author->id)->orderBy('id','desc')->get();
@@ -73,9 +66,6 @@ class WithdrawController extends Controller
         return view('user.withdraw')->with([
             'active_theme' => $active_theme,
             'user' => $user,
-            'countries' => $countries,
-            'stats' => $stats,
-            'cities' => $cities,
             'setting' => $setting,
             'withdraws' => $withdraws,
             'withdraw_methods' => $withdraw_methods,

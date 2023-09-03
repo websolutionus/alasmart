@@ -1,5 +1,6 @@
 @php
     $setting = App\Models\Setting::first();
+    Session::put('admin_lang', 'en');
 @endphp
 
 <!DOCTYPE html>

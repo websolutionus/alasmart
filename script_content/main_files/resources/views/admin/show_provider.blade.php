@@ -202,47 +202,18 @@
 
                                     <div class="form-group col-6">
                                         <label>{{__('admin.Country / Region')}} <span class="text-danger">*</span></label>
-                                        <select name="country" id="country_id" class="form-control select2">
-                                            <option value="">{{__('admin.Select')}}</option>
-                                            @if ($seller->country_id != 0)
-                                                @foreach ($countries as $country)
-                                                    <option {{ $seller->country_id == $country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($countries as $country)
-                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                        <input type="text" class="form-control" name="country" value="{{ $seller->country }}">
                                     </div>
 
                                     <div class="form-group col-6">
                                         <label>{{__('admin.State / Province')}} <span class="text-danger">*</span></label>
-                                        <select name="state" id="state_id" class="form-control select2">
-                                            <option value="">{{__('admin.Select')}}</option>
-                                            @if ($seller->state_id != 0)
-                                                @foreach ($states as $state)
-                                                    <option {{ $seller->state_id == $state->id ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($states as $state)
-                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+
+                                        <input type="text" class="form-control" name="state" value="{{ $seller->state }}">
                                     </div>
 
                                     <div class="form-group col-6">
                                         <label>{{__('City')}} <span class="text-danger">*</span></label>
-                                        <select name="city" id="city_id" class="form-control select2">
-                                            <option value="">{{__('admin.Select')}}</option>
-                                            @if ($seller->city_id != 0)
-                                                @foreach ($cities as $city)
-                                                    <option {{ $seller->city_id == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
-                                                @endforeach
-
-                                            @endif
-                                        </select>
+                                        <input type="text" class="form-control" name="city" value="{{ $seller->city }}">
                                     </div>
 
 

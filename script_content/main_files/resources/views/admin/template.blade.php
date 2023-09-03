@@ -35,7 +35,7 @@
                                 @foreach ($templates as $index => $template)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $template->title }}</td>
+                                        <td>{{ $template->templatelangadmin->title }}</td>
                                         <td><img src="{{ asset($template->image) }}" alt="" class="rounded-circle"></td>
                                         <td>
                                             @if($template->status == 1)
@@ -49,7 +49,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.template.edit',$template->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <a href="{{ route('admin.template.edit', ['template' => $template->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $template->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

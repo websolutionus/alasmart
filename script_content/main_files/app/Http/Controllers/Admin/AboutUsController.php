@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use File;
+use Image;
 use App\Models\AboutUs;
+use App\Models\Language;
 use App\Models\BecomeAuthor;
 use Illuminate\Http\Request;
-use Image;
-use File;
+use App\Models\AboutUsLanguage;
+use App\Http\Controllers\Controller;
+use App\Models\BecomeAuthorLanguage;
+
 class AboutUsController extends Controller
 {
 
@@ -16,11 +20,12 @@ class AboutUsController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $about = AboutUs::first();
-
-        return view('admin.about-us',compact('about'));
+        $about = AboutUs::with('aboutlangadmin')->first();
+        $languages = Language::get();
+        $about_language = AboutUsLanguage::where(['about_id' => $about->id, 'lang_code' => $request->lang_code])->first();
+        return view('admin.about-us',compact('about', 'languages', 'about_language'));
     }
 
     public function update_aboutUs(Request $request){
@@ -44,14 +49,18 @@ class AboutUsController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $about = AboutUs::first();
-        $about->name = $request->name;
-        $about->desgination = $request->desgination;
-        $about->title = $request->title;
-        $about->header1 = $request->header1;
-        $about->header2 = $request->header2;
-        $about->header3 = $request->header3;
-        $about->save();
+        $about = AboutUs::with('aboutlangadmin')->first();
+
+        $about_language = AboutUsLanguage::where(['about_id' => $about->id, 'lang_code' => $request->lang_code])->first();
+
+        $about_language->name = $request->name;
+        $about_language->desgination = $request->desgination;
+        $about_language->title = $request->title;
+        $about_language->header1 = $request->header1;
+        $about_language->header2 = $request->header2;
+        $about_language->header3 = $request->header3;
+        $about_language->about_us = $request->about_us;
+        $about_language->save();
 
         if($request->banner_image){
             $exist_banner = $about->banner_image;
@@ -99,13 +108,16 @@ class AboutUsController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function become_author(){
-        $become_author = BecomeAuthor::first();
-
-        return view('admin.become_author',compact('become_author'));
+    public function become_author(Request $request){
+        $become_author = BecomeAuthor::with('becomelangadmin')->first();
+        $languages = Language::get();
+        $become_language = BecomeAuthorLanguage::where(['become_id' => $become_author->id, 'lang_code' => $request->lang_code])->first();
+       
+        return view('admin.become_author',compact('become_author','languages','become_language'));
     }
 
     public function update_become_author(Request $request){
+
         $rules = [
             'title' => 'required',
             'header1' => 'required',
@@ -118,6 +130,7 @@ class AboutUsController extends Controller
             'name' => 'required',
             'desgination' => 'required',
         ];
+
         $customMessages = [
             'title.required' => trans('Title is required'),
             'header1.required' => trans('Header is required'),
@@ -132,19 +145,20 @@ class AboutUsController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $become_author = BecomeAuthor::first();
-        $become_author->title = $request->title;
-        $become_author->name = $request->name;
-        $become_author->desgination = $request->desgination;
-        $become_author->header1 = $request->header1;
-        $become_author->header2 = $request->header2;
-        $become_author->header3 = $request->header2;
-        $become_author->description = $request->description;
-        $become_author->item1 = $request->item1;
-        $become_author->item2 = $request->item2;
-        $become_author->item3 = $request->item3;
-        $become_author->item4 = $request->item4;
-        $become_author->save();
+        $become_author = BecomeAuthor::with('becomelangadmin')->first();
+        $become_language = BecomeAuthorLanguage::where(['become_id' => $become_author->id, 'lang_code' => $request->lang_code])->first();
+       
+        $become_language->title = $request->title;
+        $become_language->name = $request->name;
+        $become_language->desgination = $request->desgination;
+        $become_language->header1 = $request->header1;
+        $become_language->header2 = $request->header2;
+        $become_language->description = $request->description;
+        $become_language->item1 = $request->item1;
+        $become_language->item2 = $request->item2;
+        $become_language->item3 = $request->item3;
+        $become_language->item4 = $request->item4;
+        $become_language->save();
 
         if($request->bg_image){
             $exist_banner = $become_author->bg_image;

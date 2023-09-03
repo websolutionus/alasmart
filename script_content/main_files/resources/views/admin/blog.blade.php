@@ -38,8 +38,8 @@
                                 @foreach ($blogs as $index => $blog)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td><a href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a></td>
-                                        <td>{{ $blog->category->name }}</td>
+                                        <td><a href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguageadmin->title }}</a></td>
+                                        <td>{{ $blog->category->blogcategorylanguageadmin->category_name }}</td>
                                         <td><img src="{{ asset($blog->image) }}" width="80px" height="80px" class="rounded-circle" alt=""></td>
                                         <td>
                                             @if ($blog->show_homepage)
@@ -69,10 +69,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                        <a href="{{ route('admin.blog.edit',$blog->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.blog.edit',['blog' => $blog->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $blog->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
-
                                     </tr>
                                   @endforeach
                             </tbody>

@@ -35,8 +35,8 @@
                                 @foreach ($faqs as $index => $faq)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $faq->question }}</td>
-                                        <td>{!! clean($faq->answer) !!}</td>
+                                        <td>{{ $faq->faqlangadmin->question }}</td>
+                                        <td>{!! clean($faq->faqlangadmin->answer) !!}</td>
                                         <td>
                                             @if($faq->status == 1)
                                             <a href="javascript:;" onclick="changeBlogCategoryStatus({{ $faq->id }})">
@@ -52,7 +52,7 @@
                                         </td>
                                         <td>
 
-                                        <a href="{{ route('admin.faq.edit',$faq->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.faq.edit', ['faq' => $faq->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
                                         <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $faq->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>

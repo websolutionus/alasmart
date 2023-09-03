@@ -38,7 +38,6 @@
                                  <i class="fas fa-star"></i>
                                 @endfor
                             </span>
-                            <p>{{__('Average rating of')}} {{ $review==0?0:round($review, 1) }} {{__('based on')}} {{ $votes }} {{__('votes')}}</p>
                         </div>
                     </div>
                     <ul class="header_button d-flex flex-wrap">

@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{__('Edit product')}}</title>
-@endsection
-
-@section('meta')
     <meta name="description" content="{{__('Edit product')}}">
 @endsection
 
@@ -14,11 +11,37 @@
     ==============================-->
     <section class="upload_product_info pt_190 pb_100 xs_pb_70">
         <div class="container wow fadeInUp" data-wow-duration="1s">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="h3 mb-3 text-gray-800">{{__('Language')}}</h4>
+                        <hr>
+                        <div class="lang_list_top">
+                            <ul class="lang_list">
+                                @foreach ($languages as $language)
+                                <li><a href="{{ route('product-edit',['id' => $product->id, 'lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-danger" role="alert">
+                            @php
+                                $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
+                            @endphp
+                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                        </div> 
+                      </div>
+                    </div>
+                </div>
+            </div>
             <h3>{{__('Upload your Product')}} </h3>
             <form class="upload_product_form" action="{{ route('product-update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                 <div class="row">
+                    @if (Session::get('front_lang') == request()->get('lang_code'))
                     <div class="col-xl-6 col-md-6">
                         <div class="upload_form_input">
                             <label>{{__('Thumbnail Image')}}*</label>
@@ -66,32 +89,26 @@
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('Category')}}*</legend>
-                                <select class="select_js" name="category">
+                                <select class="select2" name="category">
                                     <option value="">{{__('Select Category')}}</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected':'' }}>{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected':'' }}>{{ $category->catlangfrontend->name }}</option>
                                     @endforeach
                                 </select>
                             </fieldset>
                         </div>
                     </div>
+                    @endif
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('Product Name')}}*</legend>
-                                <input type="text" id="name" name="name" value="{{ html_decode($product->name) }}">
+                                <input type="text" id="name" name="name" value="{{ html_decode($product_language->name) }}">
                                 <input type="hidden" name="product_type" value="{{ $product_type }}">
                             </fieldset>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="wsus__comment_single_input">
-                            <fieldset>
-                                <legend>{{__('Slug')}}*</legend>
-                                <input type="text" id="slug" name="slug" value="{{ html_decode($product->slug) }}">
-                            </fieldset>
-                        </div>
-                    </div>
+                    @if (session()->get('front_lang') == request()->get('lang_code'))
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <fieldset>
@@ -116,17 +133,18 @@
                             </fieldset>
                         </div>
                     </div>
+                    @endif
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <legend>{{__('Description')}}*</legend>
-                            <textarea id="editor" name="description" rows="8">{{ html_decode($product->description) }}</textarea>
+                            <textarea id="editor" name="description" rows="8">{{ html_decode($product_language->description) }}</textarea>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('Tags')}}*   {{__('Press the comma for new tag')}}</legend>
-                                <input type="text" data-role="tagsinput" name="tags" value="{{ html_decode($product->tags) }}">
+                                <input type="text" data-role="tagsinput" name="tags" value="{{ html_decode($product_language->tags) }}">
                             </fieldset>
                         </div>
                     </div>
@@ -134,7 +152,7 @@
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('SEO title')}}*</legend>
-                                <input type="text" name="seo_title" value="{{ html_decode($product->seo_title) }}">
+                                <input type="text" name="seo_title" value="{{ html_decode($product_language->seo_title) }}">
                             </fieldset>
                         </div>
                     </div>
@@ -142,11 +160,12 @@
                         <div class="wsus__comment_single_input">
                             <fieldset>
                                 <legend>{{__('SEO description')}}*</legend>
-                                <textarea rows="4" name="seo_description">{{ html_decode($product->seo_description) }}</textarea>
+                                <textarea rows="4" name="seo_description">{{ html_decode($product_language->seo_description) }}</textarea>
                             </fieldset>
                         </div>
                     </div>
 
+                    @if (session()->get('front_lang') == request()->get('lang_code'))
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <div class="row">
@@ -171,6 +190,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="col-12">
                         <div class="wsus__comment_single_input">
                             <button class="common_btn upload" type="submit">{{__('upload Product')}}</button>

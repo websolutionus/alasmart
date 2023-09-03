@@ -36,8 +36,8 @@
                                 @foreach ($testimonials as $index => $testimonial)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $testimonial->name }}</td>
-                                        <td>{{ $testimonial->designation }}</td>
+                                        <td>{{ $testimonial->testimoniallangadmin->name }}</td>
+                                        <td>{{ $testimonial->testimoniallangadmin->designation }}</td>
                                         <td><img src="{{ asset($testimonial->image) }}" alt="" class="rounded-circle"></td>
                                         <td>
                                             @if($testimonial->status == 1)
@@ -51,7 +51,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.testimonial.edit',$testimonial->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <a href="{{ route('admin.testimonial.edit', ['testimonial' => $testimonial->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $testimonial->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Testimonial;
-use Image;
-use File;
 use Str;
+use File;
+use Image;
+use App\Models\Language;
+use App\Models\Testimonial;
+use Illuminate\Http\Request;
+use App\Models\TestimonialLanguage;
+use App\Http\Controllers\Controller;
 
 
 class TestimonialController extends Controller
@@ -19,7 +21,7 @@ class TestimonialController extends Controller
 
     public function index()
     {
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::with('testimoniallangadmin')->get();
         return view('admin.testimonial',compact('testimonials'));
     }
 
@@ -58,13 +60,22 @@ class TestimonialController extends Controller
                 ->save(public_path().'/'.$image_name);
         }
 
-        $testimonial->name = $request->name;
-        $testimonial->designation = $request->designation;
         $testimonial->image = $image_name;
-        $testimonial->comment = $request->comment;
         $testimonial->status = $request->status;
         $testimonial->rating = $request->rating;
         $testimonial->save();
+
+        $languages = Language::get();
+        foreach($languages as $language){
+            $testimonial_language = new TestimonialLanguage();
+            $testimonial_language->testimonial_id = $testimonial->id;
+            $testimonial_language->lang_code = $language->lang_code;
+            $testimonial_language->name = $request->name;
+            $testimonial_language->designation = $request->designation;
+            $testimonial_language->comment = $request->comment;
+            $testimonial_language->save();
+        }
+        
 
         $notification = trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
@@ -72,22 +83,25 @@ class TestimonialController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $testimonial = Testimonial::find($id);
-        return view('admin.edit_testimonial',compact('testimonial'));
+        $languages = Language::get();
+        $testimonial_language = TestimonialLanguage::where(['testimonial_id' => $testimonial->id, 'lang_code' => $request->lang_code])->first();
+        return view('admin.edit_testimonial',compact('testimonial', 'languages', 'testimonial_language'));
     }
 
 
     public function update(Request $request, $id)
     {
         $testimonial = Testimonial::find($id);
+        $testimonial_language = TestimonialLanguage::where(['testimonial_id' => $testimonial->id, 'lang_code' => $request->lang_code])->first();
         $rules = [
             'name' => 'required',
             'designation' => 'required',
-            'status' => 'required',
+            'status' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'comment' => 'required',
-            'rating' => 'required',
+            'rating' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'name.required' => trans('admin_validation.Name is required'),
@@ -111,16 +125,26 @@ class TestimonialController extends Controller
                 }
         }
 
-        $testimonial->name = $request->name;
-        $testimonial->designation = $request->designation;
-        $testimonial->comment = $request->comment;
-        $testimonial->status = $request->status;
-        $testimonial->rating = $request->rating;
+    
+        if (session()->get('admin_lang') == $request->lang_code) {
+            $testimonial->status = $request->status;
+        }
+        
+
+        if($request->rating){
+            $testimonial->rating = $request->rating;
+        }
+
         $testimonial->save();
+
+        $testimonial_language->name = $request->name;
+        $testimonial_language->designation = $request->designation;
+        $testimonial_language->comment = $request->comment;
+        $testimonial_language->save();
 
         $notification = trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.testimonial.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
 
@@ -133,6 +157,8 @@ class TestimonialController extends Controller
         if($existing_image){
             if(File::exists(public_path().'/'.$existing_image))unlink(public_path().'/'.$existing_image);
         }
+
+        $testimonial_language = TestimonialLanguage::where('testimonial_id', $id)->delete();
 
         $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

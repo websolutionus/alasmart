@@ -1,5 +1,5 @@
 @php
-    $error_404=App\Models\ErrorPage::find(1);
+    $error_404=App\Models\ErrorPage::with('errorlangfrontend')->first();
 
     $active_theme = 'layout';
 

@@ -9,7 +9,15 @@
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     @yield('title')
     @php
-        $setting = App\Models\Setting::select('logo','logo_two','logo_three','footer_logo','footer_logo_two','footer_logo_three','favicon', 'selected_theme', 'currency_icon','text_direction','blog_left_right','subscriber_title', 'subscriber_description', 'subscriber_image')->first();
+        $setting = App\Models\Setting::with('settinglangfrontend')->first();
+        $languages = App\Models\Language::where('status', 1)->get();
+        $front_lang = Session::get('front_lang');
+        $language = App\Models\Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+
+        $lang_direction = App\Models\Language::where('lang_code', $front_lang)->first();
     @endphp
     <link rel="icon" type="image/png" href="{{ asset($setting->favicon) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
@@ -28,7 +36,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-    @if ($setting->text_direction=='rtl')
+
+    @if ($lang_direction->lang_direction=='right_to_left')
     <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
     @endif
 
@@ -59,7 +68,7 @@
                             $end_day = date('d', strtotime($end_time));
                         @endphp
 
-                        <p><a target="__blank" href="{{ $discount->link }}"><span>{{ $discount->offer }}% </span> {{ $discount->title }}</a></p>
+                        <p><a target="__blank" href="{{ $discount->link }}"><span>{{ $discount->offer }}% </span> {{ $discount->discountlangfrontend->title }}</a></p>
                         <input type="hidden" id="end_year" value="{{ $end_year }}">
                         <input type="hidden" id="end_month" value="{{ $end_month }}">
                         <input type="hidden" id="end_day" value="{{ $end_day }}">
@@ -70,21 +79,20 @@
                     <div class="wsus__topbar_language">
                         <ul class="wsus__multi_language d-flex flrx-wrap">
                             <li>
-                                <a href="javascript:;">{{__('USD')}} <i class="far fa-chevron-down"></i></a>
+                                <a href="javascript:;">{{__('user.USD')}} <i class="far fa-chevron-down"></i></a>
                                 <ul class="droap_language">
-                                    <li><a href="javascript:;">{{__('BDT')}}</a></li>
-                                    <li><a href="javascript:;">{{__('EUR')}}</a></li>
-                                    <li><a href="javascript:;">{{__('AED')}}</a></li>
-                                    <li><a href="javascript:;">{{__('GBP')}}</a></li>
+                                    <li><a href="javascript:;">{{__('user.BDT')}}</a></li>
+                                    <li><a href="javascript:;">{{__('user.EUR')}}</a></li>
+                                    <li><a href="javascript:;">{{__('user.AED')}}</a></li>
+                                    <li><a href="javascript:;">{{__('user.GBP')}}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;">{{__('English')}} <i class="far fa-chevron-down"></i></a>
+                                <a href="javascript:;">{{__('user.Select')}} <i class="far fa-chevron-down"></i></a>
                                 <ul class="droap_language">
-                                    <li><a href="javascript:;">{{__('Japanes')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Chines')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Arabic')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Hindi')}}</a></li>
+                                    @foreach ($languages as $language)
+                                    <li><a href="{{ route('language.change', ['front_lang' => $language->lang_code]) }}">{{ $language->lang_name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li>
@@ -93,33 +101,33 @@
                                 </a>
                                 <ul class="user_droap_menu">
                                     <li>
-                                        <a href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('Overview')}}</a>
+                                        <a href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('user.Overview')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('Portfolio')}}</a>
+                                        <a href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('user.Portfolio')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('download') }}"><i class="far fa-download"></i> {{__('Download File')}}</a>
+                                        <a href="{{ route('download') }}"><i class="far fa-download"></i> {{__('user.Download File')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('collection') }}"><i class="fas fa-heart"></i> {{__('Collection')}}</a>
+                                        <a href="{{ route('collection') }}"><i class="fas fa-heart"></i> {{__('user.Collection')}}</a>
                                     </li>
 
                                     @if (Auth::guard('web')->check())
                                     <li>
-                                        <a href="{{ route('profile-edit') }}"><i class="fas fa-user-edit"></i> {{__('Profile edit')}}</a>
+                                        <a href="{{ route('profile-edit') }}"><i class="fas fa-user-edit"></i> {{__('user.Profile edit')}}</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('change-password') }}"><i class="fas fa-lock"></i>{{__('Change Password')}}</a>
+                                        <a href="{{ route('change-password') }}"><i class="fas fa-lock"></i>{{__('user.Change Password')}}</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> {{__('Logout')}}</a>
+                                        <a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> {{__('user.Logout')}}</a>
                                     </li>
                                     @else
                                     <li>
-                                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{__('login')}}</a>
+                                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{__('user.Login')}}</a>
                                     </li>
                                     @endif
 
@@ -146,7 +154,7 @@
                                             $total_balance = $orders_items->sum('price');
                                         @endphp
                                         <li>
-                                            <p>{{__('Earnings')}}:</p>
+                                            <p>{{__('user.Earnings')}}:</p>
                                             <h2>{{ $setting->currency_icon }}{{ $total_balance }}</h2>
                                         </li>
                                     @endif
@@ -190,47 +198,47 @@
                                 $route = route('home',['theme' => 1]);
                             }
                         @endphp
-                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('Home')}} <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('user.Home')}} <i class="far fa-chevron-down"></i></a>
                         @if ($setting->selected_theme==0)
                         <ul class="wsus__droap_menu">
-                            <li><a class="active" href="{{ route('home',['theme' => 1]) }}">{{__('home one')}}</a></li>
-                            <li><a href="{{ route('home',['theme' => 2]) }}">{{__('home two')}}</a></li>
-                            <li><a href="{{ route('home',['theme' => 3]) }}">{{__('home three')}}</a></li>
+                            <li><a class="active" href="{{ route('home',['theme' => 1]) }}">{{__('user.Home one')}}</a></li>
+                            <li><a href="{{ route('home',['theme' => 2]) }}">{{__('user.Home two')}}</a></li>
+                            <li><a href="{{ route('home',['theme' => 3]) }}">{{__('user.Home three')}}</a></li>
                         </ul>
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">{{__('Products')}}</a>
+                        <a class="nav-link" href="{{ route('products') }}">{{__('user.Products')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;">{{__('Pages')}} <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link" href="javascript:;">{{__('user.Pages')}} <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
-                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('about us')}}</a></li>
-                            <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('become an author')}}</a></li>
+                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
+                            <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('user.Become an Author')}}</a></li>
 
                             @if ($setting->blog_left_right == 0)
-                            <li><a class="{{ request()->get('blog') == 'leftbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('blog leftbar')}}</a></li>
-                            <li><a class="{{ request()->get('blog') == 'rightbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('blog rightbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'leftbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('user.Blog Leftbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'rightbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('user.Blog Rightbar')}}</a></li>
                             @endif
 
-                            <li><a class="{{ Route::is('faq') ? 'active':'' }}" href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
-                            <li><a class="{{ Route::is('privacy-policy') ? 'active':'' }}" href="{{ route('privacy-policy') }}">{{__('privacy policy')}}</a></li>
-                            <li><a class="{{ Route::is('terms-and-conditions') ? 'active':'' }}" href="{{ route('terms-and-conditions') }}">{{__('terms and condition')}}</a></li>
+                            <li><a class="{{ Route::is('faq') ? 'active':'' }}" href="{{ route('faq') }}">{{__('user.FAQ')}}</a></li>
+                            <li><a class="{{ Route::is('privacy-policy') ? 'active':'' }}" href="{{ route('privacy-policy') }}">{{__('user.Privacy Policy')}}</a></li>
+                            <li><a class="{{ Route::is('terms-and-conditions') ? 'active':'' }}" href="{{ route('terms-and-conditions') }}">{{__('user.Terms and Condition')}}</a></li>
 
                             @php
                                 $pages = App\Models\CustomPage::where('status', 1)->get();
                             @endphp
                             @foreach ($pages as $page)
-                            <li><a href="{{ route('custom-page', $page->slug) }}">{{ $page->page_name }}</a></li>
+                            <li><a href="{{ route('custom-page', $page->slug) }}">{{ $page->customlangfrontend->page_name }}</a></li>
                             @endforeach
 
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('blogs') }}">{{__('Blog')}}</a>
+                        <a class="nav-link" href="{{ route('blogs') }}">{{__('user.Blog')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact-us') }}">{{__('Contact')}}</a>
+                        <a class="nav-link" href="{{ route('contact-us') }}">{{__('user.Contact')}}</a>
                     </li>
                 </ul>
 
@@ -241,7 +249,7 @@
                             <span id="cartQty">0</span>
                         </a>
                     </li>
-                    <li><a class="start_btn" href="{{ route('select-product-type') }}">{{__('Start Selling')}}</a></li>
+                    <li><a class="start_btn" href="{{ route('select-product-type') }}">{{__('user.Start Selling')}}</a></li>
                 </ul>
             </div>
         </div>
@@ -262,8 +270,11 @@
             <div class="row">
                 <div class="col-xxl-6 col-sm-10 col-md-9 col-xl-8">
                     <div class="wsus__subscribe_text">
-                        <h2>{{ $setting->subscriber_title }}</h2>
-                        <p>{{ $setting->subscriber_description }}</p>
+                        @php
+                            $setting = App\Models\Setting::with('settinglangfrontend')->first();
+                        @endphp
+                        <h2>{{ $setting->settinglangfrontend->subscriber_title }}</h2>
+                        <p>{{ $setting->settinglangfrontend->subscriber_description }}</p>
                         <form id="footerTopSubscriberForm">
                             @csrf
                             <input type="text" name="email" placeholder="{{__('Enter your email address')}}">
@@ -287,6 +298,7 @@
         $total_earning = App\Models\OrderItem::get()->sum('price');
         $total_user = App\Models\User::where(['email_verified' => 1, 'status' => 1])->get()->count();
         $social_links=App\Models\FooterSocialLink::get();
+        $setting = App\Models\Setting::with('settinglangfrontend')->first();
     @endphp
 
     <!--=============================
@@ -300,8 +312,8 @@
                 <div class="col-12">
                     <div class="wsus__subscribe_2 mb_80">
                         <div class="wsus__subscribe_2_text">
-                            <h2>{{ $setting->subscriber_title }}</h2>
-                            <p>{{ $setting->subscriber_description }}</p>
+                            <h2>{{ $setting->settinglangfrontend->subscriber_title }}</h2>
+                            <p>{{ $setting->settinglangfrontend->subscriber_description }}</p>
                         </div>
                         <form id="fsubscriberForm">
                             @csrf
@@ -320,12 +332,12 @@
                         <a class="footer_logo" href="{{ route('home') }}">
                             <img src="{{ asset($setting->footer_logo) }}" alt="Alsmart" class="img-fluid w-100">
                         </a>
-                        <p class="description">{{ $footer->description }}</p>
+                        <p class="description">{{ $footer->footerlangfrontend->description }}</p>
                     </div>
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->first_column }}</h4>
+                        <h4>{{__('Support')}}</h4>
                         <ul>
                             <li><a href="{{ route('contact-us') }}">{{__('user.Contact Us')}}</a></li>
                             <li><a href="{{ route('blogs') }}">{{__('user.Our Blog')}}</a></li>
@@ -336,7 +348,7 @@
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->second_column }}</h4>
+                        <h4>{{__('Quick Link')}}</h4>
                         <ul>
                             <li><a href="{{ route('dashboard') }}">{{__('user.My Profile')}}</a></li>
                             <li><a href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
@@ -347,7 +359,7 @@
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-3">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->third_column }}</h4>
+                        <h4>{{__('Important Link')}}</h4>
                         <ul>
                             <li><a href="{{ route('register') }}">{{__('Become an author')}}</a></li>
                             <li><a href="{{ route('terms-and-conditions') }}">{{__('Terms & Conditions')}}</a></li>
@@ -390,7 +402,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6">
                         <div class="wsus__footer_copyright d-flex flex-wrap">
-                            <p>{{ $footer->copyright }}</p>
+                            <p>{{ $footer->footerlangfrontend->copyright }}</p>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6">
@@ -754,7 +766,7 @@
                                     <td class="description">
                                         <h3><a href="{{ url('/product/${value.options.slug}') }}">${value.name}</a></h3>
                                         <p>
-                                            <span>{{__('Item by')}}</span> ${value.options.author}
+                                            <span>{{__('user.Item by')}}</span> ${value.options.author}
                                             <b class="${value.options.variant_name!=null?'':'d-none'}">${value.options.variant_name!=null?value.options.variant_name:''}</b>
                                             <b class="${value.options.price_type!=null?'':'d-none'}">${value.options.price_type!=null?value.options.price_type:''}</b>
                                         </p>
@@ -832,18 +844,18 @@
                success:function(data){
                 if(data.total){
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
-                        <p class="discount">{{__('Discount')}} <span>(-)${data.setting.currency_icon} 0</span></p>
-                        <p class="total">{{__('Total')}} <span><span>${data.setting.currency_icon}<span>${data.total}</span></span></p>
-                        <a class="common_btn" href="{{ route('checkout') }}">{{__('Proceed to Checkout')}}</a>
+                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
+                        <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} 0</span></p>
+                        <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}<span>${data.total}</span></span></p>
+                        <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>
                     `);
                 }else{
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
-                        <p class="subtotal">{{__('coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
-                        <p class="discount">{{__('Discount')}} <span>(-)${data.setting.currency_icon} ${data.discount_amount}</span></p>
-                        <p class="total">{{__('Total')}} <span><span>${data.setting.currency_icon}</span>${data.total_amount}</span></p>
-                        <a class="common_btn" href="{{ route('checkout') }}">{{__('Proceed to Checkout')}}</a>
+                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
+                        <p class="subtotal">{{__('user.Coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
+                        <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} ${data.discount_amount}</span></p>
+                        <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}</span>${data.total_amount}</span></p>
+                        <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>
                     `);
                 }
             }

@@ -32,13 +32,12 @@
                                     </div>
                                     <div class="wsus__gallery_item_text">
                                         <p class="price">{{ $setting->currency_icon }}{{ html_decode($wishlist->product->regular_price) }}</p>
-                                        <a class="title" href="{{ route('product-detail', $wishlist->product->slug) }}">{{ html_decode($wishlist->product->name) }}</a>
-                                        <p>{{__('By')}} <span>{{ $wishlist->product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $wishlist->product->category->slug]) }}">{{ $wishlist->product->category->name }}</a></p>
+                                        <a class="title" href="{{ route('product-detail', $wishlist->product->slug) }}">{{ html_decode($wishlist->product->productlangfrontend->name) }}</a>
+                                        <p>{{__('By')}} <span>{{ $wishlist->product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $wishlist->product->category->slug]) }}">{{ $wishlist->product->category->catlangfrontend->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $wishlist->product->id, 'status' => 1])->get()->average('rating');
                                                 $sale=App\Models\OrderItem::where(['product_id' => $wishlist->product->id])->get()->count();
-                                                $wishlist=App\Models\Wishlist::where(['product_id' => $wishlist->product->id])->get()->count();
                                             @endphp
                                             <li>
                                                 <p>
@@ -58,7 +57,6 @@
                                                 @endif
                                             </li>
                                             <li>
-                                                <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                                 <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                             </li>
                                         </ul>

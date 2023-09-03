@@ -32,8 +32,8 @@
                                 @foreach ($teams as $index => $team)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $team->name }}</td>
-                                        <td>{{ $team->designation }}</td>
+                                        <td>{{ $team->teamlangadmin->name }}</td>
+                                        <td>{{ $team->teamlangadmin->designation }}</td>
                                         <td><img src="{{ asset($team->image) }}" alt="" class="rounded-circle"></td>
                                         <td>
                                             @if($team->status == 1)
@@ -47,7 +47,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.our-team.edit',$team->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                            <a href="{{ route('admin.our-team.edit', ['our_team' => $team->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $team->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

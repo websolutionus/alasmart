@@ -3,8 +3,6 @@
 @section('title')
     <title>{{ $product->name }}</title>
     <title>{{ $product->seo_title }}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{ $product->seo_description }}">
 @endsection
 
@@ -73,7 +71,7 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <div class="wsus__pro_description">
-                                    {!! clean(html_decode($product->description)) !!}
+                                    {!! clean(html_decode($product->productlangfrontend->description)) !!}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
@@ -254,16 +252,16 @@
                             <h2 class="d-none" id="ext_price"><span>{{ $setting->currency_icon }}</span> <strong id="extend_price">{{ html_decode($product->extend_price) }}</strong></h2>
 
                             <ul class="feature" id="regular_content">
-                                {!! $script_content->regular_content !!}
+                                {!! $script_content->scriptlangfrontend->regular_content !!}
                             </ul>
                             <ul class="feature d-none" id="extend_content">
-                                {!! $script_content->extend_content !!}
+                                {!! $script_content->scriptlangfrontend->extend_content !!}
                             </ul>
                             @endif
                             <input type="hidden" value="{{ $product->product_type }}" id="product_type">
-                            <input type="hidden" value="{{ $product->name }}" id="product_name">
+                            <input type="hidden" value="{{ $product->productlangfrontend->name }}" id="product_name">
                             <input type="hidden" value="{{ $product->slug }}" id="slug">
-                            <input type="hidden" value="{{ $product->category->name }}" id="category_name">
+                            <input type="hidden" value="{{ $product->category->catlangfrontend->name }}" id="category_name">
                             <input type="hidden" value="{{ $product->category->id }}" id="category_id">
                             <input type="hidden" value="{{ $product->thumbnail_image }}" id="product_image">
                             <input type="hidden" value="{{ $product->author->name }}" id="author_name">
@@ -326,7 +324,7 @@
                                 <li><span>{{__('Tags')}}</span>
                                     @php
                                         $tag_arr=[];
-                                        $tags=explode(',', $product->tags);
+                                        $tags=explode(',', $product->productlangfrontend->tags);
                                         foreach($tags as $tag){
                                             $tag_arr[]=$tag;
                                         }
@@ -395,9 +393,9 @@
                             </p>
                             @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
                             <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             <span class="download"><i class="fas fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                         </div>
                     </div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Homepage;
-use Image;
 use File;
+use Image;
+use App\Models\Homepage;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use App\Models\HomepageLanguage;
+use App\Http\Controllers\Controller;
 
 class HomepageController extends Controller
 {
@@ -15,30 +17,32 @@ class HomepageController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function why_choose_us(){
-        $homepage = Homepage::first();
+    public function why_choose_us(Request $request){
+        $homepage = Homepage::with('homelangadmin')->first();
+        $languages = Language::get();
+        $homepageLanguage = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
         $why_choose_us = (object) array(
-            'title1' => $homepage->why_choose_title1,
-            'title2' => $homepage->why_choose_title2,
+            'title1' => $homepageLanguage->why_choose_title1,
+            'title2' => $homepageLanguage->why_choose_title2,
             'item1_icon' => $homepage->why_choose_item1_icon,
             'item2_icon' => $homepage->why_choose_item2_icon,
             'item3_icon' => $homepage->why_choose_item3_icon,
-            'item1_title' => $homepage->why_choose_item1_title,
-            'item2_title' => $homepage->why_choose_item2_title,
-            'item3_title' => $homepage->why_choose_item3_title,
+            'item1_title' => $homepageLanguage->why_choose_item1_title,
+            'item2_title' => $homepageLanguage->why_choose_item2_title,
+            'item3_title' => $homepageLanguage->why_choose_item3_title,
             'home3_item1_icon' => $homepage->why_choose_home3_item1_icon,
             'home3_item2_icon' => $homepage->why_choose_home3_item2_icon,
             'home3_item3_icon' => $homepage->why_choose_home3_item3_icon,
-            'home3_item1_title' => $homepage->why_choose_home3_item1_title,
-            'home3_item2_desc' => $homepage->why_choose_home3_item2_desc,
-            'home3_item3_title' => $homepage->why_choose_home3_item3_title,
-            'home3_item1_desc' => $homepage->why_choose_home3_item1_desc,
-            'home3_item2_title' => $homepage->why_choose_home3_item2_title,
-            'home3_item3_desc' => $homepage->why_choose_home3_item3_desc,
+            'home3_item1_title' => $homepageLanguage->why_choose_home3_item1_title,
+            'home3_item2_desc' => $homepageLanguage->why_choose_home3_item2_desc,
+            'home3_item3_title' => $homepageLanguage->why_choose_home3_item3_title,
+            'home3_item1_desc' => $homepageLanguage->why_choose_home3_item1_desc,
+            'home3_item2_title' => $homepageLanguage->why_choose_home3_item2_title,
+            'home3_item3_desc' => $homepageLanguage->why_choose_home3_item3_desc,
             'home2_background' => $homepage->why_choose_home2_background,
         );
 
-        return view('admin.why_choose_us', compact('why_choose_us'));
+        return view('admin.why_choose_us', compact('why_choose_us', 'languages'));
     }
 
     public function why_choose_us_update(Request $request){
@@ -70,7 +74,8 @@ class HomepageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $homepage = Homepage::first();
+        $homepage = Homepage::with('homelangadmin')->first();
+        $homepageLanguage = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
         if($request->home2_background){
             $existing_image = $homepage->why_choose_home2_background;
@@ -170,18 +175,18 @@ class HomepageController extends Controller
             }
         }
 
-        $homepage->why_choose_title1 = $request->title1;
-        $homepage->why_choose_title2 = $request->title2;
-        $homepage->why_choose_item1_title = $request->item1_title;
-        $homepage->why_choose_item2_title = $request->item2_title;
-        $homepage->why_choose_item3_title = $request->item3_title;
-        $homepage->why_choose_home3_item1_title = $request->home3_item1_title;
-        $homepage->why_choose_home3_item2_desc = $request->home3_item2_desc;
-        $homepage->why_choose_home3_item3_title = $request->home3_item3_title;
-        $homepage->why_choose_home3_item1_desc = $request->home3_item1_desc;
-        $homepage->why_choose_home3_item2_title = $request->home3_item2_title;
-        $homepage->why_choose_home3_item3_desc = $request->home3_item3_desc;
-        $homepage->save();
+        $homepageLanguage->why_choose_title1 = $request->title1;
+        $homepageLanguage->why_choose_title2 = $request->title2;
+        $homepageLanguage->why_choose_item1_title = $request->item1_title;
+        $homepageLanguage->why_choose_item2_title = $request->item2_title;
+        $homepageLanguage->why_choose_item3_title = $request->item3_title;
+        $homepageLanguage->why_choose_home3_item1_title = $request->home3_item1_title;
+        $homepageLanguage->why_choose_home3_item2_desc = $request->home3_item2_desc;
+        $homepageLanguage->why_choose_home3_item3_title = $request->home3_item3_title;
+        $homepageLanguage->why_choose_home3_item1_desc = $request->home3_item1_desc;
+        $homepageLanguage->why_choose_home3_item2_title = $request->home3_item2_title;
+        $homepageLanguage->why_choose_home3_item3_desc = $request->home3_item3_desc;
+        $homepageLanguage->save();
 
         $notification= trans('Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
@@ -189,18 +194,21 @@ class HomepageController extends Controller
     }
 
 
-    public function mobile_app(){
-        $homepage = Homepage::first();
+    public function mobile_app(Request $request){
+        $homepage = Homepage::with('homelangadmin')->first();
+        $languages = Language::get();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
 
         $mobile_app = array(
-            'home2_title' => $homepage->app_home2_title,
-            'home2_desc' => $homepage->app_home2_desc,
-            'title1' => $homepage->app_title1,
-            'title2' => $homepage->app_title2,
-            'title3' => $homepage->app_title3,
-            'home3_title' => $homepage->app_home3_title,
-            'home3_desc' => $homepage->app_home3_desc,
-            'description' => $homepage->app_description,
+            'home2_title' => $homepage_language->app_home2_title,
+            'home2_desc' => $homepage_language->app_home2_desc,
+            'title1' => $homepage_language->app_title1,
+            'title2' => $homepage_language->app_title2,
+            'title3' => $homepage_language->app_title3,
+            'home3_title' => $homepage_language->app_home3_title,
+            'home3_desc' => $homepage_language->app_home3_desc,
+            'description' => $homepage_language->app_description,
             'play_store' => $homepage->app_play_store_link,
             'app_store' => $homepage->app_apple_store_link,
             'home1_foreground' => $homepage->app_home1_foreground,
@@ -212,7 +220,7 @@ class HomepageController extends Controller
         );
         $mobile_app = (object) $mobile_app;
 
-        return view('admin.mobile_app',compact('mobile_app'));
+        return view('admin.mobile_app',compact('mobile_app',  'languages'));
     }
 
 
@@ -227,8 +235,8 @@ class HomepageController extends Controller
             'description'=>'required',
             'home3_title'=>'required',
             'home3_desc'=>'required',
-            'play_store'=>'required',
-            'app_store'=>'required',
+            'play_store'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'app_store'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'home2_title.required' => trans('Title is required'),
@@ -244,18 +252,19 @@ class HomepageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $homepage = Homepage::first();
-        $homepage->app_home2_title = $request->home2_title;
-        $homepage->app_home2_desc = $request->home2_desc;
-        $homepage->app_title1 = $request->title1;
-        $homepage->app_title2 = $request->title2;
-        $homepage->app_title3 = $request->title3;
-        $homepage->app_description = $request->description;
-        $homepage->app_home3_title = $request->home3_title;
-        $homepage->app_home3_desc = $request->home3_desc;
-        $homepage->app_play_store_link = $request->play_store;
-        $homepage->app_apple_store_link = $request->app_store;
-        $homepage->save();
+        $homepage = Homepage::with('homelangadmin')->first();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
+        
+        if($request->app_store){
+            $homepage->app_play_store_link = $request->play_store;
+            $homepage->save();
+        }
+
+        if($request->app_store){
+            $homepage->app_apple_store_link = $request->app_store;
+            $homepage->save();
+        }
 
 
         if($request->home1_foreground){
@@ -328,23 +337,36 @@ class HomepageController extends Controller
             }
         }
 
+        $homepage_language->app_home2_title = $request->home2_title;
+        $homepage_language->app_home2_desc = $request->home2_desc;
+        $homepage_language->app_title1 = $request->title1;
+        $homepage_language->app_title2 = $request->title2;
+        $homepage_language->app_title3 = $request->title3;
+        $homepage_language->app_description = $request->description;
+        $homepage_language->app_home3_title = $request->home3_title;
+        $homepage_language->app_home3_desc = $request->home3_desc;
+
+        $homepage_language->save();
+
         $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
-    public function counter(){
-        $homepage = Homepage::first();
+    public function counter(Request $request){
+        $homepage = Homepage::with('homelangadmin')->first();
+        $languages = Language::get();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
         $counter = (object) array(
             'counter1_value' => $homepage->counter1_value,
             'counter2_value' => $homepage->counter2_value,
             'counter3_value' => $homepage->counter3_value,
             'counter4_value' => $homepage->counter4_value,
-            'counter1_title' => $homepage->counter1_title,
-            'counter2_title' => $homepage->counter2_title,
-            'counter3_title' => $homepage->counter3_title,
-            'counter4_title' => $homepage->counter4_title,
+            'counter1_title' => $homepage_language->counter1_title,
+            'counter2_title' => $homepage_language->counter2_title,
+            'counter3_title' => $homepage_language->counter3_title,
+            'counter4_title' => $homepage_language->counter4_title,
             'counter1_description' => $homepage->counter1_description,
             'counter2_description' => $homepage->counter2_description,
             'counter3_description' => $homepage->counter3_description,
@@ -368,15 +390,15 @@ class HomepageController extends Controller
             'home2_background' => $homepage->counter_home2_background,
         );
 
-        return view('admin.create_counter', compact('counter'));
+        return view('admin.create_counter', compact('counter', 'languages'));
     }
 
     public function update_counter(Request $request){
         $rules = [
-            'counter1_value'=>'required',
-            'counter2_value'=>'required',
-            'counter3_value'=>'required',
-            'counter4_value'=>'required',
+            'counter1_value'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'counter2_value'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'counter3_value'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'counter4_value'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'counter1_title'=>'required',
             'counter2_title'=>'required',
             'counter3_title'=>'required',
@@ -395,15 +417,25 @@ class HomepageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $homepage = Homepage::first();
-        $homepage->counter1_value = $request->counter1_value;
-        $homepage->counter2_value = $request->counter2_value;
-        $homepage->counter3_value = $request->counter3_value;
-        $homepage->counter4_value = $request->counter4_value;
-        $homepage->counter1_title = $request->counter1_title;
-        $homepage->counter2_title = $request->counter2_title;
-        $homepage->counter3_title = $request->counter3_title;
-        $homepage->counter4_title = $request->counter4_title;
+        $homepage = Homepage::with('homelangadmin')->first();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
+        if($request->counter1_value){
+            $homepage->counter1_value = $request->counter1_value;
+        }
+
+        if($request->counter2_value){
+            $homepage->counter2_value = $request->counter2_value;
+        }
+
+        if($request->counter3_value){
+            $homepage->counter3_value = $request->counter3_value;
+        }
+
+        if($request->counter4_value){
+            $homepage->counter4_value = $request->counter4_value;
+        }
+        
         $homepage->save();
 
         if($request->counter_icon1){
@@ -532,50 +564,59 @@ class HomepageController extends Controller
             }
         }
 
+        $homepage_language->counter1_title = $request->counter1_title;
+        $homepage_language->counter2_title = $request->counter2_title;
+        $homepage_language->counter3_title = $request->counter3_title;
+        $homepage_language->counter4_title = $request->counter4_title;
+        $homepage_language->save();
 
         $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
-    public function offer(){
-        $homepage = Homepage::first();
+    public function offer(Request $request){
+
+        $homepage = Homepage::with('homelangadmin')->first();
+        $languages = Language::get();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
         $offer = (object) array(
-            'title1' => $homepage->offer_title1,
-            'title2' => $homepage->offer_title2,
+            'title1' => $homepage_language->offer_title1,
+            'title2' => $homepage_language->offer_title2,
             'link' => $homepage->offer_link,
             'home3_background' => $homepage->offer_home3_background,
-            'home3_item1_title' => $homepage->offer_home3_item1_title,
-            'home3_item1_description' => $homepage->offer_home3_item1_description,
+            'home3_item1_title' => $homepage_language->offer_home3_item1_title,
+            'home3_item1_description' => $homepage_language->offer_home3_item1_description,
             'home3_item1_link' => $homepage->offer_home3_item1_link,
-            'home3_item2_title' => $homepage->offer_home3_item2_title,
-            'home3_item2_description' => $homepage->offer_home3_item2_description,
+            'home3_item2_title' => $homepage_language->offer_home3_item2_title,
+            'home3_item2_description' => $homepage_language->offer_home3_item2_description,
             'home3_item2_link' => $homepage->offer_home3_item2_link,
-            'about_offer_title1' => $homepage->about_offer_title1,
-            'about_offer_title2' => $homepage->about_offer_title2,
-            'about_offer_title3' => $homepage->about_offer_title3,
+            'about_offer_title1' => $homepage_language->about_offer_title1,
+            'about_offer_title2' => $homepage_language->about_offer_title2,
+            'about_offer_title3' => $homepage_language->about_offer_title3,
             'about_offer_link' => $homepage->about_offer_link,
             'about_offer_background' => $homepage->about_offer_background,
         );
 
-        return view('admin.offer', compact('offer'));
+        return view('admin.offer', compact('offer', 'languages'));
     }
 
     public function update_offer(Request $request){
         $rules = [
             'title1'=>'required',
             'title2'=>'required',
-            'link'=>'required',
+            'link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'home3_item1_title'=>'required',
             'home3_item1_description'=>'required',
-            'home3_item1_link'=>'required',
+            'home3_item1_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'home3_item2_title'=>'required',
             'home3_item2_description'=>'required',
-            'home3_item2_link'=>'required',
+            'home3_item2_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'about_offer_title1'=>'required',
             'about_offer_title2'=>'required',
             'about_offer_title3'=>'required',
-            'about_offer_link'=>'required',
+            'about_offer_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'title1.required' => trans('Title is required'),
@@ -594,20 +635,25 @@ class HomepageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $homepage = Homepage::first();
-        $homepage->offer_title1 = $request->title1;
-        $homepage->offer_title2 = $request->title2;
-        $homepage->offer_link = $request->link;
-        $homepage->offer_home3_item1_title = $request->home3_item1_title;
-        $homepage->offer_home3_item1_description = $request->home3_item1_description;
-        $homepage->offer_home3_item1_link = $request->home3_item1_link;
-        $homepage->offer_home3_item2_title = $request->home3_item2_title;
-        $homepage->offer_home3_item2_description = $request->home3_item2_description;
-        $homepage->offer_home3_item2_link = $request->home3_item2_link;
-        $homepage->about_offer_title1 = $request->about_offer_title1;
-        $homepage->about_offer_title2 = $request->about_offer_title2;
-        $homepage->about_offer_title3 = $request->about_offer_title3;
-        $homepage->about_offer_link = $request->about_offer_link;
+        $homepage = Homepage::with('homelangadmin')->first();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
+        if(session()->get('admin_lang') == $request->lang_code){
+            $homepage->offer_link = session()->get('admin_lang') == $request->lang_code;
+        }
+
+        if($request->home3_item1_link){
+            $homepage->offer_home3_item1_link = $request->home3_item1_link;
+        }
+        
+        if($request->home3_item2_link){
+            $homepage->offer_home3_item2_link = $request->home3_item2_link;
+        }
+
+        if($request->about_offer_link){
+            $homepage->about_offer_link = $request->about_offer_link;
+        }
+
         $homepage->save();
 
         if($request->home3_background){
@@ -638,22 +684,39 @@ class HomepageController extends Controller
             }
         }
 
+
+        $homepage_language->offer_title1 = $request->title1;
+        $homepage_language->offer_title2 = $request->title2;
+        $homepage_language->offer_home3_item1_title = $request->home3_item1_title;
+        $homepage_language->offer_home3_item1_description = $request->home3_item1_description;
+        $homepage_language->offer_home3_item2_title = $request->home3_item2_title;
+        $homepage_language->offer_home3_item2_description = $request->home3_item2_description;
+        $homepage_language->about_offer_title1 = $request->about_offer_title1;
+        $homepage_language->about_offer_title2 = $request->about_offer_title2;
+        $homepage_language->about_offer_title3 = $request->about_offer_title3;
+
+        $homepage_language->save();
+
         $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
 
-    public function trending_offer(){
-        $homepage = Homepage::first();
+    public function trending_offer(Request $request){
+
+        $homepage = Homepage::with('homelangadmin')->first();
+        $languages = Language::get();
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
+
         $trending_offer = (object) array(
             'image' => $homepage->trending_offer_image,
-            'title1' => $homepage->trending_offer_title1,
-            'title2' => $homepage->trending_offer_title2,
+            'title1' => $homepage_language->trending_offer_title1,
+            'title2' => $homepage_language->trending_offer_title2,
             'link' => $homepage->trending_offer_link,
         );
 
-        return view('admin.trending_offer', compact('trending_offer'));
+        return view('admin.trending_offer', compact('trending_offer', 'languages'));
     }
 
 
@@ -661,7 +724,7 @@ class HomepageController extends Controller
         $rules = [
             'title1'=>'required',
             'title2'=>'required',
-            'link'=>'required',
+            'link'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'title1.required' => trans('Title is required'),
@@ -670,12 +733,14 @@ class HomepageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $homepage = Homepage::first();
-        $homepage->trending_offer_title1 = $request->title1;
-        $homepage->trending_offer_title2 = $request->title2;
-        $homepage->trending_offer_link = $request->link;
+        $homepage = Homepage::with('homelangadmin')->first();
+        
+        $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
-        $homepage->save();
+        if(session()->get('admin_lang') == $request->lang_code){
+            $homepage->trending_offer_link = session()->get('admin_lang') == $request->lang_code;
+            $homepage->save();
+        }
 
         if($request->image){
             $old_image = $homepage->trending_offer_image;
@@ -690,6 +755,11 @@ class HomepageController extends Controller
                 if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
             }
         }
+
+        $homepage_language->trending_offer_title1 = $request->title1;
+        $homepage_language->trending_offer_title2 = $request->title2;
+
+        $homepage_language->save();
 
         $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');

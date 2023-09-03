@@ -37,7 +37,7 @@
                                 @foreach ($categories as $index => $category)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->catlangadmin->name }}</td>
 
                                         <td>
                                             <img src="{{ asset($category->icon) }}" class="w_80" alt="">
@@ -63,7 +63,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                        <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.category.edit', ['category' => $category->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
                                         @if ($category->product == null)
                                             <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $category->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>

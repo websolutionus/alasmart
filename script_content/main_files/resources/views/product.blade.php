@@ -1,9 +1,6 @@
 @extends($active_theme)
 @section('title')
-<title>{{ $seo_setting->seo_title }}</title>
-@endsection
-
-@section('title')
+    <title>{{ $seo_setting->seo_title }}</title>
     <meta name="description" content="{{ $seo_setting->seo_description }}">
 @endsection
 
@@ -73,9 +70,9 @@
                                 </div>
                                 <div class="wsus__gallery_item_text">
                                     <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                                    <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
+                                    <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
                                     <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
-                                            href="javascript:;" onclick="getCatSlug('{{ $product->category->slug }}')">{{ $product->category->name }}</a></p>
+                                            href="javascript:;" onclick="getCatSlug('{{ $product->category->slug }}')">{{ $product->category->catlangfrontend->name }}</a></p>
                                     <ul class="d-flex flex-wrap justify-content-between">
                                         @php
                                             $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
@@ -124,7 +121,7 @@
                                 @php
                                     $total_product = App\Models\Product::where(['status' => 1, 'category_id'=>$category->id])->count();
                                 @endphp
-                                <li><a href="javascript:;" onclick="getCatSlug('{{ $category->slug }}')">{{ $category->name }} <span>({{ $total_product }})</span> </a></li>
+                                <li><a href="javascript:;" onclick="getCatSlug('{{ $category->slug }}')">{{ $category->catlangfrontend->name }} <span>({{ $total_product }})</span> </a></li>
                                 @endforeach
                             </ul>
                         </div>

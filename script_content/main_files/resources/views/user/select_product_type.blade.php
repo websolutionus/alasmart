@@ -25,8 +25,8 @@
                             <option value="video">{{__('Video')}}</option>
                             <option value="audio">{{__('Audio')}}</option>
                         </select>
-                        <h5>{{ $productType->title }}</h5>
-                        <p>{{ $productType->description }}</p>
+                        <h5>{{ $productType->pagelangfrontend->title }}</h5>
+                        <p>{{ $productType->pagelangfrontend->description }}</p>
                         <ul class="d-flex flex-wrap align-items-center">
                             <li><a class="cancel" href="{{ url()->previous() }}">{{__('cancel')}}</a></li>
                             <li><button class="common_btn" type="submit">{{__('Next')}}</button></li>

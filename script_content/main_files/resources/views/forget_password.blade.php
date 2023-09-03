@@ -1,80 +1,65 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('user.Forget Password')}}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{__('user.Forget Password')}}">
 @endsection
 
 @section('frontend-content')
- <!--=============================
-        LOGIN PAGE START
+
+    <!--=============================
+        BREADCRUMB START
     ==============================-->
-    <section class="wsus__login pt_180 pb_205">
+    <section class="wsus__breadcrumb" style="background: url({{ asset('frontend/images/breadcrumb_bg.jpg') }});">
         <div class="container">
             <div class="row">
-                <div class="col-xl-6 col-md-10 col-lg-7 m-auto wow fadeInUp" data-wow-duration="1s">
-                    <div class="wsus__login_area">
-                        <h2>{{__('user.Forget Your Password ?')}}</h2>
-                        <form action="{{ route('send-forget-password') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                    <p>{{__('user.Did you forget your password ? Do not worry. Please submit below form using your email, and get a reset password link.')}}</p>
-                                <div class="col-xl-12 mt-3">
-                                    <div class="wsus__login_inpu_area">
-                                        <label>{{__('Email Address')}}*</label>
-                                        <input type="text" name="email" placeholder="{{__('Email Address')}}">
-                                    </div>
-                                </div>
-                                @if($recaptchaSetting->status==1)
-                                    <div class="col-xl-12">
-                                        <div class="wsus__single_com mt_20">
-                                            <div class="g-recaptcha" data-sitekey="{{ $recaptchaSetting->site_key }}"></div>
-                                        </div>
-                                    </div>
-                                @endif
-                                <div class="col-xl-12 mt-2">
-                                    <button class="common_btn" type="submit">{{__('Forget Your Password')}}</button>
-                                </div>
-                                <div class="col-xl-12">
-                                    <p class="go_login">{{__('Redirect to login page')}}.  <a href="{{ route('login') }}">{{__('Click here')}}</a></p>
-                                </div>
-                            </div>
-                        </form>
+                <div class="col-12">
+                    <div class="wsus__breadcrumb_text">
+                        <h1>{{__('Forget Password')}}</h1>
+                        <ul class="d-flex flex-wrap">
+                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
+                            <li><a href="javascript:;">{{__('Forget Password')}}</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="login_animi_area">
-            <ul class="bg_animation">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1600ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1700ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1800ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1900ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 2000ms"></li>
-            </ul>
-            <ul class="bg_animation bg_animation_r">
-                <li class="wow bounceIn" data-wow-duration=" 1000ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1100ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1200ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1300ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1400ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1500ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1600ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1700ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1800ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 1900ms"></li>
-                <li class="wow bounceIn" data-wow-duration=" 2000ms"></li>
-            </ul>
+    </section>
+    <!--=============================
+        BREADCRUMB END
+    ==============================-->
+
+
+    <!--=============================
+        SIGN IN START
+    ==============================-->
+    <section class="wsus__sign_up wsus__sign_in mt_120 xs_mt_80 pb_120 xs_pb_80">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-10 m-auto">
+                    <div class="wsus__signup_text">
+                        <h3>{{__('Forget your password')}} ?</h3>
+                        <p class="description">{{__('Did you forget your password ? Do not worry. Please submit below form using your email, and get a reset password link.')}}</p>
+                        <form action="{{ route('send-forget-password') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="wsus__comment_single_input">
+                                        <fieldset>
+                                            <legend>{{__('Email address')}}*</legend>
+                                            <input type="email" name="email" placeholder="{{__('Email address')}}">
+                                        </fieldset>
+                                    </div>
+                                    <button type="submit" class="common_btn">{{__('Forget your password')}}</button>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="other_login text-center mt-3">{{__("Redirect to login page.")}} <a href="{{ route('login') }}">{{__('Click here')}}</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!--=============================
-        LOGIN PAGE END
+        SIGN IN END
     ==============================-->
 @endsection

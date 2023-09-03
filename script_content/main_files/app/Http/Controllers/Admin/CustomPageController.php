@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use File;
+use Image;
+use App\Models\Language;
 use App\Models\CustomPage;
 use Illuminate\Http\Request;
-use Image;
-use File;
+use App\Models\CustomPageLanguage;
+use App\Http\Controllers\Controller;
+
 class CustomPageController extends Controller
 {
     public function __construct()
@@ -16,7 +19,7 @@ class CustomPageController extends Controller
 
     public function index()
     {
-        $customPages = CustomPage::all();
+        $customPages = CustomPage::with('customlangadmin')->get();
         return view('admin.custom_page',compact('customPages'));
     }
 
@@ -30,7 +33,7 @@ class CustomPageController extends Controller
     {
         $rules = [
             'description' => 'required',
-            'page_name' => 'required|unique:custom_pages',
+            'page_name' => 'required|unique:custom_page_languages',
             'slug' => 'required|unique:custom_pages',
             'status' => 'required'
         ];
@@ -45,11 +48,19 @@ class CustomPageController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $customPage = new CustomPage();
-        $customPage->page_name = $request->page_name;
         $customPage->slug = $request->slug;
-        $customPage->description = $request->description;
         $customPage->status = $request->status;
         $customPage->save();
+
+        $languages = Language::get();
+        foreach($languages as $language){
+            $custom_page_language = new CustomPageLanguage();
+            $custom_page_language->custom_id = $customPage->id;
+            $custom_page_language->lang_code = $language->lang_code;
+            $custom_page_language->page_name = $request->page_name;
+            $custom_page_language->description = $request->description;
+            $custom_page_language->save();
+        }
 
         $notification = trans('admin_validation.Created Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
@@ -57,20 +68,24 @@ class CustomPageController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $customPage = CustomPage::find($id);
-        return view('admin.edit_custom_page',compact('customPage'));
+        $languages = Language::get();
+        $custom_page_language = CustomPageLanguage::where(['custom_id' => $customPage->id, 'lang_code' => $request->lang_code])->first();
+        
+        return view('admin.edit_custom_page',compact('customPage', 'languages', 'custom_page_language'));
     }
 
     public function update(Request $request, $id)
     {
         $customPage = CustomPage::find($id);
+        $custom_page_language = CustomPageLanguage::where(['custom_id' => $customPage->id, 'lang_code' => $request->lang_code])->first();
+        
         $rules = [
             'description' => 'required',
-            'page_name' => 'required|unique:custom_pages,page_name,'.$customPage->id,
-            'slug' => 'required|unique:custom_pages,page_name,'.$customPage->id,
-            'status' => 'required'
+            'page_name' => 'required|unique:custom_page_languages,page_name,'.$custom_page_language->id,
+            'status' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
             'page_name.required' => trans('admin_validation.Page name is required'),
@@ -83,21 +98,26 @@ class CustomPageController extends Controller
         $this->validate($request, $rules,$customMessages);
 
 
-        $customPage->page_name = $request->page_name;
-        $customPage->slug = $request->slug;
-        $customPage->description = $request->description;
-        $customPage->status = $request->status;
-        $customPage->save();
+        if(session()->get('admin_lang') == $request->lang_code){
+            $customPage->status = $request->status;
+            $customPage->save();
+        }
+
+        $custom_page_language->page_name = $request->page_name;
+        $custom_page_language->description = $request->description;
+        $custom_page_language->save();
 
         $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.custom-page.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function destroy($id)
     {
         $customPage = CustomPage::find($id);
         $customPage->delete();
+
+        $custom_page_language = CustomPageLanguage::where('custom_id', $id)->delete();
 
         $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

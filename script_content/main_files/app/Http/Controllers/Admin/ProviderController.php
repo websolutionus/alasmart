@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use Mail;
-use App\Models\City;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Ticket;
-use App\Models\Country;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\OrderItem;
 use App\Helpers\MailHelper;
-use App\Models\CountryState;
 use Illuminate\Http\Request;
 
 use App\Models\EmailTemplate;
@@ -111,10 +108,6 @@ class ProviderController extends Controller
         );
         $default_avatar = (object) $default_avatar;
 
-        $countries = Country::orderBy('name','asc')->where('status',1)->get();
-        $states = CountryState::orderBy('name','asc')->where(['status' => 1, 'country_id' => $seller->country_id])->get();
-        $cities = City::orderBy('name','asc')->where(['status' => 1, 'country_state_id' => $seller->state_id])->get();
-
         $orders = OrderItem::where('author_id', $seller->id)->get();
         $total_sold_product = $orders->count();
         
@@ -127,7 +120,7 @@ class ProviderController extends Controller
         $products = Product::where('author_id', $seller->id)->where('status', 1)->get();
         $total_product = $products->count();
 
-        return view('admin.show_provider',compact('seller','setting','countries','states','cities','default_avatar','total_sold_product','total_withdraw','current_balance','total_balance', 'total_product'));
+        return view('admin.show_provider',compact('seller','setting','default_avatar','total_sold_product','total_withdraw','current_balance','total_balance', 'total_product'));
 
     }
 
@@ -158,9 +151,9 @@ class ProviderController extends Controller
 
         $provider->name = $request->name;
         $provider->phone = $request->phone;
-        $provider->country_id = $request->country;
-        $provider->state_id = $request->state;
-        $provider->city_id = $request->city;
+        $provider->country = $request->country;
+        $provider->state = $request->state;
+        $provider->city = $request->city;
         $provider->designation = $request->designation;
         $provider->address = $request->address;
         $provider->save();

@@ -3,9 +3,6 @@
 
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
-@endsection
-
-@section('title')
     <meta name="description" content="{{ $seo_setting->seo_description }}">
 @endsection
 
@@ -18,10 +15,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('contact us')}}</h1>
+                        <h1>{{__('User.Contact Us')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('contact us')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Contact Us')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -42,7 +39,7 @@
                 <div class="col-xl-4 col-md-6 col-lg-4">
                     <div class="wsus__contact_single_info">
                         <span><i class="fas fa-phone-alt"></i></span>
-                        <a>{!! nl2br($contact->phone) !!}</a>
+                        <a>{!! nl2br($contact->contactlangfrontend->phone) !!}</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 col-lg-4">
@@ -54,7 +51,7 @@
                 <div class="col-xl-4 col-md-6 col-lg-4">
                     <div class="wsus__contact_single_info">
                         <span><i class="fas fa-map-marker-alt"></i></span>
-                        <a>{!! nl2br($contact->address) !!}</a>
+                        <a>{!! nl2br($contact->contactlangfrontend->address) !!}</a>
                     </div>
                 </div>
             </div>
@@ -62,45 +59,45 @@
                 <div class="col-xl-8 col-lg-7">
                     <form action="{{ route('send-contact-message') }}" method="POST" class="wsus__contact_form wsus__comment_input_area">
                         @csrf
-                        <h3>{{ $contact->title1 }}</h3>
+                        <h3>{{ $contact->contactlangfrontend->title1 }}</h3>
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('name')}}*</legend>
-                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="{{__('Name')}}">
+                                        <legend>{{__('user.Name')}}*</legend>
+                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="{{__('user.Name')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('phone')}}</legend>
-                                        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="{{__('Phone')}}">
+                                        <legend>{{__('user.Phone')}}</legend>
+                                        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="{{__('user.Phone')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('email')}}*</legend>
-                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="{{__('Email')}}">
+                                        <legend>{{__('user.Email')}}*</legend>
+                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="{{__('user.Email')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('subject')}}*</legend>
-                                        <input type="text" name="subject" value="{{ old('subject') }}" placeholder="{{__('Subject')}}">
+                                        <legend>{{__('user.Subject')}}*</legend>
+                                        <input type="text" name="subject" value="{{ old('subject') }}" placeholder="{{__('user.Subject')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-12">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('message')}}*</legend>
-                                        <textarea rows="6" name="message" placeholder="{{__('Write a Message')}}">{{ old('message') }}</textarea>
+                                        <legend>{{__('user.Message')}}*</legend>
+                                        <textarea rows="6" name="message" placeholder="{{__('user.Write a Message')}}">{{ old('message') }}</textarea>
                                     </fieldset>
                                 </div>
                             </div>
@@ -114,7 +111,7 @@
                             @endif
 
                             <div class="col-xl-12">
-                                <button class="common_btn" type="submit">{{__('Send Message')}}</button>
+                                <button class="common_btn" type="submit">{{__('User.Send Message')}}</button>
                             </div>
                         </div>
                     </form>
@@ -124,9 +121,9 @@
                         <div class="text">
                             <span class="icon"><i class="far fa-headset"></i></span>
                             <p>
-                                {{ $contact->title2 }}
-                                <span>{{ $contact->time }}</span>
-                                {{ $contact->off_day }}
+                                {{ $contact->contactlangfrontend->title2 }}
+                                <span>{{ $contact->contactlangfrontend->time }}</span>
+                                {{ $contact->contactlangfrontend->off_day }}
                             </p>
                         </div>
                         <div class="img">

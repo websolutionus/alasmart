@@ -16,8 +16,8 @@
                         <div class="card">
                             <img class="card-img-top" src="{{ asset($productItem->script_image) }}" alt="Card image cap">
                             <div class="card-body">
-                              <h5 class="card-title">{{ $productItem->script_title }}</h5>
-                              <p class="card-text">{{ $productItem->script_description }}</p>
+                              <h5 class="card-title">{{ $productItem->productitemlangadmin->script_title }}</h5>
+                              <p class="card-text">{{ $productItem->productitemlangadmin->script_description }}</p>
                               <a href="{{ route('admin.product.create',['product_type' => 'script']) }}" class="btn btn-primary">{{__('Go to create page')}}</a>
                             </div>
                           </div>
@@ -27,8 +27,8 @@
                         <div class="card">
                             <img class="card-img-top" src="{{ asset($productItem->image_image) }}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $productItem->image_title }}</h5>
-                                <p class="card-text">{{ $productItem->image_description }}</p>
+                                <h5 class="card-title">{{ $productItem->productitemlangadmin->image_title }}</h5>
+                                <p class="card-text">{{ $productItem->productitemlangadmin->image_description }}</p>
                                 <a href="{{ route('admin.product.create',['product_type' => 'image']) }}" class="btn btn-primary">{{__('Go to create page')}}</a>
                               </div>
                           </div>
@@ -38,8 +38,8 @@
                         <div class="card">
                             <img class="card-img-top" src="{{ asset($productItem->video_image) }}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $productItem->video_title }}</h5>
-                                <p class="card-text">{{ $productItem->video_description }}</p>
+                                <h5 class="card-title">{{ $productItem->productitemlangadmin->video_title }}</h5>
+                                <p class="card-text">{{ $productItem->productitemlangadmin->video_description }}</p>
                                 <a href="{{ route('admin.product.create',['product_type' => 'video']) }}" class="btn btn-primary">{{__('Go to create page')}}</a>
                               </div>
                           </div>
@@ -49,8 +49,8 @@
                         <div class="card">
                             <img class="card-img-top" src="{{ asset($productItem->audio_image) }}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $productItem->audio_title }}</h5>
-                                <p class="card-text">{{ $productItem->audio_description }}</p>
+                                <h5 class="card-title">{{ $productItem->productitemlangadmin->audio_title }}</h5>
+                                <p class="card-text">{{ $productItem->productitemlangadmin->audio_description }}</p>
                                 <a href="{{ route('admin.product.create',['product_type' => 'audio']) }}" class="btn btn-primary">{{__('Go to create page')}}</a>
                               </div>
                           </div>

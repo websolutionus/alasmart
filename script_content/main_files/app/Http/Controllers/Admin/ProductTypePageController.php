@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use File;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Models\ProductTypePage;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use File;
+use App\Models\ProductTypePageLanguage;
 
 class ProductTypePageController extends Controller
 {
@@ -15,14 +17,21 @@ class ProductTypePageController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index(){
+    public function index(Request $request){
         $productType = ProductTypePage::first();
-        return view('admin.product_type_page', compact('productType'));
+
+        $languages = Language::get();
+
+        $product_type_language = ProductTypePageLanguage::where(['product_type_id' => $productType->id, 'lang_code' => $request->lang_code])->first();
+        
+        return view('admin.product_type_page', compact('productType', 'languages', 'product_type_language'));
     }
 
     public function update(Request $request, $id)
     {
         $productType = ProductTypePage::find($id);
+
+        $product_type_language = ProductTypePageLanguage::where(['product_type_id' => $productType->id, 'lang_code' => $request->lang_code])->first();
 
         $rules = [
             'title'=>'required',
@@ -34,9 +43,9 @@ class ProductTypePageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $productType->title = $request->title;
-        $productType->description = $request->description;
-        $productType->save();
+        $product_type_language->title = $request->title;
+        $product_type_language->description = $request->description;
+        $product_type_language->save();
 
         if($request->image){
             $exist_banner = $productType->image;

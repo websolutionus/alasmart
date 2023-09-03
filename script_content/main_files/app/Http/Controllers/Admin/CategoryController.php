@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Setting;
-use Illuminate\Http\Request;
-use  Image;
-use File;
 use Str;
+use File;
+use  Image;
+use App\Models\Setting;
+use App\Models\Category;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use App\Models\CategoryLanguage;
+use App\Http\Controllers\Controller;
+
 class CategoryController extends Controller
 {
     public function __construct()
@@ -18,7 +21,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::with('product')->get();
+        $categories = Category::with('product', 'catlangadmin')->get();
         $setting = Setting::first();
         $selected_theme = $setting->selected_theme;
 
@@ -42,7 +45,7 @@ class CategoryController extends Controller
         $selected_theme = $setting->selected_theme;
 
         $rules = [
-            'name'=>'required|unique:categories',
+            'name'=>'required|unique:category_languages',
             'slug'=>'required|unique:categories',
             'product_gallery'=>'required',
             'status'=>'required',
@@ -69,68 +72,81 @@ class CategoryController extends Controller
         }
 
 
-        $category->name = $request->name;
+        
         $category->slug = $request->slug;
         $category->product_gallery = $request->product_gallery;
         $category->status = $request->status;
         $category->save();
+
+        $languages = Language::get();
+
+        foreach($languages as $language){
+            $category_language = new CategoryLanguage();
+            $category_language->category_id = $category->id;
+            $category_language->lang_code = $language->lang_code;
+            $category_language->name = $request->name;
+            $category_language->save();
+        }
 
         $notification = trans('admin_validation.Created Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.category.index')->with($notification);
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::with('catlangadmin')->find($id);
+
+        $languages = Language::get();
+
+        $category_language = CategoryLanguage::where(['category_id' => $id, 'lang_code' => $request->lang_code])->first();
 
         $setting = Setting::first();
         $selected_theme = $setting->selected_theme;
 
-        return view('admin.edit_category',compact('category','selected_theme'));
+        return view('admin.edit_category',compact('category','selected_theme','languages','category_language',));
     }
 
 
     public function update(Request $request,$id)
     {
         $category = Category::find($id);
+        $category_language = CategoryLanguage::where(['category_id' => $id, 'lang_code' => $request->lang_code])->first();
         $rules = [
-            'name'=>'required|unique:categories,name,'.$category->id,
-            'slug'=>'required|unique:categories,name,'.$category->id,
-            'status'=>'required',
+            'name'=>'required',
+            'status'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
 
         $customMessages = [
             'name.required' => trans('admin_validation.Name is required'),
-            'name.unique' => trans('admin_validation.Name already exist'),
-            'slug.required' => trans('admin_validation.Slug is required'),
-            'slug.unique' => trans('admin_validation.Slug already exist'),
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $category->name = $request->name;
-        $category->slug = $request->slug;
-        $category->product_gallery = $request->product_gallery;
-        $category->status = $request->status;
-        $category->save();
-        if($request->icon){
-            $old_logo = $category->icon;
-            $extention = $request->icon->getClientOriginalExtension();
-            $logo_name = 'category'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            $logo_name = 'uploads/custom-images/'.$logo_name;
-            Image::make($request->icon)
-                ->save(public_path().'/'.$logo_name);
-            $category->icon=$logo_name;
+        if(session()->get('admin_lang') == $request->lang_code){
+            $category->product_gallery = $request->product_gallery;
+            $category->status = $request->status;
             $category->save();
-            if($old_logo){
-                if(File::exists(public_path().'/'.$old_logo))unlink(public_path().'/'.$old_logo);
+            if($request->icon){
+                $old_logo = $category->icon;
+                $extention = $request->icon->getClientOriginalExtension();
+                $logo_name = 'category'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $logo_name = 'uploads/custom-images/'.$logo_name;
+                Image::make($request->icon)
+                    ->save(public_path().'/'.$logo_name);
+                $category->icon=$logo_name;
+                $category->save();
+                if($old_logo){
+                    if(File::exists(public_path().'/'.$old_logo))unlink(public_path().'/'.$old_logo);
+                }
             }
         }
 
+        $category_language->name = $request->name;
+        $category_language->save();
 
         $notification = trans('admin_validation.Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.category.index')->with($notification);
+        return redirect()->back()->with($notification);
     }
 
     public function destroy($id)
@@ -141,6 +157,8 @@ class CategoryController extends Controller
         if($old_logo){
             if(File::exists(public_path().'/'.$old_logo))unlink(public_path().'/'.$old_logo);
         }
+
+        $category_language = CategoryLanguage::where('category_id', $id)->delete();
 
         $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

@@ -27,20 +27,19 @@
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a href="{{ route('product-edit', $product->id) }}">{{__('user.Edit')}}</a></li>
+                                            <li><a href="{{ route('product-edit', ['id' => $product->id, 'lang_code' => 'en']) }}">{{__('user.Edit')}}</a></li>
                                             <li><a data-bs-toggle="modal" data-bs-target="#dataDelete" onclick="deleteData({{ $product->id }})" href="javascript:;">{{__('Delete')}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="wsus__gallery_item_text">
                                         <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                                        <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->name) }}</a>
-                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></p>
+                                        <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
-                                            @endphp
+                                             @endphp
                                             <li>
                                                 <p>
                                                     <i class="far fa-star"></i>
@@ -59,7 +58,6 @@
                                                 @endif
                                             </li>
                                             <li>
-                                                <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                                 <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                             </li>
                                         </ul>
@@ -67,8 +65,8 @@
                                 </div>
                             </div>
                             @empty
-                            <div class="col-12 text-center text-danger mt-5">
-                                <h2 class="mt-5">{{__('Product Not Found')}}</h2>
+                            <div class="col-12 text-center mt-5">
+                                <h2 class="mt-5 text-danger">{{__('Product Not Found')}}</h2>
                             </div>
                             @endforelse
                         </div>

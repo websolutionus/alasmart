@@ -7,7 +7,16 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     @yield('title')
     @php
-        $setting = App\Models\Setting::select('logo','logo_two','logo_three','footer_logo','footer_logo_two','footer_logo_three','favicon', 'selected_theme', 'currency_icon','text_direction','blog_left_right','subscriber_title', 'subscriber_description', 'subscriber_image')->first();
+        $setting = App\Models\Setting::with('settinglangfrontend')->first();
+        $languages = App\Models\Language::where('status', 1)->get();
+
+        $front_lang = Session::get('front_lang');
+        $language = App\Models\Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+
+        $lang_direction = App\Models\Language::where('lang_code', $front_lang)->first();
     @endphp
     <link rel="icon" type="image/png" href="{{ asset($setting->favicon) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
@@ -23,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-    @if ($setting->text_direction=='rtl')
+    @if ($lang_direction->lang_direction=='right_to_left')
     <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
     @endif
 
@@ -54,7 +63,7 @@
                             $end_day = date('d', strtotime($end_time));
                         @endphp
 
-                        <p><a target="__blank" href="{{ $discount->link }}"><span>{{ $discount->offer }}% </span> {{ $discount->title }}</a></p>
+                        <p><a target="__blank" href="{{ $discount->link }}"><span>{{ $discount->offer }}% </span> {{ $discount->discountlangfrontend->title }}</a></p>
                         <input type="hidden" id="end_year" value="{{ $end_year }}">
                         <input type="hidden" id="end_month" value="{{ $end_month }}">
                         <input type="hidden" id="end_day" value="{{ $end_day }}">
@@ -74,12 +83,11 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:;">{{__('English')}} <i class="far fa-chevron-down"></i></a>
+                                <a href="javascript:;">{{__('user.Select')}} <i class="far fa-chevron-down"></i></a>
                                 <ul class="droap_language">
-                                    <li><a href="javascript:;">{{__('Japanes')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Chines')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Arabic')}}</a></li>
-                                    <li><a href="javascript:;">{{__('Hindi')}}</a></li>
+                                    @foreach ($languages as $language)
+                                    <li><a href="{{ route('language.change', ['front_lang' => $language->lang_code]) }}">{{ $language->lang_name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li>
@@ -216,7 +224,7 @@
                                 $pages = App\Models\CustomPage::where('status', 1)->get();
                             @endphp
                             @foreach ($pages as $page)
-                            <li><a href="{{ route('custom-page', $page->slug) }}">{{ $page->page_name }}</a></li>
+                            <li><a href="{{ route('custom-page', $page->slug) }}">{{ $page->customlangfrontend->page_name }}</a></li>
                             @endforeach
 
                         </ul>
@@ -257,8 +265,11 @@
             <div class="row">
                 <div class="col-xxl-6 col-sm-10 col-md-9 col-xl-8">
                     <div class="wsus__subscribe_text">
-                        <h2>{{ $setting->subscriber_title }}</h2>
-                        <p>{{ $setting->subscriber_description }}</p>
+                        @php
+                            $setting = App\Models\Setting::with('settinglangfrontend')->first();
+                        @endphp
+                        <h2>{{ $setting->settinglangfrontend->subscriber_title }}</h2>
+                        <p>{{ $setting->settinglangfrontend->subscriber_description }}</p>
                         <form id="fsubscriberForm">
                             @csrf
                             <input type="text" name="email" placeholder="{{__('Enter your email address')}}">
@@ -294,12 +305,12 @@
                         <a class="footer_logo" href="{{ route('home') }}">
                             <img src="{{ asset($setting->footer_logo) }}" alt="Alsmart" class="img-fluid w-100">
                         </a>
-                        <p class="description">{{ $footer->description }}</p>
+                        <p class="description">{{ $footer->footerlangfrontend->description }}</p>
                     </div>
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->first_column }}</h4>
+                        <h4>{{__('Support')}}</h4>
                         <ul>
                             <li><a href="{{ route('contact-us') }}">{{__('user.Contact Us')}}</a></li>
                             <li><a href="{{ route('blogs') }}">{{__('user.Our Blog')}}</a></li>
@@ -310,7 +321,7 @@
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-2">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->second_column }}</h4>
+                        <h4>{{__('Quick Link')}}</h4>
                         <ul>
                             <li><a href="{{ route('dashboard') }}">{{__('user.My Profile')}}</a></li>
                             <li><a href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
@@ -321,7 +332,7 @@
                 </div>
                 <div class="col-xl-2 col-md-4 col-lg-3">
                     <div class="wsus__footer_content">
-                        <h4>{{ $footer->third_column }}</h4>
+                        <h4>{{__('Important Link')}}</h4>
                         <ul>
                             <li><a href="{{ route('register') }}">{{__('Become an author')}}</a></li>
                             <li><a href="{{ route('terms-and-conditions') }}">{{__('Terms & Conditions')}}</a></li>
@@ -364,7 +375,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-6">
                         <div class="wsus__footer_copyright d-flex flex-wrap">
-                            <p>{{ $footer->copyright }}</p>
+                            <p>{{ $footer->footerlangfrontend->copyright }}</p>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6">
@@ -728,7 +739,7 @@
                                     <td class="description">
                                         <h3><a href="{{ url('/product/${value.options.slug}') }}">${value.name}</a></h3>
                                         <p>
-                                            <span>{{__('Item by')}}</span> ${value.options.author}
+                                            <span>{{__('user.Item by')}}</span> ${value.options.author}
                                             <b class="${value.options.variant_name!=null?'':'d-none'}">${value.options.variant_name!=null?value.options.variant_name:''}</b>
                                             <b class="${value.options.price_type!=null?'':'d-none'}">${value.options.price_type!=null?value.options.price_type:''}</b>
                                         </p>

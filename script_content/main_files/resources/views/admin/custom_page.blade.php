@@ -34,7 +34,7 @@
                                 @foreach ($customPages as $index => $customPage)
                                     <tr>
                                         <td>{{ ++$index }}</td>
-                                        <td>{{ $customPage->page_name }}</td>
+                                        <td>{{ $customPage->customlangadmin->page_name }}</td>
                                         <td>
                                             @if($customPage->status == 1)
                                             <a href="javascript:;" onclick="changeCustomPageStatus({{ $customPage->id }})">
@@ -49,7 +49,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                        <a href="{{ route('admin.custom-page.edit',$customPage->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.custom-page.edit', ['custom_page' => $customPage->id, 'lang_code' => 'en']) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-sm" onclick="deleteData({{ $customPage->id }})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>

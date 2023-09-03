@@ -138,8 +138,8 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::post('/subscribe-request', [HomeController::class, 'subscribeRequest'])->name('subscribe-request');
     Route::get('/subscriber-verification/{token}', [HomeController::class, 'subscriberVerifcation'])->name('subscriber-verification');
 
-   Route::get('state-by-country/{id}',[HomeController::class,'stateByCountry'])->name('state-by-country');
-    Route::get('city-by-state/{id}',[HomeController::class,'cityByState'])->name('city-by-state');
+
+   Route::get('language-change',[HomeController::class,'language_change'])->name('language.change');
 
    
     Route::get('/payment/{slug}', [PaymentController::class, 'payment'])->name('payment');
@@ -224,7 +224,8 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('delete-product/{id}', [UserProfileController::class, 'delete_product'])->name('delete-product');
 
     Route::get('download-existing-file/{file_name}', [UserProfileController::class, 'download_existing_file'])->name('download-existing-file');
-
+    Route::get('download-existing-variant-file/{file_name}', [UserProfileController::class, 'download_existing_variant_file'])->name('download-existing-variant-file');
+    
     Route::post('/add/wishlist/{product_id}', [WishlistController::class, 'add_wishlist'])->name('add-wishlist');
     Route::get('/delete/wishlist/{id}', [UserProfileController::class, 'delete_wishlist'])->name('delete-wishlist');
     
@@ -312,6 +313,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::put('update-email-template/{id}',[EmailTemplateController::class,'update'])->name('update-email-template');
 
     Route::resource('blog-category', BlogCategoryController::class);
+    Route::get('blog-category-edit', [BlogCategoryController::class,'blog_category_edit'])->name('blog.category.edit');
     Route::put('blog-category-status/{id}', [BlogCategoryController::class,'changeStatus'])->name('blog.category.status');
 
     Route::resource('blog', BlogController::class);
@@ -419,14 +421,6 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::resource('country', CountryController::class);
     Route::put('country-status/{id}',[CountryController::class,'changeStatus'])->name('country-status');
 
-    Route::resource('state', CountryStateController::class);
-    Route::put('state-status/{id}',[CountryStateController::class,'changeStatus'])->name('state-status');
-
-    Route::resource('city', CityController::class);
-    Route::put('city-status/{id}',[CityController::class,'changeStatus'])->name('city-status');
-
-    Route::get('state-by-country/{id}',[CityController::class,'stateByCountry'])->name('state-by-country');
-    Route::get('city-by-state/{id}',[CityController::class,'cityByState'])->name('city-by-state');
 
     Route::get('seller',[ProviderController::class, 'index'])->name('provider');
     Route::get('seller-show/{id}',[ProviderController::class,'show'])->name('provider-show');
@@ -527,9 +521,19 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::post('store-product-variant/{product_id}', [ProductController::class, 'store_product_variant'])->name('store-product-variant');
     Route::put('update-product-variant/{variant_id}', [ProductController::class, 'update_product_variant'])->name('update-product-variant');
     Route::delete('delete-product-variant/{variant_id}', [ProductController::class, 'delete_product_variant'])->name('delete-product-variant');
+    Route::get('download-existing-file/{file_name}', [ProductController::class, 'download_existing_file'])->name('download-existing-file');
 
 
     Route::get('download-existing-file/{file_name}', [ProductController::class, 'download_existing_file'])->name('download-existing-file');
+
+    Route::get('languages', [LanguageController::class, 'languages'])->name('languages');
+    Route::get('language-create', [LanguageController::class, 'create'])->name('language.create');
+    Route::post('language-store', [LanguageController::class, 'store'])->name('language.store');
+    Route::get('language-edit/{id}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::put('language-update/{id}', [LanguageController::class, 'update'])->name('language.update');
+
+    Route::delete('language-delete/{id}', [LanguageController::class, 'destroy'])->name('language-delete');
+
 });
 
 });

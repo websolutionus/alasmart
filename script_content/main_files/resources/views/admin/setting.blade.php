@@ -97,14 +97,6 @@
                                                           </div>
 
                                                           <div class="form-group">
-                                                              <label for="">{{__('admin.Layout')}}</label>
-                                                              <select name="layout" id="" class="form-control">
-                                                                  <option {{ $setting->text_direction == 'rtl' ? 'selected' : '' }} value="rtl">{{__('admin.RTL (right to left)')}}</option>
-                                                                  <option {{ $setting->text_direction == 'ltr' ? 'selected' : '' }} value="ltr">{{__('admin.LTR (left to right)')}}</option>
-                                                              </select>
-                                                          </div>
-
-                                                          <div class="form-group">
                                                                 <label for="">{{__('Blog')}}</label>
                                                                 <select name="blog_left_right" id="" class="form-control">
                                                                     <option {{ $setting->blog_left_right == 0 ? 'selected' : '' }} value="0">{{__('Default')}}</option>

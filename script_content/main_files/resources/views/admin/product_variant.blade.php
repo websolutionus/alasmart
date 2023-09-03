@@ -16,7 +16,7 @@
                 <div class="card">
                   <div class="card-body">
                     <ul class="nav nav-pills flex-column">
-                      <li class="nav-item"><a href="{{ route('admin.product.edit', $product->id) }}" class="nav-link">{{__('Basic Information')}}</a></li>
+                      <li class="nav-item"><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => 'en']) }}" class="nav-link">{{__('Basic Information')}}</a></li>
 
                       <li class="nav-item"><a href="{{ route('admin.product-variant', $product->id) }}" class="nav-link active">{{__('Variant and price')}}</a></li>
 
