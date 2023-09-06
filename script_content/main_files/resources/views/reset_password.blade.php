@@ -51,8 +51,8 @@
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
                                             <legend>{{__('Password')}}*</legend>
-                                            <input type="password" name="password" placeholder="Password">
-                                            <span><i class="fas fa-eye-slash"></i></span>
+                                            <input type="password" name="password" id="passowrd_input" placeholder="{{__('Password')}}">
+                                            <span id="show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -60,8 +60,8 @@
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
                                             <legend>{{__('Confirm password')}}*</legend>
-                                            <input type="password" name="password_confirmation" placeholder="Confirm password">
-                                            <span><i class="fas fa-eye-slash"></i></span>
+                                            <input type="password" name="password_confirmation" id="c_passowrd_input" placeholder="{{__('Confirm password')}}">
+                                            <span id="c_show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -87,3 +87,42 @@
         RESET PAGE END
     ==============================-->
 @endsection
+
+@push('frontend_js')
+<script>
+    let password_show = false;
+    let c_password_show = false;
+    (function($) {
+        "use strict";
+        
+        $(document).ready(function () {
+            
+            $("#show_password").on("click", function(){
+                password_show = !password_show;
+                if(password_show){
+                    $(this).html('<i class="fas fa-eye"></i>')
+
+                    $('#passowrd_input').prop('type', 'text');
+
+                }else{
+                    $(this).html('<i class="fas fa-eye-slash"></i>')
+                    $('#passowrd_input').prop('type', 'password');
+                }
+            });
+
+            $("#c_show_password").on("click", function(){
+                c_password_show = !c_password_show;
+                if(c_password_show){
+                    $(this).html('<i class="fas fa-eye"></i>')
+
+                    $('#c_passowrd_input').prop('type', 'text');
+
+                }else{
+                    $(this).html('<i class="fas fa-eye-slash"></i>')
+                    $('#c_passowrd_input').prop('type', 'password');
+                }
+            })
+        });
+    })(jQuery);
+</script>
+@endpush

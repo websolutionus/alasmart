@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{__('Seller withdraw')}}</title>
-@endsection
-
-@section('meta')
     <meta name="description" content="{{__('Seller withdraw')}}">
 @endsection
 
@@ -24,7 +21,7 @@
                         </div>
                         <p>{{__('Current Balance')}}</p>
                         <h2>{{ $setting->currency_icon }}{{ $current_balance }}</h2>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">{{__('Withdraw')}}</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">{{__('Make withdraw')}}</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">

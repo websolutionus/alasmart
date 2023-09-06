@@ -48,11 +48,7 @@
                                         <li class="nav-item border rounded mb-1 d-none">
                                             <a class="nav-link" id="pusher-tab" data-toggle="tab" href="#pusherTab" role="tab" aria-controls="pusherTab" aria-selected="true">{{__('admin.Pusher Credential')}}</a>
                                         </li>
-
-
-                                        <li class="nav-item border rounded mb-1">
-                                            <a class="nav-link" id="blog-comment-tab" data-toggle="tab" href="#blogCommentTab" role="tab" aria-controls="blogCommentTab" aria-selected="true">{{__('admin.Blog Comment')}}</a>
-                                        </li>
+                                        
 
                                         <li class="nav-item border rounded mb-1">
                                             <a class="nav-link" id="tawk-chat-tab" data-toggle="tab" href="#tawkChatTab" role="tab" aria-controls="tawkChatTab" aria-selected="true">{{__('admin.Tawk Chat')}}</a>
@@ -880,31 +876,6 @@
                                             </div>
 
 
-
-                                            <div class="tab-pane fade" id="blogCommentTab" role="tabpanel" aria-labelledby="blog-comment-tab">
-                                                <div class="card m-0">
-                                                    <div class="card-body">
-                                                        <form action="{{ route('admin.update-facebook-comment') }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Blog Comment Type')}}</label>
-                                                                <select name="comment_type" id="comment_type" class="form-control">
-                                                                    <option {{ $facebookComment->comment_type == 1 ? 'selected' : '' }} value="1">{{__('admin.Manual Comment')}}</option>
-                                                                    <option {{ $facebookComment->comment_type == 0 ? 'selected' : '' }} value="0">{{__('admin.Facebook Comment')}}</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Facebook App Id')}}</label>
-                                                                <input type="text" class="form-control" name="app_id" value="{{ $facebookComment->app_id }}">
-                                                            </div>
-
-                                                            <button class="btn btn-primary">{{__('admin.Update')}}</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <div class="tab-pane fade" id="tawkChatTab" role="tabpanel" aria-labelledby="tawk-chat-tab">
                                                 <div class="card m-0">

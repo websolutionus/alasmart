@@ -525,7 +525,6 @@ class UserProfileController extends Controller
 
             $product->product_type = $request->product_type;
             $product->author_id = $user->id;
-            $product->slug = $request->slug;
             $product->category_id = $request->category;
             $product->preview_link = $request->preview_link;
             $product->regular_price = $request->regular_price;
@@ -605,7 +604,6 @@ class UserProfileController extends Controller
                 }
             }
             $product->author_id = $user->id;
-            $product->slug = $request->slug;
             $product->preview_link = $request->preview_link;
             $product->regular_price = $request->regular_price;
             $product->category_id = $request->category;

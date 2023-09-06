@@ -2,8 +2,6 @@
 
 @section('title')
     <title>{{__('Create product')}}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{__('Create product')}}">
 @endsection
 

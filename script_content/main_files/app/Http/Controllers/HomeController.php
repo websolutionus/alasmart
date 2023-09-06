@@ -1072,13 +1072,6 @@ class HomeController extends Controller
             $blogs = $blogs->where('blog_category_id', $category->id);
         }
 
-
-        if($request->tag){
-            $blogs = $blogs->whereHas('bloglanguagefrontend',function($query) use ($request){
-                $query->where('tag','LIKE','%'.$request->tag.'%'); 
-            });
-        }
-
         if($request->keyword){
             $blogs = $blogs->whereHas('bloglanguagefrontend',function($query) use ($request){
                 $query->where('title','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%'); 
@@ -1101,8 +1094,8 @@ class HomeController extends Controller
         }
 
         $subscriber = (object) array(
-            'title' => $setting->subscriber_title,
-            'description' => $setting->subscriber_description,
+            'title' => $setting->settinglangfrontend->subscriber_title,
+            'description' => $setting->settinglangfrontend->subscriber_description,
             'image' => $setting->blog_page_subscription_image,
         );
         $recaptchaSetting = GoogleRecaptcha::first();
@@ -1154,8 +1147,8 @@ class HomeController extends Controller
         $related_blogs = Blog::with('admin', 'bloglanguagefrontend')->where('status', 1)->where('blog_category_id', '=', $category_id)->where('id', '!=', $blog->id)->latest()->get()->take(3);
         $setting = Setting::first();
         $subscriber = (object) array(
-            'title' => $setting->subscriber_title,
-            'description' => $setting->subscriber_description,
+            'title' => $setting->settinglangfrontend->subscriber_title,
+            'description' => $setting->settinglangfrontend->subscriber_description,
             'image' => $setting->blog_page_subscription_image,
         );
         $recaptchaSetting = GoogleRecaptcha::first();

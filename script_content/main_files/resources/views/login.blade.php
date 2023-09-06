@@ -53,8 +53,8 @@
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
                                             <legend>{{__('Password')}}*</legend>
-                                            <input type="password" name="password" placeholder="Password">
-                                            <span><i class="fas fa-eye-slash"></i></span>
+                                            <input type="password" name="password" id="passowrd_input" placeholder="Password">
+                                            <span id="show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -99,3 +99,26 @@
         SIGN IN END
     ==============================-->
 @endsection
+
+@push('frontend_js')
+<script>
+    let password_show = false;
+    (function($) {
+        "use strict";
+        $(document).ready(function () {
+            $("#show_password").on("click", function(){
+                password_show = !password_show;
+                if(password_show){
+                    $(this).html('<i class="fas fa-eye"></i>')
+
+                    $('#passowrd_input').prop('type', 'text');
+
+                }else{
+                    $(this).html('<i class="fas fa-eye-slash"></i>')
+                    $('#passowrd_input').prop('type', 'password');
+                }
+            })
+        });
+    })(jQuery);
+</script>
+@endpush

@@ -53,7 +53,6 @@ use App\Models\ProductComment;
 use App\Models\ProductVariant;
 use App\Models\WithdrawMethod;
 use App\Models\CompleteRequest;
-use App\Models\FacebookComment;
 use App\Models\GoogleRecaptcha;
 use App\Models\MessageDocument;
 use App\Models\ProductLanguage;
@@ -160,7 +159,6 @@ class SettingController extends Controller
         $setting = Setting::first();
         $cookieConsent = CookieConsent::first();
         $googleRecaptcha = GoogleRecaptcha::first();
-        $facebookComment = FacebookComment::first();
         $tawkChat = TawkChat::first();
         $googleAnalytic = GoogleAnalytic::first();
         $customPaginations = CustomPagination::all();
@@ -170,7 +168,7 @@ class SettingController extends Controller
         $currencies = Currency::orderBy('name','asc')->get();
         $selected_theme = $setting->selected_theme;
 
-        return view('admin.setting',compact('setting','cookieConsent','googleRecaptcha','facebookComment','tawkChat','googleAnalytic','customPaginations','socialLogin','facebookPixel','currencies','pusher','selected_theme'));
+        return view('admin.setting',compact('setting','cookieConsent','googleRecaptcha','tawkChat','googleAnalytic','customPaginations','socialLogin','facebookPixel','currencies','pusher','selected_theme'));
     }
 
     public function updateThemeColor(Request $request){
@@ -283,26 +281,6 @@ class SettingController extends Controller
         $cookieConsent->btn_text = $request->btn_text;
         $cookieConsent->message = $request->message;
         $cookieConsent->save();
-
-        $notification = trans('admin_validation.Update Successfully');
-        $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->back()->with($notification);
-    }
-
-    public function updateFacebookComment(Request $request){
-        $rules = [
-            'comment_type' => 'required',
-            'app_id' => $request->comment_type == 0 ?  'required' : ''
-        ];
-        $customMessages = [
-            'app_id.required' => trans('admin_validation.App id is required'),
-        ];
-        $this->validate($request, $rules,$customMessages);
-
-        $facebookComment = FacebookComment::first();
-        $facebookComment->comment_type = $request->comment_type;
-        $facebookComment->app_id = $request->app_id;
-        $facebookComment->save();
 
         $notification = trans('admin_validation.Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

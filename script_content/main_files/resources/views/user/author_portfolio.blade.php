@@ -1,8 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('Seller Portfolio')}}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{__('Seller Portfolio')}}">
 @endsection
 
@@ -37,7 +35,6 @@
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
-                                                $wishlist=App\Models\Wishlist::where(['product_id' => $product->id])->get()->count();
                                             @endphp
                                             <li>
                                                 <p>
@@ -57,7 +54,6 @@
                                                 @endif
                                             </li>
                                             <li>
-                                                <span class="love"><i class="far fa-heart"></i> {{ $wishlist }}</span>
                                                 <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
                                             </li>
                                         </ul>

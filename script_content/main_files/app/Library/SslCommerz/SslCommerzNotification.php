@@ -24,8 +24,6 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->config = config('sslcommerz');
         $this->setStoreId($sslcommerz->store_id);
         $this->setStorePassword($sslcommerz->store_password);
-        // $this->setStoreId($this->config['apiCredentials']['store_id']);
-        // $this->setStorePassword($this->config['apiCredentials']['store_password']);
     }
 
     public function orderValidate($post_data, $trx_id = '', $amount = 0, $currency = "BDT")
@@ -152,9 +150,7 @@ class SslCommerzNotification extends AbstractSslCommerz
             $new_data = array();
             if (!empty($pre_define_key)) {
                 foreach ($pre_define_key as $value) {
-                    //                    if (isset($post_data[$value])) {
                     $new_data[$value] = ($post_data[$value]);
-                    //                    }
                 }
             }
             # ADD MD5 OF STORE PASSWORD

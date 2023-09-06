@@ -14,7 +14,7 @@
                     </div>
                     <div class="text wow fadeInRight" data-wow-duration="1s">
                         <h2>{{ html_decode($user->name) }}</h2>
-                        <p class="join"><span>{{__('Joined')}}:</span> {{ Carbon\Carbon::parse($user->created_at)->format('d M, Y') }}</p>
+                        <p class="join"><span>{{__('Joined')}}:</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</p>
                         <p class="skills">{{ html_decode($user->designation) }}</p>
                         @php
                             $review=App\Models\Review::where(['author_id' => $user->id, 'status' => 1])->get()->average('rating');
@@ -47,7 +47,7 @@
                         </li>
                         <li>
                             <h4><i class="fas fa-cloud-download-alt"></i> {{ $total_sold }}</h4>
-                            <p>{{__('Download')}}</p>
+                            <p>{{__('Total sale')}}</p>
                         </li>
                     </ul>
                 </div>

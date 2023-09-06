@@ -148,15 +148,6 @@
                             $sub_total = $sub_total + $order->coupon_coast;
 
                         @endphp
-                        {{-- <div class="invoice-detail-item">
-                          <div class="invoice-detail-name">{{__('admin.Subtotal')}} : {{ $setting->currency_icon }}{{ round($sub_total, 2) }}</div>
-                        </div>
-                        <div class="invoice-detail-item">
-                          <div class="invoice-detail-name">{{__('admin.Discount')}}(-) : {{ $setting->currency_icon }}{{ round($order->coupon_coast, 2) }}</div>
-                        </div>
-                        <div class="invoice-detail-item">
-                          <div class="invoice-detail-name">{{__('admin.Shipping')}} : {{ $setting->currency_icon }}{{ round($order->shipping_cost, 2) }}</div>
-                        </div> --}}
 
                         <hr class="mt-2 mb-2">
                         <div class="invoice-detail-item">
@@ -272,79 +263,10 @@
             </div>
         </div>
     </div>
-
-    {{-- @if ($refundRequest)
-        <div class="modal fade" tabindex="-1" role="dialog" id="declinedRefundRequest-{{ $refundRequest->id }}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">{{__('admin.Refund Request Declined Confirmation')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                    <p>{{__('admin.Are You sure declined this refund request')}}</p>
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <form action="{{ route('admin.refund-request-declined', $refundRequest->id) }}" method="POST">
-                            @csrf
-                            @method("PUT")
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('admin.Yes, Declined')}}</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="approvedRefundRequest-{{ $refundRequest->id }}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">{{__('admin.Refund Request Approved Confirmation')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                    <p>{{__('admin.Are You sure approved this refund request')}}</p>
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <form action="{{ route('admin.refund-request-approved', $refundRequest->id) }}" method="POST">
-                            @csrf
-                            @method("PUT")
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('admin.Yes, Approved')}}</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif --}}
-
-
-    {{-- <script>
-        function deleteData(id){
-            $("#deleteForm").attr("action",'{{ url("admin/delete-order/") }}'+"/"+id)
-        }
-    </script> --}}
     <script>
         function deleteData(id){
             $("#deleteForm").attr("action",'{{ url("admin/delete-order/") }}'+"/"+id)
         }
-
-        // (function($) {
-        //     "use strict";
-        //     $(document).ready(function() {
-
-        //         $(".print_btn").on("click", function(){
-        //             $(".custom_click").click();
-        //             window.print()
-        //         })
-
-        //     });
-        // })(jQuery);
 
     </script>
 @endsection

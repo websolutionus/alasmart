@@ -278,7 +278,7 @@
         SCROLL BUTTON START
     =============================-->
     <div class="wsus__scroll_btn">
-        <p>Up to Top</p>
+        <p>{{__('Up to Top')}}</p>
         <span><i class="far fa-angle-up"></i></span>
     </div>
     <!--============================

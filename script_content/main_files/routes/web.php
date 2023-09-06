@@ -121,7 +121,7 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
     Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
     Route::post('/send-contact-message', [HomeController::class, 'sendContactMessage'])->name('send-contact-message');
-    Route::get('/blogs/{slug?}', [HomeController::class, 'blogs'])->name('blogs');
+    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
     Route::get('/blog/{slug}', [HomeController::class, 'single_blog'])->name('blog');
     Route::post('/blog-comment', [HomeController::class, 'blogComment'])->name('blog-comment');
     Route::post('/product-comment', [HomeController::class, 'productComment'])->name('product-comment');
@@ -285,7 +285,6 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::put('update-cookie-consent',[SettingController::class,'updateCookieConset'])->name('update-cookie-consent');
     Route::put('update-tawk-chat',[SettingController::class,'updateTawkChat'])->name('update-tawk-chat');
     Route::put('update-google-recaptcha',[SettingController::class,'updateGoogleRecaptcha'])->name('update-google-recaptcha');
-    Route::put('update-facebook-comment',[SettingController::class,'updateFacebookComment'])->name('update-facebook-comment');
     
     Route::put('update-google-analytic',[SettingController::class,'updateGoogleAnalytic'])->name('update-google-analytic');
     Route::put('update-custom-pagination',[SettingController::class,'updateCustomPagination'])->name('update-custom-pagination');
@@ -500,8 +499,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::get('active-product', [ProductController::class, 'active_product'])->name('active.product');
     Route::get('pending-product', [ProductController::class, 'pending_product'])->name('pending.product');
 
-    Route::get('product-discount', [ProductController::class, 'product_discount'])->name('discount.product');
-    Route::post('update-product-discount', [ProductController::class, 'update_product_discount'])->name('update.product.discount');
+    Route::get('topbar-offer', [ProductController::class, 'topbar_offer'])->name('topbar.offer');
+    Route::post('update-topbar-offer', [ProductController::class, 'update_topbar_offer'])->name('update.topbar.offer');
 
     Route::get('package-content', [ProductController::class, 'package_content'])->name('package.content');
     Route::post('update-package-content', [ProductController::class, 'update_package_content'])->name('update.package.content');

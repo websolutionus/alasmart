@@ -7,7 +7,7 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Product Discount')}}</h1>
+            <h1>{{__('Topbar Offer')}}</h1>
           </div>
 
           <div class="section-body">
@@ -20,7 +20,7 @@
                       <div class="lang_list_top">
                           <ul class="lang_list">
                               @foreach ($languages as $language)
-                              <li><a href="{{ route('admin.discount.product', ['lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                              <li><a href="{{ route('admin.topbar.offer', ['lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
                               @endforeach
                           </ul>
                       </div>
@@ -37,7 +37,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin.update.product.discount') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.update.topbar.offer') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                             <div class="row">

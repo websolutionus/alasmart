@@ -87,6 +87,7 @@
     <!--=============================
         RELATED PRODUCT START
     ==============================-->
+    @if ($related_products->count() > 0)
     <section class="wsus__related_product wsus__galley_2 pt_115 xs_pt_75 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
@@ -145,6 +146,7 @@
             <a href="{{ route('products') }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
+    @endif
     <!--=============================
         RELATED PRODUCT END
     ==============================-->

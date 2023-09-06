@@ -307,13 +307,6 @@
         @else
             <input type="hidden" name="category" value="" id="category_form">
         @endif
-
-
-        @if (request()->has('tag'))
-            <input type="hidden" name="tag" value="{{ request()->get('tag') }}" id="tag_form">
-        @else
-            <input type="hidden" name="tag" value="" id="tag">
-        @endif
     
     </form>
 
@@ -427,7 +420,7 @@
     }
 
     function getCatTag(tag){
-        $("#tag_form").val(tag);
+        $("#keyword_form").val(tag);
         $("#blogSearchForm").submit();
     }
 

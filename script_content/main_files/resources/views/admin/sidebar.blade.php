@@ -28,7 +28,7 @@
             </li>
           </li>
 
-          <li class="nav-item dropdown {{ Route::is('admin.product.*') || Route::is('admin.active.product') || Route::is('admin.pending.product') || Route::is('admin.discount.product') || Route::is('admin.package.content') || Route::is('admin.product-type.*') || Route::is('admin.product-variant') || Route::is('admin.select-product-type') || Route::is('admin.product-comment.*') || Route::is('admin.product-review.*') || Route::is('admin.product-type-page.*') ? 'active' : '' }}">
+          <li class="nav-item dropdown {{ Route::is('admin.product.*') || Route::is('admin.active.product') || Route::is('admin.pending.product') || Route::is('admin.package.content') || Route::is('admin.product-type.*') || Route::is('admin.product-variant') || Route::is('admin.select-product-type') || Route::is('admin.product-comment.*') || Route::is('admin.product-review.*') || Route::is('admin.product-type-page.*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i><span>{{__('Manage Product')}}</span></a>
 
             <ul class="dropdown-menu">
@@ -39,8 +39,6 @@
                 <li class="{{ Route::is('admin.active.product') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.active.product') }}">{{__('Active Product')}}</a></li>
 
                 <li class="{{ Route::is('admin.pending.product') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.pending.product') }}">{{__('Pending Product')}}</a></li>
-
-                <li class="{{ Route::is('admin.discount.product') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.discount.product', ['lang_code' => 'en']) }}">{{__('Product Discount')}}</a></li>
 
                 <li class="{{ Route::is('admin.package.content') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.package.content', ['lang_code' => 'en']) }}">{{__('Package Content')}}</a></li>
 
@@ -98,7 +96,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown {{ Route::is('admin.slider.*') || Route::is('admin.counter') || Route::is('admin.testimonial.*') || Route::is('admin.template.*') || Route::is('admin.mobile-app') || Route::is('admin.subscriber-section') || Route::is('admin.partner.*') || Route::is('admin.section-content') || Route::is('admin.section-control') || Route::is('admin.why-choose-us') || Route::is('admin.offer') || Route::is('admin.trending-offer') || Route::is('admin.our-team.*') || Route::is('admin.ad') ? 'active' : '' }}">
+          <li class="nav-item dropdown {{ Route::is('admin.slider.*') || Route::is('admin.counter') || Route::is('admin.testimonial.*') || Route::is('admin.template.*') || Route::is('admin.mobile-app') || Route::is('admin.subscriber-section') || Route::is('admin.partner.*') || Route::is('admin.section-content') || Route::is('admin.section-control') || Route::is('admin.why-choose-us') || Route::is('admin.topbar.offer') || Route::is('admin.offer') || Route::is('admin.trending-offer') || Route::is('admin.our-team.*') || Route::is('admin.ad') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i><span>{{__('admin.All Section')}}</span></a>
             <ul class="dropdown-menu">
                 <li class="{{ Route::is('admin.section-content') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.section-content', ['lang_code' => 'en']) }}">{{__('admin.Section Content')}}</a></li>
@@ -110,6 +108,8 @@
                 <li class="{{ Route::is('admin.why-choose-us') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.why-choose-us', ['lang_code' => 'en']) }}">{{__('Why Choose Us')}}</a></li>
 
                 <li class="{{ Route::is('admin.counter') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.counter', ['lang_code' => 'en']) }}">{{__('admin.Counter')}}</a></li>
+
+                <li class="{{ Route::is('admin.topbar.offer') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.topbar.offer', ['lang_code' => 'en']) }}">{{__('Topbar Offer')}}</a></li>
 
                 <li class="{{ Route::is('admin.offer') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.offer', ['lang_code' => 'en']) }}">{{__('Special Offer')}}</a></li>
 

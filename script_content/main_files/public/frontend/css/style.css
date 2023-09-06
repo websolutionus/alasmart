@@ -4694,7 +4694,7 @@ HOME PAGE END
     font-size: 23px;
     padding-top: 10px;
     cursor: pointer;
-    text-align: center;
+    text-align: left;
 }
 
 .wsus__download_item_right p i {

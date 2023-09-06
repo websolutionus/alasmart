@@ -2,8 +2,6 @@
 
 @section('title')
     <title>{{__('Edit product')}}</title>
-@endsection
-@section('meta')
     <meta name="description" content="{{__('Edit product')}}">
 @endsection
 
@@ -279,7 +277,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{__('Create New Variant')}}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{__('Edit variant')}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                             class="fas fa-times"></i></button>
                 </div>

@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{__('Change password')}}</title>
-@endsection
-
-@section('meta')
     <meta name="description" content="{{__('Change password')}}">
 @endsection
 
@@ -26,7 +23,7 @@
                                         <div class="wsus__comment_single_input">
                                             <fieldset>
                                                 <legend>{{__('Current password')}}*</legend>
-                                                <input type="password" name="current_password" placeholder="*****">
+                                                <input type="password" name="current_password" placeholder="{{__('Current password')}}">
                                             </fieldset>
                                         </div>
                                     </div>
@@ -34,7 +31,7 @@
                                         <div class="wsus__comment_single_input">
                                             <fieldset>
                                                 <legend>{{__('Password')}}*</legend>
-                                                <input type="password" name="password" placeholder="*****">
+                                                <input type="password" name="password" placeholder="{{__('Password')}}">
                                             </fieldset>
                                         </div>
                                     </div>
@@ -42,7 +39,7 @@
                                         <div class="wsus__comment_single_input">
                                             <fieldset>
                                                 <legend>{{__('Confirm Password')}}*</legend>
-                                                <input type="password" name="c_password" placeholder="*****">
+                                                <input type="password" name="c_password" placeholder="{{__('Confirm Password')}}">
                                             </fieldset>
                                         </div>
                                     </div>

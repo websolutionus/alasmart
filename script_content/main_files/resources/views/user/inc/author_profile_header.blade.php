@@ -47,7 +47,7 @@
                         </li>
                         <li>
                             <h4><i class="fas fa-cloud-download-alt"></i> {{ $total_sold }}</h4>
-                            <p>{{__('Download')}}</p>
+                            <p>{{__('Total sale')}}</p>
                         </li>
                     </ul>
                 </div>

@@ -49,7 +49,7 @@ class ProductController extends Controller
 
     }
 
-    public function product_discount(Request $request){
+    public function topbar_offer(Request $request){
         $discount = ProductDiscount::first();
         $languages = Language::get();
         $product_discount_language = ProductDiscountLanguage::where(['discount_id' => $discount->id, 'lang_code' => $request->lang_code])->first();
@@ -57,7 +57,8 @@ class ProductController extends Controller
         return view('admin.product_discount', compact('discount', 'languages', 'product_discount_language'));
     }
 
-    public function update_product_discount(Request $request){
+    public function update_topbar_offer(Request $request){
+        
         $rules = [
             'title'=>'required',
             'link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',

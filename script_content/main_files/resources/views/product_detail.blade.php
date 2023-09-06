@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="text">
                                     <h4>{{ html_decode($product->author->name) }}</h4>
-                                    <p>{{__('Signup')}} - {{ Carbon\Carbon::parse($product->author->created_at)->format('F Y') }}</p>
+                                    <p>{{__('Joined')}} - {{ Carbon\Carbon::parse($product->author->created_at)->format('F Y') }}</p>
                                 </div>
                             </div>
                             <ul class="d-flex flex-wrap justify-content-center">
@@ -305,7 +305,7 @@
                                 </li>
                                 <li>
                                     <h4>{{ $total_sold }}</h4>
-                                    <p>{{__('sales')}}</p>
+                                    <p>{{__('Total sale')}}</p>
                                 </li>
                             </ul>
                             <a class="common_btn" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('View Profile')}}</a>
@@ -351,6 +351,7 @@
     <!--=============================
         RELATED PRODUCT START
     ==============================-->
+    @if ($related_products->count() > 0)
     <section class="wsus__related_product wsus__galley_2 pt_115 xs_pt_75 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
@@ -405,6 +406,7 @@
             <a href="{{ route('products', ['category' => $product->category->slug]) }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
+    @endif
     <!--=============================
         RELATED PRODUCT END
     ==============================-->

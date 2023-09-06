@@ -54,14 +54,14 @@
                                 <li><span>{{__('tags')}}:</span></li>
                                 @php
                                     $tag_arr=[];
-                                    $tags=explode(', ', $blog->tag);
+                                    $tags=explode(', ', $blog->bloglanguagefrontend->tag);
                                     foreach($tags as $tag){
                                         $tag_arr[]=$tag; 
                                     }
                                     array_pop($tag_arr);
                                 @endphp
                                 @foreach ($tag_arr as $tag)
-                                    <li><a href="{{ route('blogs', strtolower($tag)) }}">#{{ $tag }}</a></li>
+                                    <li><a href="{{ route('blogs', ['keyword' => strtolower($tag)]) }}">#{{ $tag }}</a></li>
                                 @endforeach
                             </ul>
                             <ul class="share d-flex flex-wrap align-items-center">
@@ -162,7 +162,7 @@
                                         <img src="{{ asset($blog->image) }}" alt="blog" class="img-fluid w-100">
                                     </div>
                                     <div class="text">
-                                        <a href="{{ route('blog', $blog->slug) }}">{{ $blog->title }}</a>
+                                        <a href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                                         <p><i class="fas fa-calendar-alt"></i> {{ Carbon\Carbon::parse($blog->created_at)->format('d M Y') }}</p>
                                     </div>
                                 </li>
@@ -186,7 +186,7 @@
                             <h3>{{__('Popular Tags')}}</h3>
                             <ul class="d-flex flex-wrap">
                                 @foreach ($pupular_tags as $popular_tag)
-                                <li><a href="{{ route('blogs', ['tag' => strtolower($popular_tag->tag_name)]) }}">{{ $popular_tag->tag_name }}</a></li>
+                                <li><a href="{{ route('blogs', ['keyword' => strtolower($popular_tag->tag_name)]) }}">{{ $popular_tag->tag_name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>

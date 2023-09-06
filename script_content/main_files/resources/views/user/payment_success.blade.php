@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{__('Payment Success')}}</title>
-@endsection
-
-@section('title')
     <meta name="description" content="{{__('Payment Success')}}">
 @endsection
 

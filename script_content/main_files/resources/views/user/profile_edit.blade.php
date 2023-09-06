@@ -2,9 +2,6 @@
 
 @section('title')
     <title>{{__('Profile edit')}}</title>
-@endsection
-
-@section('meta')
     <meta name="description" content="{{__('Profile edit')}}">
 @endsection
 

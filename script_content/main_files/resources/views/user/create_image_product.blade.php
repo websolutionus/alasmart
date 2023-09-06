@@ -1,6 +1,7 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('Create product')}}</title>
+    <meta name="description" content="{{__('Create product')}}">
 @endsection
 
 @section('frontend-content')

@@ -1,9 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('user.Dashboard')}}</title>
-@endsection
-
-@section('meta')
     <meta name="description" content="{{__('user.Dashboard')}}">
 @endsection
 

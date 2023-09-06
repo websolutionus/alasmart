@@ -24,9 +24,9 @@
     <div class="wsus__profile_sedebar_item wsus__sidebar_pro_info mt_30">
         <h3>{{__('Personal Info')}}</h3>
         <ul>
-            <li><span>{{__('Contry')}}</span> {{ $user->country }}</li>
+            <li><span>{{__('Country')}}</span> {{ $user->country }}</li>
             <li><span>{{__('City')}}</span> {{ $user->city }}</li>
-            <li><span>{{__('Member Since')}}</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</li>
+            <li><span>{{__('Joined')}}</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</li>
         </ul>
     </div>
 </div>
