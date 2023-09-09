@@ -118,7 +118,7 @@
 
                 <ul class="right_menu d-flex flex-wrap">
                     <li>
-                        <a href="#">
+                        <a href="{{ route('cart-view') }}">
                             <img src="{{ asset('frontend/images/menu_cart_icom.png') }}" alt="user" class="img-fluid w-100">
                             <span id="cartQty">0</span>
                         </a>
@@ -287,7 +287,7 @@
 
 
     <!--jquery library js-->
-    <script src="{{ asset('frontend/js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
     <!--bootstrap js-->
     <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
     <!--font-awesome js-->
@@ -513,6 +513,7 @@
     </script>
     
     <script>
+        "use strict";
             //wishlist start
             function addWishlist(product_id){
                 $.ajax({

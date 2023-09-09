@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use File;
 use Image;
 use App\Models\User;
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\Wishlist;
+use App\Models\OrderItem;
 use App\Models\ProductItem;
 use Illuminate\Http\Request;
 use App\Models\ScriptContent;
+use App\Models\ProductComment;
 use App\Models\ProductVariant;
 use App\Models\ProductDiscount;
 use App\Models\ProductLanguage;
@@ -714,18 +718,26 @@ class ProductController extends Controller
     }
 
     public function delete_product_variant($id){
-        $variant = ProductVariant::find($id);
-        $old_download_file = $variant->file_name;
-        $variant->delete();
-        if($old_download_file){
-            if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file)){
-                unlink(public_path().'/uploads/custom-images/'.$old_download_file);
-            }
-        }
+        $order_item = OrderItem::where('variant_id', $id)->first();
 
-        $notification = trans('Deleted successfully');
-        $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->back()->with($notification);
+        if (!$order_item) {
+            $variant = ProductVariant::find($id);
+            $old_download_file = $variant->file_name;
+            $variant->delete();
+            if($old_download_file){
+                if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file)){
+                    unlink(public_path().'/uploads/custom-images/'.$old_download_file);
+                }
+            }
+
+            $notification = trans('Deleted successfully');
+            $notification = array('messege'=>$notification,'alert-type'=>'success');
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = trans("You can't delete sold product variant");
+            $notification = array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->back()->with($notification);
+        }
     }
 
     public function download_existing_file($file_name){
@@ -774,6 +786,9 @@ class ProductController extends Controller
         }
 
         $product_language = ProductLanguage::where('product_id', $id)->delete();
+        $product_comment = ProductComment::where('product_id', $id)->delete();
+        $product_review = Review::where('product_id', $id)->delete();
+        $wishlist = Wishlist::where('product_id', $id)->delete();
 
         $notification = trans('Deleted successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');

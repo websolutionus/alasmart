@@ -88,7 +88,7 @@
         </section>
       </div>
 <script>
-
+    "use strict";
     function deleteData(id){
         $("#deleteForm").attr("action",'{{ url("admin/delete-service-review/") }}'+"/"+id)
     }

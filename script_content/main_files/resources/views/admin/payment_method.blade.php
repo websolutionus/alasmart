@@ -721,26 +721,4 @@
         </div>
         </section>
       </div>
-
-      <script>
-        function changeCashOnDeliveryStatus(id){
-            var isDemo = "{{ env('APP_MODE') }}"
-            if(isDemo == 'DEMO'){
-                toastr.error('This Is Demo Version. You Can Not Change Anything');
-                return;
-            }
-            $.ajax({
-                type:"put",
-                data: { _token : '{{ csrf_token() }}' },
-                url: "{{ route('admin.update-cash-on-delivery') }}",
-                success:function(response){
-                    toastr.success(response)
-                },
-                error:function(err){
-
-
-                }
-            })
-        }
-    </script>
 @endsection

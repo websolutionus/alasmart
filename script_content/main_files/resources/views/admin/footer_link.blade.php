@@ -142,6 +142,7 @@
       @endforeach
 
 <script>
+    "use strict";
     function deleteData(id){
         $("#deleteForm").attr("action",'{{ url("admin/footer-link/") }}'+"/"+id)
     }

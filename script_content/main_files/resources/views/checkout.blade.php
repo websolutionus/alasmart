@@ -2,7 +2,6 @@
 
 @section('title')
     <title>{{__('user.Check Out')}}</title>
-    <meta name="description" content="{{__('user.Check Out')}}">
 @endsection
 
 @section('frontend-content')

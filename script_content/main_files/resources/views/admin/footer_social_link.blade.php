@@ -130,6 +130,7 @@
       @endforeach
 
 <script>
+  "use strict";
     function deleteData(id){
         $("#deleteForm").attr("action",'{{ url("admin/social-link/") }}'+"/"+id)
     }

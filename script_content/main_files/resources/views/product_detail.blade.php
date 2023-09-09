@@ -2,7 +2,7 @@
 
 @section('title')
     <title>{{ $product->name }}</title>
-    <title>{{ $product->seo_title }}</title>
+    <meta name="title" content="{{ $product->seo_title }}">
     <meta name="description" content="{{ $product->seo_description }}">
 @endsection
 
@@ -332,7 +332,7 @@
                                     @endphp
                                     <p>
                                         @foreach ($tag_arr as $tag)
-                                        <a href="{{ route('products', ['tag' => strtolower(str_replace(' ', '-', $tag))]) }}">{{ html_decode($tag) }},</a>
+                                        <a href="{{ route('products', ['keyword' => strtolower($tag)]) }}">{{ html_decode($tag) }},</a>
                                         @endforeach
                                     </p>
                                 </li>
@@ -578,6 +578,7 @@
 </script>
 
 <script>
+    "use strict";
     $(document).ready(function(){
         $('.s1').on('click', function(){
             $('.s2, .s3, .s4, .s5').removeClass('fas fa-star text-warning');

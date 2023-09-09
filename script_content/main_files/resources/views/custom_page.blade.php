@@ -1,7 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{ $page->page_name }}</title>
-    <meta name="description" content="{{ $page->page_name }}">
 @endsection
 
 @section('frontend-content')

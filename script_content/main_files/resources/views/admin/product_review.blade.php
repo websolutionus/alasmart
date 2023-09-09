@@ -72,6 +72,7 @@
       </div>
 
 <script>
+  "use strict";
     function deleteData(id){
         $("#deleteForm").attr("action",'{{ url("admin/product-review/") }}'+"/"+id)
     }

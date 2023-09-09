@@ -338,6 +338,7 @@
 @endsection
 @push('frontend_js')
 <script>
+    "use strict";
     function deleteData(id){
         $("#deleteForm").attr("action",'{{ url("delete-product-variant/") }}'+"/"+id)
     }

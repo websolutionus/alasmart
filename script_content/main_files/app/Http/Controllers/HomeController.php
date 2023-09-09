@@ -626,10 +626,6 @@ class HomeController extends Controller
 
         $products = Product::with('category','author','productlangfrontend');
 
-        if($request->tag){
-            $products = $products->where('tags','LIKE','%'.$request->tag.'%')->orWhere('description','LIKE','%'.$request->tag.'%');
-        }
-
         if($request->category){
             $category=Category::with('catlangfrontend')->where('slug', $request->category)->first();
             $category_id=$category->id;
@@ -653,7 +649,7 @@ class HomeController extends Controller
         
         if($request->keyword){
             $products = $products->whereHas('productlangfrontend',function($query) use ($request){
-                $query->where('name','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%'); 
+                $query->where('name','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%')->orWhere('tags','LIKE','%'.$request->keyword.'%');
             });
         }
 
@@ -1074,7 +1070,7 @@ class HomeController extends Controller
 
         if($request->keyword){
             $blogs = $blogs->whereHas('bloglanguagefrontend',function($query) use ($request){
-                $query->where('title','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%'); 
+                $query->where('title','LIKE','%'.$request->keyword.'%')->orWhere('description','LIKE','%'.$request->keyword.'%')->orWhere('tag','LIKE','%'.$request->keyword.'%');
             });
         }
 

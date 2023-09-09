@@ -74,21 +74,14 @@
                     <div class="wsus__topbar_language">
                         <ul class="wsus__multi_language d-flex flrx-wrap">
                             <li>
-                                <a href="javascript:;">{{__('USD')}} <i class="far fa-chevron-down"></i></a>
-                                <ul class="droap_language">
-                                    <li><a href="javascript:;">{{__('BDT')}}</a></li>
-                                    <li><a href="javascript:;">{{__('EUR')}}</a></li>
-                                    <li><a href="javascript:;">{{__('AED')}}</a></li>
-                                    <li><a href="javascript:;">{{__('GBP')}}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:;">{{__('user.Select')}} <i class="far fa-chevron-down"></i></a>
-                                <ul class="droap_language">
-                                    @foreach ($languages as $language)
-                                    <li><a href="{{ route('language.change', ['front_lang' => $language->lang_code]) }}">{{ $language->lang_name }}</a></li>
-                                    @endforeach
-                                </ul>
+                                <form action="{{ route('language.change') }}" method="GET">
+                                    @csrf
+                                    <select name="front_lang" onchange="this.form.submit()">
+                                        @foreach ($languages as $language)
+                                        <option value="{{ $language->lang_code }}" {{ $front_lang == $language->lang_code ? 'selected':'' }}>{{ $language->lang_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </li>
                             <li>
                                 <a class="user" href="{{ route('dashboard') }}">
@@ -110,7 +103,7 @@
 
                                     @if (Auth::guard('web')->check())
                                     <li>
-                                        <a href="{{ route('profile-edit') }}"><i class="fas fa-user-edit"></i> {{__('Profile edit')}}</a>
+                                        <a href="{{ route('edit-profile') }}"><i class="fas fa-user-edit"></i> {{__('user.Edit profile')}}</a>
                                     </li>
 
                                     <li>
@@ -239,7 +232,7 @@
 
                 <ul class="right_menu d-flex flex-wrap">
                     <li>
-                        <a href="cart_view.html">
+                        <a href="{{ route('cart-view') }}">
                             <img src="{{ asset('frontend/images/menu_cart_icom.png') }}" alt="user" class="img-fluid w-100">
                             <span id="cartQty">0</span>
                         </a>
@@ -407,7 +400,7 @@
 
 
     <!--jquery library js-->
-    <script src="{{ asset('frontend/js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
     <!--bootstrap js-->
     <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
     <!--font-awesome js-->
@@ -635,6 +628,7 @@
     </script>
     
     <script>
+        "use strict";
             //wishlist start
             function addWishlist(product_id){
                 $.ajax({

@@ -1,7 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('user.Terms And Conditions')}}</title>
-    <meta name="description" content="{{__('user.Terms And Conditions')}}">
 @endsection
 
 @section('frontend-content')

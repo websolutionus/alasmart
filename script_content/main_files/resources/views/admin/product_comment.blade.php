@@ -27,9 +27,6 @@
                                 <tr>
                                     <th width="5%">{{__('admin.SN')}}</th>
                                     <th width="5%">{{__('admin.Name')}}</th>
-                                    <th width="15%">{{__('admin.Email')}}</th>
-                                    <th width="10%">{{__('Phone')}}</th>
-                                    <th width="5%">{{__('Address')}}</th>
                                     <th width="30%">{{__('admin.Comment')}}</th>
                                     <th width="5%">{{__('Product')}}</th>
                                     <th width="15%">{{__('admin.Status')}}</th>
@@ -41,9 +38,6 @@
                                     <tr>
                                         <td>{{ ++$index }}</td>
                                         <td>{{ html_decode($productComment->name) }}</td>
-                                        <td>{{ html_decode($productComment->email) }}</td>
-                                        <td>{{ html_decode($productComment->phone) }}</td>
-                                        <td>{{ html_decode($productComment->address) }}</td>
                                         <td>{{ html_decode($productComment->comment) }}</td>
                                         <td> <a class="btn btn-success btn-sm" href="{{ route('product-detail',$productComment->product->slug) }}">{{__('admin.view')}}</a></td>
                                         <td>

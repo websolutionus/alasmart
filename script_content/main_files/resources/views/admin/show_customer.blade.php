@@ -72,6 +72,7 @@
       </div>
 
 <script>
+    "use strict";
     function manageCustomerStatus(id){
         var isDemo = "{{ env('APP_MODE') }}"
         if(isDemo == 'DEMO'){

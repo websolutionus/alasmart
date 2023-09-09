@@ -67,6 +67,7 @@
 
 
 <script>
+  "use strict";
     function previewThumnailImage(event) {
         var reader = new FileReader();
         reader.onload = function(){

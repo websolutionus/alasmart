@@ -65,17 +65,4 @@
           </div>
         </section>
       </div>
-
-
-<script>
-    function previewThumnailImage(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-            var output = document.getElementById('preview-img');
-            output.src = reader.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    };
-</script>
-
 @endsection

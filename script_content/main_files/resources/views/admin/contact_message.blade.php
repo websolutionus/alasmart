@@ -89,6 +89,7 @@
       </div>
 
       <script>
+        "use strict";
           function handleSaveContactMessage(){
             var isDemo = "{{ env('APP_MODE') }}"
             if(isDemo == 'DEMO'){

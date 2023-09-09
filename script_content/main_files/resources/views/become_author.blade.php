@@ -2,7 +2,6 @@
 
 @section('title')
     <title>{{__('user.Become author')}}</title>
-    <meta name="description" content="{{__('user.Become author')}}">
 @endsection
 
 @section('frontend-content')
@@ -153,7 +152,7 @@
                             <div class="icon">
                                 <img src="{{ asset($category->icon) }}" alt="category" class="img-fluid w-100">
                             </div>
-                            <h3><a href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a></h3>
+                            <h3><a href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->catlangfrontend->name }}</a></h3>
                             @php
                                 $product = App\Models\Product::where('category_id', $category->id)->get();
                             @endphp

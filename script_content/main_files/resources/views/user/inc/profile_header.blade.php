@@ -62,6 +62,6 @@
         </li>
         <li><a class="{{ Route::is('portfolio') ? 'active' : '' }}" href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('Portfolio')}}</a></li>
         <li><a class="{{ Route::is('download') ? 'active' : '' }}" href="{{ route('download') }}"><i class="far fa-download"></i> {{__('Download File')}}</a></li>
-        <li><a class="{{ Route::is('collection') ? 'active' : '' }}" href="{{ route('collection') }}"><i class="far fa-folders"></i> {{__('Collection')}}</a></li>
+        <li><a class="{{ Route::is('collection') ? 'active' : '' }}" href="{{ route('collection') }}"><i class="far fa-heart" aria-hidden="true"></i> {{__('Collection')}}</a></li>
         <li><a class="{{ Route::is('withdraw') ? 'active' : '' }}" href="{{ route('withdraw') }}"><i class="far fa-cogs"></i> {{__('Withdraw')}} </a></li>
     </ul>

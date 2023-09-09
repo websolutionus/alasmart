@@ -13,159 +13,169 @@
         <div class="container">
             <div class="wsus__author_edit_profile_bg">
                 <h2 class="edit_heading">{{__('Edit Your Profile')}}</h2>
-                <form action="{{ route('update-profile') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="wsus__author_edit_form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Name')}}*</legend>
-                                                <input type="text" name="name" value="{{ html_decode($user->name) }}">
-                                            </fieldset>
+                                <form action="{{ route('update-profile') }}" method="POST" enctype="multipart/form-data">
+                                     @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Name')}}*</legend>
+                                                    <input type="text" name="name" value="{{ html_decode($user->name) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Designation')}}*</legend>
-                                                <input type="text" name="designation" value="{{ html_decode($user->designation) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Designation')}}*</legend>
+                                                    <input type="text" name="designation" value="{{ html_decode($user->designation) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Phone')}}*</legend>
-                                                <input type="text" name="phone" value="{{ html_decode($user->phone) }}">
-                                            </fieldset>
+                                        
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Phone')}}*</legend>
+                                                    <input type="text" name="phone" value="{{ html_decode($user->phone) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Country')}}</legend>
-                                                <input type="text" name="country" value="{{ html_decode($user->country) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Country')}}</legend>
+                                                    <input type="text" name="country" value="{{ html_decode($user->country) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('State')}}</legend>
-                                                <input type="text" name="state" value="{{ html_decode($user->phone) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('State')}}</legend>
+                                                    <input type="text" name="state" value="{{ html_decode($user->state) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Town/City')}}</legend>
-                                                <input type="text" name="city" value="{{ html_decode($user->city) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Town/City')}}</legend>
+                                                    <input type="text" name="city" value="{{ html_decode($user->city) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Address')}}*</legend>
-                                                <input type="text" name="address" value="{{ html_decode($user->address) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Address')}}*</legend>
+                                                    <input type="text" name="address" value="{{ html_decode($user->address) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Facebook')}}*</legend>
-                                                <input type="text" name="facebook" value="{{ html_decode($user->facebook )}}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Facebook')}}</legend>
+                                                    <input type="text" name="facebook" value="{{ html_decode($user->facebook )}}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Pinterest')}}*</legend>
-                                                <input type="text" name="pinterest" value="{{ html_decode($user->pinterest) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Pinterest')}}</legend>
+                                                    <input type="text" name="pinterest" value="{{ html_decode($user->pinterest) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Linkedin')}}*</legend>
-                                                <input type="text" name="linkedIn" value="{{ html_decode($user->linkedIn) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Linkedin')}}</legend>
+                                                    <input type="text" name="linkedIn" value="{{ html_decode($user->linkedIn) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Dribbble')}}*</legend>
-                                                <input type="text" name="dribbble" value="{{ html_decode($user->dribbble) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Dribbble')}}</legend>
+                                                    <input type="text" name="dribbble" value="{{ html_decode($user->dribbble) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('Twitter')}}*</legend>
-                                                <input type="text" name="twitter" value="{{ html_decode($user->twitter) }}">
-                                            </fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('Twitter')}}</legend>
+                                                    <input type="text" name="twitter" value="{{ html_decode($user->twitter) }}">
+                                                </fieldset>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-xl-12">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('About Me')}}*</legend>
-                                                <textarea rows="4" name="about_me" id="editor">{{ html_decode($user->about_me) }}</textarea>
-                                            </fieldset>
+                                        <div class="col-xl-12">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('About Me')}}*</legend>
+                                                    <textarea rows="4" name="about_me" id="editor">{{ html_decode($user->about_me) }}</textarea>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xl-12">
+                                            <div class="wsus__comment_single_input">
+                                                <fieldset>
+                                                    <legend>{{__('My Skills')}}*</legend>
+                                                    <textarea rows="4" name="my_skill" rows="7" id="editor">{{ html_decode($user->my_skill) }}</textarea>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="button_area d-flex flex-wrap align-items-center">
+                                                <li><a href="{{ url()->previous() }}" class="cancel">{{__('cancel')}}</a></li>
+                                                <li><button type="submit" class="common_btn">{{__('Save and change')}} </button></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-xl-12">
-                                        <div class="wsus__comment_single_input">
-                                            <fieldset>
-                                                <legend>{{__('My Skills')}}*</legend>
-                                                <textarea rows="4" name="my_skill" rows="7" id="editor">{{ html_decode($user->my_skill) }}</textarea>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <ul class="button_area d-flex flex-wrap align-items-center">
-                                            <li><a href="{{ url()->previous() }}" class="cancel">{{__('cancel')}}</a></li>
-                                            <li><button type="submit" class="common_btn">{{__('Save and change')}} </button></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="wsus__author_edit_photo">
-                                <div class="img">
-                                    <img src="{{ asset('frontend/images/author_upload_img.jpg') }}" alt="upload" class="img-fluid w-100">
+                            <form id="imageUploadForm" enctype="multipart/form-data">
+                                @csrf
+                                <div class="wsus__author_edit_photo">
+                                    <div class="img">
+                                        @if ($user->image!=null)
+                                        <img src="{{ asset($user->image) }}" id="preview-img"  alt="upload" class="img-fluid w-100">
+                                        @elseif($user->provider=='google')
+                                        <img src="{{ asset($user->provider_avatar) }}" id="preview-img"  alt="upload" class="img-fluid w-100">
+                                        @else
+                                        <img src="{{ asset($setting->default_avatar) }}" id="preview-img"  alt="upload" class="img-fluid w-100">
+                                        @endif
+                                    </div>
+                                    <input type="file" name="image" hidden id="user_image" onchange="userImageUpload()">
+                                    <label for="user_image"><i class="fal fa-upload"></i> {{__('Upload a Image')}}</label>
+                                    <h4>{{__('Upload Your Image')}}</h4>
+                                    <p>{{__('Choose a image PNG, JPEG, JPG')}}</p>
+                                    <p><span>{{__('Note')}}:</span> {{__('Max File Size 2MB')}}</p>
+                                    <input type="submit" id="imageformsubmit" class="btn btn-primary d-none" value="submit">
                                 </div>
-                                <input type="file" name="image" hidden id="author_photo">
-                                <label for="author_photo"><i class="fal fa-upload"></i> {{__('Upload a Picture')}}</label>
-                                <h4>{{__('Upload Your Image')}}</h4>
-                                <p>{{__('Choose a image PNG, JPEG, JPG')}}</p>
-                                <p><span>{{__('Note')}}:</span> {{__('Max File Size 2MB')}}</p>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -173,3 +183,41 @@
         AUTHOR EDIT PROFILE END
     ==============================-->
 @endsection
+
+@push('frontend_js')
+<script>
+    "use strict";
+    function userImageUpload() {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('preview-img');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+
+        var button = $("#imageformsubmit");
+            button.click();
+    };
+
+    $(document).ready(function () {
+        $('#imageUploadForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('update-user-photo') }}",
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if(response.status == 1){
+                        toastr.success(response.message)
+                    }
+                },
+                error: function (response) {
+                    if(response.responseJSON.errors.image)toastr.error(response.responseJSON.errors.image[0])
+                }
+            });
+        });
+    });
+</script>
+@endpush

@@ -1,7 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('user.Forget Password')}}</title>
-    <meta name="description" content="{{__('user.Forget Password')}}">
 @endsection
 
 @section('frontend-content')

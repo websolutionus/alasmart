@@ -26,6 +26,7 @@ use App\Events\SellerToUser;
 use Illuminate\Http\Request;
 use App\Models\RefundRequest;
 use App\Models\TicketMessage;
+use App\Models\ProductComment;
 use App\Models\ProductVariant;
 use App\Models\BreadcrumbImage;
 use App\Models\GoogleRecaptcha;
@@ -78,7 +79,7 @@ class UserProfileController extends Controller
         $user = Auth::guard('web')->user();
         $orders=Order::where('user_id', $user->id)->where('order_status', 1)->get();
 
-        $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(2);
+        $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(10);
 
         $active_theme = 'layout';
 
@@ -370,7 +371,6 @@ class UserProfileController extends Controller
         $product = Product::find($id);
         $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
         $languages = Language::get();
-        //return $product;
         $product_variants = ProductVariant::where('product_id', $id)->get();
         $setting=Setting::first();
 
@@ -713,18 +713,26 @@ class UserProfileController extends Controller
     }
 
     public function delete_product_variant($id){
-        $variant = ProductVariant::find($id);
-        $old_download_file = $variant->file_name;
-        $variant->delete();
-        if($old_download_file){
-            if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file)){
-                unlink(public_path().'/uploads/custom-images/'.$old_download_file);
+        $order_item = OrderItem::where('variant_id', $id)->first();
+        
+        if (!$order_item) {
+            $variant = ProductVariant::find($id);
+            $old_download_file = $variant->file_name;
+            $variant->delete();
+            if($old_download_file){
+                if(File::exists(public_path().'/uploads/custom-images/'.$old_download_file)){
+                    unlink(public_path().'/uploads/custom-images/'.$old_download_file);
+                }
             }
-        }
 
-        $notification = trans('Deleted successfully');
-        $notification = array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->back()->with($notification);
+            $notification = trans('Deleted successfully');
+            $notification = array('messege'=>$notification,'alert-type'=>'success');
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = trans("You can't delete sold product variant");
+            $notification = array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->back()->with($notification);
+        }
     }
 
 
@@ -802,6 +810,42 @@ class UserProfileController extends Controller
         $notification = trans('user_validation.Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
+    }
+
+    public function updateUserPhoto(Request $request){
+        $user = Auth::guard('web')->user();
+        $rules = [
+            'image' => 'file|mimes:png,jpg,jpeg|max:2048',
+        ];
+        $customMessages = [
+            'image.mimes' => trans('File type must be: png, jpg,jpeg'),
+            'image.max' => trans('Maximum file size 2MB'),
+        ];
+        $this->validate($request, $rules,$customMessages);
+
+        if($request->file('image')){
+            $old_image=$user->image;
+            $user_image=$request->image;
+            $extention=$user_image->getClientOriginalExtension();
+            $image_name = Str::slug($request->name).date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+            
+            $image_name ='uploads/custom-images/'.$image_name;
+
+            Image::make($user_image)
+                ->save(public_path().'/'.$image_name);
+
+            $user->image=$image_name;
+            $user->save();
+            if($old_image){
+                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+            }
+
+            return response()->json([
+              'status' => 1,
+              'message' => 'Image change successfully',
+            ]);
+        }
+
     }
 
     public function changePassword(){
@@ -1069,12 +1113,17 @@ class UserProfileController extends Controller
                     }
                 }
             }
+
+            $product_language = ProductLanguage::where('product_id', $id)->delete();
+            $product_comment = ProductComment::where('product_id', $id)->delete();
+            $product_review = Review::where('product_id', $id)->delete();
+            $wishlist = Wishlist::where('product_id', $id)->delete();
     
             $notification = trans('Deleted successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{
-            $notification = trans("You can't delete Sold product");
+            $notification = trans("You can't delete sold product");
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }

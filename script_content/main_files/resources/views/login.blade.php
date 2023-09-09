@@ -1,7 +1,6 @@
 @extends($active_theme)
 @section('title')
     <title>{{__('user.Login')}}</title>
-    <meta name="description" content="{{__('user.Login')}}">
 @endsection
 
 @section('frontend-content')
@@ -102,6 +101,7 @@
 
 @push('frontend_js')
 <script>
+    "use strict";
     let password_show = false;
     (function($) {
         "use strict";

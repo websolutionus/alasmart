@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="{{ asset('backend/datetimepicker/jquery.datetimepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/css/iziToast.min.css') }}">
 
-  <script src="{{ asset('backend/js/jquery-3.7.0.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
   <style>
     .fade.in {
         opacity: 1 !important;

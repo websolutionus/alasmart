@@ -2,7 +2,6 @@
 
 @section('title')
     <title>{{__('user.Cart view')}}</title>
-    <meta name="description" content="{{__('user.Cart view')}}">
 @endsection
 
 @section('frontend-content')
