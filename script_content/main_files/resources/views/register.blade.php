@@ -33,7 +33,7 @@
     <section class="wsus__sign_up mt_120 xs_mt_80 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
-                <div class="col-xl-8 col-lg-10 m-auto">
+                <div class="col-xl-7 col-lg-9 m-auto">
                     <div class="wsus__signup_text">
                         <h3>{{__('Register')}}</h3>
                         <p class="description">{{__('Welcome to Alasmart')}}.</p>
@@ -76,7 +76,7 @@
                                 </div>
                                 @if($recaptchaSetting->status==1)
                                     <div class="col-xl-12">
-                                        <div class="wsus__single_com mt_20">
+                                        <div class="wsus__single_com">
                                             <div class="g-recaptcha" data-sitekey="{{ $recaptchaSetting->site_key }}"></div>
                                         </div>
                                     </div>

@@ -96,9 +96,9 @@
                 <div class="row justify-content-between">
                     @foreach ($new_product_section->new_products as $product)
                     <div class="col">
-                        <div class="wsus__recent_product_item">
+                        <a class="wsus__recent_product_item" href="#">
                             <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
-                        </div>
+                        </a>
                     </div>
                     @endforeach
                 </div>

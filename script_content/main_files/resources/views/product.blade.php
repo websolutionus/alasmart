@@ -143,7 +143,7 @@
                             <input type="hidden" id="get_min_price" value="{{ $min_price }}">
                             <input type="hidden" id="get_max_price" value="{{ $max_price }}">
                             <input type="hidden" id="product_max_price" value="{{ $product_max_price }}">
-                            <button class="common_btn mt-3" onclick="priceFilter()"  type="submit">{{__('Filter')}}</button>
+                            <button class="common_btn mt-3 w-100" onclick="priceFilter()"  type="submit">{{__('Filter')}}</button>
                         </div>
                     </div>
                     @if ($ad->status==1)

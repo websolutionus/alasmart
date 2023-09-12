@@ -112,31 +112,31 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="wsus__comment_single_input">
+                        <div class="wsus__comment_single_input wsus__pro_input_check_area">
                             <div class="row">
                                 <div class="col-12">
                                     <h4>{{__('Others feature')}}</h4>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt_10">
                                     <input type="checkbox" name="high_resolution" id="high_resolution"> 
                                     <label for="high_resolution" class="mr-3" >{{__('High Resolution')}}</label>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt_10">
                                     <input type="checkbox" name="cross_browser" id="cross_browser"> 
                                     <label for="cross_browser" class="mr-3" >{{__('Cross Browser')}}</label>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt_10">
                                     <input type="checkbox" name="documentation" id="documentation"> 
                                     <label for="documentation" class="mr-3" >{{__('Documentation')}}</label>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 mt_10">
                                     <input type="checkbox" name="layout" id="layout"> <label for="layout" class="mr-3" >{{__('Responsive')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="wsus__comment_single_input">
+                        <div class="wsus__comment_single_input m-0">
                             <button class="common_btn upload" type="submit">{{__('upload Product')}}</button>
                         </div>
                     </div>

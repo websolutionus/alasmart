@@ -259,6 +259,10 @@ button {
     margin-right: 10px;
 }
 
+.wsus__topbar_countdown p a {
+    color: var(--colorWhite);
+}
+
 .wsus__topbar_countdown p span {
     font-weight: 800;
     font-size: 14px;
@@ -362,6 +366,37 @@ button {
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.wsus__multi_language .select_js {
+    padding-right: 20px;
+}
+
+.wsus__multi_language .nice-select {
+    background: none;
+    border: none;
+    font-size: 14px;
+    padding-left: 0;
+    padding-right: 50px;
+}
+
+.wsus__multi_language .nice-select .current {
+    color: var(--colorWhite);
+    font-weight: 400;
+}
+
+.nice-select .option {
+    padding: 0px 10px;
+}
+
+.wsus__multi_language .nice-select:after {
+    font-size: 10px;
+    color: #fff;
+    right: 30px;
+}
+
+.wsus__multi_language .nice-select .list {
+    margin-top: 0;
 }
 
 .droap_language {
@@ -1037,7 +1072,7 @@ button {
 
 .wsus__gallery_item_text .category {
     font-size: 14px;
-    color: var(--paraColor);
+    color: var(--colorBlue);
     text-transform: capitalize;
     margin-bottom: 5px;
     margin-top: 3px;
@@ -2834,7 +2869,6 @@ HOME PAGE END
 }
 
 .wsus__sidebar_licence h2 {
-    font-weight: 700;
     font-size: 60px;
     color: var(--colorWhite);
     margin-top: 5px;
@@ -2852,7 +2886,6 @@ HOME PAGE END
 }
 
 .wsus__sidebar_licence .feature {
-    margin-bottom: 50px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -3174,7 +3207,7 @@ HOME PAGE END
 
 .wsus__cart_area table tr th {
     text-transform: capitalize;
-    background: #F8F8F8;
+    background: var(--colorWhite) !important;
     font-size: 18px;
     font-weight: 500;
 }
@@ -3225,11 +3258,31 @@ HOME PAGE END
     line-height: 32px;
 }
 
+.wsus__cart_area table tr .description h3 a {
+    color: var(--colorBlack);
+    transition: all linear .3s;
+}
+
+.wsus__cart_area table tr .description h3:hover a {
+    color: var(--colorPrimary);
+    transition: all linear .3s;
+    -webkit-transition: all linear .3s;
+    -moz-transition: all linear .3s;
+    -ms-transition: all linear .3s;
+    -o-transition: all linear .3s;
+}
+
 .wsus__cart_area table tr .description p {
     font-size: 14px;
     color: var(--colorBlue);
     margin-top: 10px;
     font-weight: 400;
+}
+
+.wsus__cart_area table tr .description p b {
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-left: 5px;
 }
 
 .wsus__cart_area table p {
@@ -3314,6 +3367,7 @@ HOME PAGE END
 .wsus__cart_price_list .list_item a {
     width: 100%;
     background: var(--colorYellow);
+    border: 1px solid var(--colorYellow);
     color: var(--colorBlack);
     padding: 13px 25px;
     box-shadow: none;
@@ -3322,7 +3376,6 @@ HOME PAGE END
 }
 
 .wsus__cart_price_list .list_item a:hover {
-    border-color: var(--colorYellow);
     background: transparent;
 }
 
@@ -3429,7 +3482,7 @@ HOME PAGE END
     height: 90px;
     border: 1px solid #D9D9D9;
     border-radius: 5px;
-    /* padding: 15px 15px 15px 70px; */
+    padding: 30px 15px 30px 70px;
     margin-top: 20px;
     position: relative;
     background: var(--colorWhite);
@@ -5196,6 +5249,11 @@ HOME PAGE END
     -o-transition: all linear .3s;
 }
 
+.wsus__categories_item_2 h3 a {
+    display: block;
+    color: var(--colorBlack);
+}
+
 .wsus__categories_item_2 p {
     font-size: 14px;
     text-align: center;
@@ -5205,7 +5263,7 @@ HOME PAGE END
     border-color: var(--colorBlue);
 }
 
-.wsus__categories_item_2:hover h3 {
+.wsus__categories_item_2 h3:hover a {
     color: var(--colorBlue);
 }
 
@@ -5321,7 +5379,7 @@ HOME PAGE END
 
 .wsus__contact_single_info:hover a,
 .wsus__contact_single_info:hover p {
-    color: var(--colorWhite);
+    color: var(--colorWhite) !important;
 }
 
 .wsus__contact_form .wsus__comment_single_input fieldset {
@@ -5521,7 +5579,7 @@ HOME PAGE END
 }
 
 .wsus__trending_theme_item_text ul {
-    margin-top: 45px;
+    margin-top: 30px;
 }
 
 .wsus__trending_theme_item_text ul li span {
@@ -5875,7 +5933,7 @@ HOME PAGE END
     position: relative;
 }
 
-.wsus__new_product_area a {
+.wsus__new_product_area .common_btn {
     position: absolute;
     top: -80px;
     right: 0;
@@ -6978,7 +7036,7 @@ AUTHOR EDIT PROFILE END
 }
 
 .wsus__signup_text .form-check {
-    margin-bottom: 47px;
+    /* margin-bottom: 47px; */
 }
 
 .wsus__signup_text .form-check input {
@@ -7986,7 +8044,7 @@ AUTHOR EDIT PROFILE END
     margin-top: -45px;
 }
 
-.product_icon img{
+.product_icon img {
     width: 70px !important;
 }
 
@@ -8009,23 +8067,73 @@ AUTHOR EDIT PROFILE END
     -o-transition: all linear .3s;
 }
 
-.lang_list_top{
+.lang_list_top {
     overflow: hidden;
-  }
-  
-  .lang_list_top ul{
+}
+
+.lang_list_top ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-  .lang_list_top li {
+}
+
+.lang_list_top li {
     float: left;
-  }
-  .lang_list_top li a {
+}
+
+.lang_list_top li a {
     display: block;
     padding: 8px;
-  }
-  
+}
+
 /*============================
     Devloper custom css end
 ============================*/
+.wsus__pro_input_check_area h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.wsus__pro_input_check_area input {
+    width: auto;
+    margin-right: 5px;
+}
+
+.wsus__comment_single_input .select2-container--default .select2-selection--single {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    height: 37px;
+}
+
+.wsus__comment_single_input .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--colorBlack);
+    font-size: 13px;
+    line-height: 33px;
+    padding-left: 20px;
+}
+
+.wsus__comment_single_input .select2-container {
+    width: 100% !important;
+}
+
+.wsus__comment_single_input .select2-results__option {
+    font-size: 13px;
+}
+
+.wsus__author_edit_profile .tox-tinymce {
+    border: none;
+}
+
+.wsus__comment_single_input .product_icon {
+    margin-top: 5px;
+}
+
+.g-recaptcha {
+    overflow: hidden;
+}
+
+.g-recaptcha div {
+    width: 100% !important;
+}

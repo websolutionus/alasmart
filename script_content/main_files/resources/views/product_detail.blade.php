@@ -104,13 +104,13 @@
                                     @endforeach
                                 </div>
 
-                                @if ($productComments->hasPages())
                                 <div class="wsus__pagination">
-                                    <div class="row">
-                                    {{ $productComments->links('custom_pagination') }}
-                                    </div>
+                                    @if ($productComments->hasPages())
+                                        <div class="row">
+                                            {{ $productComments->links('custom_pagination') }}
+                                        </div>
+                                    @endif
                                 </div>
-                                @endif
                                 <form class="wsus__comment_input_area" id="productCommentForm" method="POST">
                                     @csrf
                                     <h3>{{__('Leave a Comment')}}</h3>
@@ -178,13 +178,13 @@
                                     @endforeach
                                 </div>
                                 
-                                @if ($productReviews->hasPages())
                                 <div class="wsus__pagination">
-                                    <div class="row">
-                                    {{ $productReviews->links('custom_pagination') }}
-                                    </div>
+                                    @if ($productReviews->hasPages())
+                                        <div class="row">
+                                            {{ $productReviews->links('custom_pagination') }}
+                                        </div>
+                                    @endif
                                 </div>
-                                @endif
 
                                 <form class="wsus__comment_input_area" id="productReviewForm" method="POST">
                                     @csrf
@@ -266,7 +266,7 @@
                             <input type="hidden" value="{{ $product->thumbnail_image }}" id="product_image">
                             <input type="hidden" value="{{ $product->author->name }}" id="author_name">
                             <input type="hidden" value="{{ $product->author->id }}" id="author_id">
-                            <ul class="button_area d-flex flex-wrap {{ $product->product_type=='script' ? '':'mt-3' }}">
+                            <ul class="button_area mt_50 d-flex flex-wrap {{ $product->product_type=='script' ? '':'mt-3' }}">
                                 <li><a class="live" target="__blank" href="{{ $product->preview_link }}">{{__('Live Preview')}}</a></li>
                                 <li><a class="common_btn" href="javascript:;" onclick="addToCard({{ $product->id }})">{{__('add to cart')}}</a></li>
                             </ul>
@@ -308,7 +308,7 @@
                                     <p>{{__('Total sale')}}</p>
                                 </li>
                             </ul>
-                            <a class="common_btn" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('View Profile')}}</a>
+                            <a class="common_btn w-100" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('View Profile')}}</a>
                         </div>
 
                         <div class="wsus__sidebar_pro_info mt_30">

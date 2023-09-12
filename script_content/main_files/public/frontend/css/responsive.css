@@ -318,6 +318,11 @@
     .upload_product_img {
         height: auto;
     }
+
+    .wsus__footer_content h4,
+    .wsus__footer_counter h4 {
+        font-size: 22px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -2455,7 +2460,7 @@
         height: auto;
     }
 
-    .wsus__new_product_area a {
+    .wsus__new_product_area .common_btn {
         position: unset;
         margin-top: 20px;
     }
@@ -3527,7 +3532,7 @@
         height: auto;
     }
 
-    .wsus__new_product_area a {
+    .wsus__new_product_area .common_btn {
         position: unset;
         margin-top: 20px;
     }

@@ -31,7 +31,7 @@
     <section class="wsus__sign_up wsus__sign_in mt_120 xs_mt_80 pb_120 xs_pb_80">
         <div class="container">
             <div class="row">
-                <div class="col-xl-8 col-lg-10 m-auto">
+                <div class="col-xl-7 col-lg-9 m-auto">
                     <div class="wsus__signup_text">
                         <h3>{{__('Reset Password')}}</h3>
                         <p class="description">{{__('Reset your Password to initiate the process of recovering access to your account.')}}</p>

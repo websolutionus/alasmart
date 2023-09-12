@@ -81,7 +81,7 @@
                             <li>
                                 <form action="{{ route('language.change') }}" method="GET">
                                     @csrf
-                                    <select name="front_lang" onchange="this.form.submit()">
+                                    <select class="select_js" name="front_lang" onchange="this.form.submit()">
                                         @foreach ($languages as $language)
                                         <option value="{{ $language->lang_code }}" {{ $front_lang == $language->lang_code ? 'selected':'' }}>{{ $language->lang_name }}</option>
                                         @endforeach
