@@ -201,7 +201,7 @@
                                 @endphp
                                 <div class="col-12">
                                     <div class="row">
-                                        
+
                                         @foreach ($trending_section->trending_products as $trending_index => $trending_product)
                                             @if ($latest_index <= $trending_index)
                                                 @if ($number_of_item <= 4)
@@ -250,7 +250,7 @@
                         </div>
                         <div class="wsus__trending_theme_single_text">
                             <p>{{ $trending_section->trending_offer_title1 }}</p>
-                            <a class="title" href="#">{{ $trending_section->trending_offer_title2 }}</a>
+                            <a class="title" href="{{ $trending_section->trending_offer_link }}">{{ $trending_section->trending_offer_title2 }}</a>
                             <a class="common_btn" target="_blank" href="{{ $trending_section->trending_offer_link }}">{{__('user.Purchase Now')}}</a>
                         </div>
                     </div>
@@ -428,7 +428,7 @@
                 </div>
                 <div class="col-xl-6 col-md-7">
                     <div class="wsus__download_2_text">
-                        <h2>{{ $mobile_app->title1 }} <span>{{ $mobile_app->title2 }}</span> {{ $mobile_app->title3 }}</h2>
+                        <h2>{!! strip_tags(clean($mobile_app->title1),'<span>') !!}</h2>
                         <p>{{ $mobile_app->description }}</p>
                         <ul class="d-flex flex-wrap">
                             <li>
@@ -482,7 +482,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__go_offer">
-                        <p>{{ $partner_section->offer_title1 }} <span>{{ $partner_section->offer_title2 }}</span></p>
+                        <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
                         <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('user.Go to Offer page')}}</a>
                     </div>
                 </div>

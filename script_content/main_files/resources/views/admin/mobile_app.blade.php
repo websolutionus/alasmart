@@ -28,13 +28,13 @@
                                     @endforeach
                                 </ul>
                             </div>
-    
+
                             <div class="alert alert-danger mt-2" role="alert">
                                 @php
                                     $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
                                 @endphp
-                                <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
-                            </div> 
+                                <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p>
+                            </div>
                           </div>
                         </div>
                     </div>
@@ -73,19 +73,13 @@
                                     </div>
                                     @endif
 
+                                    @php
+                                        $notify = trans('For colorfull text, write the text inside "<span>colorfull text here</span>" tag');
+                                    @endphp
+
                                     <div class="form-group">
-                                        <label for="">{{__('Title one')}} <span class="text-danger">*</span> </label>
+                                        <label for="">{{__('Title')}} <span class="text-danger">({{ $notify }}) </span> <span class="text-danger">*</span> </label>
                                         <input type="text" name="title1" class="form-control" value="{{ $mobile_app->title1 }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">{{__('Title two')}} <span class="text-danger">*</span> </label>
-                                        <input type="text" name="title2" class="form-control" value="{{ $mobile_app->title2 }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">{{__('Title three')}} <span class="text-danger">*</span> </label>
-                                        <input type="text" name="title3" class="form-control" value="{{ $mobile_app->title3 }}">
                                     </div>
 
                                     <div class="form-group">
@@ -185,7 +179,7 @@
                                             <label for="">{{__('Title')}} <span class="text-danger">*</span> </label>
                                             <input type="text" name="home3_title" class="form-control" value="{{ $mobile_app->home3_title }}">
                                         </div>
-    
+
                                         <div class="form-group">
                                             <label for="">{{__('Description')}} <span class="text-danger">*</span></label>
                                             <textarea name="home3_desc" class="form-control text-area-5" id="" cols="30" rows="10">{{ $mobile_app->home3_desc }}</textarea>

@@ -10,6 +10,10 @@
             <h1>{{__('Special Offer')}}</h1>
           </div>
 
+          @php
+            $notify = trans('For bold text, write the text inside "<span>bold text here</span>" tag');
+        @endphp
+
           <div class="section-body">
             <div class="row mt-4">
                 <div class="col-12">
@@ -29,10 +33,10 @@
                             @php
                                 $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
                             @endphp
-                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
-                        </div> 
-                      </div>
-                    </div>
+                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p>
+                        </div>
+                       </div>
+                     </div>
                 </div>
                 <div class="col-12">
                   <div class="card">
@@ -55,14 +59,10 @@
                             @if ($home2 || $home3)
                             <div class="row">
                                 <div class="form-group col-12">
-                                    <label>{{__('Title one')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Title one')}} <span class="text-danger">({{ $notify }}) </span> <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="title1" value="{{ $offer->title1 }}">
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label>{{__('Title two')}} <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="title2" value="{{ $offer->title2 }}">
-                                </div>
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
                                     <label>{{__('Link')}} <span class="text-danger">*</span></label>
@@ -158,17 +158,12 @@
                                 @endif
 
                                 <div class="form-group col-12">
-                                    <label for="">{{__('Title one')}} <span class="text-danger">*</span></label>
+                                    <label for="">{{__('Header')}} <span class="text-danger">({{ $notify }}) </span> <span class="text-danger">*</span></label>
                                     <input type="text" name="about_offer_title1" class="form-control" value="{{ $offer->about_offer_title1 }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label for="">{{__('Title two')}} <span class="text-danger">*</span></label>
-                                    <input type="text" name="about_offer_title2" class="form-control" value="{{ $offer->about_offer_title2 }}">
-                                </div>
-
-                                <div class="form-group col-12">
-                                    <label for="">{{__('Title three')}} <span class="text-danger">*</span></label>
+                                    <label for="">{{__('Title')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="about_offer_title3" class="form-control" value="{{ $offer->about_offer_title3 }}">
                                 </div>
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))

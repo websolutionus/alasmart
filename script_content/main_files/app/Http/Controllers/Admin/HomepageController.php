@@ -230,8 +230,6 @@ class HomepageController extends Controller
             'home2_title'=>'required',
             'home2_desc'=>'required',
             'title1'=>'required',
-            'title2'=>'required',
-            'title3'=>'required',
             'description'=>'required',
             'home3_title'=>'required',
             'home3_desc'=>'required',
@@ -255,7 +253,7 @@ class HomepageController extends Controller
         $homepage = Homepage::with('homelangadmin')->first();
         $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
-        
+
         if($request->app_store){
             $homepage->app_play_store_link = $request->play_store;
             $homepage->save();
@@ -340,8 +338,6 @@ class HomepageController extends Controller
         $homepage_language->app_home2_title = $request->home2_title;
         $homepage_language->app_home2_desc = $request->home2_desc;
         $homepage_language->app_title1 = $request->title1;
-        $homepage_language->app_title2 = $request->title2;
-        $homepage_language->app_title3 = $request->title3;
         $homepage_language->app_description = $request->description;
         $homepage_language->app_home3_title = $request->home3_title;
         $homepage_language->app_home3_desc = $request->home3_desc;
@@ -435,7 +431,7 @@ class HomepageController extends Controller
         if($request->counter4_value){
             $homepage->counter4_value = $request->counter4_value;
         }
-        
+
         $homepage->save();
 
         if($request->counter_icon1){
@@ -605,7 +601,6 @@ class HomepageController extends Controller
     public function update_offer(Request $request){
         $rules = [
             'title1'=>'required',
-            'title2'=>'required',
             'link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'home3_item1_title'=>'required',
             'home3_item1_description'=>'required',
@@ -614,7 +609,6 @@ class HomepageController extends Controller
             'home3_item2_description'=>'required',
             'home3_item2_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'about_offer_title1'=>'required',
-            'about_offer_title2'=>'required',
             'about_offer_title3'=>'required',
             'about_offer_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
@@ -645,7 +639,7 @@ class HomepageController extends Controller
         if($request->home3_item1_link){
             $homepage->offer_home3_item1_link = $request->home3_item1_link;
         }
-        
+
         if($request->home3_item2_link){
             $homepage->offer_home3_item2_link = $request->home3_item2_link;
         }
@@ -686,13 +680,11 @@ class HomepageController extends Controller
 
 
         $homepage_language->offer_title1 = $request->title1;
-        $homepage_language->offer_title2 = $request->title2;
         $homepage_language->offer_home3_item1_title = $request->home3_item1_title;
         $homepage_language->offer_home3_item1_description = $request->home3_item1_description;
         $homepage_language->offer_home3_item2_title = $request->home3_item2_title;
         $homepage_language->offer_home3_item2_description = $request->home3_item2_description;
         $homepage_language->about_offer_title1 = $request->about_offer_title1;
-        $homepage_language->about_offer_title2 = $request->about_offer_title2;
         $homepage_language->about_offer_title3 = $request->about_offer_title3;
 
         $homepage_language->save();
@@ -734,7 +726,7 @@ class HomepageController extends Controller
         $this->validate($request, $rules,$customMessages);
 
         $homepage = Homepage::with('homelangadmin')->first();
-        
+
         $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
         if(session()->get('admin_lang') == $request->lang_code){

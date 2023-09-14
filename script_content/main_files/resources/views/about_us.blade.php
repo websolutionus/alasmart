@@ -98,7 +98,7 @@
                 @endforeach
             </div>
             <div class="wsus__purchase" style="background: url({{ asset($our_teem_section->offer_background) }});">
-                <h3>{{ $our_teem_section->offer_title1 }} <span>{{ $our_teem_section->offer_title2 }}</span></h3>
+                <h3> {!! strip_tags(clean($our_teem_section->offer_title1),'<span>') !!}</h3>
                 <p>{{ $our_teem_section->offer_title3 }}</p>
                 <a target="_blank" href="{{ $our_teem_section->offer_link }}">{{__('user.Purchase Here')}}</a>
             </div>
