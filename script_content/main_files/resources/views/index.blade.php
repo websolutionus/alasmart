@@ -150,6 +150,7 @@
                                     @endif
                                 </li>
                                 <li>
+                                    <span class="love"><i class="far fa-heart"></i> 102</span>
                                     <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                 </li>
                             </ul>
@@ -267,43 +268,45 @@
     <!--=============================
         ABOUT COUNTER START
     ==============================-->
-    <section class="wsus__about_counter pt_110 xs_pt_70">
+    <section class="wsus__about_counter pt_120 xs_pt_80">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="wsus__single_counter">
-                        <div class="icon">
-                            <img src="{{ asset($counter_section->home1_icon1) }}" alt="counter" class="img-fluid w-100">
+            <div class="wsus__about_counter_bg">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="wsus__single_counter">
+                            <div class="icon">
+                                <img src="{{ asset($counter_section->home1_icon1) }}" alt="counter" class="img-fluid w-100">
+                            </div>
+                            <h2 class="counter">{{ $counter_section->counter1_value }}</h2>
+                            <p>{{ $counter_section->counter1_title }}</p>
                         </div>
-                        <h2 class="counter">{{ $counter_section->counter1_value }}</h2>
-                        <p>{{ $counter_section->counter1_title }}</p>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="wsus__single_counter">
-                        <div class="icon">
-                            <img src="{{ asset($counter_section->home1_icon2) }}" alt="counter" class="img-fluid w-100">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="wsus__single_counter">
+                            <div class="icon">
+                                <img src="{{ asset($counter_section->home1_icon2) }}" alt="counter" class="img-fluid w-100">
+                            </div>
+                            <h2 class="counter">{{ $counter_section->counter2_value }}</h2>
+                            <p>{{ $counter_section->counter2_title }}</p>
                         </div>
-                        <h2 class="counter">{{ $counter_section->counter2_value }}</h2>
-                        <p>{{ $counter_section->counter2_title }}</p>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="wsus__single_counter">
-                        <div class="icon">
-                            <img src="{{ asset($counter_section->home1_icon3) }}" alt="counter" class="img-fluid w-100">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="wsus__single_counter">
+                            <div class="icon">
+                                <img src="{{ asset($counter_section->home1_icon3) }}" alt="counter" class="img-fluid w-100">
+                            </div>
+                            <h2 class="counter">{{ $counter_section->counter3_value }}</h2>
+                            <p>{{ $counter_section->counter3_title }}</p>
                         </div>
-                        <h2 class="counter">{{ $counter_section->counter3_value }}</h2>
-                        <p>{{ $counter_section->counter3_title }}</p>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="wsus__single_counter">
-                        <div class="icon">
-                            <img src="{{ asset($counter_section->home1_icon4) }}" alt="counter" class="img-fluid w-100">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="wsus__single_counter">
+                            <div class="icon">
+                                <img src="{{ asset($counter_section->home1_icon4) }}" alt="counter" class="img-fluid w-100">
+                            </div>
+                            <h2 class="counter">{{ $counter_section->counter4_value }}</h2>
+                            <p>{{ $counter_section->counter4_title }}</p>
                         </div>
-                        <h2 class="counter">{{ $counter_section->counter4_value }}</h2>
-                        <p>{{ $counter_section->counter4_title }}</p>
                     </div>
                 </div>
             </div>
@@ -344,6 +347,12 @@
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
                             @endphp
+
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+
+                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                            
                             <p class="rating">
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
@@ -360,10 +369,12 @@
                             </p>
                              @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
-                            <span class="download"><i class="far fa-download"></i>{{ $sale }} {{__('user.Sale')}}</span>
+                            
+                            <div class="like_and_sell">
+                                <span class="love"><i class="far fa-heart"></i> 102</span>
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -386,15 +397,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-7 col-lg-8 m-auto">
-                    <div class="wsus__section_heading mb_50">
+                    <div class="wsus__section_heading mb_25">
                         <h5>{{ $template_section->title }}</h5>
                         <h2>{{ $template_section->description }}</h2>
                     </div>
                 </div>
             </div>
-            <div class="row template_slider">
+            <div class="row">
                 @foreach ($template_section->templates as $template)
-                <div class="col-xl-4">
+                <div class="col-xl-3">
                     <div class="wsus__template_item">
                         <div class="icon">
                             <img src="{{ asset($template->image) }}" alt="template" class="img-fluid w-100">

@@ -82,7 +82,7 @@ button {
     --colorWhite: #ffffff;
     --ratingColor: #FFC107;
     --colorYellow: #F2C94C;
-    --gradientColor: linear-gradient(135deg, #10F 0%, #0086FF 100%);
+    --gradientColor: linear-gradient(127deg, #8D49FE 0%, #013CB0 100.67%);
     --boxShadow: 0px 6px 60px 5px rgba(0, 0, 0, 0.08);
 }
 
@@ -116,7 +116,7 @@ button {
 }
 
 .common_btn:hover {
-    background: linear-gradient(126.79deg, #0086FF 0%, #1100FF 100.67%);
+    background: linear-gradient(127deg, #8D49FE 0%, #013CB0 100.67%);
 }
 
 .view_all {
@@ -1058,7 +1058,7 @@ button {
 }
 
 .wsus__gallery_item_overlay li:last-child a {
-    background: #FEB101;
+    background: #FFB321;
 }
 
 .wsus__gallery_item_overlay li:last-child a:hover {
@@ -1162,6 +1162,7 @@ button {
 
 .gallery_filter {
     justify-content: center;
+    gap: 15px;
 }
 
 .gallery_filter button {
@@ -1169,8 +1170,7 @@ button {
     font-weight: 400;
     text-transform: capitalize;
     border-radius: 5px;
-    padding: 14px 15px;
-    margin: 10px 5px 0px 5px;
+    padding: 14px 20px;
     background: var(--colorWhite);
     box-shadow: var(--boxShadow);
     transition: all linear .3s;
@@ -1185,7 +1185,7 @@ button {
 }
 
 .gallery_filter button.active {
-    background: linear-gradient(126.79deg, #1100FF 0%, #0086FF 100.67%);
+    background: linear-gradient(127deg, #8D49FE 0%, #013CB0 100.67%);
     color: var(--colorWhite);
 }
 
@@ -1196,6 +1196,13 @@ button {
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+}
+
+.wsus__about_counter_bg {
+    border-radius: 5px;
+    background: var(--colorWhite);
+    box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.05);
+    padding: 70px 0px;
 }
 
 .wsus__counter_overlay {
@@ -1318,7 +1325,7 @@ button {
 
 .wsus__galley_2 .wsus__gallery_item_text .rating {
     color: var(--ratingColor);
-    margin-bottom: 18px;
+    margin-top: 23px;
 }
 
 .wsus__galley_2 .wsus__gallery_item_text .rating span {
@@ -1326,7 +1333,17 @@ button {
 }
 
 .wsus__galley_2 .wsus__gallery_item_text .price {
-    top: 20px;
+    top: -16px;
+}
+
+.wsus__galley_2 .wsus__gallery_item_text .like_and_sell {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.wsus__galley_2 .wsus__gallery_item_text span i {
+    color: var(--colorBlack);
 }
 
 .wsus__galley_2 .wsus__gallery_item_text .download {
@@ -1335,9 +1352,10 @@ button {
     color: var(--paraColor);
     padding: 7px 10px;
     margin-left: 10px;
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
+}
+
+.wsus__galley_2 .wsus__gallery_item_text .download i {
+    margin-right: 5px;
 }
 
 .wsus__galley_2 .wsus__gallery_item_text .category {
@@ -5215,7 +5233,7 @@ HOME PAGE END
     width: auto;
     height: auto;
     padding: 30px;
-    background: #EFF3F8;
+    background: #F6F8FF;
     border-radius: 5px;
     border-bottom: 5px solid #183ebd6b;
     margin: 0px 12px 0px 12px;
@@ -5231,8 +5249,7 @@ HOME PAGE END
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: var(--colorWhite);
-    padding: 25px;
+    padding: 15px;
     margin: 0 auto;
 }
 
@@ -5486,7 +5503,7 @@ HOME PAGE END
     position: absolute;
     top: 4px;
     right: 4px;
-    padding: 7.5px 30px;
+    padding: 7.5px 25px;
     border-radius: 4px;
 }
 
@@ -5654,7 +5671,8 @@ HOME PAGE END
 .wsus__template_item {
     padding: 40px;
     background: var(--colorWhite);
-    margin: 0px 12px 0px 12px;
+    margin-top: 25px;
+    ;
     text-align: center;
     border: 1px solid var(--colorWhite);
     border-radius: 5px;
@@ -5929,6 +5947,12 @@ HOME PAGE END
     margin-top: 25px;
 }
 
+.new_bg_area {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
 .wsus__new_product_area {
     position: relative;
 }
@@ -5955,7 +5979,7 @@ HOME PAGE END
 }
 
 .wsus__why_choose_3 {
-    background: var(--colorWhite);
+    background: transparent;
 }
 
 .wsus__megapack {
@@ -7513,7 +7537,7 @@ AUTHOR EDIT PROFILE END
 }
 
 .wsus__profile_order_search form button:hover {
-    background: linear-gradient(126.79deg, #0086FF 0%, #1100FF 100.67%)
+    background: linear-gradient(127deg, #8D49FE 0%, #013CB0 100.67%)
 }
 
 .wsus__profile_order_table table {

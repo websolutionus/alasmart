@@ -1,10 +1,10 @@
-$(function (){
+$(function () {
 
     "use strict";
     let end_year = $('#end_year').val();
     let end_month = $('#end_month').val();
     let end_day = $('#end_day').val();
-    
+
     //======MENU FIX========
     if ($('.main_menu').offset() != undefined) {
         $(window).bind('scroll', function () {
@@ -17,8 +17,8 @@ $(function (){
     }
 
     //=======COUNTDOWN======
-    
-    
+
+
     simplyCountdown('.simply-countdown-one', {
         year: end_year,
         month: end_month,
@@ -269,7 +269,7 @@ $(function (){
 
     //=======TEMPLATE SLIDER======
     $('.template_slider').slick({
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,
@@ -280,13 +280,13 @@ $(function (){
             {
                 breakpoint: 1400,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 4,
                 }
             },
             {
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                 }
             },
             {

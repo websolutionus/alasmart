@@ -77,89 +77,93 @@
     ==============================-->
     @endif
 
+    <div class="new_bg_area" style="background: url({{ asset('frontend/images/new_bg.jpg') }});">
 
-    @if ($new_product_section->visibility)
-    <!--=============================
-        NEW PRODUCT START
-    ==============================-->
-    <section class="wsus__new_product pt_115 xs_pt_75">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-7 col-lg-6">
-                    <div class="wsus__section_heading heading_left mb_15">
-                        <h5>{{ $new_product_section->title }}</h5>
-                        <h2>{{ $new_product_section->description }}</h2>
+        @if ($new_product_section->visibility)
+        <!--=============================
+            NEW PRODUCT START
+        ==============================-->
+        <section class="wsus__new_product pt_115 xs_pt_75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-7 col-lg-6">
+                        <div class="wsus__section_heading heading_left mb_15">
+                            <h5>{{ $new_product_section->title }}</h5>
+                            <h2>{{ $new_product_section->description }}</h2>
+                        </div>
                     </div>
                 </div>
+                <div class="wsus__new_product_area">
+                    <div class="row justify-content-between">
+                        @foreach ($new_product_section->new_products as $product)
+                        <div class="col">
+                            <a class="wsus__recent_product_item" href="#">
+                                <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                    <a href="{{ route('products', ['new' => 1]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right" aria-hidden="true"></i></a>
+                </div>
             </div>
-            <div class="wsus__new_product_area">
+        </section>
+        <!--=============================
+            NEW PRODUCT END
+        ==============================-->
+        @endif
+
+        @if ($why_choose_us->visibility)
+        <!--=============================
+            WHY CHOOSE 3 START
+        ==============================-->
+        <section class="wsus__why_choose_3 wsus__why_choose_2 pt_115 xs_pt_75 pb_115 xs_pb_75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-7 m-auto">
+                        <div class="wsus__section_heading mb_15">
+                            <h5>{{ $why_choose_us->title1 }}</h5>
+                            <h2>{{ $why_choose_us->title2 }}</h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="row justify-content-between">
-                    @foreach ($new_product_section->new_products as $product)
-                    <div class="col">
-                        <a class="wsus__recent_product_item" href="#">
-                            <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
-                        </a>
+                    <div class="col-xl-4 col-sm-6 col-lg-4">
+                        <div class="wsus__why_choose_item">
+                            <div class="img">
+                                <img src="{{ asset($why_choose_us->home3_icon1) }}" alt="why choose" class="img-fluid w-100">
+                            </div>
+                            <h4>{{ $why_choose_us->home3_title1 }}</h4>
+                            <p>{{ $why_choose_us->home3_description1 }}</p>
+                        </div>
                     </div>
-                    @endforeach
+                    <div class="col-xl-4 col-sm-6 col-lg-4">
+                        <div class="wsus__why_choose_item center">
+                            <div class="img">
+                                <img src="{{ asset($why_choose_us->home3_icon2) }}" alt="why choose" class="img-fluid w-100">
+                            </div>
+                            <h4>{{ $why_choose_us->home3_title2 }}</h4>
+                            <p>{{ $why_choose_us->home3_description2 }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6 col-lg-4">
+                        <div class="wsus__why_choose_item last">
+                            <div class="img">
+                                <img src="{{ asset($why_choose_us->home3_icon3) }}" alt="why choose" class="img-fluid w-100">
+                            </div>
+                            <h4>{{ $why_choose_us->home3_title3 }}</h4>
+                            <p>{{ $why_choose_us->home3_description3 }}</p>
+                        </div>
+                    </div>
                 </div>
-                <a href="{{ route('products', ['new' => 1]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right" aria-hidden="true"></i></a>
             </div>
-        </div>
-    </section>
-    <!--=============================
-        NEW PRODUCT END
-    ==============================-->
-    @endif
+        </section>
+        <!--=============================
+            WHY CHOOSE 3 END
+        ==============================-->
+        @endif
 
-    @if ($why_choose_us->visibility)
-    <!--=============================
-        WHY CHOOSE 3 START
-    ==============================-->
-    <section class="wsus__why_choose_3 wsus__why_choose_2 pt_115 xs_pt_75 pb_115 xs_pb_75">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-7 m-auto">
-                    <div class="wsus__section_heading mb_15">
-                        <h5>{{ $why_choose_us->title1 }}</h5>
-                        <h2>{{ $why_choose_us->title2 }}</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-xl-4 col-sm-6 col-lg-4">
-                    <div class="wsus__why_choose_item">
-                        <div class="img">
-                            <img src="{{ asset($why_choose_us->home3_icon1) }}" alt="why choose" class="img-fluid w-100">
-                        </div>
-                        <h4>{{ $why_choose_us->home3_title1 }}</h4>
-                        <p>{{ $why_choose_us->home3_description1 }}</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 col-lg-4">
-                    <div class="wsus__why_choose_item center">
-                        <div class="img">
-                            <img src="{{ asset($why_choose_us->home3_icon2) }}" alt="why choose" class="img-fluid w-100">
-                        </div>
-                        <h4>{{ $why_choose_us->home3_title2 }}</h4>
-                        <p>{{ $why_choose_us->home3_description2 }}</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 col-lg-4">
-                    <div class="wsus__why_choose_item last">
-                        <div class="img">
-                            <img src="{{ asset($why_choose_us->home3_icon3) }}" alt="why choose" class="img-fluid w-100">
-                        </div>
-                        <h4>{{ $why_choose_us->home3_title3 }}</h4>
-                        <p>{{ $why_choose_us->home3_description3 }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--=============================
-        WHY CHOOSE 3 END
-    ==============================-->
-    @endif
+    </div>
+
 
 
     @if ($product_section->visibility)
