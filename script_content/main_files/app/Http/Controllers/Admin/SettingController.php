@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use File;
 use Image;
 use Artisan;
+use Session;
 use Validator;
 use App\Models\Faq;
 use App\Models\Blog;
@@ -31,8 +32,8 @@ use App\Models\OrderItem;
 use App\Models\CustomPage;
 use App\Models\FooterLink;
 use App\Models\PopularTag;
-use App\Models\Subscriber;
 
+use App\Models\Subscriber;
 use App\Models\BlogComment;
 use App\Models\FaqLanguage;
 use App\Models\PopularPost;
@@ -43,30 +44,47 @@ use Illuminate\Http\Request;
 use App\Models\CookieConsent;
 use App\Models\FacebookPixel;
 use App\Models\RefundRequest;
+
+
 use App\Models\ScriptContent;
-
-
 use App\Models\TicketMessage;
 use App\Models\ContactMessage;
+use App\Models\FooterLanguage;
 use App\Models\GoogleAnalytic;
 use App\Models\ProductComment;
 use App\Models\ProductVariant;
+use App\Models\SectionContent;
+use App\Models\SliderLanguage;
 use App\Models\WithdrawMethod;
+use App\Models\AboutUsLanguage;
 use App\Models\CompleteRequest;
 use App\Models\GoogleRecaptcha;
 use App\Models\MessageDocument;
+use App\Models\OurTeamLanguage;
 use App\Models\ProductLanguage;
+use App\Models\SettingLanguage;
 use App\Models\CategoryLanguage;
 use App\Models\CustomPagination;
 use App\Models\FooterSocialLink;
+use App\Models\HomepageLanguage;
 use App\Models\ProviderWithdraw;
 use App\Models\PusherCredentail;
 use App\Models\TemplateLanguage;
+use App\Models\CustomPageLanguage;
 use App\Models\AppointmentSchedule;
+use App\Models\ContactPageLanguage;
+use App\Models\ProductItemLanguage;
+use App\Models\TestimonialLanguage;
 use App\Http\Controllers\Controller;
+use App\Models\BecomeAuthorLanguage;
 use App\Models\BlogCategoryLanguage;
+use App\Models\PrivacyPolicyLanguage;
+use App\Models\ScriptContentLanguage;
+use App\Models\SectionContentLanguage;
 use App\Models\SocialLoginInformation;
-use Session;
+use App\Models\ProductDiscountLanguage;
+use App\Models\ProductTypePageLanguage;
+use App\Models\TermsAndConditionLanguage;
 
 class SettingController extends Controller
 {
@@ -101,16 +119,17 @@ class SettingController extends Controller
         Coupon::truncate();
         ProviderWithdraw::truncate();
         OurTeam::truncate();
+        OurTeamLanguage::truncate();
         Partner::truncate();
         Review::truncate();
         Subscriber::truncate();
         Testimonial::truncate();
+        TestimonialLanguage::truncate();
         User::truncate();
         WithdrawMethod::truncate();
         Wishlist::truncate();
-        Template::truncate();
-        TemplateLanguage::truncate();
         CustomPage::truncate();
+        CustomPageLanguage::truncate();
 
 
 
@@ -123,6 +142,81 @@ class SettingController extends Controller
             if($admin_image){
                 if(File::exists(public_path().'/'.$admin_image))unlink(public_path().'/'.$admin_image);
             }
+        }
+
+        $content_languages = SectionContentLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($content_languages as $content){
+            $content->delete();
+        }
+
+        $slider_languages = SliderLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($slider_languages as $slider){
+            $slider->delete();
+        }
+
+        $homepage_language = HomepageLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($homepage_language as $homepage){
+            $homepage->delete();
+        }
+
+        $product_discount_languages = ProductDiscountLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($product_discount_languages as $discount){
+            $discount->delete();
+        }
+
+        $template_languages = TemplateLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($template_languages as $template){
+            $template->delete();
+        }
+
+        $setting_languages = SettingLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($setting_languages as $setting){
+            $setting->delete();
+        }
+
+        $script_content_languages = ScriptContentLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($script_content_languages as $script_content){
+            $script_content->delete();
+        }
+
+        $product_item_languages = ProductItemLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($product_item_languages as $product_item){
+            $product_item->delete();
+        }
+
+        $product_type_languages = ProductTypePageLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($product_type_languages as $product_type){
+            $product_type->delete();
+        }
+
+        $footer_languages = FooterLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($footer_languages as $footer){
+            $footer->delete();
+        }
+
+        $about_languages = AboutUsLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($about_languages as $about){
+            $about->delete();
+        }
+
+        $become_languages = BecomeAuthorLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($become_languages as $become){
+            $become->delete();
+        }
+
+        $contact_page_languages = ContactPageLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($contact_page_languages as $contact_page){
+            $contact_page->delete();
+        }
+
+        $terms_condition_languages = TermsAndConditionLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($terms_condition_languages as $terms_condition_language){
+            $terms_condition_language->delete();
+        }
+
+        $privacy_policy_languages = PrivacyPolicyLanguage::where('lang_code', '!=', 'en')->get();
+        foreach($privacy_policy_languages as $privacy_policy_language){
+            $privacy_policy_languages->delete();
         }
 
         $languages = Language::where('id', '!=', 1)->get();

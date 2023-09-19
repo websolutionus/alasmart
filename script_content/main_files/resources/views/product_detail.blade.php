@@ -103,14 +103,13 @@
                                     </div>
                                     @endforeach
                                 </div>
-
+                                @if ($productComments->hasPages())
                                 <div class="wsus__pagination">
-                                    @if ($productComments->hasPages())
                                         <div class="row">
                                             {{ $productComments->links('custom_pagination') }}
                                         </div>
-                                    @endif
                                 </div>
+                                @endif
                                 <form class="wsus__comment_input_area" id="productCommentForm" method="POST">
                                     @csrf
                                     <h3>{{__('Leave a Comment')}}</h3>
@@ -153,17 +152,12 @@
                                             <div class="text">
                                                 <h3>{{ html_decode($productReview->user->name) }}
                                                     <span>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                        <i class="far fa-star"></i>
-                                                    </span>
-                                                </h3>
-                                                <h3 class="user-product-review">{{ html_decode($productReview->user->name) }}
-                                                    <span>
-                                                        @for ($i = 0; $i < $productReview->rating; $i++)
-                                                        <i class="fas fa-star"></i>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $productReview->rating)
+                                                            <i class="fas fa-star"></i>
+                                                            @else
+                                                            <i class="far fa-star"></i>
+                                                            @endif
                                                         @endfor
                                                     </span>
                                                 </h3>
@@ -379,20 +373,15 @@
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
                             @endphp
                             <p class="rating">
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review)
+                                    <i class="fas fa-star"></i>
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
-                            @if ($review > 0)
-                            <p class="rating featured-review-rating">
-                                @for ($i = 0; $i < $review; $i++)
-                                <i class="fas fa-star"></i>
-                                @endfor
-                            </p>
-                            @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
                             <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"

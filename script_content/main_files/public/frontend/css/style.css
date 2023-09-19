@@ -4769,7 +4769,7 @@ HOME PAGE END
     font-size: 23px;
     padding-top: 10px;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
 }
 
 .wsus__download_item_right p i {
@@ -8049,29 +8049,6 @@ AUTHOR EDIT PROFILE END
 /*============================
     Devloper custom css start
 ============================*/
-.product-review-rating {
-    margin-top: -24px !important;
-}
-
-.featured-review-rating {
-    margin-top: -42px !important;
-}
-
-.testimonial-rating {
-    margin-top: -30px;
-}
-
-.user-product-review {
-    margin-top: -24px !important;
-}
-
-.user-rating-box {
-    margin-top: -24px !important;
-}
-
-.download-product-rating {
-    margin-top: -45px;
-}
 
 .product_icon img {
     width: 70px !important;

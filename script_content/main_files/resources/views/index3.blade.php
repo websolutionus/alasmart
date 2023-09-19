@@ -97,7 +97,7 @@
                     <div class="row justify-content-between">
                         @foreach ($new_product_section->new_products as $product)
                         <div class="col">
-                            <a class="wsus__recent_product_item" href="#">
+                            <a class="wsus__recent_product_item" href="{{ route('product-detail', $product->slug) }}">
                                 <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
                             </a>
                         </div>
@@ -215,20 +215,15 @@
                                 @endphp
                                 <li>
                                     <p>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $review)
+                                            <i class="fas fa-star"></i>
+                                            @else
+                                            <i class="far fa-star"></i>
+                                            @endif
+                                        @endfor
                                         <span>({{ $review == 0 ? 0 : $review }})</span>
                                     </p>
-                                    @if ($review > 0)
-                                    <p class="product-review-rating">
-                                        @for ($i = 0; $i < $review; $i++)
-                                        <i class="fas fa-star"></i>
-                                        @endfor
-                                    </p>
-                                    @endif
                                 </li>
                                 <li>
                                     <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
@@ -311,7 +306,7 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
                                 <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
@@ -320,26 +315,28 @@
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
                             @endphp
+
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+
+                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                            
                             <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review)
+                                    <i class="fas fa-star"></i>
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
-                            @if ($review>0)
-                             <p class="rating featured-review-rating">
-                                @for ($i = 0; $i < $review; $i++)
-                                <i class="fas fa-star"></i>
-                                @endfor
-                            </p>
-                             @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
-                            <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
+                            
+                            <div class="like_and_sell">
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -412,15 +409,12 @@
                 <div class="col-xl-6">
                     <div class="wsus__testimonial_item">
                         <p class="rating">
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                        <p class="rating testimonial-rating">
-                            @for ($i = 0; $i < $testimonial->rating; $i++)
-                            <i class="fas fa-star"></i>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $testimonial->rating)
+                                <i class="fas fa-star"></i>
+                                @else
+                                <i class="far fa-star"></i>
+                                @endif
                             @endfor
                         </p>
                         <p class="description">{{ $testimonial->testimoniallangfrontend->comment }}</p>

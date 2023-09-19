@@ -136,20 +136,15 @@
                                 @endphp
                                 <li>
                                     <p>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $review)
+                                            <i class="fas fa-star"></i>
+                                            @else
+                                            <i class="far fa-star"></i>
+                                            @endif
+                                        @endfor
                                         <span>({{ $review == 0 ? 0 : $review }})</span>
                                     </p>
-                                    @if ($review > 0)
-                                    <p class="product-review-rating">
-                                        @for ($i = 0; $i < $review; $i++)
-                                        <i class="fas fa-star"></i>
-                                        @endfor
-                                    </p>
-                                    @endif
                                 </li>
                                 <li>
                                     <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
@@ -264,364 +259,58 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab" tabindex="0">
-                            <!-- <div class="row">
+                            <div class="row">
                                 @foreach ($popular_trending->new_products as $new_product)
-                                <div class="col-md-2">
-                                    <div class="wsus__recent_product_item">
-                                        <a href="{{ route('product-detail', $new_product->slug) }}">
+                                <div class="col-xl-4 col-md-6 col-lg-4">
+                                    <div class="wsus__recent_product_2_item">
+                                        <div class="img">
                                             <img src="{{ asset($new_product->product_icon) }}" alt="product" class="img-fluid w-100">
-                                        </a>
+                                        </div>
+                                        <div class="text">
+                                            <a href="{{ route('product-detail', $new_product->slug) }}">{{ $new_product->productlangfrontend->name }}</a>
+                                            <p>{{ $setting->currency_icon }}{{ $new_product->regular_price }}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 @endforeach
-                            </div> -->
-
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab" tabindex="0">
-                            <!-- <div class="row">
+
+                            <div class="row">
                                 @foreach ($popular_trending->trending_products as $trending_product)
-                                <div class="col-md-2">
-                                    <div class="wsus__recent_product_item">
-                                        <a href="{{ route('product-detail', $trending_product->slug) }}">
+                                <div class="col-xl-4 col-md-6 col-lg-4">
+                                    <div class="wsus__recent_product_2_item">
+                                        <div class="img">
                                             <img src="{{ asset($trending_product->product_icon) }}" alt="product" class="img-fluid w-100">
-                                        </a>
+                                        </div>
+                                        <div class="text">
+                                            <a href="{{ route('product-detail', $trending_product->slug) }}">{{ $trending_product->productlangfrontend->name }}</a>
+                                            <p>{{ $setting->currency_icon }}{{ $trending_product->regular_price }}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 @endforeach
-                            </div> -->
-
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                             aria-labelledby="pills-contact-tab" tabindex="0">
-                            <!-- <div class="row">
+                            <div class="row">
                                 @foreach ($popular_trending->popular_products as $popular_product)
-                                <div class="col">
-                                    <div class="wsus__recent_product_item">
-                                        <a href="{{ route('product-detail', $popular_product->slug) }}">
+                                <div class="col-xl-4 col-md-6 col-lg-4">
+                                    <div class="wsus__recent_product_2_item">
+                                        <div class="img">
                                             <img src="{{ asset($popular_product->product_icon) }}" alt="product" class="img-fluid w-100">
-                                        </a>
+                                        </div>
+                                        <div class="text">
+                                            <a href="{{ route('product-detail', $popular_product->slug) }}">{{ $popular_product->productlangfrontend->name }}</a>
+                                            <p>{{ $setting->currency_icon }}{{ $popular_product->regular_price }}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 @endforeach
-                            </div> -->
-
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-lg-4">
-                                    <div class="wsus__recent_product_2_item">
-                                        <div class="img">
-                                            <img src="https://i.ibb.co/GQzNBCQ/p-img2.png" alt="product" class="img-fluid w-100">
-                                        </div>
-                                        <div class="text">
-                                            <a href="#">Oifolio-Digital Marketing</a>
-                                            <p>$6.99</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -657,7 +346,7 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
                                 <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
@@ -666,26 +355,28 @@
                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
                                 $sale=App\Models\OrderItem::where(['product_id' => $product->id])->get()->count();
                             @endphp
+
+                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
+
+                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                            
                             <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review)
+                                    <i class="fas fa-star"></i>
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
-                            @if ($review>0)
-                             <p class="rating featured-review-rating">
-                                @for ($i = 0; $i < $review; $i++)
-                                <i class="fas fa-star"></i>
-                                @endfor
-                            </p>
-                             @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
-                                    href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
-                            <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
+                            
+                            <div class="like_and_sell">
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -768,15 +459,12 @@
                 <div class="col-xl-6">
                     <div class="wsus__testimonial_item">
                         <p class="rating">
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                        <p class="rating testimonial-rating">
-                            @for ($i = 0; $i < $testimonial->rating; $i++)
-                            <i class="fas fa-star"></i>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $testimonial->rating)
+                                <i class="fas fa-star"></i>
+                                @else
+                                <i class="far fa-star"></i>
+                                @endif
                             @endfor
                         </p>
                         <p class="description">{{ $testimonial->testimoniallangfrontend->comment }}</p>

@@ -28,10 +28,14 @@
                                     <label>{{__('Language Name')}} <span class="text-danger">*</span></label>
                                     <input class="form-control" type="text" name="lang_name" value="{{ $language->lang_name }}">
                                 </div>
+
+                                @if ($language->id != 1)
                                 <div class="form-group col-12">
                                     <label>{{__('Language Code')}} <span class="text-danger">*</span></label>
                                     <input class="form-control" type="text" name="lang_code" value="{{ $language->lang_code }}">
                                 </div>
+                                @endif
+
                                 <div class="form-group col-12">
                                     <label>{{__('Default')}} <span class="text-danger">*</span></label>
                                     <select name="is_default" class="form-control">
@@ -47,6 +51,8 @@
                                         <option value="right_to_left" {{ $language->lang_direction == 'right_to_left' ? 'selected':'' }}>{{__('Right to left')}}</option>
                                     </select>
                                 </div>
+
+                                @if ($language->id != 1)
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
@@ -54,6 +60,8 @@
                                         <option value="0" {{ $language->status == 0 ? 'selected':'' }}>{{__('admin.Inactive')}}</option>
                                     </select>
                                 </div>
+                                @endif
+
                             </div>
                             <div class="row">
                                 <div class="col-12">

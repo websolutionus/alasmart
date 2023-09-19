@@ -158,11 +158,6 @@ class TemplateController extends Controller
         if($request->link){
             $template->link = $request->link;
         }
-        
-
-        if(session()->get('admin_lang') == $request->lang_code){
-            $template->status = $request->status;
-        }
 
         $template->save();
 

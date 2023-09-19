@@ -24,20 +24,15 @@
                         @endphp
                         <div class="rating">
                             <span>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-                            <p>{{__('Average rating of')}} {{ $review==0?0:round($review, 1) }} {{__('based on')}} {{ $votes }} {{__('votes')}}</p>
-                        </div>
-                        <div class="rating user-rating-box">
-                            <span>
-                                @for ($i = 0; $i < $review; $i++)
-                                 <i class="fas fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review)
+                                    <i class="fas fa-star"></i>
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
                                 @endfor
                             </span>
+                            <p>{{__('Average rating of')}} {{ $review==0?0:round($review, 1) }} {{__('based on')}} {{ $votes }} {{__('votes')}}</p>
                         </div>
                     </div>
                     <ul class="header_button d-flex flex-wrap">

@@ -38,20 +38,15 @@
                                             @endphp
                                             <li>
                                                 <p>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $review)
+                                                        <i class="fas fa-star"></i>
+                                                        @else
+                                                        <i class="far fa-star"></i>
+                                                        @endif
+                                                    @endfor
                                                     <span>({{ $review == 0 ? 0 : $review }})</span>
                                                 </p>
-                                                @if ($review > 0)
-                                                <p class="product-review-rating">
-                                                    @for ($i = 0; $i < $review; $i++)
-                                                    <i class="fas fa-star"></i>
-                                                    @endfor
-                                                </p>
-                                                @endif
                                             </li>
                                             <li>
                                                 <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>

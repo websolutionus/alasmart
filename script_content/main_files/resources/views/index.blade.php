@@ -134,20 +134,15 @@
                                 @endphp
                                 <li>
                                     <p>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $review)
+                                            <i class="fas fa-star"></i>
+                                            @else
+                                            <i class="far fa-star"></i>
+                                            @endif
+                                        @endfor
                                         <span>({{ $review == 0 ? 0 : $review }})</span>
                                     </p>
-                                    @if ($review > 0)
-                                    <p class="product-review-rating">
-                                        @for ($i = 0; $i < $review; $i++)
-                                        <i class="fas fa-star"></i>
-                                        @endfor
-                                    </p>
-                                    @endif
                                 </li>
                                 <li>
                                     <span class="love"><i class="far fa-heart"></i> 102</span>
@@ -354,24 +349,18 @@
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             
                             <p class="rating">
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review)
+                                    <i class="fas fa-star"></i>
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                @endfor
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
-                             @if ($review>0)
-                             <p class="rating featured-review-rating">
-                                @for ($i = 0; $i < $review; $i++)
-                                <i class="fas fa-star"></i>
-                                @endfor
-                            </p>
-                             @endif
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             
                             <div class="like_and_sell">
-                                <span class="love"><i class="far fa-heart"></i> 102</span>
                                 <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
                             

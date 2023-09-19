@@ -80,15 +80,6 @@
                                     <label>{{__('admin.Description')}} <span class="text-danger">*</span></label>
                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control text-area-5">{{ $template_language->description }}</textarea>
                                 </div>
-                                @if(session()->get('admin_lang') == request()->get('lang_code'))
-                                <div class="form-group col-12">
-                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
-                                    <select name="status" class="form-control">
-                                        <option value="1" {{ $template->status == 1 ? 'selected':'' }}>{{__('admin.Active')}}</option>
-                                        <option value="0" {{ $template->status == 0 ? 'selected':'' }}>{{__('admin.Inactive')}}</option>
-                                    </select>
-                                </div>
-                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-12">

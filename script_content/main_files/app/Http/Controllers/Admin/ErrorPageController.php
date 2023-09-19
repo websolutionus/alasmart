@@ -18,18 +18,13 @@ class ErrorPageController extends Controller
     }
 
     public function index(Request $request){
-        $errorpage = ErrorPage::with('errorlangfrontend')->first();
-        $languages = Language::get();
-        $error_language = ErrorPageLanguage::where(['error_id' => $errorpage->id, 'lang_code' => $request->lang_code])->first();
-        
-        return view('admin.error_page', compact('errorpage', 'languages', 'error_language'));
+        $errorpage = ErrorPage::first();
+        return view('admin.error_page', compact('errorpage'));
     }
 
     public function update(Request $request, $id)
     {
         $errorPage = ErrorPage::first();
-        $error_language = ErrorPageLanguage::where(['error_id' => $errorPage->id, 'lang_code' => $request->lang_code])->first();
-        
         $rules = [
             'title'=>'required',
             'button_text'=>'required',
@@ -40,9 +35,9 @@ class ErrorPageController extends Controller
         ];
         $this->validate($request, $rules,$customMessages);
 
-        $error_language->title = $request->title;
-        $error_language->button_text = $request->button_text;
-        $error_language->save();
+        $errorPage->title = $request->title;
+        $errorPage->button_text = $request->button_text;
+        $errorPage->save();
 
         if($request->image){
             $exist_banner = $errorPage->image;

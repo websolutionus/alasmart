@@ -1,16 +1,11 @@
 @php
-    $error_404=App\Models\ErrorPage::with('errorlangfrontend')->first();
-
+    $error_404=App\Models\ErrorPage::first();
     $active_theme = 'layout';
-
 @endphp
 
 @extends($active_theme)
 @section('title')
-    <title>{{ $error_404->title }}</title>
-@endsection
-@section('meta')
-<title>{{ $error_404->title }}</title>
+    <title>{{__('Sorry, Page Not Found')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -40,6 +35,7 @@
     <!--=============================
         ERROR/404 START
     ==============================-->
+    
     <section class="wsus__error pt_120 xs_pt_80 pb_115 xs_pb_75">
         <div class="container">
             <div class="row">

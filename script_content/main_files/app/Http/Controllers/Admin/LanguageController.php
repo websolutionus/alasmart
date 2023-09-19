@@ -14,7 +14,6 @@ use App\Models\Category;
 use App\Models\Homepage;
 use App\Models\Language;
 use App\Models\Template;
-use App\Models\ErrorPage;
 use App\Models\CustomPage;
 use App\Models\ContactPage;
 use App\Models\FaqLanguage;
@@ -38,7 +37,6 @@ use App\Models\SettingLanguage;
 use App\Models\CategoryLanguage;
 use App\Models\HomepageLanguage;
 use App\Models\TemplateLanguage;
-use App\Models\ErrorPageLanguage;
 use App\Models\TermsAndCondition;
 use App\Models\CustomPageLanguage;
 use Illuminate\Support\Facades\DB;
@@ -513,17 +511,6 @@ class LanguageController extends Controller
             $privacy_policy_language->save();
         }
 
-        $error_page = ErrorPage::with('errorlangadmin')->first();
-        
-        if($error_page){
-            $error_language = new ErrorPageLanguage();
-            $error_language->error_id = $error_page->id;
-            $error_language->lang_code = $language->lang_code;
-            $error_language->title = $error_page->errorlangadmin->title;
-            $error_language->button_text = $error_page->errorlangadmin->button_text;
-            $error_language->save();
-        }
-
         $faqs = Faq::with('faqlangadmin')->get();
 
         foreach($faqs as $faq){
@@ -563,7 +550,7 @@ class LanguageController extends Controller
         
         $rules = [
             'lang_name'=>'required|unique:languages,id,'.$id,
-            'lang_code'=>'required|unique:languages,id,'.$id,
+            'lang_code'=> $id != 1 ? 'required|unique:languages,id,'.$id : '',
         ];
         $customMessages = [
             'lang_name.required' => trans('admin_validation.Name is required'),
@@ -576,38 +563,38 @@ class LanguageController extends Controller
 
         $language = Language::findOrFail($id);
 
-        $old_path = base_path().'/lang'.'/'.$language->lang_code;
-        $update_path = base_path().'/lang'.'/'.$request->lang_code;
+        if ($language->id != 1) {
+            $old_path = base_path().'/lang'.'/'.$language->lang_code;
+            $update_path = base_path().'/lang'.'/'.$request->lang_code;
 
-        if (File::exists($old_path) && $old_path != $update_path) {
-            File::move($old_path, $update_path);
+            if (File::exists($old_path) && $old_path != $update_path) {
+                File::move($old_path, $update_path);
+            }
+            
+            BlogCategoryLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            BlogLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            CategoryLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ProductLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            SectionContentLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            SliderLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            HomepageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            TestimonialLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            TemplateLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            OurTeamLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            SettingLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            AboutUsLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            BecomeAuthorLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ContactPageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            TermsAndConditionLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            PrivacyPolicyLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            FaqLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            CustomPageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ProductDiscountLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ScriptContentLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ProductItemLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            ProductTypePageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
+            FooterLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
         }
-        
-        BlogCategoryLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        BlogLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        CategoryLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ProductLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        SectionContentLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        SliderLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        HomepageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        TestimonialLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        TemplateLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        OurTeamLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        SettingLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        AboutUsLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        BecomeAuthorLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ContactPageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        TermsAndConditionLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        PrivacyPolicyLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ErrorPageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        FaqLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        CustomPageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ProductDiscountLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ScriptContentLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ProductItemLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        ProductTypePageLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-        FooterLanguage::where('lang_code', $language->lang_code)->update(['lang_code' => $request->lang_code]);
-
         if($request->is_default == 'Yes'){
             DB::table('languages')->where('id', '!=', $language->id)->update(['is_default' => 'No']);
         }
@@ -617,10 +604,18 @@ class LanguageController extends Controller
         }
     
         $language->lang_name = $request->lang_name;
-        $language->lang_code = $request->lang_code;
+
+        if ($language->id != 1) {
+            $language->lang_code = $request->lang_code;
+        }
+
         $language->is_default = $request->is_default;
         $language->lang_direction = $request->lang_direction;
-        $language->status = $request->status;
+
+        if ($language->id != 1) {
+            $language->status = $request->status;
+        }
+
         $language->save();
 
         
@@ -656,7 +651,6 @@ class LanguageController extends Controller
         $contact_language = ContactPageLanguage::where('lang_code', $language->lang_code)->delete();
         $terms_condition_language = TermsAndConditionLanguage::where('lang_code', $language->lang_code)->delete();
         $privacy_policy_language = PrivacyPolicyLanguage::where('lang_code', $language->lang_code)->delete();
-        $error_language = ErrorPageLanguage::where('lang_code', $language->lang_code)->delete();
         $faq_language = FaqLanguage::where('lang_code', $language->lang_code)->delete();
         $custom_page_language = CustomPageLanguage::where('lang_code', $language->lang_code)->delete();
         $product_discount_language = ProductDiscountLanguage::where('lang_code', $language->lang_code)->delete();

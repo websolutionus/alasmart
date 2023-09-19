@@ -49,15 +49,12 @@
                                             $review=App\Models\Review::where(['product_id' => $item->product->id, 'status' => 1])->get()->average('rating');
                                         @endphp
                                         <p data-bs-toggle="modal" data-bs-target="#review{{ $item->product->id }}">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </p>
-                                        <p class="download-product-rating" data-bs-toggle="modal" data-bs-target="#review{{ $item->product->id }}">
-                                            @for ($i = 0; $i < $review; $i++)
-                                            <i class="fas fa-star text-warning"></i>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $review)
+                                                <i class="fas fa-star text-warning"></i>
+                                                @else
+                                                <i class="fas fa-star"></i>
+                                                @endif
                                             @endfor
                                         </p>
                                     </div>
