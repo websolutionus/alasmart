@@ -62,11 +62,13 @@
                            </div>
                             @endforelse
                         </div>
-                        @if ($wishlists->hasPages())
                         <div class="wsus__pagination mt_25">
-                            {{ $wishlists->links('custom_pagination') }}
+                            <div class="row">
+                                @if ($wishlists->hasPages())
+                                    {{ $wishlists->links('custom_pagination') }}
+                                @endif
+                            </div>
                         </div>
-                        @endif
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4">

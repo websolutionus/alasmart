@@ -61,11 +61,13 @@
                             </div>
                             @endforelse
                         </div>
-                        @if ($products->hasPages())
-                            <div class="wsus__pagination mt_25">
-                                {{ $products->links('custom_pagination') }}
+                        <div class="wsus__pagination mt_25">
+                            <div class="row">
+                                @if ($products->hasPages())
+                                    {{ $products->links('custom_pagination') }}
+                                @endif
                             </div>
-                        @endif
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4">

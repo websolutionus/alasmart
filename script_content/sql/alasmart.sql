@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2023 at 07:59 AM
+-- Generation Time: Sep 19, 2023 at 01:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -2042,7 +2042,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `order_id`, `user_id`, `name`, `email`, `phone`, `total_amount`, `payment_method`, `payment_status`, `transection_id`, `currency_icon`, `country_code`, `currency_code`, `currency_rate`, `order_status`, `order_approval_date`, `order_date`, `order_month`, `order_year`, `cart_qty`, `created_at`, `updated_at`) VALUES
 (1, 187418, 1, 'John Doe', 'user@gmail.com', '22-402-666', 100, 'Stripe', 'success', 'txn_3NkgkjBsmz7k2BTD0gRi33UK', NULL, 'US', 'usd', 1, '1', NULL, '2023-08-30', '08', '2023', 1, '2023-08-30 05:15:41', '2023-08-30 05:15:41'),
-(2, 364371, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 50, 'Mollie', 'success', 'tr_BBJpU2HkuX', NULL, 'AS', 'CAD', 1.27, '1', NULL, '2023-08-30', '08', '2023', 1, '2023-08-30 06:01:48', '2023-08-30 06:01:48');
+(2, 364371, 2, 'Amaya Hendrix', 'user2@gmail.com', '123-874-8948', 50, 'Mollie', 'success', 'tr_BBJpU2HkuX', NULL, 'AS', 'CAD', 1.27, '1', NULL, '2023-08-30', '08', '2023', 1, '2023-08-30 06:01:48', '2023-08-30 06:01:48'),
+(4, 181260, 1, 'John Doe', 'user@gmail.com', '22-402-666', 60, 'Stripe', 'success', 'txn_3Ns1rlBsmz7k2BTD0f6VSA1N', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-19', '09', '2023', 1, '2023-09-19 11:13:19', '2023-09-19 11:13:19');
 
 -- --------------------------------------------------------
 
@@ -2072,7 +2073,8 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `author_id`, `user_id`, `product_type`, `price_type`, `variant_id`, `variant_name`, `price`, `qty`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 2, 1, 'image', NULL, 3, 'Large : 1920x2540', 100, '1', '2023-08-30 05:15:41', '2023-08-30 05:15:41'),
-(2, 2, 5, 1, 2, 'script', 'regular price', NULL, NULL, 50, '1', '2023-08-30 06:01:48', '2023-08-30 06:01:48');
+(2, 2, 5, 1, 2, 'script', 'regular price', NULL, NULL, 50, '1', '2023-08-30 06:01:48', '2023-08-30 06:01:48'),
+(4, 4, 1, 2, 1, 'script', 'extend price', NULL, NULL, 60, '1', '2023-09-19 11:13:19', '2023-09-19 11:13:19');
 
 -- --------------------------------------------------------
 
@@ -2798,7 +2800,8 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`id`, `product_id`, `order_id`, `variant_id`, `user_id`, `author_id`, `review`, `rating`, `status`, `created_at`, `updated_at`) VALUES
 (1, 5, 2, NULL, 2, 1, 'Test Review', 5, 1, '2023-08-30 06:02:19', '2023-08-30 06:04:07'),
-(2, 2, 1, 3, 1, 2, 'Test review', 3, 1, '2023-08-30 06:06:25', '2023-08-30 06:06:34');
+(2, 2, 1, 3, 1, 2, 'Test review', 3, 1, '2023-08-30 06:06:25', '2023-08-30 06:06:34'),
+(5, 1, NULL, NULL, 1, 2, 'Test review', 5, 1, '2023-09-19 11:15:29', '2023-09-19 11:16:21');
 
 -- --------------------------------------------------------
 
@@ -3508,7 +3511,8 @@ CREATE TABLE `wishlists` (
 INSERT INTO `wishlists` (`id`, `user_id`, `author_id`, `product_id`, `created_at`, `updated_at`) VALUES
 (1, 2, 2, 2, '2023-08-29 11:26:18', '2023-08-29 11:26:18'),
 (2, 1, 2, 1, '2023-08-30 05:18:20', '2023-08-30 05:18:20'),
-(3, 1, 1, 5, '2023-09-10 05:56:30', '2023-09-10 05:56:30');
+(3, 1, 1, 5, '2023-09-10 05:56:30', '2023-09-10 05:56:30'),
+(4, 2, 1, 5, '2023-09-19 09:04:25', '2023-09-19 09:04:25');
 
 -- --------------------------------------------------------
 
@@ -4519,13 +4523,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `our_teams`
@@ -4681,7 +4685,7 @@ ALTER TABLE `refund_requests`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `script_contents`
@@ -4819,7 +4823,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `withdraw_methods`

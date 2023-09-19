@@ -128,7 +128,9 @@
                         @endforelse
                     </div>
                     <div class="wsus__pagination mt_25">
-                        {{ $blogs->links('custom_pagination') }}
+                        <div class="row">
+                            {{ $blogs->links('custom_pagination') }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,7 +177,9 @@
                 @endforelse
             </div>
             <div class="wsus__pagination blog_list mt_25">
-                {{ $blogs->links('custom_pagination') }}
+                <div class="row">
+                    {{ $blogs->links('custom_pagination') }}
+                </div>
             </div>
         </div>
     </section>
@@ -223,7 +227,9 @@
                         @endforelse
                     </div>
                     <div class="wsus__pagination mt_25">
-                        {{ $blogs->links('custom_pagination') }}
+                        <div class="row">
+                            {{ $blogs->links('custom_pagination') }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4">

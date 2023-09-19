@@ -1230,34 +1230,42 @@ class HomeController extends Controller
 
     public function productReview(Request $request){
         if(Auth::guard('web')->check()){
-            $rules = [
-                'rating'=>'required',
-                'review'=>'required',
-                'g-recaptcha-response'=>new Captcha()
-            ];
-            $customMessages = [
-                'rating.required' => trans('user_validation.Rating is required'),
-                'review.required' => trans('user_validation.Review is required'),
-            ];
-            $this->validate($request, $rules,$customMessages);
-
             $user = Auth::guard('web')->user();
+            $order_item = OrderItem::where(['product_id' => $request->product_id, 'user_id' => $user->id])->first();
 
-            $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
-            if($isReview > 0){
-                $notification = trans('user_validation.You have already submited review');
-                return response()->json(['status' => 0, 'message' => $notification]);
+            if($order_item){
+                $rules = [
+                    'rating'=>'required',
+                    'review'=>'required',
+                    'g-recaptcha-response'=>new Captcha()
+                ];
+                $customMessages = [
+                    'rating.required' => trans('user_validation.Rating is required'),
+                    'review.required' => trans('user_validation.Review is required'),
+                ];
+                $this->validate($request, $rules,$customMessages);
+    
+                $user = Auth::guard('web')->user();
+    
+                $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
+                if($isReview > 0){
+                    $notification = trans('user_validation.You have already submited review');
+                    return response()->json(['status' => 0, 'message' => $notification]);
+                }
+                
+                $review = new Review();
+                $review->user_id = $user->id;
+                $review->rating = $request->rating;
+                $review->review = $request->review;
+                $review->product_id = $request->product_id;
+                $review->author_id = $request->author_id;
+                $review->save();
+                $notification = trans('user_validation.Review Submited successfully');
+                return response()->json(['status' => 1, 'message' => $notification]);
+            }else{
+                $notification = trans('You can only review your purchased products');
+                return response()->json(['status' => 0, 'message' => $notification]);  
             }
-            
-            $review = new Review();
-            $review->user_id = $user->id;
-            $review->rating = $request->rating;
-            $review->review = $request->review;
-            $review->product_id = $request->product_id;
-            $review->author_id = $request->author_id;
-            $review->save();
-            $notification = trans('user_validation.Review Submited successfully');
-            return response()->json(['status' => 1, 'message' => $notification]);
         }else{
             $notification = trans('Please login your account');
             return response()->json(['status' => 0, 'message' => $notification]);

@@ -105,7 +105,9 @@
                         @endforelse
                     </div>
                     <div class="wsus__pagination mt_50">
-                        {{ $products->links('custom_pagination') }}
+                        <div class="row">
+                            {{ $products->links('custom_pagination') }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-4">

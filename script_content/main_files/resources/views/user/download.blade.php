@@ -62,11 +62,13 @@
                             @endif
                         @endforeach
 
-                        @if ($order_items->hasPages())
-                        <div class="row">
-                            {{ $order_items->links('custom_pagination') }}
+                        <div class="wsus__pagination mt_25">
+                            <div class="row">
+                                @if ($order_items->hasPages())
+                                    {{ $order_items->links('custom_pagination') }}
+                                @endif
+                            </div>
                         </div>
-                        @endif
 
                         <!-- rating modal end -->
                         <div class="wsus__rating_moadl_area">

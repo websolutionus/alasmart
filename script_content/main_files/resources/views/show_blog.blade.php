@@ -93,11 +93,13 @@
                             </p>
                         </div>
                         @endforeach
-                        @if ($blog_comments->hasPages())
                         <div class="wsus__pagination mt_30">
-                            {{ $blog_comments->links('custom_pagination') }}
+                            @if ($blog_comments->hasPages())
+                                <div class="row">
+                                    {{ $blog_comments->links('custom_pagination') }}
+                                </div>
+                            @endif
                         </div>
-                        @endif
                     </div>
                     @endif
                     <form class="wsus__comment_input_area mt_60" id="blogCommentForm">
