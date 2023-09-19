@@ -1,5 +1,4 @@
 <div class="col-12 mt_25">
-    <div class="wsus__pagination">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
 
@@ -37,5 +36,4 @@
 
             </ul>
         </nav>
-    </div>
 </div>

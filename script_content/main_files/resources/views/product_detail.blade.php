@@ -103,13 +103,13 @@
                                     </div>
                                     @endforeach
                                 </div>
-                                @if ($productComments->hasPages())
                                 <div class="wsus__pagination">
+                                    @if ($productComments->hasPages())
                                         <div class="row">
                                             {{ $productComments->links('custom_pagination') }}
                                         </div>
+                                    @endif
                                 </div>
-                                @endif
                                 <form class="wsus__comment_input_area" id="productCommentForm" method="POST">
                                     @csrf
                                     <h3>{{__('Leave a Comment')}}</h3>
