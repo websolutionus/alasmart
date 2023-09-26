@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 07:24 AM
+-- Generation Time: Sep 26, 2023 at 07:43 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -2590,7 +2590,7 @@ CREATE TABLE `product_item_languages` (
 
 INSERT INTO `product_item_languages` (`id`, `item_id`, `lang_code`, `script_title`, `script_description`, `image_title`, `image_description`, `video_title`, `video_description`, `audio_title`, `audio_description`, `created_at`, `updated_at`) VALUES
 (1, 1, 'en', 'Create Script Product', 'What is script product ? If you interest submit php, wordpress, mobile app, html design or any other web related script then you can choose it', 'Create Image Product', 'What is image product ? If you interest jpg, jpeg, pnj or any other image related file then you can choose it', 'Create Video Product', 'What is video product ? If you interest animation, video design, video related file then you can choose it', 'Create Audio Product', 'What is audio product ? If you interest animation, video design, video related file then you can choose it', NULL, '2023-08-28 09:15:59'),
-(28, 1, 'bn', 'Create Script Product', 'What is script product ? If you interest submit php, wordpress, mobile app, html design or any other web related script then you can choose it', 'Create Image Product', 'What is image product ? If you interest jpg, jpeg, pnj or any other image related file then you can choose it', 'Create Video Product', 'What is video product ? If you interest animation, video design, video related file then you can choose it', 'Create Audio Product', 'What is audio product ? If you interest animation, video design, video related file then you can choose it', '2023-09-23 09:52:17', '2023-09-23 09:52:17');
+(28, 1, 'bn', 'স্ক্রিপ্ট পণ্য তৈরি করুন', 'স্ক্রিপ্ট পণ্য কি? আপনি যদি পিএইচপি, ওয়ার্ডপ্রেস, মোবাইল অ্যাপ, এইচটিএমএল ডিজাইন বা অন্য কোনও ওয়েব সম্পর্কিত স্ক্রিপ্ট জমা দিতে আগ্রহী হন তবে আপনি এটি বেছে নিতে পারেন', 'ইমেজ পণ্য তৈরি করুন', 'ইমেজ পণ্য কি? আপনি যদি jpg, jpeg, pnj বা অন্য কোন ইমেজ সম্পর্কিত ফাইলে আগ্রহী হন তাহলে আপনি এটি বেছে নিতে পারেন', 'ভিডিও পণ্য তৈরি করুন', 'ভিডিও পণ্য কি? আপনি যদি অ্যানিমেশন, ভিডিও ডিজাইন, ভিডিও সম্পর্কিত ফাইল আগ্রহী হন তবে আপনি এটি চয়ন করতে পারেন', 'অডিও পণ্য তৈরি করুন', 'অডিও পণ্য কি? আপনি যদি অ্যানিমেশন, ভিডিও ডিজাইন, ভিডিও সম্পর্কিত ফাইল আগ্রহী হন তবে আপনি এটি চয়ন করতে পারেন', '2023-09-23 09:52:17', '2023-09-26 05:32:21');
 
 -- --------------------------------------------------------
 
@@ -2708,7 +2708,7 @@ CREATE TABLE `product_type_page_languages` (
 
 INSERT INTO `product_type_page_languages` (`id`, `product_type_id`, `lang_code`, `title`, `description`, `created_at`, `updated_at`) VALUES
 (1, 1, 'en', 'Need help selecting a category?', 'A great way to start is by browsing through our categories to see what other authors are selling.', NULL, '2023-08-28 09:15:59'),
-(19, 1, 'bn', 'Need help selecting a category?', 'A great way to start is by browsing through our categories to see what other authors are selling.', '2023-09-23 09:52:17', '2023-09-23 09:52:17');
+(19, 1, 'bn', 'একটি বিভাগ নির্বাচন সাহায্য প্রয়োজন?', 'শুরু করার একটি দুর্দান্ত উপায় হল অন্য লেখকরা কী বিক্রি করছেন তা দেখতে আমাদের বিভাগগুলির মাধ্যমে ব্রাউজ করা।', '2023-09-23 09:52:17', '2023-09-26 05:33:11');
 
 -- --------------------------------------------------------
 
@@ -2966,7 +2966,7 @@ CREATE TABLE `script_content_languages` (
 
 INSERT INTO `script_content_languages` (`id`, `script_id`, `lang_code`, `regular_content`, `extend_content`, `created_at`, `updated_at`) VALUES
 (1, 1, 'en', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>6 months support from author</li>\r\n</ul>', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>12 months support from author</li>\r\n</ul>', NULL, '2023-08-28 09:15:59'),
-(22, 1, 'bn', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>6 months support from author</li>\r\n</ul>', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>12 months support from author</li>\r\n</ul>', '2023-09-23 09:52:17', '2023-09-23 09:52:17');
+(22, 1, 'bn', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>6 months support from author</li>\r\n</ul>', '<ul class=\"feature\">\r\n<li>All time Future updates</li>\r\n<li>Quality checked by DigMark</li>\r\n<li>12 months support from author</li>\r\n</ul>', '2023-09-23 09:52:17', '2023-09-26 05:36:46');
 
 -- --------------------------------------------------------
 
