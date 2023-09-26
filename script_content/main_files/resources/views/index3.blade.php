@@ -251,7 +251,7 @@
                 <div class="row mb_10">
                     <div class="col-xl-12">
                         <div class="wsus__megapack_text">
-                            <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
+                            <p>{!! strip_tags(clean($partner_section->offer_title1)) !!} <span>{!! strip_tags(clean($partner_section->offer_title2)) !!}</span></p>
                             <a target="_blank" href="{{ $special_offer->link }}">{{__('user.Go to Offer page')}}</a>
                         </div>
                     </div>

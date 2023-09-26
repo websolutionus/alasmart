@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use File;
 use Image;
+use App\Models\Setting;
 use App\Models\Homepage;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -46,12 +47,17 @@ class HomepageController extends Controller
     }
 
     public function why_choose_us_update(Request $request){
+        $setting = Setting::first();
+        $home2= false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 2){
+            $home2 = true;
+        }
         $rules = [
             'title1' => 'required',
             'title2' => 'required',
-            'item1_title' => 'required',
-            'item2_title' => 'required',
-            'item3_title' => 'required',
+            'item1_title' => $home2 ? 'required':'',
+            'item2_title' => $home2 ? 'required':'',
+            'item3_title' => $home2 ? 'required':'',
             'home3_item1_title' => 'required',
             'home3_item2_desc' => 'required',
             'home3_item3_title' => 'required',
@@ -177,9 +183,11 @@ class HomepageController extends Controller
 
         $homepageLanguage->why_choose_title1 = $request->title1;
         $homepageLanguage->why_choose_title2 = $request->title2;
-        $homepageLanguage->why_choose_item1_title = $request->item1_title;
-        $homepageLanguage->why_choose_item2_title = $request->item2_title;
-        $homepageLanguage->why_choose_item3_title = $request->item3_title;
+        if($home2){
+            $homepageLanguage->why_choose_item1_title = $request->item1_title;
+            $homepageLanguage->why_choose_item2_title = $request->item2_title;
+            $homepageLanguage->why_choose_item3_title = $request->item3_title;
+        }
         $homepageLanguage->why_choose_home3_item1_title = $request->home3_item1_title;
         $homepageLanguage->why_choose_home3_item2_desc = $request->home3_item2_desc;
         $homepageLanguage->why_choose_home3_item3_title = $request->home3_item3_title;
@@ -225,14 +233,28 @@ class HomepageController extends Controller
 
 
     public function update_mobile_app(Request $request){
+        $setting = Setting::first();
+        $home1= false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 1){
+            $home1 = true;
+        }
 
+        $home2= false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 2){
+            $home2 = true;
+        }
+
+        $home3 = false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 3){
+            $home3 = true;
+        }
         $rules = [
-            'home2_title'=>'required',
-            'home2_desc'=>'required',
-            'title1'=>'required',
-            'description'=>'required',
-            'home3_title'=>'required',
-            'home3_desc'=>'required',
+            'home2_title'=> $home2 ? 'required':'',
+            'home2_desc'=> $home2 ? 'required':'',
+            'title1'=> $home1 ? 'required':'',
+            'description'=> $home1 ? 'required':'',
+            'home3_title'=> $home3 ? 'required':'',
+            'home3_desc'=> $home3 ? 'required':'',
             'play_store'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
             'app_store'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
@@ -335,12 +357,18 @@ class HomepageController extends Controller
             }
         }
 
-        $homepage_language->app_home2_title = $request->home2_title;
-        $homepage_language->app_home2_desc = $request->home2_desc;
-        $homepage_language->app_title1 = $request->title1;
-        $homepage_language->app_description = $request->description;
-        $homepage_language->app_home3_title = $request->home3_title;
-        $homepage_language->app_home3_desc = $request->home3_desc;
+        if ($home2) {
+            $homepage_language->app_home2_title = $request->home2_title;
+            $homepage_language->app_home2_desc = $request->home2_desc;
+        }
+        if ($home1) {
+            $homepage_language->app_title1 = $request->title1;
+            $homepage_language->app_description = $request->description;
+        }
+        if ($home3) {
+            $homepage_language->app_home3_title = $request->home3_title;
+            $homepage_language->app_home3_desc = $request->home3_desc;
+        }
 
         $homepage_language->save();
 
@@ -599,15 +627,32 @@ class HomepageController extends Controller
     }
 
     public function update_offer(Request $request){
+        $setting = Setting::first();
+        $home1= false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 1){
+            $home1 = true;
+        }
+
+        $home2= false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 2){
+            $home2 = true;
+        }
+
+        $home3 = false;
+        if($setting->selected_theme == 0 || $setting->selected_theme == 3){
+            $home3 = true;
+        }
+
         $rules = [
-            'title1'=>'required',
-            'link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
-            'home3_item1_title'=>'required',
-            'home3_item1_description'=>'required',
-            'home3_item1_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
-            'home3_item2_title'=>'required',
-            'home3_item2_description'=>'required',
-            'home3_item2_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'title1'=> $home1 || $home3 ? 'required':'',
+            'title2'=> $home1 || $home3 ? 'required':'',
+            'link'=>session()->get('admin_lang') == $request->lang_code && ($home1 || $home3) ? 'required':'',
+            'home3_item1_title'=> $home3 ? 'required':'',
+            'home3_item1_description'=>$home3 ? 'required':'',
+            'home3_item1_link'=>session()->get('admin_lang') == $request->lang_code && $home3 ? 'required':'',
+            'home3_item2_title'=>$home3 ? 'required':'',
+            'home3_item2_description'=>$home3 ? 'required':'',
+            'home3_item2_link'=>session()->get('admin_lang') == $request->lang_code && $home3 ? 'required':'',
             'about_offer_title1'=>'required',
             'about_offer_title3'=>'required',
             'about_offer_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
@@ -632,15 +677,15 @@ class HomepageController extends Controller
         $homepage = Homepage::with('homelangadmin')->first();
         $homepage_language = HomepageLanguage::where(['home_id' => $homepage->id, 'lang_code' => $request->lang_code])->first();
 
-        if(session()->get('admin_lang') == $request->lang_code){
+        if(session()->get('admin_lang') == $request->lang_code && ($home1 || $home3)){
             $homepage->offer_link = session()->get('admin_lang') == $request->lang_code;
         }
 
-        if($request->home3_item1_link){
+        if($request->home3_item1_link  && $home3){
             $homepage->offer_home3_item1_link = $request->home3_item1_link;
         }
 
-        if($request->home3_item2_link){
+        if($request->home3_item2_link  && $home3){
             $homepage->offer_home3_item2_link = $request->home3_item2_link;
         }
 
@@ -679,11 +724,17 @@ class HomepageController extends Controller
         }
 
 
-        $homepage_language->offer_title1 = $request->title1;
-        $homepage_language->offer_home3_item1_title = $request->home3_item1_title;
-        $homepage_language->offer_home3_item1_description = $request->home3_item1_description;
-        $homepage_language->offer_home3_item2_title = $request->home3_item2_title;
-        $homepage_language->offer_home3_item2_description = $request->home3_item2_description;
+        if ($home1 || $home3) {
+            $homepage_language->offer_title1 = $request->title1;
+            $homepage_language->offer_title2 = $request->title2;
+        }
+        
+        if($home3){
+            $homepage_language->offer_home3_item1_title = $request->home3_item1_title;
+            $homepage_language->offer_home3_item1_description = $request->home3_item1_description;
+            $homepage_language->offer_home3_item2_title = $request->home3_item2_title;
+            $homepage_language->offer_home3_item2_description = $request->home3_item2_description;
+        }
         $homepage_language->about_offer_title1 = $request->about_offer_title1;
         $homepage_language->about_offer_title3 = $request->about_offer_title3;
 

@@ -168,15 +168,12 @@
                     <div class="wsus__testimonial_item">
                         <p class="description">{{ $testimonial->testimoniallangfrontend->comment }}</p>
                         <p class="rating">
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                        <p class="rating testimonial-rating">
-                            @for ($i = 0; $i < $testimonial->rating; $i++)
-                            <i class="fas fa-star"></i>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $testimonial->rating)
+                                <i class="fas fa-star"></i>
+                                @else
+                                <i class="far fa-star"></i>
+                                @endif
                             @endfor
                         </p>
                         <div class="wsus__testimonial_footer d-flex flex-wrap">

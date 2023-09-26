@@ -482,7 +482,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__go_offer">
-                        <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
+                        <p>{!! strip_tags(clean($partner_section->offer_title1)) !!} <span>{!! strip_tags(clean($partner_section->offer_title2)) !!}</span></p>
                         <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('user.Go to Offer page')}}</a>
                     </div>
                 </div>

@@ -216,7 +216,7 @@ class SettingController extends Controller
 
         $privacy_policy_languages = PrivacyPolicyLanguage::where('lang_code', '!=', 'en')->get();
         foreach($privacy_policy_languages as $privacy_policy_language){
-            $privacy_policy_languages->delete();
+            $privacy_policy_language->delete();
         }
 
         $languages = Language::where('id', '!=', 1)->get();

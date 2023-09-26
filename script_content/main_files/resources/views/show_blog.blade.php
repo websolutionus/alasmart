@@ -1,8 +1,8 @@
 @extends($active_theme)
 @section('title')
-    <title>{{ $blog->title }}</title>
-    <meta name="title" content="{{ $blog->seo_title }}">
-    <meta name="description" content="{{ $blog->seo_description }}">
+    <title>{{ $blog->bloglanguagefrontend->title }}</title>
+    <meta name="title" content="{{ $blog->bloglanguagefrontend->seo_title }}">
+    <meta name="description" content="{{ $blog->bloglanguagefrontend->seo_description }}">
 @endsection
 
 @section('frontend-content')

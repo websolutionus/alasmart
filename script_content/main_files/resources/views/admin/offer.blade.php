@@ -46,6 +46,11 @@
                             @method('PUT')
                             <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                             @php
+                                $home1= false;
+                                if($setting->selected_theme == 0 || $setting->selected_theme == 1){
+                                    $home1 = true;
+                                }
+
                                 $home2= false;
                                 if($setting->selected_theme == 0 || $setting->selected_theme == 2){
                                     $home2 = true;
@@ -56,11 +61,17 @@
                                     $home3 = true;
                                 }
                             @endphp
-                            @if ($home2 || $home3)
+                            @if ($home1 || $home3)
                             <div class="row">
+
                                 <div class="form-group col-12">
-                                    <label>{{__('Title one')}} <span class="text-danger">({{ $notify }}) </span> <span class="text-danger">*</span></label>
+                                    <label><span class="font-weight-bold">{{__('Title one')}} </span> <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="title1" value="{{ $offer->title1 }}">
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label><span class="font-weight-bold">{{__('Title two')}}</span> <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control"  name="title2" value="{{ $offer->title2 }}">
                                 </div>
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
@@ -158,7 +169,7 @@
                                 @endif
 
                                 <div class="form-group col-12">
-                                    <label for="">{{__('Header')}} <span class="text-danger">({{ $notify }}) </span> <span class="text-danger">*</span></label>
+                                    <label for=""> <span class="font-weight-bold">{{__('Header')}}</span> <span class="text-danger">*</span></label>
                                     <input type="text" name="about_offer_title1" class="form-control" value="{{ $offer->about_offer_title1 }}">
                                 </div>
 

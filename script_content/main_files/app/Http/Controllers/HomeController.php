@@ -369,9 +369,9 @@ class HomeController extends Controller
              $partner_visbility = true;
          }
 
-         $partner_content = $contents->where('id', )->first();
+         $partner_content = $contents->where('id', 11)->first();
          $partners = Partner::where(['status' => 1])->get()->take($partner_control->qty);
- 
+         
          $partner_section = (object) array(
              'visibility' => $partner_visbility,
              'title' => $partner_content->contentlangfrontend->title,
@@ -1275,7 +1275,7 @@ class HomeController extends Controller
     
     public function faq(){
 
-        $faqs = Faq::with('faqlangfrontend')->orderBy('id','desc')->where('status',1)->get();
+        $faqs = Faq::with('faqlangfrontend')->where('status',1)->get();
 
         $recaptchaSetting = GoogleRecaptcha::first();
 

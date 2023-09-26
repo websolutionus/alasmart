@@ -1,9 +1,9 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{ $product->name }}</title>
-    <meta name="title" content="{{ $product->seo_title }}">
-    <meta name="description" content="{{ $product->seo_description }}">
+    <title>{{ $product->productlangfrontend->name }}</title>
+    <meta name="title" content="{{ $product->productlangfrontend->seo_title }}">
+    <meta name="description" content="{{ $product->productlangfrontend->seo_description }}">
 @endsection
 
 @section('frontend-content')

@@ -27,7 +27,7 @@ class WishlistController extends Controller
                  return response()->json(['error'=>'This product allready exist']);
               } 
             }else{
-             return response()->json(['error'=>'At first login your acount']);
+             return response()->json(['error'=>'At first login your account']);
             }
     }
 }

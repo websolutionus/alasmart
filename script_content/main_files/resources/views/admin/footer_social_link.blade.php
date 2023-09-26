@@ -72,7 +72,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="">{{__('admin.Icon')}}</label>
-                                <input type="text" class="form-control custom-icon-picker" name="icon">
+                                <input type="text" class="form-control custom-icon-picker" name="icon" autocomplete="off">
                             </div>
                             <div class="form-group">
                               <label for="">{{__('Media text')}}</label>
@@ -109,7 +109,7 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="">{{__('admin.Icon')}}</label>
-                                <input type="text" class="form-control custom-icon-picker" name="icon" value="{{ $link->icon }}">
+                                <input type="text" class="form-control custom-icon-picker" name="icon" value="{{ $link->icon }}" autocomplete="off">
                             </div>
                             <div class="form-group">
                               <label for="">{{__('Media text')}}</label>

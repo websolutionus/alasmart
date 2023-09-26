@@ -43,12 +43,12 @@
                             <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
                             <div class="row">
                                 <div class="form-group col-12">
-                                    <label>{{__('Title one')}} <span class="text-danger">*</span></label>
+                                    <label> <span class="font-weight-bold">{{__('Title one')}}</span> <span class="text-danger">*</span></label>
                                     <input type="text" name="title1" value="{{ $why_choose_us->title1 }}" class="form-control">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Title two')}} <span class="text-danger">*</span></label>
+                                    <label> <span class="font-weight-bold">{{__('Title two')}}</span> <span class="text-danger">*</span></label>
                                     <input type="text" name="title2" value="{{ $why_choose_us->title2 }}" class="form-control">
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                     $home3 = true;
                                 }
                             @endphp
-                            @if ($home3 || $home1)
+                            @if ($home3)
                             <div class="row">
                                 <div class="col-12">
                                     @if ($home3)

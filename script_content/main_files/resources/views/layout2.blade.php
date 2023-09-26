@@ -186,7 +186,11 @@
                                 $route = route('home',['theme' => 1]);
                             }
                         @endphp
-                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('Home')}} <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('Home')}} 
+                            @if ($setting->selected_theme==0)
+                            <i class="far fa-chevron-down"></i>
+                            @endif
+                        </a>
                         @if ($setting->selected_theme==0)
                         <ul class="wsus__droap_menu">
                             <li><a href="{{ route('home',['theme' => 1]) }}">{{__('home one')}}</a></li>
