@@ -42,10 +42,10 @@ class TestimonialController extends Controller
             'rating' => 'required',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Name is required'),
-            'designation.required' => trans('admin_validation.Designation is required'),
-            'image.required' => trans('admin_validation.Image is required'),
-            'comment.required' => trans('admin_validation.Comment is required'),
+            'name.required' => trans('Name is required'),
+            'designation.required' => trans('Designation is required'),
+            'image.required' => trans('Image is required'),
+            'comment.required' => trans('Comment is required'),
             'rating.required' => trans('Rating is required'),
         ];
         $this->validate($request, $rules,$customMessages);
@@ -77,7 +77,7 @@ class TestimonialController extends Controller
         }
         
 
-        $notification = trans('admin_validation.Created Successfully');
+        $notification = trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.testimonial.index')->with($notification);
     }
@@ -104,9 +104,9 @@ class TestimonialController extends Controller
             'rating' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Name is required'),
-            'designation.required' => trans('admin_validation.Designation is required'),
-            'comment.required' => trans('admin_validation.Comment is required'),
+            'name.required' => trans('Name is required'),
+            'designation.required' => trans('Designation is required'),
+            'comment.required' => trans('Comment is required'),
             'rating.required' => trans('Rating is required'),
         ];
         $this->validate($request, $rules,$customMessages);
@@ -142,7 +142,7 @@ class TestimonialController extends Controller
         $testimonial_language->comment = $request->comment;
         $testimonial_language->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -160,7 +160,7 @@ class TestimonialController extends Controller
 
         $testimonial_language = TestimonialLanguage::where('testimonial_id', $id)->delete();
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.testimonial.index')->with($notification);
     }
@@ -170,11 +170,11 @@ class TestimonialController extends Controller
         if($item->status == 1){
             $item->status = 0;
             $item->save();
-            $message = trans('admin_validation.Inactive Successfully');
+            $message = trans('Inactive Successfully');
         }else{
             $item->status = 1;
             $item->save();
-            $message = trans('admin_validation.Active Successfully');
+            $message = trans('Active Successfully');
         }
 
         return response()->json($message);

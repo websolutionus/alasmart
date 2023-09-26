@@ -1,7 +1,7 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('user.Dashboard')}}</title>
-    <meta name="description" content="{{__('user.Dashboard')}}">
+    <title>{{__('Dashboard')}}</title>
+    <meta name="description" content="{{__('Dashboard')}}">
 @endsection
 
 @section('frontend-content')

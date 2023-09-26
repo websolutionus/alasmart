@@ -9,13 +9,13 @@
           <div class="section-header">
             <h1>{{__('Language')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Language')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.language.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
+            <a href="{{ route('admin.language.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,14 +24,14 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.SN')}}</th>
-                                    <th>{{__('admin.Name')}}</th>
+                                    <th>{{__('SN')}}</th>
+                                    <th>{{__('Name')}}</th>
 
                                     <th>{{__('Language Code')}}</th>
                                     <th>{{__('Language Direction')}}</th>
                                     <th>{{__('Default')}}</th>
                                     <th>{{__('Status')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -52,9 +52,9 @@
 
                                         <td>
                                             @if ($language->is_default == 'Yes')
-                                                <span class="badge badge-success">{{__('admin.Yes')}}</span>
+                                                <span class="badge badge-success">{{__('Yes')}}</span>
                                             @else
-                                            <span class="badge badge-danger">{{__('admin.No')}}</span>
+                                            <span class="badge badge-danger">{{__('No')}}</span>
                                             @endif
                                         </td>
                                         
@@ -96,7 +96,7 @@
                       </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
                 </div>
             </div>
         </div>

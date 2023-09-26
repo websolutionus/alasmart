@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('User.Contact Us')}}</h1>
+                        <h1>{{__('Contact Us')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
-                            <li><a href="javascript:;">{{__('user.Contact Us')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('Contact Us')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,40 +65,40 @@
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('user.Name')}}*</legend>
-                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="{{__('user.Name')}}">
+                                        <legend>{{__('Name')}}*</legend>
+                                        <input type="text" name="name" value="{{ old('name') }}" placeholder="{{__('Name')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('user.Phone')}}</legend>
-                                        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="{{__('user.Phone')}}">
+                                        <legend>{{__('Phone')}}</legend>
+                                        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="{{__('Phone')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('user.Email')}}*</legend>
-                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="{{__('user.Email')}}">
+                                        <legend>{{__('Email')}}*</legend>
+                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="{{__('Email')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('user.Subject')}}*</legend>
-                                        <input type="text" name="subject" value="{{ old('subject') }}" placeholder="{{__('user.Subject')}}">
+                                        <legend>{{__('Subject')}}*</legend>
+                                        <input type="text" name="subject" value="{{ old('subject') }}" placeholder="{{__('Subject')}}">
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-xl-12">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('user.Message')}}*</legend>
-                                        <textarea rows="6" name="message" placeholder="{{__('user.Write a Message')}}">{{ old('message') }}</textarea>
+                                        <legend>{{__('Message')}}*</legend>
+                                        <textarea rows="6" name="message" placeholder="{{__('Write a Message')}}">{{ old('message') }}</textarea>
                                     </fieldset>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                             @endif
 
                             <div class="col-xl-12">
-                                <button class="common_btn" type="submit">{{__('User.Send Message')}}</button>
+                                <button class="common_btn" type="submit">{{__('Send Message')}}</button>
                             </div>
                         </div>
                     </form>

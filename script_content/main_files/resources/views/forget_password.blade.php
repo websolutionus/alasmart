@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('user.Forget Password')}}</title>
+    <title>{{__('Forget Password')}}</title>
 @endsection
 
 @section('frontend-content')

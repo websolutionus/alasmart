@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Popular Tag')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Popular Tag')}}</div>
             </div>
           </div>
@@ -25,7 +25,7 @@
                                 <label for="">{{__('Tag')}}</label>
                                 <input type="text" class="form-control" name="tag_name">
                             </div>
-                            <button class="btn btn-primary">{{__('admin.Save')}}</button>
+                            <button class="btn btn-primary">{{__('Save')}}</button>
                         </form>
                     </div>
                 </div>
@@ -40,9 +40,9 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th width="5%">{{__('admin.SN')}}</th>
+                                    <th width="5%">{{__('SN')}}</th>
                                     <th width="30%">{{__('Tag Name')}}</th>
-                                    <th width="15%">{{__('admin.Action')}}</th>
+                                    <th width="15%">{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>

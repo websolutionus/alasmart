@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('user.About Us')}}</h1>
+                        <h1>{{__('About Us')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
-                            <li><a href="javascript:;">{{__('user.About Us')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('About Us')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
             <div class="wsus__purchase" style="background: url({{ asset($our_teem_section->offer_background) }});">
                 <h3> {!! strip_tags(clean($our_teem_section->offer_title1),'<span>') !!}</h3>
                 <p>{{ $our_teem_section->offer_title3 }}</p>
-                <a target="_blank" href="{{ $our_teem_section->offer_link }}">{{__('user.Purchase Here')}}</a>
+                <a target="_blank" href="{{ $our_teem_section->offer_link }}">{{__('Purchase Here')}}</a>
             </div>
         </div>
     </section>

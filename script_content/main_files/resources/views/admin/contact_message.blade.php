@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Contact Message')}}</title>
+<title>{{__('Contact Message')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Contact Message')}}</h1>
+            <h1>{{__('Contact Message')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Contact Message')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Contact Message')}}</div>
             </div>
           </div>
 
@@ -24,19 +24,19 @@
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Receive contact message email')}}</label>
+                                    <label for="">{{__('Receive contact message email')}}</label>
                                     <input type="email" name="contact_email" class="form-control" value="{{ $setting->contact_email }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Want to save email in database?')}}</label>
+                                    <label for="">{{__('Want to save email in database?')}}</label>
                                     <select name="enable_save_contact_message" id="" class="form-control">
-                                        <option {{ $setting->enable_save_contact_message == 1 ? 'selected' : '' }} value="1">{{__('admin.Yes')}}</option>
-                                        <option {{ $setting->enable_save_contact_message == 0 ? 'selected' : '' }} value="0">{{__('admin.No')}}</option>
+                                        <option {{ $setting->enable_save_contact_message == 1 ? 'selected' : '' }} value="1">{{__('Yes')}}</option>
+                                        <option {{ $setting->enable_save_contact_message == 0 ? 'selected' : '' }} value="0">{{__('No')}}</option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                             </form>
                         </div>
                     </div>
@@ -53,13 +53,13 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th width="5%">{{__('admin.SN')}}</th>
-                                    <th width="10%">{{__('admin.Name')}}</th>
-                                    <th width="15%">{{__('admin.Email')}}</th>
-                                    <th width="10%">{{__('admin.Phone')}}</th>
-                                    <th width="20%">{{__('admin.Subject')}}</th>
-                                    <th width="35%">{{__('admin.Message')}}</th>
-                                    <th width="5%">{{__('admin.Action')}}</th>
+                                    <th width="5%">{{__('SN')}}</th>
+                                    <th width="10%">{{__('Name')}}</th>
+                                    <th width="15%">{{__('Email')}}</th>
+                                    <th width="10%">{{__('Phone')}}</th>
+                                    <th width="20%">{{__('Subject')}}</th>
+                                    <th width="35%">{{__('Message')}}</th>
+                                    <th width="5%">{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>

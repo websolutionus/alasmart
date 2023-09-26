@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.About Us')}}</title>
+<title>{{__('About Us')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.About Us')}}</h1>
+            <h1>{{__('About Us')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.About Us')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('About Us')}}</div>
             </div>
           </div>
 
@@ -116,11 +116,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">{{__('admin.About Us')}} <span class="text-danger">*</span></label>
+                                        <label for="">{{__('About Us')}} <span class="text-danger">*</span></label>
                                         <textarea name="about_us" id="" class="summernote" cols="30" rows="10">{!! clean($about_language->about_us) !!}</textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                                   </form>
                             </div>
                         </div>

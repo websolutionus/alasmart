@@ -33,11 +33,11 @@ class WithdrawMethodController extends Controller
             'description' => 'required',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Title is required'),
-            'minimum_amount.required' => trans('admin_validation.Public key is required'),
-            'maximum_amount.required' => trans('admin_validation.Secret key is required'),
-            'withdraw_charge.required' => trans('admin_validation.Currency rate is required'),
-            'description.required' => trans('admin_validation.Currency name is required'),
+            'name.required' => trans('Title is required'),
+            'minimum_amount.required' => trans('Public key is required'),
+            'maximum_amount.required' => trans('Secret key is required'),
+            'withdraw_charge.required' => trans('Currency rate is required'),
+            'description.required' => trans('Currency name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -50,7 +50,7 @@ class WithdrawMethodController extends Controller
         $method->status = 1;
         $method->save();
 
-        $notification=trans('admin_validation.Create Successfully');
+        $notification=trans('Create Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.withdraw-method.index')->with($notification);
     }
@@ -71,11 +71,11 @@ class WithdrawMethodController extends Controller
             'description' => 'required',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Title is required'),
-            'minimum_amount.required' => trans('admin_validation.Public key is required'),
-            'maximum_amount.required' => trans('admin_validation.Secret key is required'),
-            'withdraw_charge.required' => trans('admin_validation.Currency rate is required'),
-            'description.required' => trans('admin_validation.Currency name is required'),
+            'name.required' => trans('Title is required'),
+            'minimum_amount.required' => trans('Public key is required'),
+            'maximum_amount.required' => trans('Secret key is required'),
+            'withdraw_charge.required' => trans('Currency rate is required'),
+            'description.required' => trans('Currency name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -88,7 +88,7 @@ class WithdrawMethodController extends Controller
         $method->status = 1;
         $method->save();
 
-        $notification=trans('admin_validation.Update Successfully');
+        $notification=trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.withdraw-method.index')->with($notification);
     }
@@ -96,7 +96,7 @@ class WithdrawMethodController extends Controller
     public function destroy($id){
         $method = WithdrawMethod::find($id);
         $method->delete();
-        $notification=trans('admin_validation.Delete Successfully');
+        $notification=trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.withdraw-method.index')->with($notification);
     }
@@ -106,11 +106,11 @@ class WithdrawMethodController extends Controller
         if($method->status==1){
             $method->status=0;
             $method->save();
-            $message= trans('admin_validation.Inactive Successfully');
+            $message= trans('Inactive Successfully');
         }else{
             $method->status=1;
             $method->save();
-            $message= trans('admin_validation.Active Successfully');
+            $message= trans('Active Successfully');
         }
         return response()->json($message);
     }

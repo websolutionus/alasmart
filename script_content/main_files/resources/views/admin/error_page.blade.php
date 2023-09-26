@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Error Page')}}</title>
+<title>{{__('Error Page')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Error Page')}}</h1>
+            <h1>{{__('Error Page')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Error Page')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Error Page')}}</div>
             </div>
           </div>
 
@@ -45,14 +45,14 @@
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="">{{__('admin.Button Text')}}</label>
+                                                <label for="">{{__('Button Text')}}</label>
                                                 <input type="text" name="button_text" class="form-control" value="{{ $errorpage->button_text }}">
                                             </div>
                                         </div>
 
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                                 </form>
                             </div>
                         </div>

@@ -94,33 +94,33 @@
                                 </a>
                                 <ul class="user_droap_menu">
                                     <li>
-                                        <a href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('user.Overview')}}</a>
+                                        <a href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('Overview')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('user.Portfolio')}}</a>
+                                        <a href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('Portfolio')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('download') }}"><i class="far fa-download"></i> {{__('user.Download File')}}</a>
+                                        <a href="{{ route('download') }}"><i class="far fa-download"></i> {{__('Download File')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('collection') }}"><i class="fas fa-heart"></i> {{__('user.Collection')}}</a>
+                                        <a href="{{ route('collection') }}"><i class="fas fa-heart"></i> {{__('Collection')}}</a>
                                     </li>
 
                                     @if (Auth::guard('web')->check())
                                     <li>
-                                        <a href="{{ route('edit-profile') }}"><i class="fas fa-user-edit"></i> {{__('user.Edit profile')}}</a>
+                                        <a href="{{ route('edit-profile') }}"><i class="fas fa-user-edit"></i> {{__('Edit profile')}}</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('change-password') }}"><i class="fas fa-lock"></i>{{__('user.Change Password')}}</a>
+                                        <a href="{{ route('change-password') }}"><i class="fas fa-lock"></i>{{__('Change Password')}}</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> {{__('user.Logout')}}</a>
+                                        <a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> {{__('Logout')}}</a>
                                     </li>
                                     @else
                                     <li>
-                                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{__('user.Login')}}</a>
+                                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> {{__('Login')}}</a>
                                     </li>
                                     @endif
 
@@ -147,7 +147,7 @@
                                             $total_balance = $orders_items->sum('price');
                                         @endphp
                                         <li>
-                                            <p>{{__('user.Earnings')}}:</p>
+                                            <p>{{__('Earnings')}}:</p>
                                             <h2>{{ $setting->currency_icon }}{{ $total_balance }}</h2>
                                         </li>
                                     @endif
@@ -191,36 +191,36 @@
                                 $route = route('home',['theme' => 1]);
                             }
                         @endphp
-                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('user.Home')}} 
+                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('Home')}} 
                             @if ($setting->selected_theme==0)
                             <i class="far fa-chevron-down"></i>
                             @endif
                         </a>
                         @if ($setting->selected_theme==0)
                         <ul class="wsus__droap_menu">
-                            <li><a class="active" href="{{ route('home',['theme' => 1]) }}">{{__('user.Home one')}}</a></li>
-                            <li><a href="{{ route('home',['theme' => 2]) }}">{{__('user.Home two')}}</a></li>
-                            <li><a href="{{ route('home',['theme' => 3]) }}">{{__('user.Home three')}}</a></li>
+                            <li><a class="active" href="{{ route('home',['theme' => 1]) }}">{{__('Home one')}}</a></li>
+                            <li><a href="{{ route('home',['theme' => 2]) }}">{{__('Home two')}}</a></li>
+                            <li><a href="{{ route('home',['theme' => 3]) }}">{{__('Home three')}}</a></li>
                         </ul>
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">{{__('user.Products')}}</a>
+                        <a class="nav-link" href="{{ route('products') }}">{{__('Products')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;">{{__('user.Pages')}} <i class="far fa-chevron-down"></i></a>
+                        <a class="nav-link" href="javascript:;">{{__('Pages')}} <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
-                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
-                            <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('user.Become an Author')}}</a></li>
+                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('About Us')}}</a></li>
+                            <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('Become an Author')}}</a></li>
 
                             @if ($setting->blog_left_right == 0)
-                            <li><a class="{{ request()->get('blog') == 'leftbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('user.Blog Leftbar')}}</a></li>
-                            <li><a class="{{ request()->get('blog') == 'rightbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('user.Blog Rightbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'leftbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'leftbar']) }}">{{__('Blog Leftbar')}}</a></li>
+                            <li><a class="{{ request()->get('blog') == 'rightbar' ? 'active':'' }}" href="{{ route('blogs', ['blog'=>'rightbar']) }}">{{__('Blog Rightbar')}}</a></li>
                             @endif
 
-                            <li><a class="{{ Route::is('faq') ? 'active':'' }}" href="{{ route('faq') }}">{{__('user.FAQ')}}</a></li>
-                            <li><a class="{{ Route::is('privacy-policy') ? 'active':'' }}" href="{{ route('privacy-policy') }}">{{__('user.Privacy Policy')}}</a></li>
-                            <li><a class="{{ Route::is('terms-and-conditions') ? 'active':'' }}" href="{{ route('terms-and-conditions') }}">{{__('user.Terms and Condition')}}</a></li>
+                            <li><a class="{{ Route::is('faq') ? 'active':'' }}" href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
+                            <li><a class="{{ Route::is('privacy-policy') ? 'active':'' }}" href="{{ route('privacy-policy') }}">{{__('Privacy Policy')}}</a></li>
+                            <li><a class="{{ Route::is('terms-and-conditions') ? 'active':'' }}" href="{{ route('terms-and-conditions') }}">{{__('Terms and Condition')}}</a></li>
 
                             @php
                                 $pages = App\Models\CustomPage::where('status', 1)->get();
@@ -232,10 +232,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('blogs') }}">{{__('user.Blog')}}</a>
+                        <a class="nav-link" href="{{ route('blogs') }}">{{__('Blog')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact-us') }}">{{__('user.Contact')}}</a>
+                        <a class="nav-link" href="{{ route('contact-us') }}">{{__('Contact')}}</a>
                     </li>
                 </ul>
 
@@ -246,7 +246,7 @@
                             <span id="cartQty">0</span>
                         </a>
                     </li>
-                    <li><a class="start_btn" href="{{ route('select-product-type') }}">{{__('user.Start Selling')}}</a></li>
+                    <li><a class="start_btn" href="{{ route('select-product-type') }}">{{__('Start Selling')}}</a></li>
                 </ul>
             </div>
         </div>
@@ -336,10 +336,10 @@
                     <div class="wsus__footer_content">
                         <h4>{{__('Support')}}</h4>
                         <ul>
-                            <li><a href="{{ route('contact-us') }}">{{__('user.Contact Us')}}</a></li>
-                            <li><a href="{{ route('blogs') }}">{{__('user.Our Blog')}}</a></li>
-                            <li><a href="{{ route('faq') }}">{{__('user.FAQ')}}</a></li>
-                            <li><a href="{{ route('privacy-policy') }}">{{__('user.Privacy Policy')}}</a></li>
+                            <li><a href="{{ route('contact-us') }}">{{__('Contact Us')}}</a></li>
+                            <li><a href="{{ route('blogs') }}">{{__('Our Blog')}}</a></li>
+                            <li><a href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
+                            <li><a href="{{ route('privacy-policy') }}">{{__('Privacy Policy')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -347,9 +347,9 @@
                     <div class="wsus__footer_content">
                         <h4>{{__('Quick Link')}}</h4>
                         <ul>
-                            <li><a href="{{ route('dashboard') }}">{{__('user.My Profile')}}</a></li>
-                            <li><a href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
-                            <li><a href="{{ route('login') }}">{{__('user.Login')}}</a></li>
+                            <li><a href="{{ route('dashboard') }}">{{__('My Profile')}}</a></li>
+                            <li><a href="{{ route('about-us') }}">{{__('About Us')}}</a></li>
+                            <li><a href="{{ route('login') }}">{{__('Login')}}</a></li>
                             <li><a href="{{ route('register') }}">{{__('Registration')}}</a></li>
                         </ul>
                     </div>
@@ -506,7 +506,7 @@
                         return;
                     }
     
-                    let loading = "{{__('user.Processing...')}}"
+                    let loading = "{{__('Processing...')}}"
     
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
@@ -518,7 +518,7 @@
                         success: function (response) {
                             if(response.status == 1){
                                 toastr.success(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#fsubscriberForm").trigger("reset");
@@ -528,7 +528,7 @@
     
                             if(response.status == 0){
                                 toastr.error(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#fsubscriberForm").trigger("reset");
@@ -540,7 +540,7 @@
                             $('#fsubShowSpain').addClass('d-none');
                             $('#fsubSubmitBtn').removeClass('d-none');
                             toastr.error('Something went wrong');
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#fsubscribe_btn").html(subscribe);
                             $("#fsubscribe_btn").attr('disabled',false);
                             $("#fsubscriberForm").trigger("reset");
@@ -559,7 +559,7 @@
                         return;
                     }
     
-                    let loading = "{{__('user.Processing...')}}"
+                    let loading = "{{__('Processing...')}}"
     
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
@@ -571,7 +571,7 @@
                         success: function (response) {
                             if(response.status == 1){
                                 toastr.success(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#footerTopSubscriberForm").trigger("reset");
@@ -581,7 +581,7 @@
     
                             if(response.status == 0){
                                 toastr.error(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#footerTopSubscriberForm").trigger("reset");
@@ -593,7 +593,7 @@
                             $('#footerTopSubShowSpain').addClass('d-none');
                             $('#footerTopSubSubmitBtn').removeClass('d-none');
                             toastr.error('Something went wrong');
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#fsubscribe_btn").html(subscribe);
                             $("#fsubscribe_btn").attr('disabled',false);
                             $("#footerTopSubscriberForm").trigger("reset");
@@ -615,7 +615,7 @@
                             }
                         })
                     }else{
-                        var response= "<option value=''>{{__('user.Select a State')}}</option>";
+                        var response= "<option value=''>{{__('Select a State')}}</option>";
                         $("#state_id").html(response);
                     }
     
@@ -635,7 +635,7 @@
                             }
                         })
                     }else{
-                        var response= "<option value=''>{{__('user.Select a city')}}</option>";
+                        var response= "<option value=''>{{__('Select a city')}}</option>";
                         $("#state_id").html(response);
                     }
     
@@ -764,7 +764,7 @@
                                     <td class="description">
                                         <h3><a href="{{ url('/product/${value.options.slug}') }}">${value.name}</a></h3>
                                         <p>
-                                            <span>{{__('user.Item by')}}</span> ${value.options.author}
+                                            <span>{{__('Item by')}}</span> ${value.options.author}
                                             <b class="${value.options.variant_name!=null?'':'d-none'}">${value.options.variant_name!=null?value.options.variant_name:''}</b>
                                             <b class="${value.options.price_type!=null?'':'d-none'}">${value.options.price_type!=null?value.options.price_type:''}</b>
                                         </p>
@@ -842,18 +842,18 @@
                success:function(data){
                 if(data.total){
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
-                        <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} 0</span></p>
-                        <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}<span>${data.total}</span></span></p>
-                        <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>
+                        <p class="subtotal">{{__('Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
+                        <p class="discount">{{__('Discount')}} <span>(-)${data.setting.currency_icon} 0</span></p>
+                        <p class="total">{{__('Total')}} <span><span>${data.setting.currency_icon}<span>${data.total}</span></span></p>
+                        <a class="common_btn" href="{{ route('checkout') }}">{{__('Proceed to Checkout')}}</a>
                     `);
                 }else{
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
-                        <p class="subtotal">{{__('user.Coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
-                        <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} ${data.discount_amount}</span></p>
-                        <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}</span>${data.total_amount}</span></p>
-                        <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>
+                        <p class="subtotal">{{__('Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
+                        <p class="subtotal">{{__('Coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
+                        <p class="discount">{{__('Discount')}} <span>(-)${data.setting.currency_icon} ${data.discount_amount}</span></p>
+                        <p class="total">{{__('Total')}} <span><span>${data.setting.currency_icon}</span>${data.total_amount}</span></p>
+                        <a class="common_btn" href="{{ route('checkout') }}">{{__('Proceed to Checkout')}}</a>
                     `);
                 }
             }

@@ -46,19 +46,19 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true"><i class="fal fa-layer-group"></i> {{__('user.Description')}}</button>
+                                    aria-selected="true"><i class="fal fa-layer-group"></i> {{__('Description')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-profile" type="button" role="tab"
                                     aria-controls="pills-profile" aria-selected="false"><i class="far fa-comments"></i>
-                                    {{__('user.Comments')}} ({{ $productComments->count() }})</button>
+                                    {{__('Comments')}} ({{ $productComments->count() }})</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-contact" type="button" role="tab"
                                     aria-controls="pills-contact" aria-selected="false"><i class="far fa-star"></i>
-                                    {{__('user.Review')}} ({{ $productReviews->count() }})</button>
+                                    {{__('Review')}} ({{ $productReviews->count() }})</button>
                             </li>
 
                             <li class="nav-item" role="presentation">
@@ -363,8 +363,8 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
@@ -375,7 +375,7 @@
 
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
 
-                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
+                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             
                             <p class="rating">
@@ -391,7 +391,7 @@
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             
                             <div class="like_and_sell">
-                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('Sale')}}</span>
                             </div>
                             
                         </div>
@@ -452,7 +452,7 @@
                             $('#submitBtnn').removeClass('d-none');
                             $('#showSpainn').addClass('d-none');
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                             }
                         }
                     }
@@ -490,7 +490,7 @@
                         $('#submitBtn').removeClass('d-none');
                         if(response.responseJSON.errors.comment)toastr.error(response.responseJSON.errors.comment[0])
                         if(!response.responseJSON.errors.comment){
-                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });
@@ -528,7 +528,7 @@
                         if(response.responseJSON.errors.rating)toastr.error(response.responseJSON.errors.rating[0])
                         if(response.responseJSON.errors.review)toastr.error(response.responseJSON.errors.review[0])
                         if(!response.responseJSON.errors.comment){
-                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });

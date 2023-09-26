@@ -1,17 +1,17 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Popular Blog')}}</title>
+<title>{{__('Popular Blog')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Popular Blog')}}</h1>
+            <h1>{{__('Popular Blog')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item active"><a href="{{ route('admin.blog.index') }}">{{__('admin.Blogs')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Popular Blog')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.blog.index') }}">{{__('Blogs')}}</a></div>
+              <div class="breadcrumb-item">{{__('Popular Blog')}}</div>
             </div>
           </div>
 
@@ -23,15 +23,15 @@
                         <form action="{{ route('admin.popular-blog.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="">{{__('admin.Blog')}}</label>
+                                <label for="">{{__('Blog')}}</label>
                                 <select name="blog_id" id="" class="form-control select2" required>
-                                    <option value="">{{__('admin.Select Blog')}}</option>
+                                    <option value="">{{__('Select Blog')}}</option>
                                     @foreach ($blogs as $blog)
                                         <option value="{{ $blog->id }}">{{ $blog->bloglanguageadmin->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <button class="btn btn-primary">{{__('admin.Save')}}</button>
+                            <button class="btn btn-primary">{{__('Save')}}</button>
                         </form>
                     </div>
                 </div>
@@ -46,12 +46,12 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th width="5%">{{__('admin.SN')}}</th>
-                                    <th width="30%">{{__('admin.Blog')}}</th>
-                                    <th width="15%">{{__('admin.Category')}}</th>
-                                    <th width="10%">{{__('admin.Image')}}</th>
-                                    <th width="15%">{{__('admin.Status')}}</th>
-                                    <th width="15%">{{__('admin.Action')}}</th>
+                                    <th width="5%">{{__('SN')}}</th>
+                                    <th width="30%">{{__('Blog')}}</th>
+                                    <th width="15%">{{__('Category')}}</th>
+                                    <th width="10%">{{__('Image')}}</th>
+                                    <th width="15%">{{__('Status')}}</th>
+                                    <th width="15%">{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -64,12 +64,12 @@
                                         <td>
                                             @if($popularBlog->status == 1)
                                             <a href="javascript:;" onclick="changePopularBlogStatus({{ $popularBlog->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="changePopularBlogStatus({{ $popularBlog->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
                                             @endif
                                         </td>

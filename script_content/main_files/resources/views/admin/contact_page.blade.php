@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Conact Us')}}</title>
+<title>{{__('Conact Us')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Conact Us')}}</h1>
+            <h1>{{__('Conact Us')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Conact Us')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Conact Us')}}</div>
             </div>
           </div>
 
@@ -94,13 +94,13 @@
                               </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Phone')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Phone')}} <span class="text-danger">*</span></label>
                                     <textarea name="phone" cols="30" rows="10" class="form-control text-area-5">{{ $contact_language->phone }}</textarea>
                                 </div>
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Google Map')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Google Map')}} <span class="text-danger">*</span></label>
                                     <textarea name="google_map" cols="30" rows="10" class="form-control text-area-5">{{ $contact->map }}</textarea>
                                 </div>
                                 @endif
@@ -108,7 +108,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button class="btn btn-primary">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

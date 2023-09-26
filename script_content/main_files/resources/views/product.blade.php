@@ -40,7 +40,7 @@
                     <div class="wsus__product_page_search">
                         <form id="search_form">
                             <input type="text" name="keyword" id="search_keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('Search your products')}}...">
-                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('user.Search')}}</button>
+                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('Search')}}</button>
                         </form>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="wsus__product_sidebar_area mt_25">
                         <div class="wsus__product_sidebar categories">
-                            <h3>{{__('user.Categories')}}</h3>
+                            <h3>{{__('Categories')}}</h3>
                             <ul>
                                 @foreach ($categories as $category)
                                 @php
@@ -127,7 +127,7 @@
                             <h3>{{__('Filter Price')}}</h3>
                             <div id="slider-range" class="price-filter-range"></div>
                             <div class="range_price_area d-flex">
-                                <p>{{__('user.Price')}}: <span>{{ $setting->currency_icon }}</span></p>
+                                <p>{{__('Price')}}: <span>{{ $setting->currency_icon }}</span></p>
                                 <div class="range_main_price d-flex">
                                     <input type="text" oninput="validity.valid||(value='0');" id="min_price"
                                         class="price-range-field" readonly />

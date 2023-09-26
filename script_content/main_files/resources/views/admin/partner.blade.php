@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Partner')}}</title>
+<title>{{__('Partner')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Partner')}}</h1>
+            <h1>{{__('Partner')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Partner')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Partner')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.partner.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
+            <a href="{{ route('admin.partner.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,28 +24,28 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.Link')}}</th>
-                                    <th>{{__('admin.Logo')}}</th>
-                                    <th>{{__('admin.Status')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('Link')}}</th>
+                                    <th>{{__('Logo')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
                                 @foreach ($partners as $index => $partner)
                                     <tr>
 
-                                        <td><a href="{{ $partner->link }}">{{__('admin.Click Me')}}</a></td>
+                                        <td><a href="{{ $partner->link }}">{{__('Click Me')}}</a></td>
 
                                         <td> <img class="w_80" src="{{ asset($partner->logo) }}" alt="" width="50px"></td>
                                         <td>
                                             @if($partner->status == 1)
                                             <a href="javascript:;" onclick="changeProductBrandStatus({{ $partner->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="changeProductBrandStatus({{ $partner->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @endif

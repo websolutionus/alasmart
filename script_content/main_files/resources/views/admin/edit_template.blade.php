@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Edit Template')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item active"><a href="{{ route('admin.template.index') }}">{{__('Template')}}</a></div>
               <div class="breadcrumb-item">{{__('Edit Template')}}</div>
             </div>
@@ -52,7 +52,7 @@
 
                                 @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Existing Icon')}}</label>
+                                    <label>{{__('Existing Icon')}}</label>
                                     <div>
                                         <img class="icon_w100" src="{{ asset($template->image) }}" alt="">
                                     </div>
@@ -65,25 +65,25 @@
                                 @endif
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Title')}}</label>
+                                    <label>{{__('Title')}}</label>
                                     <input type="text" id="title" class="form-control" value="{{ $template_language->title }}" name="title">
                                 </div>
 
                                 @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Link')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Link')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="link" class="form-control" value="{{ $template->link }}" name="link">
                                 </div>
                                 @endif
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Description')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Description')}} <span class="text-danger">*</span></label>
                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control text-area-5">{{ $template_language->description }}</textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('admin.Save')}}</button>
+                                    <button class="btn btn-primary">{{__('Save')}}</button>
                                 </div>
                             </div>
                         </form>

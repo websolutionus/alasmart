@@ -1,19 +1,19 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Dashboard')}}</title>
+<title>{{__('Dashboard')}}</title>
 @endsection
 @section('admin-content')
 <!-- Main Content -->
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>{{__('admin.Dashboard')}}</h1>
+        <h1>{{__('Dashboard')}}</h1>
       </div>
 
       <div class="section-body">
         <div class="row">
             <div class="col-12">
-                <h4 class="dashboard_title">{{__('admin.Today')}}</h4>
+                <h4 class="dashboard_title">{{__('Today')}}</h4>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
@@ -84,7 +84,7 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>{{__('admin.Total Earnings')}}</h4>
+                    <h4>{{__('Total Earnings')}}</h4>
                   </div>
                   <div class="card-body">
                     {{ $currency_icon->icon }}{{ $today_total_earning }}
@@ -100,7 +100,7 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>{{__('admin.Withdraw Request')}}</h4>
+                    <h4>{{__('Withdraw Request')}}</h4>
                   </div>
                   <div class="card-body">
                     {{ $currency_icon->icon }}{{ $today_withdraw_request }}
@@ -143,7 +143,7 @@
 
 
             <div class="col-12">
-                <h4 class="dashboard_title">{{__('admin.This Month')}}</h4>
+                <h4 class="dashboard_title">{{__('This Month')}}</h4>
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -216,7 +216,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Total Earnings')}}</h4>
+                      <h4>{{__('Total Earnings')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $monthly_total_earning }}
@@ -232,7 +232,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Withdraw Request')}}</h4>
+                      <h4>{{__('Withdraw Request')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $monthly_withdraw_request }}
@@ -274,7 +274,7 @@
               </div>
 
             <div class="col-12">
-                <h4 class="dashboard_title">{{__('admin.This Year')}}</h4>
+                <h4 class="dashboard_title">{{__('This Year')}}</h4>
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -347,7 +347,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Total Earnings')}}</h4>
+                      <h4>{{__('Total Earnings')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $yearly_total_earning }}
@@ -363,7 +363,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Withdraw Request')}}</h4>
+                      <h4>{{__('Withdraw Request')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $yearly_withdraw_request }}
@@ -405,7 +405,7 @@
               </div>
 
             <div class="col-12">
-                <h4 class="dashboard_title">{{__('admin.Total')}}</h4>
+                <h4 class="dashboard_title">{{__('Total')}}</h4>
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
@@ -478,7 +478,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Total Earnings')}}</h4>
+                      <h4>{{__('Total Earnings')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $total_total_earning }}
@@ -494,7 +494,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Withdraw Request')}}</h4>
+                      <h4>{{__('Withdraw Request')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $currency_icon->icon }}{{ $total_withdraw_request }}
@@ -558,7 +558,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Client')}}</h4>
+                      <h4>{{__('Client')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $total_clients }}
@@ -576,7 +576,7 @@
                   </div>
                   <div class="card-wrap">
                     <div class="card-header">
-                      <h4>{{__('admin.Blog')}}</h4>
+                      <h4>{{__('Blog')}}</h4>
                     </div>
                     <div class="card-body">
                       {{ $total_blog }}

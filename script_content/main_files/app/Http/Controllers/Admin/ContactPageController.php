@@ -37,14 +37,14 @@ class ContactPageController extends Controller
             'google_map' => session()->get('admin_lang') == $request->lang_code ? 'required':''
         ];
         $customMessages = [
-            'email.required' => trans('admin_validation.Email is required'),
-            'address.required' => trans('admin_validation.Address is required'),
-            'phone.required' => trans('admin_validation.Phone is required'),
+            'email.required' => trans('Email is required'),
+            'address.required' => trans('Address is required'),
+            'phone.required' => trans('Phone is required'),
             'title1.required' => trans('Title is required'),
             'time.required' => trans('Office time is required'),
             'off_day.required' => trans('Off day is required'),
             'title2.required' => trans('Title is required'),
-            'google_map.unique' => trans('admin_validation.Google Map is required'),
+            'google_map.unique' => trans('Google Map is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -84,7 +84,7 @@ class ContactPageController extends Controller
         $contact_language->phone = $request->phone;
         $contact_language->save();
 
-        $notification = trans('admin_validation.Updated Successfully');
+        $notification = trans('Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

@@ -31,7 +31,7 @@ class ErrorPageController extends Controller
         ];
         $customMessages = [
             'title.required' => trans('Title is required'),
-            'button_text.required' => trans('admin_validation.Button text is required')
+            'button_text.required' => trans('Button text is required')
         ];
         $this->validate($request, $rules,$customMessages);
 

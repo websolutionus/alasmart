@@ -52,12 +52,12 @@ class CategoryController extends Controller
             'icon'=>'required',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Name is required'),
-            'name.unique' => trans('admin_validation.Name already exist'),
-            'slug.required' => trans('admin_validation.Slug is required'),
-            'slug.unique' => trans('admin_validation.Slug already exist'),
-            'icon.required' => trans('admin_validation.Icon is required'),
-            'image.required' => trans('admin_validation.Image is required'),
+            'name.required' => trans('Name is required'),
+            'name.unique' => trans('Name already exist'),
+            'slug.required' => trans('Slug is required'),
+            'slug.unique' => trans('Slug already exist'),
+            'icon.required' => trans('Icon is required'),
+            'image.required' => trans('Image is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $category_language->save();
         }
 
-        $notification = trans('admin_validation.Created Successfully');
+        $notification = trans('Created Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.category.index')->with($notification);
     }
@@ -118,7 +118,7 @@ class CategoryController extends Controller
         ];
 
         $customMessages = [
-            'name.required' => trans('admin_validation.Name is required'),
+            'name.required' => trans('Name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -144,7 +144,7 @@ class CategoryController extends Controller
         $category_language->name = $request->name;
         $category_language->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -160,7 +160,7 @@ class CategoryController extends Controller
 
         $category_language = CategoryLanguage::where('category_id', $id)->delete();
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.category.index')->with($notification);
     }
@@ -170,11 +170,11 @@ class CategoryController extends Controller
         if($category->status==1){
             $category->status=0;
             $category->save();
-            $message = trans('admin_validation.Inactive Successfully');
+            $message = trans('Inactive Successfully');
         }else{
             $category->status=1;
             $category->save();
-            $message= trans('admin_validation.Active Successfully');
+            $message= trans('Active Successfully');
         }
         return response()->json($message);
     }

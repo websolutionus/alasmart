@@ -103,7 +103,7 @@
 
                                     @if (Auth::guard('web')->check())
                                     <li>
-                                        <a href="{{ route('edit-profile') }}"><i class="fas fa-user-edit"></i> {{__('user.Edit profile')}}</a>
+                                        <a href="{{ route('edit-profile') }}"><i class="fas fa-user-edit"></i> {{__('Edit profile')}}</a>
                                     </li>
 
                                     <li>
@@ -309,10 +309,10 @@
                     <div class="wsus__footer_content">
                         <h4>{{__('Support')}}</h4>
                         <ul>
-                            <li><a href="{{ route('contact-us') }}">{{__('user.Contact Us')}}</a></li>
-                            <li><a href="{{ route('blogs') }}">{{__('user.Our Blog')}}</a></li>
-                            <li><a href="{{ route('faq') }}">{{__('user.FAQ')}}</a></li>
-                            <li><a href="{{ route('privacy-policy') }}">{{__('user.Privacy Policy')}}</a></li>
+                            <li><a href="{{ route('contact-us') }}">{{__('Contact Us')}}</a></li>
+                            <li><a href="{{ route('blogs') }}">{{__('Our Blog')}}</a></li>
+                            <li><a href="{{ route('faq') }}">{{__('FAQ')}}</a></li>
+                            <li><a href="{{ route('privacy-policy') }}">{{__('Privacy Policy')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -320,9 +320,9 @@
                     <div class="wsus__footer_content">
                         <h4>{{__('Quick Link')}}</h4>
                         <ul>
-                            <li><a href="{{ route('dashboard') }}">{{__('user.My Profile')}}</a></li>
-                            <li><a href="{{ route('about-us') }}">{{__('user.About Us')}}</a></li>
-                            <li><a href="{{ route('login') }}">{{__('user.Login')}}</a></li>
+                            <li><a href="{{ route('dashboard') }}">{{__('My Profile')}}</a></li>
+                            <li><a href="{{ route('about-us') }}">{{__('About Us')}}</a></li>
+                            <li><a href="{{ route('login') }}">{{__('Login')}}</a></li>
                             <li><a href="{{ route('register') }}">{{__('Registration')}}</a></li>
                         </ul>
                     </div>
@@ -478,7 +478,7 @@
                         return;
                     }
     
-                    let loading = "{{__('user.Processing...')}}"
+                    let loading = "{{__('Processing...')}}"
     
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
@@ -490,7 +490,7 @@
                         success: function (response) {
                             if(response.status == 1){
                                 toastr.success(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#fsubscriberForm").trigger("reset");
@@ -500,7 +500,7 @@
     
                             if(response.status == 0){
                                 toastr.error(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#fsubscriberForm").trigger("reset");
@@ -512,7 +512,7 @@
                             $('#fsubShowSpain').addClass('d-none');
                             $('#fsubSubmitBtn').removeClass('d-none');
                             toastr.error('Something went wrong');
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#fsubscribe_btn").html(subscribe);
                             $("#fsubscribe_btn").attr('disabled',false);
                             $("#fsubscriberForm").trigger("reset");
@@ -531,7 +531,7 @@
                         return;
                     }
     
-                    let loading = "{{__('user.Processing...')}}"
+                    let loading = "{{__('Processing...')}}"
     
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
@@ -543,7 +543,7 @@
                         success: function (response) {
                             if(response.status == 1){
                                 toastr.success(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#footerTopSubscriberForm").trigger("reset");
@@ -553,7 +553,7 @@
     
                             if(response.status == 0){
                                 toastr.error(response.message);
-                                let subscribe = "{{__('user.Subscribe')}}"
+                                let subscribe = "{{__('Subscribe')}}"
                                 $("#fsubscribe_btn").html(subscribe);
                                 $("#fsubscribe_btn").attr('disabled',false);
                                 $("#footerTopSubscriberForm").trigger("reset");
@@ -565,7 +565,7 @@
                             $('#footerTopSubShowSpain').addClass('d-none');
                             $('#footerTopSubSubmitBtn').removeClass('d-none');
                             toastr.error('Something went wrong');
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#fsubscribe_btn").html(subscribe);
                             $("#fsubscribe_btn").attr('disabled',false);
                             $("#footerTopSubscriberForm").trigger("reset");
@@ -587,7 +587,7 @@
                             }
                         })
                     }else{
-                        var response= "<option value=''>{{__('user.Select a State')}}</option>";
+                        var response= "<option value=''>{{__('Select a State')}}</option>";
                         $("#state_id").html(response);
                     }
     
@@ -607,7 +607,7 @@
                             }
                         })
                     }else{
-                        var response= "<option value=''>{{__('user.Select a city')}}</option>";
+                        var response= "<option value=''>{{__('Select a city')}}</option>";
                         $("#state_id").html(response);
                     }
     
@@ -737,7 +737,7 @@
                                     <td class="description">
                                         <h3><a href="{{ url('/product/${value.options.slug}') }}">${value.name}</a></h3>
                                         <p>
-                                            <span>{{__('user.Item by')}}</span> ${value.options.author}
+                                            <span>{{__('Item by')}}</span> ${value.options.author}
                                             <b class="${value.options.variant_name!=null?'':'d-none'}">${value.options.variant_name!=null?value.options.variant_name:''}</b>
                                             <b class="${value.options.price_type!=null?'':'d-none'}">${value.options.price_type!=null?value.options.price_type:''}</b>
                                         </p>

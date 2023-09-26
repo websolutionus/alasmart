@@ -1,6 +1,6 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Send Mail To Seller')}}</title>
+<title>{{__('Send Mail To Seller')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
@@ -17,20 +17,20 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h1>{{__('admin.Send Email to')}} {{ $user->email }}</h1>
+                            <h1>{{__('Send Email to')}} {{ $user->email }}</h1>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.send-mail-to-single-provider',$user->id) }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Subject')}}</label>
+                                    <label for="">{{__('Subject')}}</label>
                                     <input type="text" name="subject" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Message')}}</label>
+                                    <label for="">{{__('Message')}}</label>
                                     <textarea name="message" id="message" class="summernote" cols="30" rows="10"></textarea>
                                 </div>
-                                <button class="btn btn-primary">{{__('admin.Send Email')}}</button>
+                                <button class="btn btn-primary">{{__('Send Email')}}</button>
                             </form>
                         </div>
                     </div>

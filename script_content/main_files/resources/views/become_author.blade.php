@@ -1,7 +1,7 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('user.Become author')}}</title>
+    <title>{{__('Become author')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -16,7 +16,7 @@
                     <div class="col-xxl-6 col-xl-6 col-md-7">
                         <div class="wsus__become_author_text">
                             <h2>{{ $become_author->becomelangfrontend->title }}</h2>
-                            <a href="{{ route('register') }}" class="common_btn">{{__('user.Become an Author')}}</a>
+                            <a href="{{ route('register') }}" class="common_btn">{{__('Become an Author')}}</a>
                         </div>
                     </div>
                     <div class="col-xxl-4 col-xl-5 col-md-5">

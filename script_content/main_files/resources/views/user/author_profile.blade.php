@@ -80,7 +80,7 @@
                             if(response.responseJSON.errors.email)toastr.error(response.responseJSON.errors.email[0])
                             if(response.responseJSON.errors.message)toastr.error(response.responseJSON.errors.message[0])
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                             }
                             $('#submitBtn').removeClass('d-none');
                             $('#showSpain').addClass('d-none');

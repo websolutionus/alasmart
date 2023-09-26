@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="form-group col-12">
-                                        <label for="">{{__('admin.New Background')}}</label>
+                                        <label for="">{{__('New Background')}}</label>
                                         <input type="file" name="image" class="form-control-file">
                                     </div>
                                 </div>

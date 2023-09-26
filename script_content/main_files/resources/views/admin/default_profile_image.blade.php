@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Default Avatar')}}</title>
+<title>{{__('Default Avatar')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Default Avatar')}}</h1>
+            <h1>{{__('Default Avatar')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Default Avatar')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Default Avatar')}}</div>
             </div>
           </div>
 
@@ -23,16 +23,16 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="">{{__('admin.Existing Avatar')}}</label>
+                                <label for="">{{__('Existing Avatar')}}</label>
                                 <div>
                                     <img class="default-avatar" src="{{ asset($default_avatar) }}" alt="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('admin.New Avatar')}}</label>
+                                <label for="">{{__('New Avatar')}}</label>
                                 <input type="file" name="avatar" class="form-control-file" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                         </form>
                     </div>
                   </div>

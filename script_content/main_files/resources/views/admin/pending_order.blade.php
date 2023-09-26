@@ -50,7 +50,7 @@
                                               @if($order->payment_status == 'success')
                                               <span class="badge badge-success">{{__('success')}} </span>
                                               @else
-                                              <span class="badge badge-danger">{{__('admin.Pending')}}</span>
+                                              <span class="badge badge-danger">{{__('Pending')}}</span>
                                               @endif
                                           </td>
   
@@ -91,7 +91,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">{{__('admin.Order Status')}}</h5>
+                        <h5 class="modal-title">{{__('Order Status')}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -104,14 +104,14 @@
                         <div class="form-group">
                             <label for="">{{__('Payment')}}</label>
                             <select name="payment_status" id="" class="form-control">
-                                <option {{ $order->payment_status == 'pending' ? 'selected' : '' }} value="pending">{{__('admin.Pending')}}</option>
-                                <option {{ $order->payment_status == 'success' ? 'selected' : '' }} value="success">{{__('admin.Success')}}</option>
+                                <option {{ $order->payment_status == 'pending' ? 'selected' : '' }} value="pending">{{__('Pending')}}</option>
+                                <option {{ $order->payment_status == 'success' ? 'selected' : '' }} value="success">{{__('Success')}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">{{__('Order')}}</label>
                             <select name="order_status" id="" class="form-control">
-                              <option {{ $order->order_status == 0 ? 'selected' : '' }} value="0">{{__('admin.Pending')}}</option>
+                              <option {{ $order->order_status == 0 ? 'selected' : '' }} value="0">{{__('Pending')}}</option>
                               <option {{ $order->order_status == 1 ? 'selected' : '' }} value="1">{{__('Complete')}}</option>
                             </select>
                         </div>
@@ -120,8 +120,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
-                <button type="submit" class="btn btn-primary">{{__('admin.Update Status')}}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('Update Status')}}</button>
             </div>
           </form>
         </div>

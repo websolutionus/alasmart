@@ -1,15 +1,15 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Subscribers')}}</title>
+<title>{{__('Subscribers')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Subscribers')}}</h1>
+            <h1>{{__('Subscribers')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
             </div>
           </div>
 
@@ -18,20 +18,20 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h1>{{__('admin.Send Email to All Subscriber')}}</h1>
+                            <h1>{{__('Send Email to All Subscriber')}}</h1>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.each-subscriber-email') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Subject')}}</label>
+                                    <label for="">{{__('Subject')}}</label>
                                     <input type="text" name="subject" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{__('admin.Message')}}</label>
+                                    <label for="">{{__('Message')}}</label>
                                     <textarea name="message" id="message" class="form-control text-area-5" cols="30" rows="10"></textarea>
                                 </div>
-                                <button class="btn btn-primary">{{__('admin.Send Email')}}</button>
+                                <button class="btn btn-primary">{{__('Send Email')}}</button>
                             </form>
                         </div>
                     </div>
@@ -48,10 +48,10 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.SN')}}</th>
-                                    <th>{{__('admin.Email')}}</th>
-                                    <th>{{__('admin.Verified')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('SN')}}</th>
+                                    <th>{{__('Email')}}</th>
+                                    <th>{{__('Verified')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -61,9 +61,9 @@
                                         <td>{{ html_decode($subscriber->email) }}</td>
                                         <td>
                                             @if($subscriber->is_verified == 1)
-                                                <span class="badge badge-success">{{__('admin.Yes')}}</span>
+                                                <span class="badge badge-success">{{__('Yes')}}</span>
                                             @else
-                                                <span class="badge badge-danger">{{__('admin.No')}}</span>
+                                                <span class="badge badge-danger">{{__('No')}}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -92,7 +92,7 @@
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                       <div class="modal-header">
-                              <h5 class="modal-title">{{__('admin.Send To')}} : {{ $subscriber->email }}</h5>
+                              <h5 class="modal-title">{{__('Send To')}} : {{ $subscriber->email }}</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                   </button>
@@ -102,18 +102,18 @@
                           <form action="{{ route('admin.specification-subscriber-email',$subscriber->id) }}" method="POST">
                               @csrf
                               <div class="form-group">
-                                  <label for="">{{__('admin.Subject')}}</label>
+                                  <label for="">{{__('Subject')}}</label>
                                   <input type="text" name="subject" class="form-control">
                               </div>
                               <div class="form-group">
-                                  <label for="">{{__('admin.Message')}}</label>
+                                  <label for="">{{__('Message')}}</label>
                                   <textarea name="message" id="message" class="form-control text-area-5" cols="30" rows="10"></textarea>
                               </div>
                       </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
-                      <button type="submit" class="btn btn-primary">{{__('admin.Send Email')}}</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                      <button type="submit" class="btn btn-primary">{{__('Send Email')}}</button>
                   </div>
                 </form>
               </div>

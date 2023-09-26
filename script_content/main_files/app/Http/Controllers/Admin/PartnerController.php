@@ -34,7 +34,7 @@ class PartnerController extends Controller
             'logo' => 'required'
         ];
         $customMessages = [
-            'logo.required' => trans('admin_validation.Logo is required')
+            'logo.required' => trans('Logo is required')
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -51,7 +51,7 @@ class PartnerController extends Controller
         $partner->status = $request->status;
         $partner->save();
 
-        $notification = trans('admin_validation.Created Successfully');
+        $notification = trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.partner.index')->with($notification);
     }
@@ -86,7 +86,7 @@ class PartnerController extends Controller
         $partner->status = $request->status;
         $partner->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.partner.index')->with($notification);
     }
@@ -101,7 +101,7 @@ class PartnerController extends Controller
             if(File::exists(public_path().'/'.$old_logo))unlink(public_path().'/'.$old_logo);
         }
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.partner.index')->with($notification);
     }
@@ -111,11 +111,11 @@ class PartnerController extends Controller
         if($partner->status == 1){
             $partner->status = 0;
             $partner->save();
-            $message = trans('admin_validation.InActive Successfully');
+            $message = trans('InActive Successfully');
         }else{
             $partner->status = 1;
             $partner->save();
-            $message = trans('admin_validation.Active Successfully');
+            $message = trans('Active Successfully');
         }
         return response()->json($message);
     }

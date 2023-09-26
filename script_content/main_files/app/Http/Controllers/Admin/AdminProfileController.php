@@ -37,10 +37,10 @@ class AdminProfileController extends Controller
             'password'=>'confirmed',
         ];
         $customMessages = [
-            'name.required' => trans('admin_validation.Name is required'),
-            'email.required' => trans('admin_validation.Email is required'),
-            'email.unique' => trans('admin_validation.Email already exist'),
-            'password.confirmed' => trans('admin_validation.Confirm password does not match'),
+            'name.required' => trans('Name is required'),
+            'email.required' => trans('Email is required'),
+            'email.unique' => trans('Email already exist'),
+            'password.confirmed' => trans('Confirm password does not match'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -71,7 +71,7 @@ class AdminProfileController extends Controller
         $admin->email=$request->email;
         $admin->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.profile')->with($notification);
 

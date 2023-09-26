@@ -20,7 +20,7 @@ class ContactWithAuthorController extends Controller
                 'g-recaptcha-response'=>new Captcha()
             ];
             $customMessages = [
-                'message.required' => trans('user_validation.Message is required'),
+                'message.required' => trans('Message is required'),
             ];
             $this->validate($request, $rules,$customMessages);
 

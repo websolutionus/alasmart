@@ -107,10 +107,10 @@ class WithdrawController extends Controller
         ];
 
         $customMessages = [
-            'method_id.required' => trans('user_validation.Payment Method filed is required'),
-            'withdraw_amount.required' => trans('user_validation.Withdraw amount filed is required'),
-            'withdraw_amount.numeric' => trans('user_validation.Please provide valid numeric number'),
-            'account_info.required' => trans('user_validation.Account filed is required'),
+            'method_id.required' => trans('Payment Method filed is required'),
+            'withdraw_amount.required' => trans('Withdraw amount filed is required'),
+            'withdraw_amount.numeric' => trans('Please provide valid numeric number'),
+            'account_info.required' => trans('Account filed is required'),
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -141,7 +141,7 @@ class WithdrawController extends Controller
         $current_balance = $total_balance - $total_withdraw;
 
         if($request->withdraw_amount > $current_balance){
-            $notification = trans('user_validation.Sorry! Your Payment request is more then your current balance');
+            $notification = trans('Sorry! Your Payment request is more then your current balance');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -158,12 +158,12 @@ class WithdrawController extends Controller
             $widthdraw->withdraw_charge = $method->withdraw_charge;
             $widthdraw->account_info = $request->account_info;
             $widthdraw->save();
-            $notification = trans('user_validation.Withdraw request send successfully, please wait for admin approval');
+            $notification = trans('Withdraw request send successfully, please wait for admin approval');
             $notification=array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
 
         }else{
-            $notification = trans('user_validation.Your amount range is not available');
+            $notification = trans('Your amount range is not available');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }

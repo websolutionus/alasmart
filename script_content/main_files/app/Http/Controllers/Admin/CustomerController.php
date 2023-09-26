@@ -66,7 +66,7 @@ class CustomerController extends Controller
         OrderItem::where('user_id',$id)->delete();
         Product::where('author_id',$id)->delete();
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -77,11 +77,11 @@ class CustomerController extends Controller
         if($customer->status == 1){
             $customer->status = 0;
             $customer->save();
-            $message = trans('admin_validation.Inactive Successfully');
+            $message = trans('Inactive Successfully');
         }else{
             $customer->status = 1;
             $customer->save();
-            $message = trans('admin_validation.Active Successfully');
+            $message = trans('Active Successfully');
         }
         return response()->json($message);
     }
@@ -96,8 +96,8 @@ class CustomerController extends Controller
             'message'=>'required'
         ];
         $customMessages = [
-            'subject.required' => trans('admin_validation.Subject is required'),
-            'message.required' => trans('admin_validation.Message is required'),
+            'subject.required' => trans('Subject is required'),
+            'message.required' => trans('Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -107,7 +107,7 @@ class CustomerController extends Controller
             Mail::to($user->email)->send(new SendSingleSellerMail($request->subject,$request->message));
         }
 
-        $notification = trans('admin_validation.Email Send Successfully');
+        $notification = trans('Email Send Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -118,8 +118,8 @@ class CustomerController extends Controller
             'message'=>'required'
         ];
         $customMessages = [
-            'subject.required' => trans('admin_validation.Subject is required'),
-            'message.required' => trans('admin_validation.Message is required'),
+            'subject.required' => trans('Subject is required'),
+            'message.required' => trans('Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -127,7 +127,7 @@ class CustomerController extends Controller
         MailHelper::setMailConfig();
         Mail::to($user->email)->send(new SendSingleSellerMail($request->subject,$request->message));
 
-        $notification = trans('admin_validation.Email Send Successfully');
+        $notification = trans('Email Send Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

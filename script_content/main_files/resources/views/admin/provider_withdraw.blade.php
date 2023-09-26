@@ -1,6 +1,6 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Provider withdraw')}}</title>
+<title>{{__('Provider withdraw')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Seller withdraw')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Seller withdraw')}}</div>
             </div>
           </div>
@@ -23,14 +23,14 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th >{{__('admin.SN')}}</th>
+                                    <th >{{__('SN')}}</th>
                                     <th >{{__('Seller')}}</th>
-                                    <th >{{__('admin.Method')}}</th>
-                                    <th >{{__('admin.Charge')}}</th>
-                                    <th >{{__('admin.Total Amount')}}</th>
-                                    <th >{{__('admin.Withdraw Amount')}}</th>
-                                    <th >{{__('admin.Status')}}</th>
-                                    <th >{{__('admin.Action')}}</th>
+                                    <th >{{__('Method')}}</th>
+                                    <th >{{__('Charge')}}</th>
+                                    <th >{{__('Total Amount')}}</th>
+                                    <th >{{__('Withdraw Amount')}}</th>
+                                    <th >{{__('Status')}}</th>
+                                    <th >{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -46,9 +46,9 @@
                                         <td>{{ $setting->currency_icon }}{{ $withdraw->withdraw_amount }}</td>
                                         <td>
                                             @if ($withdraw->status==1)
-                                            <span class="badge badge-success">{{__('admin.Success')}}</span>
+                                            <span class="badge badge-success">{{__('Success')}}</span>
                                             @else
-                                            <span class="badge badge-danger">{{__('admin.Pending')}}</span>
+                                            <span class="badge badge-danger">{{__('Pending')}}</span>
                                             @endif
                                         </td>
                                         <td>

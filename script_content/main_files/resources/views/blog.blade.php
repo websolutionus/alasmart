@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('user.Blog')}}</h1>
+                        <h1>{{__('Blog')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
-                            <li><a href="javascript:;">{{__('user.Blog')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('Blog')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,14 +39,14 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="wsus__sidebar">
                         <div class="wsus__sidebar_item wsus__sidebar_search mt-0">
-                            <h3>{{__('user.Search')}}</h3>
+                            <h3>{{__('Search')}}</h3>
                             <form id="search_form">
-                                <input type="text" name="keyword" id="keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('user.Search')}}">
+                                <input type="text" name="keyword" id="keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('Search')}}">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_blog">
-                            <h3>{{__('user.Popular Post')}}</h3>
+                            <h3>{{__('Popular Post')}}</h3>
                             <ul>
                                 @foreach ($popular_blogs as $blog)
                                 <li>
@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_categories">
-                            <h3>{{__('user.Categories')}}</h3>
+                            <h3>{{__('Categories')}}</h3>
                             <ul>
                                 @foreach ($categories as $category)
                                 @php
@@ -73,7 +73,7 @@
                             </ul>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_tags">
-                            <h3>{{__('user.Popular Tags')}}</h3>
+                            <h3>{{__('Popular Tags')}}</h3>
                             <ul class="d-flex flex-wrap">
                                 @foreach ($popular_tags as $popular_tag)
                                 <li><a href="javascript:;" onclick="getCatTag('{{strtolower($popular_tag->tag_name)}}')">{{ $popular_tag->tag_name }}</a></li>
@@ -88,8 +88,8 @@
                                 <p>{!! clean($subscriber->description) !!}</p>
                                 <form id="subscriberForm">
                                     @csrf
-                                    <input type="text" name="email" placeholder="{{__('user.Enter Your Email Address')}}">
-                                    <button class="common_btn" id="subSubmitBtn" type="submit">{{__('user.Subscribe')}}</button>
+                                    <input type="text" name="email" placeholder="{{__('Enter Your Email Address')}}">
+                                    <button class="common_btn" id="subSubmitBtn" type="submit">{{__('Subscribe')}}</button>
                                     <button class="common_btn d-none" id="subShowSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                                 </form>
                             </div>
@@ -109,13 +109,13 @@
                                     <a class="title" href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                                     <p class="description">{{ $blog->bloglanguagefrontend->short_description }}</p>
                                     <ul>
-                                        <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
+                                        <li><a href="{{ route('blog', $blog->slug) }}">{{__('Read More')}}</a></li>
                                         <li>
                                             <div class="img">
                                                 <img src="{{ asset($blog->admin->image) }}" alt="author"
                                                     class="img-fluid w-100">
                                             </div>
-                                            <p><span>{{__('user.By')}}</span> {{ $blog->admin->name }} </p>
+                                            <p><span>{{__('By')}}</span> {{ $blog->admin->name }} </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -123,7 +123,7 @@
                         </div>
                         @empty
                         <div class="col-12 text-center mt-5">
-                            <h2 class="text-danger">{{__('user.Blog Not Found')}}</h2>
+                            <h2 class="text-danger">{{__('Blog Not Found')}}</h2>
                        </div>
                         @endforelse
                     </div>
@@ -159,12 +159,12 @@
                             <a class="title" href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                             <p class="description">{{ $blog->bloglanguagefrontend->short_description }}</p>
                             <ul>
-                                <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
+                                <li><a href="{{ route('blog', $blog->slug) }}">{{__('Read More')}}</a></li>
                                 <li>
                                     <div class="img">
                                         <img src="{{ asset($blog->admin->image) }}" alt="author" class="img-fluid w-100">
                                     </div>
-                                    <p><span>{{__('user.By')}}</span> {{ $blog->admin->name }} </p>
+                                    <p><span>{{__('By')}}</span> {{ $blog->admin->name }} </p>
                                 </li>
                             </ul>
                         </div>
@@ -208,13 +208,13 @@
                                     <a class="title" href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                                     <p class="description">{{ $blog->bloglanguagefrontend->short_description }}</p>
                                     <ul>
-                                        <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
+                                        <li><a href="{{ route('blog', $blog->slug) }}">{{__('Read More')}}</a></li>
                                         <li>
                                             <div class="img">
                                                 <img src="{{ asset($blog->admin->image) }}" alt="author"
                                                     class="img-fluid w-100">
                                             </div>
-                                            <p><span>{{__('user.By')}}</span> {{ $blog->admin->name }} </p>
+                                            <p><span>{{__('By')}}</span> {{ $blog->admin->name }} </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -222,7 +222,7 @@
                         </div>
                         @empty
                         <div class="col-12 text-center mt-5">
-                            <h2 class="text-danger">{{__('user.Blog Not Found')}}</h2>
+                            <h2 class="text-danger">{{__('Blog Not Found')}}</h2>
                        </div>
                         @endforelse
                     </div>
@@ -235,14 +235,14 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="wsus__sidebar">
                         <div class="wsus__sidebar_item wsus__sidebar_search mt-0">
-                            <h3>{{__('user.Search')}}</h3>
+                            <h3>{{__('Search')}}</h3>
                             <form id="search_form">
-                                <input type="text" name="keyword" id="keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('user.Search')}}">
+                                <input type="text" name="keyword" id="keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('Search')}}">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_blog">
-                            <h3>{{__('user.Popular Post')}}</h3>
+                            <h3>{{__('Popular Post')}}</h3>
                             <ul>
                                 @foreach ($popular_blogs as $blog)
                                 <li>
@@ -258,7 +258,7 @@
                             </ul>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_categories">
-                            <h3>{{__('user.Categories')}}</h3>
+                            <h3>{{__('Categories')}}</h3>
                             <ul>
                                 @foreach ($categories as $category)
                                 @php
@@ -269,7 +269,7 @@
                             </ul>
                         </div>
                         <div class="wsus__sidebar_item wsus__sidebar_tags">
-                            <h3>{{__('user.Popular Tags')}}</h3>
+                            <h3>{{__('Popular Tags')}}</h3>
                             <ul class="d-flex flex-wrap">
                                 @foreach ($popular_tags as $popular_tag)
                                 <li><a href="javascript:;" onclick="getCatTag('{{strtolower($popular_tag->tag_name)}}')">{{ $popular_tag->tag_name }}</a></li>
@@ -284,8 +284,8 @@
                                 <p>{!! clean($subscriber->description) !!}</p>
                                 <form id="subscriberForm">
                                     @csrf
-                                    <input type="text" name="email" placeholder="{{__('user.Enter Your Email Address')}}">
-                                    <button class="common_btn" id="subSubmitBtn" type="submit">{{__('user.Subscribe')}}</button>
+                                    <input type="text" name="email" placeholder="{{__('Enter Your Email Address')}}">
+                                    <button class="common_btn" id="subSubmitBtn" type="submit">{{__('Subscribe')}}</button>
                                     <button class="common_btn d-none" id="subShowSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                                 </form>
                             </div>
@@ -353,7 +353,7 @@
                         if(response.responseJSON.errors.comment)toastr.error(response.responseJSON.errors.comment[0])
 
                         if(!response.responseJSON.errors.name && !response.responseJSON.errors.email && !response.responseJSON.errors.comment){
-                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });
@@ -370,7 +370,7 @@
                     return;
                 }
 
-                let loading = "{{__('user.Processing...')}}"
+                let loading = "{{__('Processing...')}}"
 
                 $("#subscribe_btn").html(loading);
                 $("#subscribe_btn").attr('disabled',true);
@@ -382,7 +382,7 @@
                     success: function (response) {
                         if(response.status == 1){
                             toastr.success(response.message);
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");
@@ -392,7 +392,7 @@
 
                         if(response.status == 0){
                             toastr.error(response.message);
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");
@@ -404,7 +404,7 @@
                         $('#subShowSpain').addClass('d-none');
                         $('#subSubmitBtn').removeClass('d-none');
                         toastr.error('Something went wrong');
-                        let subscribe = "{{__('user.Subscribe')}}"
+                        let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");

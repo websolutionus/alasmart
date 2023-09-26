@@ -43,7 +43,7 @@ class AdController extends Controller
             }
         }
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

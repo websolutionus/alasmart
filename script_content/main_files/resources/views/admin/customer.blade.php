@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.User List')}}</title>
+<title>{{__('User List')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.User List')}}</h1>
+            <h1>{{__('User List')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.User List')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('User List')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-              <a href="{{ route('admin.send-email-to-all-customer') }}" class="btn btn-primary">{{__('admin.Send email to all user')}}</a>
+              <a href="{{ route('admin.send-email-to-all-customer') }}" class="btn btn-primary">{{__('Send email to all user')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,11 +24,11 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th >{{__('admin.SN')}}</th>
-                                    <th >{{__('admin.Name')}}</th>
-                                    <th >{{__('admin.Email')}}</th>
-                                    <th >{{__('admin.Status')}}</th>
-                                    <th >{{__('admin.Action')}}</th>
+                                    <th >{{__('SN')}}</th>
+                                    <th >{{__('Name')}}</th>
+                                    <th >{{__('Email')}}</th>
+                                    <th >{{__('Status')}}</th>
+                                    <th >{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -41,12 +41,12 @@
                                         <td>
                                             @if($customer->status == 1)
                                             <a href="javascript:;" onclick="manageCustomerStatus({{ $customer->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="manageCustomerStatus({{ $customer->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @endif
@@ -81,7 +81,7 @@
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                       <div class="modal-header">
-                              <h5 class="modal-title">{{__('admin.Send To')}} : {{ $customer->email }}</h5>
+                              <h5 class="modal-title">{{__('Send To')}} : {{ $customer->email }}</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                   </button>
@@ -91,18 +91,18 @@
                           <form action="{{ route('admin.send-mail-to-single-user',$customer->id) }}" method="POST">
                               @csrf
                               <div class="form-group">
-                                  <label for="">{{__('admin.Subject')}}</label>
+                                  <label for="">{{__('Subject')}}</label>
                                   <input type="text" name="subject" class="form-control">
                               </div>
                               <div class="form-group">
-                                  <label for="">{{__('admin.Message')}}</label>
+                                  <label for="">{{__('Message')}}</label>
                                   <textarea name="message" id="message" class="summernote" cols="30" rows="10"></textarea>
                               </div>
                       </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
-                      <button type="submit" class="btn btn-primary">{{__('admin.Send Email')}}</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                      <button type="submit" class="btn btn-primary">{{__('Send Email')}}</button>
                   </div>
                 </form>
               </div>
@@ -116,11 +116,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                       <div class="modal-body">
-                          {{__('admin.You can not delete this customer. Because there are one or more order and shop account has been created in this customer.')}}
+                          {{__('You can not delete this customer. Because there are one or more order and shop account has been created in this customer.')}}
                       </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
                 </div>
             </div>
         </div>

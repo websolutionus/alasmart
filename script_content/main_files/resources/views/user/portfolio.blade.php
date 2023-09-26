@@ -24,7 +24,7 @@
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a href="{{ route('product-edit', ['id' => $product->id, 'lang_code' => 'en']) }}">{{__('user.Edit')}}</a></li>
+                                            <li><a href="{{ route('product-edit', ['id' => $product->id, 'lang_code' => 'en']) }}">{{__('Edit')}}</a></li>
                                             <li><a data-bs-toggle="modal" data-bs-target="#dataDelete" onclick="deleteData({{ $product->id }})" href="javascript:;">{{__('Delete')}}</a></li>
                                         </ul>
                                     </div>

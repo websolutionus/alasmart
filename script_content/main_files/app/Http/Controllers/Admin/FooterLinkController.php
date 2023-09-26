@@ -15,7 +15,7 @@ class FooterLinkController extends Controller
     public function index(){
         $links = FooterLink::where('column',1)->get();
         $column = 1;
-        $title = trans('admin_validation.First Column Link');
+        $title = trans('First Column Link');
         $footer = Footer::first();
         $columnTitle = $footer->first_column;
         return view('admin.footer_link', compact('links','column','title','columnTitle'));
@@ -24,7 +24,7 @@ class FooterLinkController extends Controller
     public function secondColFooterLink(){
         $links = FooterLink::where('column',2)->get();
         $column = 2;
-        $title = trans('admin_validation.Second Column Link');
+        $title = trans('Second Column Link');
         $footer = Footer::first();
         $columnTitle = $footer->second_column;
         return view('admin.footer_link', compact('links','column','title','columnTitle'));
@@ -33,7 +33,7 @@ class FooterLinkController extends Controller
     public function thirdColFooterLink(){
         $links = FooterLink::where('column',3)->get();
         $column = 3;
-        $title = trans('admin_validation.Third Column Link');
+        $title = trans('Third Column Link');
         $footer = Footer::first();
         $columnTitle = $footer->third_column;
         return view('admin.footer_link', compact('links','column','title','columnTitle'));
@@ -47,8 +47,8 @@ class FooterLinkController extends Controller
             'name' =>'required',
         ];
         $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
-            'name.required' => trans('admin_validation.Name is required'),
+            'link.required' => trans('Link is required'),
+            'name.required' => trans('Name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -58,7 +58,7 @@ class FooterLinkController extends Controller
         $link->column = $request->column;
         $link->save();
 
-        $notification=trans('admin_validation.Create Successfully');
+        $notification=trans('Create Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -69,8 +69,8 @@ class FooterLinkController extends Controller
             'link' =>'required',
         ];
         $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
-            'name.required' => trans('admin_validation.Name is required'),
+            'link.required' => trans('Link is required'),
+            'name.required' => trans('Name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -79,7 +79,7 @@ class FooterLinkController extends Controller
         $link->title = $request->name;
         $link->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -87,7 +87,7 @@ class FooterLinkController extends Controller
     public function destroy($id){
         $link = FooterLink::find($id);
         $link->delete();
-        $notification=trans('admin_validation.Delete Successfully');
+        $notification=trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -97,7 +97,7 @@ class FooterLinkController extends Controller
             'title' =>'required'
         ];
         $customMessages = [
-            'title.required' => trans('admin_validation.Title is required'),
+            'title.required' => trans('Title is required'),
         ];
         $this->validate($request, $rules,$customMessages);
         $footer = Footer::first();
@@ -111,7 +111,7 @@ class FooterLinkController extends Controller
             $footer->third_column = $request->title;
             $footer->save();
         }
-        $notification=trans('admin_validation.Update Successfully');
+        $notification=trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 

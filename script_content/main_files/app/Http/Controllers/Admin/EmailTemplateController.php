@@ -35,8 +35,8 @@ class EmailTemplateController extends Controller
             'description'=>'required',
         ];
         $customMessages = [
-            'subject.required' => trans('admin_validation.Subject is required'),
-            'description.required' => trans('admin_validation.Description is required'),
+            'subject.required' => trans('Subject is required'),
+            'description.required' => trans('Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -45,11 +45,11 @@ class EmailTemplateController extends Controller
             $template->subject = $request->subject;
             $template->description = $request->description;
             $template->save();
-            $notification= trans('admin_validation.Updated Successfully');
+            $notification= trans('Updated Successfully');
             $notification=array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('admin.email-template')->with($notification);
         }else{
-            $notification= trans('admin_validation.Something went wrong');
+            $notification= trans('Something went wrong');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('admin.email-template')->with($notification);
         }

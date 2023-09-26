@@ -11,7 +11,7 @@
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.our-team.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
+            <a href="{{ route('admin.our-team.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -20,12 +20,12 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.SN')}}</th>
-                                    <th>{{__('admin.Name')}}</th>
-                                    <th>{{__('admin.Designation')}}</th>
-                                    <th>{{__('admin.Image')}}</th>
-                                    <th>{{__('admin.Status')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('SN')}}</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('Designation')}}</th>
+                                    <th>{{__('Image')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -38,11 +38,11 @@
                                         <td>
                                             @if($team->status == 1)
                                             <a href="javascript:;" onclick="changeFeatureStatus({{ $team->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
                                             @else
                                             <a href="javascript:;" onclick="changeFeatureStatus({{ $team->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
                                             @endif
                                         </td>

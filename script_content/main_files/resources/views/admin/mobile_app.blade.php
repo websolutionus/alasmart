@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Mobile App')}}</title>
+<title>{{__('Mobile App')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Mobile App')}}</h1>
+            <h1>{{__('Mobile App')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Mobile App')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Mobile App')}}</div>
             </div>
           </div>
 
@@ -57,7 +57,7 @@
 
                                     @if ($home1)
 
-                                    <h6 class="home_border">{{__('admin.Home One')}}</h6>
+                                    <h6 class="home_border">{{__('Home One')}}</h6>
                                         <hr>
                                     @if (session()->get('admin_lang') == request()->get('lang_code'))
                                     <div class="form-group">
@@ -93,7 +93,7 @@
 
                                     @if ($home2)
 
-                                    <h6 class="home_border">{{__('admin.Home Two')}}</h6>
+                                    <h6 class="home_border">{{__('Home Two')}}</h6>
                                     <hr>
                                     @if (session()->get('admin_lang') == request()->get('lang_code'))
                                     <div class="form-group">
@@ -193,7 +193,7 @@
                                     </div>
                                     @endif
 
-                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                                 </form>
                             </div>
                         </div>

@@ -103,7 +103,7 @@ class AboutUsController extends Controller
                 if(File::exists(public_path().'/'.$exist_signature))unlink(public_path().'/'.$exist_signature);
             }
         }
-        $notification = trans('admin_validation.Updated Successfully');
+        $notification = trans('Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -286,7 +286,7 @@ class AboutUsController extends Controller
             }
         }
 
-        $notification = trans('admin_validation.Updated Successfully');
+        $notification = trans('Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

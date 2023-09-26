@@ -9,13 +9,13 @@
           <div class="section-header">
             <h1>{{__('Coupon')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Coupon')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.coupon.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
+            <a href="{{ route('admin.coupon.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,13 +24,13 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('SN')}}</th>
                                     <th>{{__('Coupons name')}}</th>
                                     <th>{{__('Coupon discount')}}</th>
                                     <th>{{__('Coupon validity')}}</th>
                                     <th>{{__('Validity')}}</th>
-                                    <th>{{__('admin.Status')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -51,12 +51,12 @@
                                         <td>
                                             @if($coupon->status == 1)
                                             <a href="javascript:;" onclick="changeCouponStatus({{ $coupon->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="changeCouponStatus({{ $coupon->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @endif
@@ -85,11 +85,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                       <div class="modal-body">
-                          {{__('admin.You can not delete this category. Because there are one or more services has been created in this category.')}}
+                          {{__('You can not delete this category. Because there are one or more services has been created in this category.')}}
                       </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
                 </div>
             </div>
         </div>

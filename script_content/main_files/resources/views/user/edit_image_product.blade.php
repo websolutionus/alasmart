@@ -192,9 +192,9 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="size">{{__('user.Name')}}</td>
-                                            <td class="price">{{__('user.Price')}}</td>
-                                            <td class="button_area">{{__('user.Action')}}</td>
+                                            <td class="size">{{__('Name')}}</td>
+                                            <td class="price">{{__('Price')}}</td>
+                                            <td class="button_area">{{__('Action')}}</td>
                                         </tr>
                                         @foreach ($product_variants as $product_variant)
                                         <tr>
@@ -204,7 +204,7 @@
                                                 <a href="{{ route('download-existing-variant-file', $product_variant->file_name) }}" class="download_btn"><i class="fad fa-arrow-to-bottom"></i>
                                                     {{__('download')}}</a>
 
-                                                <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#editVariantModal-{{ $product_variant->id }}" class="edit_btn"><i class="fas fa-edit"></i> {{__('user.edit')}}</a>
+                                                <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#editVariantModal-{{ $product_variant->id }}" class="edit_btn"><i class="fas fa-edit"></i> {{__('edit')}}</a>
 
                                                 <a data-bs-toggle="modal" data-bs-target="#deleteModal" href="javascript:;"  class="delete_btn" onclick="deleteData({{ $product_variant->id }})"><i class="fas fa-trash-alt"></i>
                                                     {{__('delete')}}</a>
@@ -321,14 +321,14 @@
                             class="fas fa-times"></i></button>
                 </div>
                 <div class="modal-body">
-                    <p>{{__('admin.Are You sure delete this item ?')}}</p>
+                    <p>{{__('Are You sure delete this item ?')}}</p>
                 </div>
                 <form id="deleteForm" action="" method="POST">
                     @csrf
                     @method("DELETE")
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">{{__('admin.Close')}}</button>
-                        <button type="submit" class="btn btn-primary">{{__('admin.Yes, Delete')}}</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Yes, Delete')}}</button>
                     </div>
                 </form>
             </div>

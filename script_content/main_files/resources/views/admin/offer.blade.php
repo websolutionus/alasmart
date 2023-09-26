@@ -89,7 +89,7 @@
                                 <div class="row">
 
                                     <div class="col-12">
-                                        <h6 class="home_border">{{__('admin.Home Three')}}</h6>
+                                        <h6 class="home_border">{{__('Home Three')}}</h6>
                                         <hr>
                                     </div>
                                     @if (session()->get('admin_lang') == request()->get('lang_code'))
@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div class="form-group col-12">
-                                        <label for="">{{__('admin.New Background')}}</label>
+                                        <label for="">{{__('New Background')}}</label>
                                         <input type="file" name="home3_background" class="form-control-file">
                                     </div>
                                     @endif

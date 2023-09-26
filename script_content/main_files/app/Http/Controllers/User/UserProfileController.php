@@ -758,10 +758,10 @@ class UserProfileController extends Controller
             'image' => 'file|mimes:png,jpg,jpeg|max:2048',
         ];
         $customMessages = [
-            'name.required' => trans('user_validation.Name is required'),
+            'name.required' => trans('Name is required'),
             'designation.required' => trans('Designation is required'),
-            'phone.required' => trans('user_validation.Phone is required'),
-            'address.required' => trans('user_validation.Address is required'),
+            'phone.required' => trans('Phone is required'),
+            'address.required' => trans('Address is required'),
             'about_me.required' => trans('About is required'),
             'my_skill.required' => trans('Skill is required'),
             'image.mimes' => trans('File type must be: png, jpg,jpeg'),
@@ -807,7 +807,7 @@ class UserProfileController extends Controller
         $user = User::select('id','name','email','image','phone','address','status','is_provider')->where('id', $user->id)->first();
 
 
-        $notification = trans('user_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -864,11 +864,11 @@ class UserProfileController extends Controller
             'c_password' => 'required|same:password',
         ];
         $customMessages = [
-            'current_password.required' => trans('user_validation.Current password is required'),
-            'password.required' => trans('user_validation.Password is required'),
-            'password.min' => trans('user_validation.Password minimum 4 character'),
+            'current_password.required' => trans('Current password is required'),
+            'password.required' => trans('Password is required'),
+            'password.min' => trans('Password minimum 4 character'),
             'c_password.required' => trans('Confirm password is required'),
-            'c_password.same' => trans('user_validation.Confirm password does not match'),
+            'c_password.same' => trans('Confirm password does not match'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -882,7 +882,7 @@ class UserProfileController extends Controller
             return redirect()->back()->with($notification);
 
         }else{
-            $notification = trans('user_validation.Current password does not match');
+            $notification = trans('Current password does not match');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -932,10 +932,10 @@ class UserProfileController extends Controller
             $wishlist->product_id = $id;
             $wishlist->user_id = $user->id;
             $wishlist->save();
-            $message = trans('user_validation.Wishlist added successfully');
+            $message = trans('Wishlist added successfully');
             return response()->json(['status' => 1, 'message' => $message]);
         }else{
-            $message = trans('user_validation.Already added');
+            $message = trans('Already added');
             return response()->json(['status' => 0, 'message' => $message]);
         }
     }
@@ -943,7 +943,7 @@ class UserProfileController extends Controller
     public function removeWishlist($id){
         $wishlist = Wishlist::find($id);
         $wishlist->delete();
-        $notification = trans('user_validation.Removed successfully');
+        $notification = trans('Removed successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -963,8 +963,8 @@ class UserProfileController extends Controller
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'rating.required' => trans('user_validation.Rating is required'),
-            'review.required' => trans('user_validation.Review is required'),
+            'rating.required' => trans('Rating is required'),
+            'review.required' => trans('Review is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -982,7 +982,7 @@ class UserProfileController extends Controller
         if($isExistOrder){
             $isReview = ProductReview::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
             if($isReview > 0){
-                $message = trans('user_validation.You have already submited review');
+                $message = trans('You have already submited review');
                 return response()->json(['status' => 0, 'message' => $message]);
             }
             $review = new ProductReview();
@@ -992,10 +992,10 @@ class UserProfileController extends Controller
             $review->product_vendor_id = $request->seller_id;
             $review->product_id = $request->product_id;
             $review->save();
-            $message = trans('user_validation.Review Submited successfully');
+            $message = trans('Review Submited successfully');
             return response()->json(['status' => 1, 'message' => $message]);
         }else{
-            $message = trans('user_validation.Opps! You can not review this product');
+            $message = trans('Opps! You can not review this product');
             return response()->json(['status' => 0, 'message' => $message]);
         }
 
@@ -1013,7 +1013,7 @@ class UserProfileController extends Controller
         $review->review = $request->review;
         $review->save();
 
-        $notification = trans('user_validation.Updated successfully');
+        $notification = trans('Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -1025,8 +1025,8 @@ class UserProfileController extends Controller
             'review'=>'required',
         ];
         $customMessages = [
-            'rating.required' => trans('user_validation.Rating is required'),
-            'review.required' => trans('user_validation.Review is required'),
+            'rating.required' => trans('Rating is required'),
+            'review.required' => trans('Review is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1034,7 +1034,7 @@ class UserProfileController extends Controller
         
         $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
         if($isReview > 0){
-            $notification = trans('user_validation.You have already submited review');
+            $notification = trans('You have already submited review');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -1048,7 +1048,7 @@ class UserProfileController extends Controller
         $review->variant_id = $request->variant_id;
         $review->author_id = $request->author_id;
         $review->save();
-        $notification = trans('user_validation.Review Submited successfully');
+        $notification = trans('Review Submited successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
         

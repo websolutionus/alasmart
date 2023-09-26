@@ -47,24 +47,24 @@
                             <div class="row">
                                 @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Existing Image')}}</label>
+                                    <label>{{__('Existing Image')}}</label>
                                     <div>
                                         <img src="{{ asset($team->image) }}" alt="" width="150px">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Image')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Image')}} <span class="text-danger">*</span></label>
                                     <input type="file" id="title" class="form-control-file"  name="image">
                                 </div>
                                 @endif
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Name')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Name')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="name" class="form-control"  name="name" value="{{ $team_language->name }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Desgination')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Desgination')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="designation" class="form-control"  name="designation" value="{{ $team_language->designation }}">
                                 </div>
 
@@ -85,10 +85,10 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option  {{ $team->status == 1 ? 'selected' : '' }} value="1">{{__('admin.Active')}}</option>
-                                        <option  {{ $team->status == 0 ? 'selected' : '' }} value="0">{{__('admin.Inactive')}}</option>
+                                        <option  {{ $team->status == 1 ? 'selected' : '' }} value="1">{{__('Active')}}</option>
+                                        <option  {{ $team->status == 0 ? 'selected' : '' }} value="0">{{__('Inactive')}}</option>
                                     </select>
                                 </div>
                                 @endif

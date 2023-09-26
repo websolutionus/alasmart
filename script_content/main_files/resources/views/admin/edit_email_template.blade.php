@@ -1,22 +1,22 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Email Template')}}</title>
+<title>{{__('Email Template')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Edit Email Template')}}</h1>
+            <h1>{{__('Edit Email Template')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item active"><a href="{{ route('admin.email-template') }}">{{__('admin.Email Template')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Edit Email Template')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.email-template') }}">{{__('Email Template')}}</a></div>
+              <div class="breadcrumb-item">{{__('Edit Email Template')}}</div>
             </div>
           </div>
 
         <div class="section-body">
-            <a href="{{ route('admin.email-template') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.Email Template')}}</a>
+            <a href="{{ route('admin.email-template') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('Email Template')}}</a>
             <div class="row mt-4">
                 @if ($template->id != 3)
                     <div class="col">
@@ -24,8 +24,8 @@
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>
-                                        <th>{{__('admin.Variable')}}</th>
-                                        <th>{{__('admin.Meaning')}}</th>
+                                        <th>{{__('Variable')}}</th>
+                                        <th>{{__('Meaning')}}</th>
                                     </thead>
                                     <tbody>
                                         @if ($template->id == 1)
@@ -34,7 +34,7 @@
                                                     $name="{{name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.User Name')}}</td>
+                                                <td>{{__('User Name')}}</td>
                                             </tr>
                                         @endif
 
@@ -44,35 +44,35 @@
                                                     $name="{{name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.User Name')}}</td>
+                                                <td>{{__('User Name')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $email="{{email}}";
                                                 @endphp
                                                 <td>{{ $email }}</td>
-                                                <td>{{__('admin.User Email')}}</td>
+                                                <td>{{__('User Email')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $phone="{{phone}}";
                                                 @endphp
                                                 <td>{{ $phone }}</td>
-                                                <td>{{__('admin.User Phone')}}</td>
+                                                <td>{{__('User Phone')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $subject="{{subject}}";
                                                 @endphp
                                                 <td>{{ $subject }}</td>
-                                                <td>{{__('admin.User Subject')}}</td>
+                                                <td>{{__('User Subject')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $message="{{message}}";
                                                 @endphp
                                                 <td>{{ $message }}</td>
-                                                <td>{{__('admin.Message')}}</td>
+                                                <td>{{__('Message')}}</td>
                                             </tr>
                                         @endif
 
@@ -82,7 +82,7 @@
                                                     $name="{{user_name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.User Name')}}</td>
+                                                <td>{{__('User Name')}}</td>
                                             </tr>
                                         @endif
 
@@ -99,35 +99,35 @@
                                                     $method="{{withdraw_method}}";
                                                 @endphp
                                                 <td>{{ $method }}</td>
-                                                <td>{{__('admin.Withdraw method')}}</td>
+                                                <td>{{__('Withdraw method')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $total_amount="{{total_amount}}";
                                                 @endphp
                                                 <td>{{ $total_amount }}</td>
-                                                <td>{{__('admin.Total amount')}}</td>
+                                                <td>{{__('Total amount')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $withdraw_charge="{{withdraw_charge}}";
                                                 @endphp
                                                 <td>{{ $withdraw_charge }}</td>
-                                                <td>{{__('admin.Withdraw Charge')}}</td>
+                                                <td>{{__('Withdraw Charge')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $withdraw_amount="{{withdraw_amount}}";
                                                 @endphp
                                                 <td>{{ $withdraw_amount }}</td>
-                                                <td>{{__('admin.Withdraw amount')}}</td>
+                                                <td>{{__('Withdraw amount')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $approval_date="{{approval_date}}";
                                                 @endphp
                                                 <td>{{ $approval_date }}</td>
-                                                <td>{{__('admin.Approval Date')}}</td>
+                                                <td>{{__('Approval Date')}}</td>
                                             </tr>
                                         @endif
 
@@ -137,21 +137,21 @@
                                                     $name="{{user_name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.User Name')}}</td>
+                                                <td>{{__('User Name')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $total_amount="{{total_amount}}";
                                                 @endphp
                                                 <td>{{ $total_amount }}</td>
-                                                <td>{{__('admin.Total amount')}}</td>
+                                                <td>{{__('Total amount')}}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $payment_method="{{payment_method}}";
                                                 @endphp
                                                 <td>{{ $payment_method }}</td>
-                                                <td>{{__('admin.Payment Method')}}</td>
+                                                <td>{{__('Payment Method')}}</td>
                                             </tr>
 
                                             <tr>
@@ -159,7 +159,7 @@
                                                     $payment_status="{{payment_status}}";
                                                 @endphp
                                                 <td>{{ $payment_status }}</td>
-                                                <td>{{__('admin.Payment Status')}}</td>
+                                                <td>{{__('Payment Status')}}</td>
                                             </tr>
 
                                             <tr>
@@ -167,7 +167,7 @@
                                                     $order_status="{{order_status}}";
                                                 @endphp
                                                 <td>{{ $order_status }}</td>
-                                                <td>{{__('admin.Order Status')}}</td>
+                                                <td>{{__('Order Status')}}</td>
                                             </tr>
 
                                             <tr>
@@ -175,7 +175,7 @@
                                                     $order_date="{{order_date}}";
                                                 @endphp
                                                 <td>{{ $order_date }}</td>
-                                                <td>{{__('admin.Order Date')}}</td>
+                                                <td>{{__('Order Date')}}</td>
                                             </tr>
 
                                             <tr>
@@ -183,7 +183,7 @@
                                                     $order_detail="{{order_detail}}";
                                                 @endphp
                                                 <td>{{ $order_detail }}</td>
-                                                <td>{{__('admin.Order Detail')}}</td>
+                                                <td>{{__('Order Detail')}}</td>
                                             </tr>
                                         @endif
 
@@ -194,7 +194,7 @@
                                                     $name="{{name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Client Name')}}</td>
+                                                <td>{{__('Client Name')}}</td>
                                             </tr>
 
                                             <tr>
@@ -202,7 +202,7 @@
                                                     $name="{{order_id}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Order Id')}}</td>
+                                                <td>{{__('Order Id')}}</td>
                                             </tr>
 
                                             <tr>
@@ -210,7 +210,7 @@
                                                     $name="{{amount}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Total Amount')}}</td>
+                                                <td>{{__('Total Amount')}}</td>
                                             </tr>
 
                                             <tr>
@@ -218,7 +218,7 @@
                                                     $name="{{schedule_date}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Schedule Date')}}</td>
+                                                <td>{{__('Schedule Date')}}</td>
                                             </tr>
                                         @endif
 
@@ -228,7 +228,7 @@
                                                     $name="{{name}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Provider Name')}}</td>
+                                                <td>{{__('Provider Name')}}</td>
                                             </tr>
 
                                             <tr>
@@ -236,7 +236,7 @@
                                                     $name="{{order_id}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Order Id')}}</td>
+                                                <td>{{__('Order Id')}}</td>
                                             </tr>
 
                                             <tr>
@@ -244,7 +244,7 @@
                                                     $name="{{amount}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Total Amount')}}</td>
+                                                <td>{{__('Total Amount')}}</td>
                                             </tr>
 
                                             <tr>
@@ -252,7 +252,7 @@
                                                     $name="{{schedule_date}}";
                                                 @endphp
                                                 <td>{{ $name }}</td>
-                                                <td>{{__('admin.Schedule Date')}}</td>
+                                                <td>{{__('Schedule Date')}}</td>
                                             </tr>
                                         @endif
 
@@ -286,14 +286,14 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="">{{__('admin.Subject')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('Subject')}} <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" value="{{ $template->subject }}" name="subject">
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('admin.Description')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('Description')}} <span class="text-danger">*</span></label>
                                 <textarea name="description" cols="30" rows="10" class="form-control summernote">{{ $template->description }}</textarea>
                             </div>
-                            <button class="btn btn-success" type="submit">{{__('admin.Update')}}</button>
+                            <button class="btn btn-success" type="submit">{{__('Update')}}</button>
                         </form>
                     </div>
                   </div>

@@ -15,7 +15,7 @@
                     <div class="wsus__breadcrumb_text">
                         <h1>{{ $page->customlangfrontend->page_name }}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('Home')}}</a></li>
                             <li><a href="javascritp:;">{{ $page->customlangfrontend->page_name }}</a></li>
                         </ul>
                     </div>

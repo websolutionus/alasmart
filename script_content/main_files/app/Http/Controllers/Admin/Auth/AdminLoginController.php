@@ -35,8 +35,8 @@ class AdminLoginController extends Controller
         ];
 
         $customMessages = [
-            'email.required' => trans('admin_validation.Email is required'),
-            'password.required' => trans('admin_validation.Password is required'),
+            'email.required' => trans('Email is required'),
+            'password.required' => trans('Password is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -50,26 +50,26 @@ class AdminLoginController extends Controller
             if($isAdmin->status==1){
                 if(Hash::check($request->password,$isAdmin->password)){
                     if(Auth::guard('admin')->attempt($credential,$request->remember)){
-                        $notification= trans('admin_validation.Login Successfully');
+                        $notification= trans('Login Successfully');
                         return response()->json(['success'=>$notification]);
                     }
                 }else{
-                    $notification= trans('admin_validation.Invalid Password');
+                    $notification= trans('Invalid Password');
                     return response()->json(['error'=>$notification]);
                 }
             }else{
-                $notification= trans('admin_validation.Inactive account');
+                $notification= trans('Inactive account');
                 return response()->json(['error'=>$notification]);
             }
         }else{
-            $notification= trans('admin_validation.Invalid Email');
+            $notification= trans('Invalid Email');
             return response()->json(['error'=>$notification]);
         }
     }
 
     public function adminLogout(){
         Auth::guard('admin')->logout();
-        $notification= trans('admin_validation.Logout Successfully');
+        $notification= trans('Logout Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.login')->with($notification);
     }

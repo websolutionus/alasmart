@@ -51,7 +51,7 @@ class PopularTagController extends Controller
         $popularTag->save();
 
 
-        $notification = trans('admin_validation.Added Successfully');
+        $notification = trans('Added Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.popular-tags.index')->with($notification);
     }
@@ -101,7 +101,7 @@ class PopularTagController extends Controller
         $tag = PopularTag::find($id);
         $tag->delete();
 
-        $notification= trans('admin_validation.Delete Successfully');
+        $notification= trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.popular-tags.index')->with($notification);
     }

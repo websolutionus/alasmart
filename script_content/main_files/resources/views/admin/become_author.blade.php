@@ -212,7 +212,7 @@
                                         <textarea name="description" id="" class="summernote" cols="30" rows="10">{!! clean($become_language->description) !!}</textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                                   </form>
                             </div>
                         </div>

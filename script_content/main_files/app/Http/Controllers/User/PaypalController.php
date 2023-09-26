@@ -75,7 +75,7 @@ class PaypalController extends Controller
     
     public function payWithPaypal(Request $request){
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -121,7 +121,7 @@ class PaypalController extends Controller
             $payment->create($this->apiContext);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
 
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -142,7 +142,7 @@ class PaypalController extends Controller
         $cart_qty = Session::get('cart_qty');
         $paypalSetting = PaypalPayment::first();
         if (empty($request->get('PayerID')) || empty($request->get('token'))) {
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }
@@ -206,7 +206,7 @@ class PaypalController extends Controller
     }
 
     public function paypalPaymentCancled(){
-        $notification = trans('user_validation.Payment Faild');
+        $notification = trans('Payment Faild');
         $notification = array('messege'=>$notification,'alert-type'=>'error');
         return redirect()->route('payment', $service->slug)->with($notification);
     }

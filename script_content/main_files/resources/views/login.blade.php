@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('user.Login')}}</title>
+    <title>{{__('Login')}}</title>
 @endsection
 
 @section('frontend-content')

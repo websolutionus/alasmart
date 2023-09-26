@@ -1,22 +1,22 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Blog')}}</title>
+<title>{{__('Blog')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Edit Blog')}}</h1>
+            <h1>{{__('Edit Blog')}}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item active"><a href="{{ route('admin.blog.index') }}">{{__('admin.Blog')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Edit Blog')}}</div>
+                <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.blog.index') }}">{{__('Blog')}}</a></div>
+              <div class="breadcrumb-item">{{__('Edit Blog')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.blog.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.Blog')}}</a>
+            <a href="{{ route('admin.blog.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('Blog')}}</a>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -50,30 +50,30 @@
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Thumbnail Image Preview')}}</label>
+                                    <label>{{__('Thumbnail Image Preview')}}</label>
                                     <div>
                                         <img id="preview-img" class="admin-img" src="{{ asset($blog->image) }}" alt="">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.New Thumbnail Image')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('New Thumbnail Image')}} <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control-file"  name="image" onchange="previewThumnailImage(event)">
                                 </div>
                                 @endif
 
                                 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Title')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Title')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="title" class="form-control"  name="title" value="{{ $blog_language->title }}">
                                     <input type="hidden" id="title" class="form-control"  name="lang_code" value="{{ request()->get('lang_code') }}">
                                 </div>
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Category')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Category')}} <span class="text-danger">*</span></label>
                                     <select name="category" class="form-control select2" id="category">
-                                        <option value="">{{__('admin.Select Category')}}</option>
+                                        <option value="">{{__('Select Category')}}</option>
                                         @foreach ($categories as $category)
                                             <option {{ $category->id == $blog->blog_category_id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->blogcategorylanguageadmin->category_name }}</option>
                                         @endforeach
@@ -87,32 +87,32 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Description')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Description')}} <span class="text-danger">*</span></label>
                                     <textarea name="description" id="" cols="30" rows="10" class="summernote">{!! clean($blog_language->description) !!}</textarea>
                                 </div>
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Show Homepage ?')}}  <span class="text-danger">*</span></label>
+                                    <label>{{__('Show Homepage ?')}}  <span class="text-danger">*</span></label>
                                     <select name="show_homepage" class="form-control">
-                                        <option {{ $blog->show_homepage == 0 ? 'selected' : '' }} value="0">{{__('admin.No')}}</option>
-                                        <option {{ $blog->show_homepage == 1 ? 'selected' : '' }} value="1">{{__('admin.Yes')}}</option>
+                                        <option {{ $blog->show_homepage == 0 ? 'selected' : '' }} value="0">{{__('No')}}</option>
+                                        <option {{ $blog->show_homepage == 1 ? 'selected' : '' }} value="1">{{__('Yes')}}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group col-12">
                                     <label>{{__('Show Featured ?')}}  <span class="text-danger">*</span></label>
                                     <select name="show_featured" class="form-control">
-                                        <option {{ $blog->show_featured == 0 ? 'selected' : '' }} value="0">{{__('admin.No')}}</option>
-                                        <option {{ $blog->show_featured == 1 ? 'selected' : '' }} value="1">{{__('admin.Yes')}}</option>
+                                        <option {{ $blog->show_featured == 0 ? 'selected' : '' }} value="0">{{__('No')}}</option>
+                                        <option {{ $blog->show_featured == 1 ? 'selected' : '' }} value="1">{{__('Yes')}}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option {{ $blog->status == 1 ? 'selected' : '' }} value="1">{{__('admin.Active')}}</option>
-                                        <option {{ $blog->status == 0 ? 'selected' : '' }} value="0">{{__('admin.Inactive')}}</option>
+                                        <option {{ $blog->status == 1 ? 'selected' : '' }} value="1">{{__('Active')}}</option>
+                                        <option {{ $blog->status == 0 ? 'selected' : '' }} value="0">{{__('Inactive')}}</option>
                                     </select>
                                 </div>
 
@@ -124,18 +124,18 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.SEO Title')}}</label>
+                                    <label>{{__('SEO Title')}}</label>
                                    <input type="text" class="form-control" name="seo_title" value="{{ $blog_language->seo_title }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.SEO Description')}}</label>
+                                    <label>{{__('SEO Description')}}</label>
                                     <textarea name="seo_description" id="" cols="30" rows="10" class="form-control text-area-5">{{ $blog_language->seo_description }}</textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button class="btn btn-primary">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

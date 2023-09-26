@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Product Type')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Product Type')}}</div>
             </div>
           </div>
@@ -161,7 +161,7 @@
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                                 </form>
                             </div>
                         </div>

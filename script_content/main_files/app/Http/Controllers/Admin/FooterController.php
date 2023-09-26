@@ -33,7 +33,7 @@ class FooterController extends Controller
             'description' =>'required',
         ];
         $customMessages = [
-            'copyright.required' => trans('admin_validation.Copyright is required'),
+            'copyright.required' => trans('Copyright is required'),
             'description.required' => trans('Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
@@ -61,7 +61,7 @@ class FooterController extends Controller
         }
 
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 

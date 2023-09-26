@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Frontend Language')}}</title>
+<title>{{__('Frontend Language')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Frontend Language')}}</h1>
+            <h1>{{__('Frontend Language')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Frontend Language')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Frontend Language')}}</div>
             </div>
           </div>
 
@@ -54,7 +54,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                         </form>
                         </div>
 

@@ -50,14 +50,14 @@ class BlogController extends Controller
             'show_featured'=>'required',
         ];
         $customMessages = [
-            'title.required' => trans('admin_validation.Title is required'),
-            'title.unique' => trans('admin_validation.Title already exist'),
-            'slug.required' => trans('admin_validation.Slug is required'),
-            'slug.unique' => trans('admin_validation.Slug already exist'),
-            'image.required' => trans('admin_validation.Image is required'),
+            'title.required' => trans('Title is required'),
+            'title.unique' => trans('Title already exist'),
+            'slug.required' => trans('Slug is required'),
+            'slug.unique' => trans('Slug already exist'),
+            'image.required' => trans('Image is required'),
             'short_description.required' => trans('Short description is required'),
-            'description.required' => trans('admin_validation.Description is required'),
-            'category.required' => trans('admin_validation.Category is required'),
+            'description.required' => trans('Description is required'),
+            'category.required' => trans('Category is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -111,7 +111,7 @@ class BlogController extends Controller
             $blog_language->save();
         }
 
-        $notification= trans('admin_validation.Created Successfully');
+        $notification= trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.blog.index')->with($notification);
     }
@@ -144,10 +144,10 @@ class BlogController extends Controller
             'show_featured'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'title.required' => trans('admin_validation.Title is required'),
+            'title.required' => trans('Title is required'),
             'short_description.required' => trans('Short description is required'),
-            'description.required' => trans('admin_validation.Description is required'),
-            'category.required' => trans('admin_validation.Category is required'),
+            'description.required' => trans('Description is required'),
+            'category.required' => trans('Category is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -211,7 +211,7 @@ class BlogController extends Controller
         $blog_language->seo_description = $request->seo_description ? $request->seo_description : $request->title;
         $blog_language->save();
 
-        $notification= trans('admin_validation.Updated Successfully');
+        $notification= trans('Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -232,7 +232,7 @@ class BlogController extends Controller
         PopularPost::where('blog_id',$id)->delete();
         $blog_language = BlogLanguage::where('blog_id', $id)->delete();
 
-        $notification=  trans('admin_validation.Delete Successfully');
+        $notification=  trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.blog.index')->with($notification);
     }
@@ -242,11 +242,11 @@ class BlogController extends Controller
         if($blog->status==1){
             $blog->status=0;
             $blog->save();
-            $message= trans('admin_validation.Inactive Successfully');
+            $message= trans('Inactive Successfully');
         }else{
             $blog->status=1;
             $blog->save();
-            $message= trans('admin_validation.Active Successfully');
+            $message= trans('Active Successfully');
         }
         return response()->json($message);
     }

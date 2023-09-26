@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Edit Category')}}</title>
+<title>{{__('Edit Category')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Edit Category')}}</h1>
+            <h1>{{__('Edit Category')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.category.index') }}">{{__('admin.Category List')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Edit Category')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.category.index') }}">{{__('Category List')}}</a></div>
+              <div class="breadcrumb-item">{{__('Edit Category')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.category.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.Category List')}}</a>
+            <a href="{{ route('admin.category.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('Category List')}}</a>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -49,20 +49,20 @@
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Existing Icon')}}</label>
+                                    <label>{{__('Existing Icon')}}</label>
                                     <div>
                                         <img src="{{ asset($category->icon) }}" class="w_80" alt="">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Icon')}}</label>
+                                    <label>{{__('Icon')}}</label>
                                     <input type="file" class="form-control-file"  name="icon">
                                 </div>
                                 @endif
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Name')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Name')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="name" class="form-control"  name="name" value="{{ $category_language->name }}">
 
                                     <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
@@ -71,22 +71,22 @@
                                 <div class="form-group col-12">
                                     <label>{{__('Show product gallery')}} <span class="text-danger">*</span></label>
                                     <select name="product_gallery" class="form-control">
-                                        <option {{ $category->product_gallery==1 ? 'selected': '' }} value="1">{{__('admin.Yes')}}</option>
-                                        <option {{ $category->product_gallery==0 ? 'selected': '' }} value="0">{{__('admin.No')}}</option>
+                                        <option {{ $category->product_gallery==1 ? 'selected': '' }} value="1">{{__('Yes')}}</option>
+                                        <option {{ $category->product_gallery==0 ? 'selected': '' }} value="0">{{__('No')}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option {{ $category->status==1 ? 'selected': '' }} value="1">{{__('admin.Active')}}</option>
-                                        <option {{ $category->status==0 ? 'selected': '' }}  value="0">{{__('admin.InActive')}}</option>
+                                        <option {{ $category->status==1 ? 'selected': '' }} value="1">{{__('Active')}}</option>
+                                        <option {{ $category->status==0 ? 'selected': '' }}  value="0">{{__('InActive')}}</option>
                                     </select>
                                 </div>
                                 @endif
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('admin.Update')}}</button>
+                                    <button class="btn btn-primary">{{__('Update')}}</button>
                                 </div>
                             </div>
                         </form>

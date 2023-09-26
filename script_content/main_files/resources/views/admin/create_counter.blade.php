@@ -131,7 +131,7 @@
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="row">
                                     <div class="col-12">
-                                        <h6 class="home_border">{{__('admin.Home Two')}}</h6>
+                                        <h6 class="home_border">{{__('Home Two')}}</h6>
                                         <hr>
                                     </div>
                                     <div class="form-group col-12">

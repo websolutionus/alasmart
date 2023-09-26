@@ -55,7 +55,7 @@ class PaymentController extends Controller
     public function bankPayment(Request $request){
 
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -64,7 +64,7 @@ class PaymentController extends Controller
             'tnx_info'=>'required',
         ];
         $customMessages = [
-            'tnx_info.required' => trans('user_validation.Transaction is required'),
+            'tnx_info.required' => trans('Transaction is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -114,7 +114,7 @@ class PaymentController extends Controller
     public function payWithStripe(Request $request){
 
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -181,7 +181,7 @@ class PaymentController extends Controller
 
     public function payWithRazorpay(Request $request){
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -241,12 +241,12 @@ class PaymentController extends Controller
                 return redirect()->route('payment-success')->with($notification);
 
             }catch (Exception $e) {
-                $notification = trans('user_validation.Payment Faild');
+                $notification = trans('Payment Faild');
                 $notification = array('messege'=>$notification,'alert-type'=>'error');
                 return redirect()->back()->with($notification);
             }
         }else{
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -255,7 +255,7 @@ class PaymentController extends Controller
     public function payWithFlutterwave(Request $request){
 
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -330,7 +330,7 @@ class PaymentController extends Controller
             $notification = trans('Thanks for your new order');
             return response()->json(['status' => 'success' , 'message' => $notification]);
         }else{
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             return response()->json(['status' => 'faild' , 'message' => $notification]);
         }
     }
@@ -338,7 +338,7 @@ class PaymentController extends Controller
     public function payWithMollie(Request $request){
 
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -429,7 +429,7 @@ class PaymentController extends Controller
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('payment-success')->with($notification);
         }else{
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }
@@ -437,7 +437,7 @@ class PaymentController extends Controller
 
     public function payWithPayStack(Request $request){
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -513,7 +513,7 @@ class PaymentController extends Controller
             $notification = trans('Thanks for your new order');
             return response()->json(['status' => 'success' , 'message' => $notification]);
         }else{
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             return response()->json(['status' => 'faild' , 'message' => $notification]);
         }
     }
@@ -522,7 +522,7 @@ class PaymentController extends Controller
     public function payWithInstamojo(Request $request){
 
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -603,7 +603,7 @@ class PaymentController extends Controller
         curl_close($ch);
 
         if ($err) {
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         } else {
@@ -660,7 +660,7 @@ class PaymentController extends Controller
                 return redirect()->route('payment-success')->with($notification);
             }
         }else{
-            $notification = trans('user_validation.Payment Faild');
+            $notification = trans('Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }

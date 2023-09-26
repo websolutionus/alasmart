@@ -104,7 +104,7 @@ class OrderController extends Controller
 
         $orders = $orders->paginate(15);
 
-        $title = trans('admin_validation.Awaiting for approval');
+        $title = trans('Awaiting for approval');
         $setting = Setting::first();
         $currency_icon = array(
             'icon' => $setting->currency_icon
@@ -135,7 +135,7 @@ class OrderController extends Controller
 
         $orders = $orders->paginate(15);
 
-        $title = trans('admin_validation.Active Booking');
+        $title = trans('Active Booking');
         $setting = Setting::first();
         $currency_icon = array(
             'icon' => $setting->currency_icon
@@ -166,7 +166,7 @@ class OrderController extends Controller
 
         $orders = $orders->paginate(15);
 
-        $title = trans('admin_validation.Complete Booking');
+        $title = trans('Complete Booking');
         $setting = Setting::first();
         $currency_icon = array(
             'icon' => $setting->currency_icon
@@ -197,7 +197,7 @@ class OrderController extends Controller
 
         $orders = $orders->paginate(15);
 
-        $title = trans('admin_validation.Declined Booking');
+        $title = trans('Declined Booking');
         $setting = Setting::first();
         $currency_icon = array(
             'icon' => $setting->currency_icon
@@ -249,7 +249,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order_item=OrderItem::where('order_id', $id)->delete();
         $order->delete();
-        $notification = trans('admin_validation.Delete successfully');
+        $notification = trans('Delete successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.all-booking')->with($notification);
     }
@@ -260,7 +260,7 @@ class OrderController extends Controller
         $order->order_status = 'order_decliened_by_provider';
         $order->save();
 
-        $notification= trans('admin_validation.Declined Successfully');
+        $notification= trans('Declined Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -270,7 +270,7 @@ class OrderController extends Controller
         $order->order_status = 'approved_by_provider';
         $order->save();
 
-        $notification= trans('admin_validation.Approved Successfully');
+        $notification= trans('Approved Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -280,7 +280,7 @@ class OrderController extends Controller
         $order->payment_status = 'success';
         $order->save();
 
-        $notification= trans('admin_validation.Approved Successfully');
+        $notification= trans('Approved Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

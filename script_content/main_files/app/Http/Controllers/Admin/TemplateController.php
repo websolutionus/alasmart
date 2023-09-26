@@ -51,9 +51,9 @@ class TemplateController extends Controller
         ];
 
         $customMessages = [
-            'title.required' => trans('admin_validation.Title is required'),
-            'description.required' => trans('admin_validation.Description is required'),
-            'image.required' => trans('admin_validation.Image is required'),
+            'title.required' => trans('Title is required'),
+            'description.required' => trans('Description is required'),
+            'image.required' => trans('Image is required'),
             'link.required' => trans('Link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
@@ -84,7 +84,7 @@ class TemplateController extends Controller
             $template_language->save();
         }
 
-        $notification = trans('admin_validation.Created Successfully');
+        $notification = trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.template.index')->with($notification);
     }
@@ -131,8 +131,8 @@ class TemplateController extends Controller
         ];
 
         $customMessages = [
-            'title.required' => trans('admin_validation.Title is required'),
-            'description.required' => trans('admin_validation.Description is required'),
+            'title.required' => trans('Title is required'),
+            'description.required' => trans('Description is required'),
             'link.required' => trans('Link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
@@ -167,7 +167,7 @@ class TemplateController extends Controller
 
         $template_language->save();
 
-        $notification = trans('admin_validation.Created Successfully');
+        $notification = trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -190,7 +190,7 @@ class TemplateController extends Controller
 
         $template_language = TemplateLanguage::where('template_id', $id)->delete();
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.template.index')->with($notification);
     }
@@ -200,11 +200,11 @@ class TemplateController extends Controller
         if($template->status == 1){
             $template->status = 0;
             $template->save();
-            $message = trans('admin_validation.Inactive Successfully');
+            $message = trans('Inactive Successfully');
         }else{
             $template->status = 1;
             $template->save();
-            $message = trans('admin_validation.Active Successfully');
+            $message = trans('Active Successfully');
         }
 
         return response()->json($message);

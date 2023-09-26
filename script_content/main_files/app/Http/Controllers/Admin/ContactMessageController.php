@@ -23,7 +23,7 @@ class ContactMessageController extends Controller
         $contactMessage = ContactMessage::find($id);
         $contactMessage->delete();
 
-        $notification = trans('admin_validation.Delete Successfully');
+        $notification = trans('Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -34,7 +34,7 @@ class ContactMessageController extends Controller
             'contact_email' => 'required',
         ];
         $customMessages = [
-            'contact_email.required' => trans('admin_validation.Contact email is required'),
+            'contact_email.required' => trans('Contact email is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -43,7 +43,7 @@ class ContactMessageController extends Controller
         $setting->enable_save_contact_message = $request->enable_save_contact_message;
         $setting->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

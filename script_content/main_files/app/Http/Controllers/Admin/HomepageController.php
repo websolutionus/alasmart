@@ -267,8 +267,8 @@ class HomepageController extends Controller
             'description.required' => trans('Description is required'),
             'home3_title.required' => trans('Title is required'),
             'home3_desc.required' => trans('Description is required'),
-            'play_store.required' => trans('admin_validation.Play store is required'),
-            'app_store.required' => trans('admin_validation.App store is required'),
+            'play_store.required' => trans('Play store is required'),
+            'app_store.required' => trans('App store is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -372,7 +372,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -594,7 +594,7 @@ class HomepageController extends Controller
         $homepage_language->counter4_title = $request->counter4_title;
         $homepage_language->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -740,7 +740,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('admin_validation.Updated Successfully');
+        $notification= trans('Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -804,7 +804,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('admin_validation.Updated Successfully');
+        $notification= trans('Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

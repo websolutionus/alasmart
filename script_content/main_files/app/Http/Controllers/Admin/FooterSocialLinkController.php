@@ -24,9 +24,9 @@ class FooterSocialLinkController extends Controller
             'icon' =>'required',
         ];
         $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
+            'link.required' => trans('Link is required'),
             'icon.required' => trans('Text is required'),
-            'icon.required' => trans('admin_validation.Icon is required'),
+            'icon.required' => trans('Icon is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -36,7 +36,7 @@ class FooterSocialLinkController extends Controller
         $link->icon = $request->icon;
         $link->save();
 
-        $notification=trans('admin_validation.Create Successfully');
+        $notification=trans('Create Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -48,9 +48,9 @@ class FooterSocialLinkController extends Controller
             'icon' =>'required',
         ];
         $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
+            'link.required' => trans('Link is required'),
             'text.required' => trans('Text is required'),
-            'icon.required' => trans('admin_validation.Icon is required'),
+            'icon.required' => trans('Icon is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -60,7 +60,7 @@ class FooterSocialLinkController extends Controller
         $link->icon = $request->icon;
         $link->save();
 
-        $notification=trans('admin_validation.Update Successfully');
+        $notification=trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -68,7 +68,7 @@ class FooterSocialLinkController extends Controller
     public function destroy($id){
         $link = FooterSocialLink::find($id);
         $link->delete();
-        $notification=trans('admin_validation.Delete Successfully');
+        $notification=trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

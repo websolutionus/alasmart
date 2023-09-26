@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Template')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Template')}}</div>
             </div>
           </div>
@@ -23,10 +23,10 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('admin.SN')}}</th>
-                                    <th>{{__('admin.Title')}}</th>
-                                    <th>{{__('admin.Icon')}}</th>
-                                    <th>{{__('admin.Action')}}</th>
+                                    <th>{{__('SN')}}</th>
+                                    <th>{{__('Title')}}</th>
+                                    <th>{{__('Icon')}}</th>
+                                    <th>{{__('Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>

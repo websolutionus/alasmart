@@ -53,11 +53,11 @@
                                 <tbody>
                                     <tr class="header_row">
                                         <th class="number">{{__('Number')}}</th>
-                                        <th class="method">{{__('user.Method')}}</th>
-                                        <th class="method">{{__('user.Total Amount')}}</th>
-                                        <th class="charge">{{__('user.Charge')}}</th>
-                                        <th class="amount">{{__('user.Withdraw Amount')}}</th>
-                                        <th class="status">{{__('user.Status')}}</th>
+                                        <th class="method">{{__('Method')}}</th>
+                                        <th class="method">{{__('Total Amount')}}</th>
+                                        <th class="charge">{{__('Charge')}}</th>
+                                        <th class="amount">{{__('Withdraw Amount')}}</th>
+                                        <th class="status">{{__('Status')}}</th>
                                     </tr>
 
                                     @foreach ($withdraws as $index=>$withdraw)
@@ -68,9 +68,9 @@
                                             <td class="charge">{{ $setting->currency_icon }}{{ $withdraw->total_amount-$withdraw->withdraw_amount }}</td>
                                             <td class="amount">{{ $setting->currency_icon }}{{ html_decode($withdraw->withdraw_amount) }}</td>
                                             @if ($withdraw->status==1)
-                                            <td class="status"><span class="success">{{__('user.Success')}}</span></td>
+                                            <td class="status"><span class="success">{{__('Success')}}</span></td>
                                             @else
-                                            <td class="status"><span class="pending">{{__('user.Pending')}}</span></td>
+                                            <td class="status"><span class="pending">{{__('Pending')}}</span></td>
                                             @endif
                                         </tr>
                                     @endforeach

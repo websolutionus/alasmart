@@ -36,9 +36,9 @@ class FaqController extends Controller
             'status'=>'required',
         ];
         $customMessages = [
-            'question.required' => trans('admin_validation.Question is required'),
-            'question.unique' => trans('admin_validation.Question already exist'),
-            'answer.required' => trans('admin_validation.Answer is required'),
+            'question.required' => trans('Question is required'),
+            'question.unique' => trans('Question already exist'),
+            'answer.required' => trans('Answer is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -56,7 +56,7 @@ class FaqController extends Controller
             $faq_language->save();
         }
 
-        $notification= trans('admin_validation.Created Successfully');
+        $notification= trans('Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.faq.index')->with($notification);
     }
@@ -82,9 +82,9 @@ class FaqController extends Controller
             'status'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'question.required' => trans('admin_validation.Question is required'),
-            'question.unique' => trans('admin_validation.Question already exist'),
-            'answer.required' => trans('admin_validation.Answer is required'),
+            'question.required' => trans('Question is required'),
+            'question.unique' => trans('Question already exist'),
+            'answer.required' => trans('Answer is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -98,7 +98,7 @@ class FaqController extends Controller
         $faq_language->answer = $request->answer;
         $faq_language->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -110,7 +110,7 @@ class FaqController extends Controller
 
         $faq_language = FaqLanguage::where('faq_id', $id)->delete();
 
-        $notification= trans('admin_validation.Delete Successfully');
+        $notification= trans('Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.faq.index')->with($notification);
     }
@@ -120,11 +120,11 @@ class FaqController extends Controller
         if($faq->status==1){
             $faq->status=0;
             $faq->save();
-            $message= trans('admin_validation.Inactive Successfully');
+            $message= trans('Inactive Successfully');
         }else{
             $faq->status=1;
             $faq->save();
-            $message= trans('admin_validation.Active Successfully');
+            $message= trans('Active Successfully');
         }
         return response()->json($message);
     }

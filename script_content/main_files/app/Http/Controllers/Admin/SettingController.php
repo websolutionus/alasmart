@@ -244,7 +244,7 @@ class SettingController extends Controller
 
         Session::forget('front_lang');
 
-        $notification = trans('admin_validation.Database Cleared Successfully');
+        $notification = trans('Database Cleared Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -272,7 +272,7 @@ class SettingController extends Controller
         $setting->theme_three_color = $request->theme_three_color;
         $setting->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -282,7 +282,7 @@ class SettingController extends Controller
         foreach($request->quantities as $index => $quantity){
             if($request->quantities[$index]==''){
                 $notification=array(
-                    'messege'=> trans('admin_validation.Every field is required'),
+                    'messege'=> trans('Every field is required'),
                     'alert-type'=>'error'
                 );
 
@@ -294,7 +294,7 @@ class SettingController extends Controller
             $customPagination->save();
         }
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -310,11 +310,11 @@ class SettingController extends Controller
             'selected_theme' => 'required',
         ];
         $customMessages = [
-            'lg_header.required' => trans('admin_validation.Sidebar large header is required'),
-            'sm_header.required' => trans('admin_validation.Sidebar small header is required'),
-            'currency_name.required' => trans('admin_validation.Currency name is required'),
-            'currency_icon.required' => trans('admin_validation.Currency icon is required'),
-            'timezone.required' => trans('admin_validation.Timezone is required'),
+            'lg_header.required' => trans('Sidebar large header is required'),
+            'sm_header.required' => trans('Sidebar small header is required'),
+            'currency_name.required' => trans('Currency name is required'),
+            'currency_icon.required' => trans('Currency icon is required'),
+            'timezone.required' => trans('Timezone is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -328,7 +328,7 @@ class SettingController extends Controller
         $setting->timezone = $request->timezone;
         $setting->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -348,17 +348,17 @@ class SettingController extends Controller
             'message' => 'required',
         ];
         $customMessages = [
-            'allow.required' => trans('admin_validation.Allow is required'),
-            'border.required' => trans('admin_validation.Border is required'),
-            'corners.required' => trans('admin_validation.Corner is required'),
-            'background_color.required' => trans('admin_validation.Background color is required'),
-            'text_color.required' => trans('admin_validation.Text color is required'),
-            'border_color.required' => trans('admin_validation.Border Color is required'),
-            'button_color.required' => trans('admin_validation.Button color is required'),
-            'btn_text_color.required' => trans('admin_validation.Button text color is required'),
-            'link_text.required' => trans('admin_validation.Link text is required'),
-            'btn_text.required' => trans('admin_validation.Button text is required'),
-            'message.required' => trans('admin_validation.Message is required'),
+            'allow.required' => trans('Allow is required'),
+            'border.required' => trans('Border is required'),
+            'corners.required' => trans('Corner is required'),
+            'background_color.required' => trans('Background color is required'),
+            'text_color.required' => trans('Text color is required'),
+            'border_color.required' => trans('Border Color is required'),
+            'button_color.required' => trans('Button color is required'),
+            'btn_text_color.required' => trans('Button text color is required'),
+            'link_text.required' => trans('Link text is required'),
+            'btn_text.required' => trans('Button text is required'),
+            'message.required' => trans('Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -376,7 +376,7 @@ class SettingController extends Controller
         $cookieConsent->message = $request->message;
         $cookieConsent->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -387,8 +387,8 @@ class SettingController extends Controller
             'chat_link' => $request->allow == 1 ?  'required' : ''
         ];
         $customMessages = [
-            'allow.required' => trans('admin_validation.Allow is required'),
-            'chat_link.required' => trans('admin_validation.Chat link is required'),
+            'allow.required' => trans('Allow is required'),
+            'chat_link.required' => trans('Chat link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -397,7 +397,7 @@ class SettingController extends Controller
         $tawkChat->chat_link = $request->chat_link;
         $tawkChat->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -408,8 +408,8 @@ class SettingController extends Controller
             'analytic_id' => $request->allow == 1 ?  'required' : ''
         ];
         $customMessages = [
-            'allow.required' => trans('admin_validation.Allow is required'),
-            'analytic_id.required' => trans('admin_validation.Analytic id is required'),
+            'allow.required' => trans('Allow is required'),
+            'analytic_id.required' => trans('Analytic id is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -418,7 +418,7 @@ class SettingController extends Controller
         $googleAnalytic->analytic_id = $request->analytic_id;
         $googleAnalytic->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -432,9 +432,9 @@ class SettingController extends Controller
             'allow' => 'required',
         ];
         $customMessages = [
-            'site_key.required' => trans('admin_validation.Site key is required'),
-            'secret_key.required' => trans('admin_validation.Secret key is required'),
-            'allow.required' => trans('admin_validation.Allow is required'),
+            'site_key.required' => trans('Site key is required'),
+            'secret_key.required' => trans('Secret key is required'),
+            'allow.required' => trans('Allow is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -444,7 +444,7 @@ class SettingController extends Controller
         $googleRecaptcha->secret_key = $request->secret_key;
         $googleRecaptcha->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -559,7 +559,7 @@ class SettingController extends Controller
             }
         }
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -579,9 +579,9 @@ class SettingController extends Controller
             'gmail_redirect_url' => $request->allow_gmail_login ?  'required' : '',
         ];
         $customMessages = [
-            'gmail_client_id.required' => trans('admin_validation.Gmail client id is required'),
-            'gmail_secret_id.required' => trans('admin_validation.Gmail secret id is required'),
-            'gmail_redirect_url.required' => trans('admin_validation.Gmail redirect url is required'),
+            'gmail_client_id.required' => trans('Gmail client id is required'),
+            'gmail_secret_id.required' => trans('Gmail secret id is required'),
+            'gmail_redirect_url.required' => trans('Gmail redirect url is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -592,7 +592,7 @@ class SettingController extends Controller
         $socialLogin->gmail_redirect_url = $request->gmail_redirect_url;
         $socialLogin->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -603,7 +603,7 @@ class SettingController extends Controller
             'app_id' => $request->allow_facebook_pixel ?  'required' : '',
         ];
         $customMessages = [
-            'app_id.required' => trans('admin_validation.App id is required'),
+            'app_id.required' => trans('App id is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -612,7 +612,7 @@ class SettingController extends Controller
         $facebookPixel->status = $request->allow_facebook_pixel ? 1 : 0;
         $facebookPixel->save();
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -625,10 +625,10 @@ class SettingController extends Controller
             'app_cluster' => 'required',
         ];
         $customMessages = [
-            'app_id.required' => trans('admin_validation.App id is required'),
-            'app_key.required' => trans('admin_validation.App key is required'),
-            'app_secret.required' => trans('admin_validation.App secret is required'),
-            'app_cluster.required' => trans('admin_validation.App cluster is required'),
+            'app_id.required' => trans('App id is required'),
+            'app_key.required' => trans('App key is required'),
+            'app_secret.required' => trans('App secret is required'),
+            'app_cluster.required' => trans('App cluster is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -645,7 +645,7 @@ class SettingController extends Controller
         Artisan::call("env:set PUSHER_APP_CLUSTER='". $request->app_cluster ."'");
 
 
-        $notification = trans('admin_validation.Update Successfully');
+        $notification = trans('Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{__('Edit Language')}}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{__('Edit language')}}</div>
             </div>
           </div>
@@ -54,10 +54,10 @@
 
                                 @if ($language->id != 1)
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option value="1" {{ $language->status == 1 ? 'selected':'' }}>{{__('admin.Active')}}</option>
-                                        <option value="0" {{ $language->status == 0 ? 'selected':'' }}>{{__('admin.Inactive')}}</option>
+                                        <option value="1" {{ $language->status == 1 ? 'selected':'' }}>{{__('Active')}}</option>
+                                        <option value="0" {{ $language->status == 0 ? 'selected':'' }}>{{__('Inactive')}}</option>
                                     </select>
                                 </div>
                                 @endif
@@ -65,7 +65,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('admin.Save')}}</button>
+                                    <button class="btn btn-primary">{{__('Save')}}</button>
                                 </div>
                             </div>
                         </form>

@@ -31,7 +31,7 @@ class AdminForgotPasswordController extends Controller
         ];
 
         $customMessages = [
-            'email.required' => trans('admin_validation.Email is required'),
+            'email.required' => trans('Email is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -48,12 +48,12 @@ class AdminForgotPasswordController extends Controller
 
             Mail::to($admin->email)->send(new AdminForgetPassword($admin,$message,$subject));
 
-            $notification= trans('admin_validation.Forget password link send your email');
+            $notification= trans('Forget password link send your email');
             $notification=array('messege'=>$notification,'alert-type'=>'success');
             return Redirect()->back()->with($notification);
 
         }else {
-            $notification= trans('admin_validation.email does not exist');
+            $notification= trans('email does not exist');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return Redirect()->back()->with($notification);
         }
@@ -79,10 +79,10 @@ class AdminForgotPasswordController extends Controller
             'password'=>'required|confirmed|min:4'
         ];
         $customMessages = [
-            'email.required' => trans('admin_validation.Email is required'),
-            'password.required' => trans('admin_validation.Password is required'),
-            'password.confirmed' => trans('admin_validation.Password deos not match'),
-            'password.min' => trans('admin_validation.Password must be 4 characters'),
+            'email.required' => trans('Email is required'),
+            'password.required' => trans('Password is required'),
+            'password.confirmed' => trans('Password deos not match'),
+            'password.min' => trans('Password must be 4 characters'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -92,11 +92,11 @@ class AdminForgotPasswordController extends Controller
             $admin->forget_password_token=null;
             $admin->save();
 
-            $notification= trans('admin_validation.Password Reset Successfully');
+            $notification= trans('Password Reset Successfully');
             $notification=array('messege'=>$notification,'alert-type'=>'success');
             return Redirect()->route('admin.login')->with($notification);
         }else{
-            $notification= trans('admin_validation.Something went wrong');
+            $notification= trans('Something went wrong');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return back()->with($notification);
         }

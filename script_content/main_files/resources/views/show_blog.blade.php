@@ -251,7 +251,7 @@
                         if(response.responseJSON.errors.comment)toastr.error(response.responseJSON.errors.comment[0])
 
                         if(!response.responseJSON.errors.name && !response.responseJSON.errors.email && !response.responseJSON.errors.comment){
-                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });
@@ -268,7 +268,7 @@
                     return;
                 }
 
-                let loading = "{{__('user.Processing...')}}"
+                let loading = "{{__('Processing...')}}"
 
                 $("#subscribe_btn").html(loading);
                 $("#subscribe_btn").attr('disabled',true);
@@ -280,7 +280,7 @@
                     success: function (response) {
                         if(response.status == 1){
                             toastr.success(response.message);
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");
@@ -290,7 +290,7 @@
 
                         if(response.status == 0){
                             toastr.error(response.message);
-                            let subscribe = "{{__('user.Subscribe')}}"
+                            let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");
@@ -302,7 +302,7 @@
                         $('#subShowSpain').addClass('d-none');
                         $('#subSubmitBtn').removeClass('d-none');
                         toastr.error('Something went wrong');
-                        let subscribe = "{{__('user.Subscribe')}}"
+                        let subscribe = "{{__('Subscribe')}}"
                             $("#subscribe_btn").html(subscribe);
                             $("#subscribe_btn").attr('disabled',false);
                             $("#subscriberForm").trigger("reset");

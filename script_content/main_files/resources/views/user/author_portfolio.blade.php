@@ -125,7 +125,7 @@
                             $('#submitBtn').removeClass('d-none');
                             $('#showSpain').addClass('d-none');
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
                             }
                         }
                     }

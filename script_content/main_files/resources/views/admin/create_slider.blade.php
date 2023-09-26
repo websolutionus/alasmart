@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Intro section')}}</title>
+<title>{{__('Intro section')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Intro section')}}</h1>
+            <h1>{{__('Intro section')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Intro section')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('Intro section')}}</div>
             </div>
           </div>
 
@@ -54,7 +54,7 @@
 
                             <div class="row {{ $home1 == false ? 'd-none' : '' }}">
                                 <div class="col-12">
-                                    <h6 class="home_border">{{__('admin.Home One')}}</h6>
+                                    <h6 class="home_border">{{__('Home One')}}</h6>
                                     <hr>
                                 </div>
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
@@ -102,14 +102,14 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Existing Image')}}</label>
+                                    <label>{{__('Existing Image')}}</label>
                                     <div>
                                         <img class="home2_image" src="{{ asset($slider->home2_image) }}" alt="">
                                     </div>
                                 </div>
     
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.New Image')}}</label>
+                                    <label>{{__('New Image')}}</label>
                                     <input type="file" name="home2_image" class="form-control-file">
                                 </div>
                                 @endif
@@ -133,7 +133,7 @@
 
                             <div class="row {{ $home3 == false ? 'd-none' : '' }}">
                                 <div class="col-12">
-                                    <h6 class="home_border">{{__('admin.Home Three')}}</h6>
+                                    <h6 class="home_border">{{__('Home Three')}}</h6>
                                     <hr>
                                 </div>
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
@@ -150,13 +150,13 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Existing Image')}}</label>
+                                    <label>{{__('Existing Image')}}</label>
                                     <div>
                                         <img class="home2_image" src="{{ asset($slider->home3_image) }}" alt="">
                                     </div>
                                 </div>
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.New Image')}}</label>
+                                    <label>{{__('New Image')}}</label>
                                     <input type="file" name="home3_image" class="form-control-file">
                                 </div>
                                 @endif

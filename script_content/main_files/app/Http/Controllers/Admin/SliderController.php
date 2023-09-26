@@ -40,11 +40,11 @@ class SliderController extends Controller
             'total_user' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'home1_title.required' => trans('admin_validation.Title is required'),
-            'home2_title.required' => trans('admin_validation.Title is required'),
-            'home3_title.required' => trans('admin_validation.Title is required'),
-            'home2_description.required' => trans('admin_validation.Description is required'),
-            'home3_description.required' => trans('admin_validation.Description is required'),
+            'home1_title.required' => trans('Title is required'),
+            'home2_title.required' => trans('Title is required'),
+            'home3_title.required' => trans('Title is required'),
+            'home2_description.required' => trans('Description is required'),
+            'home3_description.required' => trans('Description is required'),
             'total_sold.required' => trans('Total sold is required'),
             'total_product.required' => trans('Total product is required'),
             'total_user.required' => trans('Total user is required'),
@@ -145,7 +145,7 @@ class SliderController extends Controller
         $sliderlanguage->home3_description = $request->home3_description;
         $sliderlanguage->save();
 
-        $notification= trans('admin_validation.Update Successfully');
+        $notification= trans('Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

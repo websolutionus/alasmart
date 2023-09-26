@@ -786,13 +786,13 @@ class HomeController extends Controller
         if($user== 0){
             return response()->json(['status' => 1]);
         }else{
-            return response()->json(['status' => 0, 'message' => trans('user_validation.User name already exist')]);
+            return response()->json(['status' => 0, 'message' => trans('User name already exist')]);
         }
     }
 
     public function stateByCountry($id){
         $states = CountryState::where(['status' => 1, 'country_id' => $id])->orderBy('name','asc')->get();
-        $response='<option value="">'.trans('user_validation.Select').'</option>';
+        $response='<option value="">'.trans('Select').'</option>';
         if($states->count() > 0){
             foreach($states as $state){
                 $response .= "<option value=".$state->id.">".$state->name."</option>";
@@ -804,7 +804,7 @@ class HomeController extends Controller
 
     public function cityByState($id){
         $cities = City::where(['status' => 1, 'country_state_id' => $id])->orderBy('name','asc')->get();
-        $response='<option value="">'.trans('user_validation.Select').'</option>';
+        $response='<option value="">'.trans('Select').'</option>';
         if($cities->count() > 0){
             foreach($cities as $city){
                 $response .= "<option value=".$city->id.">".$city->name."</option>";
@@ -1018,10 +1018,10 @@ class HomeController extends Controller
         ];
 
         $customMessages = [
-            'name.required' => trans('user_validation.Name is required'),
-            'email.required' => trans('user_validation.Email is required'),
-            'subject.required' => trans('user_validation.Subject is required'),
-            'message.required' => trans('user_validation.Message is required'),
+            'name.required' => trans('Name is required'),
+            'email.required' => trans('Email is required'),
+            'subject.required' => trans('Subject is required'),
+            'message.required' => trans('Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1050,7 +1050,7 @@ class HomeController extends Controller
 
         Mail::to($setting->contact_email)->send(new ContactMessageInformation($message,$subject,$user_email));
 
-        $notification = trans('user_validation.Message send successfully');
+        $notification = trans('Message send successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -1178,10 +1178,10 @@ class HomeController extends Controller
         ];
 
         $customMessages = [
-            'name.required' => trans('user_validation.Name is required'),
-            'email.required' => trans('user_validation.Email is required'),
-            'comment.required' => trans('user_validation.Comment is required'),
-            'blog_id.required' => trans('user_validation.Blog id is required'),
+            'name.required' => trans('Name is required'),
+            'email.required' => trans('Email is required'),
+            'comment.required' => trans('Comment is required'),
+            'blog_id.required' => trans('Blog id is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1192,7 +1192,7 @@ class HomeController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
 
-        $notification = trans('user_validation.Blog comment submited successfully');
+        $notification = trans('Blog comment submited successfully');
 
         return response()->json(['status' => 1, 'message' => $notification]);
     }
@@ -1205,7 +1205,7 @@ class HomeController extends Controller
             ];
     
             $customMessages = [
-                'comment.required' => trans('user_validation.Comment is required'),
+                'comment.required' => trans('Comment is required'),
             ];
             $this->validate($request, $rules,$customMessages);
             
@@ -1240,8 +1240,8 @@ class HomeController extends Controller
                     'g-recaptcha-response'=>new Captcha()
                 ];
                 $customMessages = [
-                    'rating.required' => trans('user_validation.Rating is required'),
-                    'review.required' => trans('user_validation.Review is required'),
+                    'rating.required' => trans('Rating is required'),
+                    'review.required' => trans('Review is required'),
                 ];
                 $this->validate($request, $rules,$customMessages);
     
@@ -1249,7 +1249,7 @@ class HomeController extends Controller
     
                 $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
                 if($isReview > 0){
-                    $notification = trans('user_validation.You have already submited review');
+                    $notification = trans('You have already submited review');
                     return response()->json(['status' => 0, 'message' => $notification]);
                 }
                 
@@ -1260,7 +1260,7 @@ class HomeController extends Controller
                 $review->product_id = $request->product_id;
                 $review->author_id = $request->author_id;
                 $review->save();
-                $notification = trans('user_validation.Review Submited successfully');
+                $notification = trans('Review Submited successfully');
                 return response()->json(['status' => 1, 'message' => $notification]);
             }else{
                 $notification = trans('You can only review your purchased products');
@@ -1340,13 +1340,13 @@ class HomeController extends Controller
                 $subject=$template->subject;
                 Mail::to($subscriber->email)->send(new SubscriptionVerification($subscriber,$message,$subject));
 
-                return response()->json(['status' => 1, 'message' => trans('user_validation.Subscription successfully, please verified your email')]);
+                return response()->json(['status' => 1, 'message' => trans('Subscription successfully, please verified your email')]);
 
             }else{
-                return response()->json(['status' => 0, 'message' => trans('user_validation.Email already exist')]);
+                return response()->json(['status' => 0, 'message' => trans('Email already exist')]);
             }
         }else{
-            return response()->json(['status' => 0, 'message' => trans('user_validation.Email Field is required')]);
+            return response()->json(['status' => 0, 'message' => trans('Email Field is required')]);
         }
     }
 
@@ -1356,11 +1356,11 @@ class HomeController extends Controller
             $subscriber->verified_token = null;
             $subscriber->is_verified = 1;
             $subscriber->save();
-            $notification = trans('user_validation.Email verification successfully');
+            $notification = trans('Email verification successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('home')->with($notification);
         }else{
-            $notification = trans('user_validation.Invalid token');
+            $notification = trans('Invalid token');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('home')->with($notification);
         }

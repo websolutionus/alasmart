@@ -1,13 +1,13 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Section Content')}}</title>
+<title>{{__('Section Content')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Section Content')}}</h1>
+            <h1>{{__('Section Content')}}</h1>
 
           </div>
 
@@ -61,16 +61,16 @@
                                            @endif
 
                                             <div class="form-group col-12">
-                                                <label>{{__('admin.Title')}} <span class="text-danger">*</span></label>
+                                                <label>{{__('Title')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="title" value="{{ $content->title }}" class="form-control">
                                             </div>
                                             <div class="form-group col-12">
-                                                <label>{{__('admin.Description')}} <span class="text-danger">*</span></label>
+                                                <label>{{__('Description')}} <span class="text-danger">*</span></label>
                                                 <textarea name="description" id="" cols="30" rows="3" class="form-control text-area-3">{{ $content->description }}</textarea>
                                             </div>
 
                                             <div class="col-12">
-                                                <button class="btn btn-primary">{{__('admin.Save')}}</button>
+                                                <button class="btn btn-primary">{{__('Save')}}</button>
                                             </div>
                                     </div>
 
