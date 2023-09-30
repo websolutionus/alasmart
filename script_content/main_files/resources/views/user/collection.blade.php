@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('User Collection')}}</title>
-    <meta name="description" content="{{__('User Collection')}}">
+    <title>{{__('user.User Collection')}}</title>
+    <meta name="description" content="{{__('user.User Collection')}}">
 @endsection
 
 @section('frontend-content')
@@ -24,14 +24,14 @@
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($wishlist->product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a target="__blank" href="{{ $wishlist->product->preview_link }}">{{__('Preview')}}</a></li>
-                                            <li><a href="{{ route('delete-wishlist', $wishlist->id) }}">{{__('Delete')}}</a></li>
+                                            <li><a target="__blank" href="{{ $wishlist->product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                            <li><a href="{{ route('delete-wishlist', $wishlist->id) }}">{{__('user.Delete')}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="wsus__gallery_item_text">
                                         <p class="price">{{ $setting->currency_icon }}{{ html_decode($wishlist->product->regular_price) }}</p>
                                         <a class="title" href="{{ route('product-detail', $wishlist->product->slug) }}">{{ html_decode($wishlist->product->productlangfrontend->name) }}</a>
-                                        <p>{{__('By')}} <span>{{ $wishlist->product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $wishlist->product->category->slug]) }}">{{ $wishlist->product->category->catlangfrontend->name }}</a></p>
+                                        <p>{{__('user.By')}} <span>{{ $wishlist->product->author->name }}</span> {{__('user.In')}} <a class="category" href="{{ route('products', ['category' => $wishlist->product->category->slug]) }}">{{ $wishlist->product->category->catlangfrontend->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $wishlist->product->id, 'status' => 1])->get()->average('rating');
@@ -50,7 +50,7 @@
                                                 </p>
                                             </li>
                                             <li>
-                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             @empty
                             <div class="col-12 text-center mt-5">
-                                <h2 class="mt-5 text-danger">{{__('Collection not found')}}</h2>
+                                <h2 class="mt-5 text-danger">{{__('user.Collection not found')}}</h2>
                            </div>
                             @endforelse
                         </div>

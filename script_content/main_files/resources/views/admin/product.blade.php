@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Products')}}</title>
+<title>{{__('admin.Products')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Products')}}</h1>
+            <h1>{{__('admin.Products')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Products')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Products')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.select-product-type') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="{{ route('admin.select-product-type') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,12 +24,12 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th >{{__('SN')}}</th>
-                                    <th >{{__('Name')}}</th>
-                                    <th >{{__('Total Sale')}}</th>
-                                    <th >{{__('Category')}}</th>
-                                    <th >{{__('Status')}}</th>
-                                    <th >{{__('Action')}}</th>
+                                    <th >{{__('admin.SN')}}</th>
+                                    <th >{{__('admin.Name')}}</th>
+                                    <th >{{__('admin.Total Sale')}}</th>
+                                    <th >{{__('admin.Category')}}</th>
+                                    <th >{{__('admin.Status')}}</th>
+                                    <th >{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -46,9 +46,9 @@
 
                                         <td>
                                             @if($product->status == 1)
-                                                <span class="badge badge-success">{{__('Active')}}</span>
+                                                <span class="badge badge-success">{{__('admin.Active')}}</span>
                                             @else
-                                                <span class="badge badge-danger">{{__('Inactive')}}</span>
+                                                <span class="badge badge-danger">{{__('admin.Inactive')}}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -80,11 +80,11 @@
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                         <div class="modal-body">
-                            {{__('You can not delete this product. Because there are one or more order has been created in this product.')}}
+                            {{__('admin.You can not delete this product. Because there are one or more order has been created in this product.')}}
                         </div>
 
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
                   </div>
               </div>
           </div>

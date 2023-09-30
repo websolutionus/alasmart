@@ -42,11 +42,11 @@ class AdminController extends Controller
             'password' => 'required|min:4',
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'email.required' => trans('Email is required'),
-            'email.unique' => trans('Email already exist'),
-            'password.required' => trans('Password is required'),
-            'password.min' => trans('Password Must be 4 characters'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'email.required' => trans('admin_validation.Email is required'),
+            'email.unique' => trans('admin_validation.Email already exist'),
+            'password.required' => trans('admin_validation.Password is required'),
+            'password.min' => trans('admin_validation.Password Must be 4 characters'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -57,7 +57,7 @@ class AdminController extends Controller
         $admin->password =Hash::make($request->password);
         $admin->save();
 
-        $notification = trans('Create Successfully');
+        $notification = trans('admin_validation.Create Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -70,7 +70,7 @@ class AdminController extends Controller
         if($old_image){
             if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
         }
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -80,11 +80,11 @@ class AdminController extends Controller
         if($admin->status == 1){
             $admin->status = 0;
             $admin->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $admin->status = 1;
             $admin->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

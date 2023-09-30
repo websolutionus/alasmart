@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Reset Password')}}</title>
+    <title>{{__('user.Reset Password')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -12,10 +12,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('Reset password')}}</h1>
+                        <h1>{{__('user.Reset password')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('Reset password')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Reset password')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,24 +33,24 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-9 m-auto">
                     <div class="wsus__signup_text">
-                        <h3>{{__('Reset Password')}}</h3>
-                        <p class="description">{{__('Reset your Password to initiate the process of recovering access to your account.')}}</p>
+                        <h3>{{__('user.Reset Password')}}</h3>
+                        <p class="description">{{__('user.Reset your Password to initiate the process of recovering access to your account.')}}</p>
                         <form action="{{ route('store-reset-password',$token) }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Email address')}}*</legend>
-                                            <input type="email" name="email" value="{{ $user->email }}"  placeholder="{{__('Email address')}}" readonly>
+                                            <legend>{{__('user.Email address')}}*</legend>
+                                            <input type="email" name="email" value="{{ $user->email }}"  placeholder="{{__('user.Email address')}}" readonly>
                                         </fieldset>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Password')}}*</legend>
-                                            <input type="password" name="password" id="passowrd_input" placeholder="{{__('Password')}}">
+                                            <legend>{{__('user.Password')}}*</legend>
+                                            <input type="password" name="password" id="passowrd_input" placeholder="{{__('user.Password')}}">
                                             <span id="show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
@@ -58,8 +58,8 @@
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Confirm password')}}*</legend>
-                                            <input type="password" name="password_confirmation" id="c_passowrd_input" placeholder="{{__('Confirm password')}}">
+                                            <legend>{{__('user.Confirm password')}}*</legend>
+                                            <input type="password" name="password_confirmation" id="c_passowrd_input" placeholder="{{__('user.Confirm password')}}">
                                             <span id="c_show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
@@ -72,11 +72,11 @@
                                     </div>
                                 @endif
                                 <div class="col-12">
-                                    <button type="submit" class="common_btn">{{__('Reset Password')}}</button>
+                                    <button type="submit" class="common_btn">{{__('user.Reset Password')}}</button>
                                 </div>
                             </div>
                         </form>
-                        <p class="other_login">{{__('Alrady have an Account')}}? <a href="{{ route('login') }}">{{__('Login')}}</a></p>
+                        <p class="other_login">{{__('user.Already have an Account')}}? <a href="{{ route('login') }}">{{__('user.Login')}}</a></p>
                     </div>
                 </div>
             </div>

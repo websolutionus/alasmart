@@ -1,22 +1,22 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Edit team')}}</title>
+<title>{{__('admin.Edit team')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Edit team')}}</h1>
+            <h1>{{__('admin.Edit team')}}</h1>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.our-team.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('Our team')}}</a>
+            <a href="{{ route('admin.our-team.index') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.Our team')}}</a>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
                       <div class="card-body">
-                        <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                        <h3 class="h3 mb-3 text-gray-800">{{__('admin.Language')}}</h3>
                         <hr>
                         <div class="lang_list_top">
                             <ul class="lang_list">
@@ -30,7 +30,7 @@
                             @php
                                 $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
                             @endphp
-                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                            <p>{{__('admin.Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
                         </div> 
                       </div>
                     </div>
@@ -47,55 +47,55 @@
                             <div class="row">
                                 @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('Existing Image')}}</label>
+                                    <label>{{__('admin.Existing Image')}}</label>
                                     <div>
                                         <img src="{{ asset($team->image) }}" alt="" width="150px">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Image')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('admin.Image')}} <span class="text-danger">*</span></label>
                                     <input type="file" id="title" class="form-control-file"  name="image">
                                 </div>
                                 @endif
                                 <div class="form-group col-12">
-                                    <label>{{__('Name')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('admin.Name')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="name" class="form-control"  name="name" value="{{ $team_language->name }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Desgination')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('admin.Desgination')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="designation" class="form-control"  name="designation" value="{{ $team_language->designation }}">
                                 </div>
 
                                 @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
-                                    <label>{{__('Facebook')}}</label>
+                                    <label>{{__('admin.Facebook')}}</label>
                                     <input type="text" class="form-control"  name="facebook" value="{{ $team->facebook }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Twitter')}}</label>
+                                    <label>{{__('admin.Twitter')}}</label>
                                     <input type="text" class="form-control"  name="twitter" value="{{ $team->twitter }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Instagram')}}</label>
+                                    <label>{{__('admin.Instagram')}}</label>
                                     <input type="text" class="form-control"  name="instagram" value="{{ $team->instagram }}">
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('Status')}} <span class="text-danger">*</span></label>
+                                    <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option  {{ $team->status == 1 ? 'selected' : '' }} value="1">{{__('Active')}}</option>
-                                        <option  {{ $team->status == 0 ? 'selected' : '' }} value="0">{{__('Inactive')}}</option>
+                                        <option  {{ $team->status == 1 ? 'selected' : '' }} value="1">{{__('admin.Active')}}</option>
+                                        <option  {{ $team->status == 0 ? 'selected' : '' }} value="0">{{__('admin.Inactive')}}</option>
                                     </select>
                                 </div>
                                 @endif
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button class="btn btn-primary">{{__('Update')}}</button>
+                                    <button class="btn btn-primary">{{__('admin.Update')}}</button>
                                 </div>
                             </div>
                         </form>

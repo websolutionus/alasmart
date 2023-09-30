@@ -35,7 +35,7 @@
                             <img src="{{ $error_404->image }}" alt="error" class="img-fluid w-100">
                         </div>
                         <h2>{{ $error_404->title}}</h2>
-                        <a class="common_btn2" href="{{ route('home') }}">{{__('Go Back Home')}}</a>
+                        <a class="common_btn2" href="{{ route('home') }}">{{__('user.Go Back Home')}}</a>
                     </div>
                 </div>
             </div>

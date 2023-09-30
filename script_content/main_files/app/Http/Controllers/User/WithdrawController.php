@@ -6,6 +6,7 @@ use Auth;
 use Session;
 use App\Models\Order;
 use App\Models\Setting;
+use App\Models\Language;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\WithdrawMethod;
@@ -14,24 +15,17 @@ use App\Http\Controllers\Controller;
 
 class WithdrawController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:web');
-    }
-
-    public function ok(){
-        $user = Auth::guard('web')->user();
-        $withdraws = ProviderWithdraw::where('user_id',$user->id)->orderBy('id','desc')->get();
-        $setting = Setting::first();
-        $currency_icon = array(
-            'icon' => $setting->currency_icon
-        );
-        $currency_icon = (object) $currency_icon;
-
-        return view('user.withdraw', compact('withdraws','currency_icon', 'user'));
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
     }
 
     public function index(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $author = $user;
         $setting = Setting::first();
@@ -75,6 +69,7 @@ class WithdrawController extends Controller
         ]);
     }
     public function show($id){
+        $this->translator();
         $withdraw = ProviderWithdraw::find($id);
         $setting = Setting::first();
         $currency_icon = array(
@@ -85,11 +80,13 @@ class WithdrawController extends Controller
     }
 
     public function create(){
+        $this->translator();
         $methods = WithdrawMethod::whereStatus('1')->get();
         return view('provider.create_withdraw', compact('methods'));
     }
 
     public function getWithDrawAccountInfo($id){
+        $this->translator();
         $method = WithdrawMethod::whereId($id)->first();
         $setting = Setting::first();
         $currency_icon = array(
@@ -100,6 +97,7 @@ class WithdrawController extends Controller
     }
 
     public function store(Request $request){
+        $this->translator();
         $rules = [
             'method_id' => 'required',
             'withdraw_amount' => 'required|numeric',
@@ -107,10 +105,10 @@ class WithdrawController extends Controller
         ];
 
         $customMessages = [
-            'method_id.required' => trans('Payment Method filed is required'),
-            'withdraw_amount.required' => trans('Withdraw amount filed is required'),
-            'withdraw_amount.numeric' => trans('Please provide valid numeric number'),
-            'account_info.required' => trans('Account filed is required'),
+            'method_id.required' => trans('user_validation.Payment Method field is required'),
+            'withdraw_amount.required' => trans('user_validation.Withdraw amount field is required'),
+            'withdraw_amount.numeric' => trans('user_validation.Please provide valid numeric number'),
+            'account_info.required' => trans('user_validation.Account field is required'),
         ];
 
         $this->validate($request, $rules, $customMessages);
@@ -141,7 +139,7 @@ class WithdrawController extends Controller
         $current_balance = $total_balance - $total_withdraw;
 
         if($request->withdraw_amount > $current_balance){
-            $notification = trans('Sorry! Your Payment request is more then your current balance');
+            $notification = trans('user_validation.Sorry! Your Payment request is more then your current balance');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -158,12 +156,12 @@ class WithdrawController extends Controller
             $widthdraw->withdraw_charge = $method->withdraw_charge;
             $widthdraw->account_info = $request->account_info;
             $widthdraw->save();
-            $notification = trans('Withdraw request send successfully, please wait for admin approval');
+            $notification = trans('user_validation.Withdraw request send successfully, please wait for admin approval');
             $notification=array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
 
         }else{
-            $notification = trans('Your amount range is not available');
+            $notification = trans('user_validation.Your amount range is not available');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }

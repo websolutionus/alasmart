@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Withdraw Method')}}</title>
+<title>{{__('admin.Withdraw Method')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Withdraw Method')}}</h1>
+            <h1>{{__('admin.Withdraw Method')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Withdraw Method')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Withdraw Method')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.withdraw-method.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="{{ route('admin.withdraw-method.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,13 +24,13 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('Minimum Amount')}}</th>
-                                    <th>{{__('Maximum Amount')}}</th>
-                                    <th>{{__('Charge')}}</th>
-                                    <th>{{__('Status')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Name')}}</th>
+                                    <th>{{__('admin.Minimum Amount')}}</th>
+                                    <th>{{__('admin.Maximum Amount')}}</th>
+                                    <th>{{__('admin.Charge')}}</th>
+                                    <th>{{__('admin.Status')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -44,12 +44,12 @@
                                         <td>
                                             @if($method->status == 1)
                                             <a href="javascript:;" onclick="changeProductTaxStatus({{ $method->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="changeProductTaxStatus({{ $method->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inactive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inactive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @endif

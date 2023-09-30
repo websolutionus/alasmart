@@ -70,8 +70,19 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeController extends Controller
 {
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+    
     public function index(Request $request)
     {
+        $this->translator();
+
         $setting = Setting::select('selected_theme')->first();
         if($setting->selected_theme == 0){
             if($request->has('theme')){
@@ -600,6 +611,7 @@ class HomeController extends Controller
 
     public function product(Request $request){
         
+        $this->translator();
         
         if($request->min_price){
             $min_price = $request->min_price;
@@ -683,6 +695,8 @@ class HomeController extends Controller
 
     public function product_detail($slug){
 
+        $this->translator();
+
         $user = Auth::guard('web')->user();
 
         $paginateComentQty = CustomPagination::whereId('7')->first()->qty;
@@ -721,6 +735,9 @@ class HomeController extends Controller
 
 
     public function become_author(){
+
+        $this->translator();
+
         $active_theme = 'layout';
         $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
@@ -782,17 +799,18 @@ class HomeController extends Controller
 
 
     public function checkUserName(Request $request){
+        $this->translator();
         $user = User::where('user_name',$request->username)->count();
         if($user== 0){
             return response()->json(['status' => 1]);
         }else{
-            return response()->json(['status' => 0, 'message' => trans('User name already exist')]);
+            return response()->json(['status' => 0, 'message' => trans('user_validation.User name already exist')]);
         }
     }
 
     public function stateByCountry($id){
         $states = CountryState::where(['status' => 1, 'country_id' => $id])->orderBy('name','asc')->get();
-        $response='<option value="">'.trans('Select').'</option>';
+        $response='<option value="">'.trans('user_validation.Select').'</option>';
         if($states->count() > 0){
             foreach($states as $state){
                 $response .= "<option value=".$state->id.">".$state->name."</option>";
@@ -804,7 +822,7 @@ class HomeController extends Controller
 
     public function cityByState($id){
         $cities = City::where(['status' => 1, 'country_state_id' => $id])->orderBy('name','asc')->get();
-        $response='<option value="">'.trans('Select').'</option>';
+        $response='<option value="">'.trans('user_validation.Select').'</option>';
         if($cities->count() > 0){
             foreach($cities as $city){
                 $response .= "<option value=".$city->id.">".$city->name."</option>";
@@ -817,6 +835,9 @@ class HomeController extends Controller
 
 
     public function aboutUs(){
+
+        $this->translator();
+
         $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
         $setting = Setting::first();
@@ -993,6 +1014,9 @@ class HomeController extends Controller
 
 
     public function contactUs(){
+
+        $this->translator();
+
         $contact = ContactPage::first();
         $recaptchaSetting = GoogleRecaptcha::first();
 
@@ -1009,6 +1033,7 @@ class HomeController extends Controller
     }
 
     public function sendContactMessage(Request $request){
+        $this->translator();
         $rules = [
             'name'=>'required',
             'email'=>'required',
@@ -1018,10 +1043,10 @@ class HomeController extends Controller
         ];
 
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'email.required' => trans('Email is required'),
-            'subject.required' => trans('Subject is required'),
-            'message.required' => trans('Message is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'email.required' => trans('user_validation.Email is required'),
+            'subject.required' => trans('user_validation.Subject is required'),
+            'message.required' => trans('user_validation.Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1050,13 +1075,16 @@ class HomeController extends Controller
 
         Mail::to($setting->contact_email)->send(new ContactMessageInformation($message,$subject,$user_email));
 
-        $notification = trans('Message send successfully');
+        $notification = trans('user_validation.Message send successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
 
     public function blogs(Request $request){
+
+        $this->translator();
+
         $seo_setting = SeoSetting::where('id', 6)->first();
 
         $paginateQty = CustomPagination::whereId('1')->first()->qty;
@@ -1124,6 +1152,9 @@ class HomeController extends Controller
 
 
     public function single_blog($slug){
+
+        $this->translator();
+
         $blog = Blog::with('category', 'admin', 'bloglanguagefrontend')->where('slug', $slug)->first();
         $tags=json_decode($blog->tag);
         $category_id=$blog->blog_category_id;
@@ -1169,6 +1200,7 @@ class HomeController extends Controller
     }
 
     public function blogComment(Request $request){
+        $this->translator();
         $rules = [
             'name'=>'required',
             'email'=>'required',
@@ -1178,10 +1210,10 @@ class HomeController extends Controller
         ];
 
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'email.required' => trans('Email is required'),
-            'comment.required' => trans('Comment is required'),
-            'blog_id.required' => trans('Blog id is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'email.required' => trans('user_validation.Email is required'),
+            'comment.required' => trans('user_validation.Comment is required'),
+            'blog_id.required' => trans('user_validation.Blog id is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1192,12 +1224,13 @@ class HomeController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
 
-        $notification = trans('Blog comment submited successfully');
+        $notification = trans('user_validation.Blog comment submited successfully');
 
         return response()->json(['status' => 1, 'message' => $notification]);
     }
 
     public function productComment(Request $request){
+        $this->translator();
         if(Auth::guard('web')->check()){
             $rules = [
                 'comment'=>'required',
@@ -1205,7 +1238,7 @@ class HomeController extends Controller
             ];
     
             $customMessages = [
-                'comment.required' => trans('Comment is required'),
+                'comment.required' => trans('user_validation.Comment is required'),
             ];
             $this->validate($request, $rules,$customMessages);
             
@@ -1220,15 +1253,16 @@ class HomeController extends Controller
             $comment->comment = $request->comment;
             $comment->save();
     
-            $notification = trans('Comment submited successfully');
+            $notification = trans('user_validation.Comment submited successfully');
             return response()->json(['status' => 1, 'message' => $notification]);
         }else{
-            $notification = trans('Please login your account');
+            $notification = trans('user_validation.Please login your account');
             return response()->json(['status' => 0, 'message' => $notification]);
         } 
     }
 
     public function productReview(Request $request){
+        $this->translator();
         if(Auth::guard('web')->check()){
             $user = Auth::guard('web')->user();
             $order_item = OrderItem::where(['product_id' => $request->product_id, 'user_id' => $user->id])->first();
@@ -1240,8 +1274,8 @@ class HomeController extends Controller
                     'g-recaptcha-response'=>new Captcha()
                 ];
                 $customMessages = [
-                    'rating.required' => trans('Rating is required'),
-                    'review.required' => trans('Review is required'),
+                    'rating.required' => trans('user_validation.Rating is required'),
+                    'review.required' => trans('user_validation.Review is required'),
                 ];
                 $this->validate($request, $rules,$customMessages);
     
@@ -1249,7 +1283,7 @@ class HomeController extends Controller
     
                 $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
                 if($isReview > 0){
-                    $notification = trans('You have already submited review');
+                    $notification = trans('user_validation.You have already submited review');
                     return response()->json(['status' => 0, 'message' => $notification]);
                 }
                 
@@ -1260,20 +1294,22 @@ class HomeController extends Controller
                 $review->product_id = $request->product_id;
                 $review->author_id = $request->author_id;
                 $review->save();
-                $notification = trans('Review Submited successfully');
+                $notification = trans('user_validation.Review Submited successfully');
                 return response()->json(['status' => 1, 'message' => $notification]);
             }else{
-                $notification = trans('You can only review your purchased products');
+                $notification = trans('user_validation.You can only review your purchased products');
                 return response()->json(['status' => 0, 'message' => $notification]);  
             }
         }else{
-            $notification = trans('Please login your account');
+            $notification = trans('user_validation.Please login your account');
             return response()->json(['status' => 0, 'message' => $notification]);
         }
     }
 
     
     public function faq(){
+
+        $this->translator();
 
         $faqs = Faq::with('faqlangfrontend')->where('status',1)->get();
 
@@ -1289,6 +1325,9 @@ class HomeController extends Controller
     }
 
     public function termsAndCondition(){
+
+        $this->translator();
+
         $terms_conditions = TermsAndCondition::first();
         $terms_conditions = $terms_conditions->termslangfrontend->terms_and_condition;
 
@@ -1301,6 +1340,9 @@ class HomeController extends Controller
     }
 
     public function privacyPolicy(){
+
+        $this->translator();
+
         $privacyPolicy = PrivacyPolicy::with('privacylangfrontend')->first();
         $privacyPolicy = $privacyPolicy->privacylangfrontend->privacy_policy;
 
@@ -1314,6 +1356,7 @@ class HomeController extends Controller
 
 
     public function customPage($slug){
+        $this->translator();
         $page = CustomPage::with('customlangfrontend')->where(['slug' => $slug, 'status' => 1])->first();
         $active_theme = 'layout';
 
@@ -1325,6 +1368,7 @@ class HomeController extends Controller
 
 
     public function subscribeRequest(Request $request){
+        $this->translator();
         if($request->email != null){
             $isExist = Subscriber::where('email', $request->email)->count();
             if($isExist == 0){
@@ -1340,27 +1384,28 @@ class HomeController extends Controller
                 $subject=$template->subject;
                 Mail::to($subscriber->email)->send(new SubscriptionVerification($subscriber,$message,$subject));
 
-                return response()->json(['status' => 1, 'message' => trans('Subscription successfully, please verified your email')]);
+                return response()->json(['status' => 1, 'message' => trans('user_validation.Subscription successfully, please verified your email')]);
 
             }else{
-                return response()->json(['status' => 0, 'message' => trans('Email already exist')]);
+                return response()->json(['status' => 0, 'message' => trans('user_validation.Email already exist')]);
             }
         }else{
-            return response()->json(['status' => 0, 'message' => trans('Email Field is required')]);
+            return response()->json(['status' => 0, 'message' => trans('user_validation.Email Field is required')]);
         }
     }
 
     public function subscriberVerifcation($token){
+        $this->translator();
         $subscriber = Subscriber::where('verified_token',$token)->first();
         if($subscriber){
             $subscriber->verified_token = null;
             $subscriber->is_verified = 1;
             $subscriber->save();
-            $notification = trans('Email verification successfully');
+            $notification = trans('user_validation.Email verification successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('home')->with($notification);
         }else{
-            $notification = trans('Invalid token');
+            $notification = trans('user_validation.Invalid token');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('home')->with($notification);
         }

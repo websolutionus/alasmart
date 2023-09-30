@@ -1,7 +1,7 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Check Out')}}</title>
+    <title>{{__('user.Check Out')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('Check Out')}}</h1>
+                        <h1>{{__('user.Check Out')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('Home')}}</a></li>
-                            <li><a href="javascript:;">{{__('Check Out')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.Home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Check Out')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__checkout_text">
-                        <h3>{{__('Select your payment method')}}</h3>
+                        <h3>{{__('user.Select your payment method')}}</h3>
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             @if ($stripe->status == 1)
                             <li class="nav-item">
@@ -105,7 +105,7 @@
                                         data-key="{{ $razorpay->key }}"
                                         data-currency="{{ $razorpay->currency_code }}"
                                         data-amount= "{{ $payable_amount * 100 }}"
-                                        data-buttontext="{{__('Pay')}} {{ $payable_amount }} {{ $razorpay->currency_code }}"
+                                        data-buttontext="{{__('user.Pay')}} {{ $payable_amount }} {{ $razorpay->currency_code }}"
                                         data-name="{{ $razorpay->name }}"
                                         data-description="{{ $razorpay->description }}"
                                         data-image="{{ asset($razorpay->image) }}"
@@ -150,7 +150,7 @@
 
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__checkout_sidebar" id="sticky_sidebar">
-                        <h3>{{__('Order Summary')}}</h3>
+                        <h3>{{__('user.Order Summary')}}</h3>
                         <ul>
                             @foreach ($carts as $cart)
                             <li>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="text">
                                     <a href="{{ route('product-detail', $cart->options->slug) }}">{{ html_decode($cart->name) }}</a>
-                                    <p>{{__('Item by')}} {{ html_decode($cart->options->author) }}</p>
+                                    <p>{{__('user.Item by')}} {{ html_decode($cart->options->author) }}</p>
                                     <p>{{ $cart->options->size ? html_decode($cart->options->size):'' }}</p>
                                     <p> {{ $cart->options->price_type ? ucfirst(html_decode($cart->options->price_type)):''}}</p>
                                     <h3>{{ $setting->currency_icon }}{{ html_decode($cart->price) }}</h3>
@@ -169,15 +169,15 @@
                         </ul>
                         @if (Session::has('coupon'))
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
-                            <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
-                            <p class="total">{{__('Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
+                            <p>{{__('user.Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} {{ session()->get('coupon')['discount_amount'] }}</span> </p>
+                            <p class="total">{{__('user.Total')}}  <span>{{ $setting->currency_icon }}{{ session()->get('coupon')['total_amount'] }}</span> </p>
                         </div>
                         @else
                         <div class="wsus__checkout_sidebar_price">
-                            <p>{{__('Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
-                            <p>{{__('Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} 0</span> </p>
-                            <p class="total">{{__('Total')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Subtotal')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
+                            <p>{{__('user.Discount')}} <span class="dis_amount">(-){{ $setting->currency_icon }} 0</span> </p>
+                            <p class="total">{{__('user.Total')}} <span>{{ $setting->currency_icon }}{{ $subTotal }}</span> </p>
                         </div>
                         @endif
                     </div>
@@ -198,8 +198,8 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-8">
                     <div class="wsus__section_heading mb_15">
-                        <h5>{{__('Save time with pre-installed software')}}.</h5>
-                        <h2>{{__('Related Products')}}.</h2>
+                        <h5>{{__('user.Save time with pre-installed software')}}.</h5>
+                        <h2>{{__('user.Related Products')}}.</h2>
                     </div>
                 </div>
             </div>
@@ -210,8 +210,8 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
@@ -222,7 +222,7 @@
 
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
 
-                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             
                             <p class="rating">
@@ -238,7 +238,7 @@
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             
                             <div class="like_and_sell">
-                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('Sale')}}</span>
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
                             
                         </div>
@@ -246,11 +246,11 @@
                 </div>
                 @empty
                 <div class="col-12 text-center mt-5">
-                    <h2 class="mt-5 text-danger">{{__('Product Not Found')}}</h2>
+                    <h2 class="mt-5 text-danger">{{__('user.Product Not Found')}}</h2>
                 </div>
                 @endforelse
             </div>
-            <a href="{{ route('products') }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+            <a href="{{ route('products') }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     @endif
@@ -264,7 +264,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{__('Pay via Stripe')}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{__('user.Pay via Stripe')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -280,7 +280,7 @@
             <div class="row">
                 <div class="col-md-12 mt-2">
                     <div class="form-group">
-                        <label for="card_number">{{__('Card Number')}}*</label>
+                        <label for="card_number">{{__('user.Card Number')}}*</label>
                         <input autocomplete='off' class='form-control card-number' size='20'
                         type='text' name="card_number" autocomplete="off">
                         <input type="hidden" name="total_amount" value="{{ $cartTotal }}">
@@ -289,7 +289,7 @@
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="form-group">
-                        <label for="month">{{__('Month')}}*</label>
+                        <label for="month">{{__('user.Month')}}*</label>
                         <input input
                         class='form-control card-expiry-month' size='2'
                         type='text' name="month" autocomplete="off">
@@ -297,14 +297,14 @@
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="form-group">
-                        <label for="year">{{__('Year')}}*</label>
+                        <label for="year">{{__('user.Year')}}*</label>
                         <input class='form-control card-expiry-year' size='4'
                         type='text' name="year" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-12 my-4">
                     <div class="form-group">
-                        <label for="cvc">{{__('CVC')}}*</label>
+                        <label for="cvc">{{__('user.CVC')}}*</label>
                         <input autocomplete='off'
                         class='form-control card-cvc' size='4'
                         type='text' name="cvc" autocomplete="off">
@@ -313,14 +313,14 @@
               </div>
               <div class='row'>
                 <div class='col-md-12 error d-none'>
-                    <div class='alert-danger alert'>{{__('Please correct the errors and try
+                    <div class='alert-danger alert'>{{__('user.Please correct the errors and try
                         again')}}.</div>
                 </div>
             </div>
             
            <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('Cancel')}}</button>
-            <button class="btn btn-primary btn-block" type="submit">{{__('Payment')}}</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('user.Cancel')}}</button>
+            <button class="btn btn-primary btn-block" type="submit">{{__('user.Payment')}}</button>
           </div>
           </form>
         </div>
@@ -334,7 +334,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="bankPaymentLabel">{{__('Bank Payment')}}</h5>
+                    <h5 class="modal-title" id="bankPaymentLabel">{{__('user.Bank Payment')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -346,7 +346,7 @@
                             </div>
 
                             <div class="col-xl-12">
-                                <textarea required cols="3" rows="3" name="tnx_info"  placeholder="{{__('Type your transaction information')}}"></textarea>
+                                <textarea required cols="3" rows="3" name="tnx_info"  placeholder="{{__('user.Type your transaction information')}}"></textarea>
                                 <input type="hidden" name="total_amount" value="{{ $cartTotal }}">
                                 <input type="hidden" name="cart_qty" value="{{ $cartQty }}">
                             </div>
@@ -355,8 +355,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Close')}}</button>
-                    <button type="submit" class="btn btn-danger">{{__('Submit')}}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('user.Close')}}</button>
+                    <button type="submit" class="btn btn-danger">{{__('user.Submit')}}</button>
                 </div>
                 </form>
             </div>

@@ -1,13 +1,13 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Edit Product')}}</title>
+<title>{{__('admin.Edit Product')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Edit Product')}}</h1>
+            <h1>{{__('admin.Edit Product')}}</h1>
           </div>
 
           <div class="section-body">
@@ -16,9 +16,9 @@
                 <div class="card">
                   <div class="card-body">
                     <ul class="nav nav-pills flex-column">
-                      <li class="nav-item"><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => 'en']) }}" class="nav-link">{{__('Basic Information')}}</a></li>
+                      <li class="nav-item"><a href="{{ route('admin.product.edit',['product' => $product->id, 'lang_code' => 'en']) }}" class="nav-link">{{__('admin.Basic Information')}}</a></li>
 
-                      <li class="nav-item"><a href="{{ route('admin.product-variant', $product->id) }}" class="nav-link active">{{__('Variant and price')}}</a></li>
+                      <li class="nav-item"><a href="{{ route('admin.product-variant', $product->id) }}" class="nav-link active">{{__('admin.Variant and price')}}</a></li>
 
                     </ul>
                   </div>
@@ -27,17 +27,17 @@
               <div class="col-md-9">
                   <div class="card" id="settings-card">
                     <div class="card-header">
-                      <h4>{{__('Variant and price')}}</h4>
+                      <h4>{{__('admin.Variant and price')}}</h4>
 
-                      <button class="btn btn-primary variant-btn" data-toggle="modal" data-target="#addNewVariant"><i class="fa fa-plus" aria-hidden="true"></i> {{__('Add new variant')}}</button>
+                      <button class="btn btn-primary variant-btn" data-toggle="modal" data-target="#addNewVariant"><i class="fa fa-plus" aria-hidden="true"></i> {{__('admin.Add new variant')}}</button>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>{{__('Variant')}}</th>
-                                    <th>{{__('Price')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.Variant')}}</th>
+                                    <th>{{__('admin.Price')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +70,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                     <div class="modal-header">
-                            <h5 class="modal-title">{{__('Create new variant')}}</h5>
+                            <h5 class="modal-title">{{__('admin.Create new variant')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -81,21 +81,21 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="">{{__('Variant name')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('admin.Variant name')}} <span class="text-danger">*</span></label>
                                 <input type="text" name="variant_name" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label for="">{{__('Price')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('admin.Price')}} <span class="text-danger">*</span></label>
                                 <input type="text" name="price" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label for="">{{__('Upload file')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('admin.Upload file')}} <span class="text-danger">*</span></label>
                                 <input type="file" name="file_name" class="form-control" accept=".zip">
                             </div>
 
-                            <button class="btn btn-primary">{{__('Save')}}</button>
+                            <button class="btn btn-primary">{{__('admin.Save')}}</button>
                         </form>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                     <div class="modal-header">
-                            <h5 class="modal-title">{{__('Edit variant')}}</h5>
+                            <h5 class="modal-title">{{__('admin.Edit variant')}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -121,21 +121,21 @@
                             @method('PUT')
 
                             <div class="form-group">
-                                <label for="">{{__('Variant name')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('admin.Variant name')}} <span class="text-danger">*</span></label>
                                 <input type="text" name="variant_name" class="form-control" value="{{ html_decode($product_variant->variant_name) }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="">{{__('Price')}} <span class="text-danger">*</span></label>
+                                <label for="">{{__('admin.Price')}} <span class="text-danger">*</span></label>
                                 <input type="text" name="price" class="form-control" value="{{ html_decode($product_variant->price) }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="">{{__('Upload file')}}</label>
+                                <label for="">{{__('admin.Upload file')}}</label>
                                 <input type="file" name="file_name" class="form-control" accept=".zip">
                             </div>
 
-                            <button class="btn btn-primary">{{__('Update')}}</button>
+                            <button class="btn btn-primary">{{__('admin.Update')}}</button>
                         </form>
                     </div>
                 </div>

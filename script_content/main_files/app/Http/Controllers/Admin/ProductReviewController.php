@@ -29,7 +29,7 @@ class ProductReviewController extends Controller
         $productReview = Review::find($id);
         $productReview->delete();
 
-        $notification= trans('Delete Successfully');
+        $notification= trans('admin_validation.Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.product-review.index')->with($notification);
     }
@@ -39,11 +39,11 @@ class ProductReviewController extends Controller
         if($productReview->status == 1){
             $productReview->status = 0;
             $productReview->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $productReview->status = 1;
             $productReview->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

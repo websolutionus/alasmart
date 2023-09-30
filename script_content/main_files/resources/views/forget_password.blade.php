@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Forget Password')}}</title>
+    <title>{{__('user.Forget Password')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('Forget Password')}}</h1>
+                        <h1>{{__('user.Forget Password')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('Forget Password')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Forget Password')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,23 +36,23 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-10 m-auto">
                     <div class="wsus__signup_text">
-                        <h3>{{__('Forget your password')}} ?</h3>
-                        <p class="description">{{__('Did you forget your password ? Do not worry. Please submit below form using your email, and get a reset password link.')}}</p>
+                        <h3>{{__('user.Forget your password')}} ?</h3>
+                        <p class="description">{{__('user.Did you forget your password ? Do not worry. Please submit below form using your email, and get a reset password link.')}}</p>
                         <form action="{{ route('send-forget-password') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Email address')}}*</legend>
-                                            <input type="email" name="email" placeholder="{{__('Email address')}}">
+                                            <legend>{{__('user.Email address')}}*</legend>
+                                            <input type="email" name="email" placeholder="{{__('user.Email address')}}">
                                         </fieldset>
                                     </div>
-                                    <button type="submit" class="common_btn">{{__('Forget your password')}}</button>
+                                    <button type="submit" class="common_btn">{{__('user.Forget your password')}}</button>
                                 </div>
                             </div>
                         </form>
-                        <p class="other_login text-center mt-3">{{__("Redirect to login page.")}} <a href="{{ route('login') }}">{{__('Click here')}}</a></p>
+                        <p class="other_login text-center mt-3">{{__("Redirect to login page.")}} <a href="{{ route('login') }}">{{__('user.Click here')}}</a></p>
                     </div>
                 </div>
             </div>

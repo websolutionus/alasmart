@@ -27,12 +27,12 @@ class EmailConfigurationController extends Controller
             'mail_encryption' => 'required',
         ];
         $customMessages = [
-            'mail_host.required' => trans('Mail host is required'),
-            'email.required' => trans('Email is required'),
-            'smtp_username.required' => trans('Smtp username is required'),
-            'smtp_password.unique' => trans('Smtp password is required'),
-            'mail_port.required' => trans('Mail port is required'),
-            'mail_encryption.required' => trans('Mail encryption is required'),
+            'mail_host.required' => trans('admin_validation.Mail host is required'),
+            'email.required' => trans('admin_validation.Email is required'),
+            'smtp_username.required' => trans('admin_validation.Smtp username is required'),
+            'smtp_password.unique' => trans('admin_validation.Smtp password is required'),
+            'mail_port.required' => trans('admin_validation.Mail port is required'),
+            'mail_encryption.required' => trans('admin_validation.Mail encryption is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -45,7 +45,7 @@ class EmailConfigurationController extends Controller
         $email->mail_encryption = $request->mail_encryption;
         $email->save();
 
-        $notification=  trans('Update Successfully');
+        $notification=  trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

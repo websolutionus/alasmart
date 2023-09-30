@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Payment Success')}}</title>
-    <meta name="description" content="{{__('Payment Success')}}">
+    <title>{{__('user.Payment Success')}}</title>
+    <meta name="description" content="{{__('user.Payment Success')}}">
 @endsection
 
 @section('frontend-content')
@@ -14,10 +14,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('payment done')}}</h1>
+                        <h1>{{__('user.payment done')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li> 
-                            <li><a href="javascript:;">{{__('payment done')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li> 
+                            <li><a href="javascript:;">{{__('user.payment done')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,8 +40,8 @@
                         <div class="wsus__payment_done_img">
                             <img src="{{ asset('frontend/images/thankyou.png') }}" alt="thankyou" class="img-fluid w-100">
                         </div>
-                        <h3>{{__('Thank You')}} ! <br> {{__('For Buying this Item')}}.</h3>
-                        <a class="common_btn" href="{{ route('download') }}">{{__('Download File')}}</a>
+                        <h3>{{__('user.Thank You')}} ! <br> {{__('user.For Buying this Item')}}.</h3>
+                        <a class="common_btn" href="{{ route('download') }}">{{__('user.Download File')}}</a>
                     </div>
                 </div>
             </div>

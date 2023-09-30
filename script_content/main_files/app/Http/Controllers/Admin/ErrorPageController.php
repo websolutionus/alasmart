@@ -30,8 +30,8 @@ class ErrorPageController extends Controller
             'button_text'=>'required',
         ];
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'button_text.required' => trans('Button text is required')
+            'title.required' => trans('admin_validation.Title is required'),
+            'button_text.required' => trans('admin_validation.Button text is required')
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -53,7 +53,7 @@ class ErrorPageController extends Controller
             }
         }
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

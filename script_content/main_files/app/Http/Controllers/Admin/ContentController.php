@@ -35,7 +35,7 @@ class ContentController extends Controller
             'description'=> $request->maintainance_mode ? 'required' : ''
         ];
         $customMessages = [
-            'description.required' => trans('Description is required'),
+            'description.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -58,7 +58,7 @@ class ContentController extends Controller
         $maintainance->description = $request->description;
         $maintainance->save();
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -110,8 +110,8 @@ class ContentController extends Controller
             'description'=>'required'
         ];
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'description.required' => trans('Description is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'description.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -165,7 +165,7 @@ class ContentController extends Controller
                 if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
             }
         }
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -194,9 +194,9 @@ class ContentController extends Controller
             'description' => 'required',
         ];
         $customMessages = [
-            'section_name.required' => trans('Section name is required'),
-            'title.required' => trans('Title is required'),
-            'description.required' => trans('Description is required'),
+            'section_name.required' => trans('admin_validation.Section name is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'description.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -210,7 +210,7 @@ class ContentController extends Controller
         $section->description = $request->description;
         $section->save();
 
-        $notification = trans('Updated Successfully');
+        $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -232,7 +232,7 @@ class ContentController extends Controller
             $section->save();
         }
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -248,8 +248,8 @@ class ContentController extends Controller
             'seo_description' => 'required'
         ];
         $customMessages = [
-            'seo_title.required' => trans('Seo title is required'),
-            'seo_description.required' => trans('Seo description is required'),
+            'seo_title.required' => trans('admin_validation.Seo title is required'),
+            'seo_description.required' => trans('admin_validation.Seo description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -258,7 +258,7 @@ class ContentController extends Controller
         $page->seo_description = $request->seo_description;
         $page->save();
 
-        $notification = trans('Update Successfully');
+        $notification = trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -286,7 +286,7 @@ class ContentController extends Controller
             }
         }
 
-        $notification = trans('Update Successfully');
+        $notification = trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

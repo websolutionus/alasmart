@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Privacy Policy')}}</title>
+    <title>{{__('user.Privacy Policy')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('privacy policy')}}</h1>
+                        <h1>{{__('user.privacy policy')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('privacy policy')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.privacy policy')}}</a></li>
                         </ul>
                     </div>
                 </div>

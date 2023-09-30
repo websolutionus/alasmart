@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('SEO Setup')}}</title>
+<title>{{__('admin.SEO Setup')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('SEO Setup')}}</h1>
+            <h1>{{__('admin.SEO Setup')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('SEO Setup')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.SEO Setup')}}</div>
             </div>
           </div>
 
@@ -41,7 +41,7 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label for="">{{__('SEO Title')}}</label>
+                                                                        <label for="">{{__('admin.SEO Title')}}</label>
                                                                         <input type="text" name="seo_title" class="form-control" value="{{ $page->seo_title }}">
                                                                     </div>
                                                                 </div>
@@ -50,13 +50,13 @@
 
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label for="">{{__('SEO Description')}}</label>
+                                                                        <label for="">{{__('admin.SEO Description')}}</label>
                                                                         <textarea name="seo_description" id="" cols="30" rows="5" class="form-control text-area-5">{{ $page->seo_description }}</textarea>
 
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+                                                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
                                                         </form>
                                                     </div>
                                                 </div>

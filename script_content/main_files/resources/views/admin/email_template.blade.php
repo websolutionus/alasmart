@@ -1,15 +1,15 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Email Template')}}</title>
+<title>{{__('admin.Email Template')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Email Template')}}</h1>
+            <h1>{{__('admin.Email Template')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
             </div>
           </div>
           <div class="section-body">
@@ -21,10 +21,10 @@
                             <table class="table table-striped" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th>{{__('SN')}}</th>
-                                        <th>{{__('Email Template')}}</th>
-                                        <th>{{__('Subject')}}</th>
-                                        <th>{{__('Action')}}</th>
+                                        <th>{{__('admin.SN')}}</th>
+                                        <th>{{__('admin.Email Template')}}</th>
+                                        <th>{{__('admin.Subject')}}</th>
+                                        <th>{{__('admin.Action')}}</th>
                                       </tr>
                                 </thead>
                                 <tbody>

@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Template')}}</title>
+<title>{{__('admin.Template')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Template')}}</h1>
+            <h1>{{__('admin.Template')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Template')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Template')}}</div>
             </div>
           </div>
 
@@ -23,10 +23,10 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Title')}}</th>
-                                    <th>{{__('Icon')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Title')}}</th>
+                                    <th>{{__('admin.Icon')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>

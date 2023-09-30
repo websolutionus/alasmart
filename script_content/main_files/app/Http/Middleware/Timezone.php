@@ -3,8 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
+use Session;
 use App\Models\Setting;
+use Illuminate\Http\Request;
+
 class Timezone
 {
     /**
@@ -17,9 +19,12 @@ class Timezone
     public function handle(Request $request, Closure $next)
     {
         $setting = Setting::first();
+        
         config(['app.timezone' => $setting->timezone]);
         date_default_timezone_set($setting->timezone);
 
         return $next($request);
+
+        
     }
 }

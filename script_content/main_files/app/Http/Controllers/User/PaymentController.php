@@ -17,22 +17,23 @@ use Razorpay\Api\Api;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Setting;
+use App\Models\Language;
 use App\Models\Schedule;
+
+
 use App\Models\OrderItem;
-
-
-use App\Helpers\MailHelper;
 Use Stripe;
+use App\Helpers\MailHelper;
 use App\Models\BankPayment;
 use App\Models\Flutterwave;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use App\Models\PaypalPayment;
+
 use App\Models\StripePayment;
 
+
 use App\Mail\OrderSuccessfully;
-
-
 use App\Models\BreadcrumbImage;
 use App\Models\PaymongoPayment;
 use App\Models\RazorpayPayment;
@@ -51,11 +52,20 @@ class PaymentController extends Controller
         $this->middleware('auth:web');
     }
 
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
 
     public function bankPayment(Request $request){
-
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -64,7 +74,7 @@ class PaymentController extends Controller
             'tnx_info'=>'required',
         ];
         $customMessages = [
-            'tnx_info.required' => trans('Transaction is required'),
+            'tnx_info.required' => trans('user_validation.Transaction is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -106,15 +116,15 @@ class PaymentController extends Controller
         }
         $this->sendMailToUser($user, $order);
         Cart::destroy();
-        $notification = trans('Your order has been submited, wait for admin approval');
+        $notification = trans('user_validation.Your order has been submited, wait for admin approval');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('payment-success')->with($notification);
     }
 
     public function payWithStripe(Request $request){
-
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -173,15 +183,16 @@ class PaymentController extends Controller
     $this->sendMailToUser($user, $order);
     Cart::destroy();
 
-    $notification = trans('Thanks for your new order');
+    $notification = trans('user_validation.Thanks for your new order');
     $notification = array('messege'=>$notification,'alert-type'=>'success');
     return redirect()->route('payment-success')->with($notification);
 
     }
 
     public function payWithRazorpay(Request $request){
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -236,26 +247,26 @@ class PaymentController extends Controller
                 }
                 $this->sendMailToUser($user, $order);
                 Cart::destroy();
-                $notification = trans('Thanks for your new order');
+                $notification = trans('user_validation.Thanks for your new order');
                 $notification = array('messege'=>$notification,'alert-type'=>'success');
                 return redirect()->route('payment-success')->with($notification);
 
             }catch (Exception $e) {
-                $notification = trans('Payment Faild');
+                $notification = trans('user_validation.Payment Faild');
                 $notification = array('messege'=>$notification,'alert-type'=>'error');
                 return redirect()->back()->with($notification);
             }
         }else{
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
     }
 
     public function payWithFlutterwave(Request $request){
-
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -327,18 +338,18 @@ class PaymentController extends Controller
             }
             $this->sendMailToUser($user, $order);
             Cart::destroy();
-            $notification = trans('Thanks for your new order');
+            $notification = trans('user_validation.Thanks for your new order');
             return response()->json(['status' => 'success' , 'message' => $notification]);
         }else{
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             return response()->json(['status' => 'faild' , 'message' => $notification]);
         }
     }
 
     public function payWithMollie(Request $request){
-
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -371,7 +382,7 @@ class PaymentController extends Controller
     }
 
     public function molliePaymentSuccess(Request $request){
-    
+        $this->translator();
         $mollie = PaystackAndMollie::first();
         $mollie_api_key = $mollie->mollie_key;
         Mollie::api()->setApiKey($mollie_api_key);
@@ -425,19 +436,20 @@ class PaymentController extends Controller
         Session::forget('cart_qty');
         $this->sendMailToUser($user, $order);
         Cart::destroy();
-            $notification = trans('Thanks for your new order');
+            $notification = trans('user_validation.Thanks for your new order');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('payment-success')->with($notification);
         }else{
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }
     }
 
     public function payWithPayStack(Request $request){
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -510,19 +522,19 @@ class PaymentController extends Controller
             }
             $this->sendMailToUser($user, $order);
             Cart::destroy();
-            $notification = trans('Thanks for your new order');
+            $notification = trans('user_validation.Thanks for your new order');
             return response()->json(['status' => 'success' , 'message' => $notification]);
         }else{
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             return response()->json(['status' => 'faild' , 'message' => $notification]);
         }
     }
 
 
     public function payWithInstamojo(Request $request){
-
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -576,8 +588,7 @@ class PaymentController extends Controller
     }
 
     public function instamojoResponse(Request $request){
-
-
+        $this->translator();
         $input = $request->all();
         $instamojoPayment = InstamojoPayment::first();
         $environment = $instamojoPayment->account_mode;
@@ -603,7 +614,7 @@ class PaymentController extends Controller
         curl_close($ch);
 
         if ($err) {
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         } else {
@@ -655,12 +666,12 @@ class PaymentController extends Controller
             $this->sendMailToUser($user, $order);
             Cart::destroy();
 
-                $notification = trans('Thanks for your new order');
+                $notification = trans('user_validation.Thanks for your new order');
                 $notification = array('messege'=>$notification,'alert-type'=>'success');
                 return redirect()->route('payment-success')->with($notification);
             }
         }else{
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }

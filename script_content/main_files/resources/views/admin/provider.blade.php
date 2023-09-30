@@ -1,18 +1,18 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Provider List')}}</title>
+<title>{{__('admin.Provider List')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Seller List')}}</h1>
+            <h1>{{__('admin.Seller List')}}</h1>
 
           </div>
 
           <div class="section-body">
-              <a href="{{ route('admin.send-email-to-all-provider') }}" class="btn btn-primary">{{__('Send email to all seller')}}</a>
+              <a href="{{ route('admin.send-email-to-all-provider') }}" class="btn btn-primary">{{__('admin.Send email to all seller')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -21,11 +21,11 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th >{{__('SN')}}</th>
-                                    <th >{{__('Seller Name')}}</th>
-                                    <th >{{__('Email')}}</th>
-                                    <th >{{__('Status')}}</th>
-                                    <th >{{__('Action')}}</th>
+                                    <th >{{__('admin.SN')}}</th>
+                                    <th >{{__('admin.Seller Name')}}</th>
+                                    <th >{{__('admin.Email')}}</th>
+                                    <th >{{__('admin.Status')}}</th>
+                                    <th >{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -37,12 +37,12 @@
                                         <td>
                                             @if($seller->status == 1)
                                             <a href="javascript:;" onclick="manageCustomerStatus({{ $seller->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('Inctive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.Inctive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @else
                                             <a href="javascript:;" onclick="manageCustomerStatus({{ $seller->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
 
                                             @endif
@@ -77,11 +77,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                       <div class="modal-body">
-                          {{__('You can not delete this seller. Because there are one or more products and shop account has been created in this seller.')}}
+                          {{__('admin.You can not delete this seller. Because there are one or more products and shop account has been created in this seller.')}}
                       </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
                 </div>
             </div>
         </div>

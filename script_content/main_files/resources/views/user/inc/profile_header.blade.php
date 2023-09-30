@@ -14,7 +14,7 @@
                     </div>
                     <div class="text wow fadeInRight" data-wow-duration="1s">
                         <h2>{{ html_decode($user->name) }}</h2>
-                        <p class="join"><span>{{__('Joined')}}:</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</p>
+                        <p class="join"><span>{{__('user.Joined')}}:</span> {{ Carbon\Carbon::parse($user->created_at)->format('F Y') }}</p>
                         <p class="skills">{{ html_decode($user->designation) }}</p>
                         @php
                             $review=App\Models\Review::where(['author_id' => $user->id, 'status' => 1])->get()->average('rating');
@@ -32,17 +32,17 @@
                                     @endif
                                 @endfor
                             </span>
-                            <p>{{__('Average rating of')}} {{ $review==0?0:round($review, 1) }} {{__('based on')}} {{ $votes }} {{__('votes')}}</p>
+                            <p>{{__('user.Average rating of')}} {{ $review==0?0:round($review, 1) }} {{__('user.based on')}} {{ $votes }} {{__('user.votes')}}</p>
                         </div>
                     </div>
                     <ul class="header_button d-flex flex-wrap">
                         <li>
                             <h4><i class="fas fa-box-full"></i> {{ $total_product }}</h4>
-                            <p>{{__('Products')}}</p>
+                            <p>{{__('user.Products')}}</p>
                         </li>
                         <li>
                             <h4><i class="fas fa-cloud-download-alt"></i> {{ $total_sold }}</h4>
-                            <p>{{__('Total sale')}}</p>
+                            <p>{{__('user.Total sale')}}</p>
                         </li>
                     </ul>
                 </div>
@@ -53,10 +53,10 @@
 
 <div class="container">
     <ul class="header_menu d-flex flex-wrap">
-        <li><a class="{{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('Overview')}}</a>
+        <li><a class="{{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="fal fa-layer-group"></i> {{__('user.Overview')}}</a>
         </li>
-        <li><a class="{{ Route::is('portfolio') ? 'active' : '' }}" href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('Portfolio')}}</a></li>
-        <li><a class="{{ Route::is('download') ? 'active' : '' }}" href="{{ route('download') }}"><i class="far fa-download"></i> {{__('Download File')}}</a></li>
-        <li><a class="{{ Route::is('collection') ? 'active' : '' }}" href="{{ route('collection') }}"><i class="far fa-heart" aria-hidden="true"></i> {{__('Collection')}}</a></li>
-        <li><a class="{{ Route::is('withdraw') ? 'active' : '' }}" href="{{ route('withdraw') }}"><i class="far fa-cogs"></i> {{__('Withdraw')}} </a></li>
+        <li><a class="{{ Route::is('portfolio') ? 'active' : '' }}" href="{{ route('portfolio') }}"><i class="far fa-box"></i> {{__('user.Portfolio')}}</a></li>
+        <li><a class="{{ Route::is('download') ? 'active' : '' }}" href="{{ route('download') }}"><i class="far fa-download"></i> {{__('user.Download File')}}</a></li>
+        <li><a class="{{ Route::is('collection') ? 'active' : '' }}" href="{{ route('collection') }}"><i class="far fa-heart" aria-hidden="true"></i> {{__('user.Collection')}}</a></li>
+        <li><a class="{{ Route::is('withdraw') ? 'active' : '' }}" href="{{ route('withdraw') }}"><i class="far fa-cogs"></i> {{__('user.Withdraw')}} </a></li>
     </ul>

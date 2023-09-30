@@ -40,9 +40,9 @@ class TeamController extends Controller
             'status' => 'required',
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'designation.required' => trans('Designation is required'),
-            'image.required' => trans('Image is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'designation.required' => trans('admin_validation.Designation is required'),
+            'image.required' => trans('admin_validation.Image is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -74,7 +74,7 @@ class TeamController extends Controller
             $team_language->save();
         }
 
-        $notification = trans('Created Successfully');
+        $notification = trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.our-team.index')->with($notification);
     }
@@ -100,8 +100,8 @@ class TeamController extends Controller
             'status' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'designation.required' => trans('Designation is required')
+            'name.required' => trans('admin_validation.Name is required'),
+            'designation.required' => trans('admin_validation.Designation is required')
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -143,7 +143,7 @@ class TeamController extends Controller
         $team_language->designation = $request->designation;
         $team_language->save();
 
-        $notification = trans('Update Successfully');
+        $notification = trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -161,7 +161,7 @@ class TeamController extends Controller
 
         $team_language = OurTeamLanguage::where('team_id', $id)->delete();
 
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.our-team.index')->with($notification);
     }
@@ -171,11 +171,11 @@ class TeamController extends Controller
         if($item->status == 1){
             $item->status = 0;
             $item->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $item->status = 1;
             $item->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
 
         return response()->json($message);

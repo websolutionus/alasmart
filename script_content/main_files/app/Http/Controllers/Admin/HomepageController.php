@@ -66,17 +66,17 @@ class HomepageController extends Controller
             'home3_item3_desc' => 'required',
         ];
         $customMessages = [
-            'title1.required' => trans('Title is required'),
-            'title2.required' => trans('Title is required'),
-            'item1_title.required' => trans('Title is required'),
-            'item2_title.required' => trans('Title is required'),
-            'item3_title.required' => trans('Title is required'),
-            'home3_item1_title.required' => trans('Title is required'),
-            'home3_item2_desc.required' => trans('Description is required'),
-            'home3_item3_title.required' => trans('Title is required'),
-            'home3_item1_desc.required' => trans('Description is required'),
-            'home3_item2_title.required' => trans('Title is required'),
-            'home3_item3_desc.required' => trans('Description is required'),
+            'title1.required' => trans('admin_validation.Title is required'),
+            'title2.required' => trans('admin_validation.Title is required'),
+            'item1_title.required' => trans('admin_validation.Title is required'),
+            'item2_title.required' => trans('admin_validation.Title is required'),
+            'item3_title.required' => trans('admin_validation.Title is required'),
+            'home3_item1_title.required' => trans('admin_validation.Title is required'),
+            'home3_item2_desc.required' => trans('admin_validation.Description is required'),
+            'home3_item3_title.required' => trans('admin_validation.Title is required'),
+            'home3_item1_desc.required' => trans('admin_validation.Description is required'),
+            'home3_item2_title.required' => trans('admin_validation.Title is required'),
+            'home3_item3_desc.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -196,7 +196,7 @@ class HomepageController extends Controller
         $homepageLanguage->why_choose_home3_item3_desc = $request->home3_item3_desc;
         $homepageLanguage->save();
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -259,16 +259,16 @@ class HomepageController extends Controller
             'app_store'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'home2_title.required' => trans('Title is required'),
-            'home2_desc.required' => trans('Description is required'),
-            'title1.required' => trans('Title is required'),
-            'title2.required' => trans('Title is required'),
-            'title3.required' => trans('Title is required'),
-            'description.required' => trans('Description is required'),
-            'home3_title.required' => trans('Title is required'),
-            'home3_desc.required' => trans('Description is required'),
-            'play_store.required' => trans('Play store is required'),
-            'app_store.required' => trans('App store is required'),
+            'home2_title.required' => trans('admin_validation.Title is required'),
+            'home2_desc.required' => trans('admin_validation.Description is required'),
+            'title1.required' => trans('admin_validation.Title is required'),
+            'title2.required' => trans('admin_validation.Title is required'),
+            'title3.required' => trans('admin_validation.Title is required'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'home3_title.required' => trans('admin_validation.Title is required'),
+            'home3_desc.required' => trans('admin_validation.Description is required'),
+            'play_store.required' => trans('admin_validation.Play store is required'),
+            'app_store.required' => trans('admin_validation.App store is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -372,7 +372,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -429,14 +429,14 @@ class HomepageController extends Controller
             'counter4_title'=>'required',
         ];
         $customMessages = [
-            'counter1_value.required' => trans('Quantity is required'),
-            'counter2_value.required' => trans('Quantity is required'),
-            'counter3_value.required' => trans('Quantity is required'),
-            'counter4_value.required' => trans('Quantity is required'),
-            'counter1_title.required' => trans('Title is required'),
-            'counter2_title.required' => trans('Title is required'),
-            'counter3_title.required' => trans('Title is required'),
-            'counter4_title.required' => trans('Title is required'),
+            'counter1_value.required' => trans('admin_validation.Quantity is required'),
+            'counter2_value.required' => trans('admin_validation.Quantity is required'),
+            'counter3_value.required' => trans('admin_validation.Quantity is required'),
+            'counter4_value.required' => trans('admin_validation.Quantity is required'),
+            'counter1_title.required' => trans('admin_validation.Title is required'),
+            'counter2_title.required' => trans('admin_validation.Title is required'),
+            'counter3_title.required' => trans('admin_validation.Title is required'),
+            'counter4_title.required' => trans('admin_validation.Title is required'),
 
         ];
         $this->validate($request, $rules,$customMessages);
@@ -594,7 +594,7 @@ class HomepageController extends Controller
         $homepage_language->counter4_title = $request->counter4_title;
         $homepage_language->save();
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -658,19 +658,19 @@ class HomepageController extends Controller
             'about_offer_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'title1.required' => trans('Title is required'),
-            'title2.required' => trans('Title is required'),
-            'link.required' => trans('Link is required'),
-            'home3_item1_title.required' => trans('Link is required'),
-            'home3_item1_description.required' => trans('Description is required'),
-            'home3_item1_link.required' => trans('Link is required'),
-            'home3_item2_title.required' => trans('Link is required'),
-            'home3_item2_description.required' => trans('Description is required'),
-            'home3_item2_link.required' => trans('Link is required'),
-            'about_offer_title1.required' => trans('Title is required'),
-            'about_offer_title2.required' => trans('Title is required'),
-            'about_offer_title3.required' => trans('Title is required'),
-            'about_offer_link.required' => trans('Link is required'),
+            'title1.required' => trans('admin_validation.Title is required'),
+            'title2.required' => trans('admin_validation.Title is required'),
+            'link.required' => trans('admin_validation.Link is required'),
+            'home3_item1_title.required' => trans('admin_validation.Link is required'),
+            'home3_item1_description.required' => trans('admin_validation.Description is required'),
+            'home3_item1_link.required' => trans('admin_validation.Link is required'),
+            'home3_item2_title.required' => trans('admin_validation.Link is required'),
+            'home3_item2_description.required' => trans('admin_validation.Description is required'),
+            'home3_item2_link.required' => trans('admin_validation.Link is required'),
+            'about_offer_title1.required' => trans('admin_validation.Title is required'),
+            'about_offer_title2.required' => trans('admin_validation.Title is required'),
+            'about_offer_title3.required' => trans('admin_validation.Title is required'),
+            'about_offer_link.required' => trans('admin_validation.Link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -740,7 +740,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -770,9 +770,9 @@ class HomepageController extends Controller
             'link'=> session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'title1.required' => trans('Title is required'),
-            'title2.required' => trans('Title is required'),
-            'link.required' => trans('Link is required'),
+            'title1.required' => trans('admin_validation.Title is required'),
+            'title2.required' => trans('admin_validation.Title is required'),
+            'link.required' => trans('admin_validation.Link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -804,7 +804,7 @@ class HomepageController extends Controller
 
         $homepage_language->save();
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

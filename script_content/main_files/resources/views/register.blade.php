@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Register')}}</title>
+    <title>{{__('user.Register')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -12,10 +12,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('sign up')}}</h1>
+                        <h1>{{__('user.sign up')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('sign up')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.sign up')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -35,32 +35,32 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-9 m-auto">
                     <div class="wsus__signup_text">
-                        <h3>{{__('Register')}}</h3>
-                        <p class="description">{{__('Welcome to Alasmart')}}.</p>
+                        <h3>{{__('user.Register')}}</h3>
+                        <p class="description">{{__('user.Welcome to Alasmart')}}.</p>
                         <form action="{{ route('store-register') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Name')}}*</legend>
-                                            <input type="text" name="name" placeholder="{{__('Name')}}">
+                                            <legend>{{__('user.Name')}}*</legend>
+                                            <input type="text" name="name" placeholder="{{__('user.Name')}}">
                                         </fieldset>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Email')}}*</legend>
-                                            <input type="email" name="email" placeholder="{{__('Email')}}">
+                                            <legend>{{__('user.Email')}}*</legend>
+                                            <input type="email" name="email" placeholder="{{__('user.Email')}}">
                                         </fieldset>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Password')}}*</legend>
-                                            <input type="password" id="passowrd_input" name="password" placeholder="{{__('Password')}}">
+                                            <legend>{{__('user.Password')}}*</legend>
+                                            <input type="password" id="passowrd_input" name="password" placeholder="{{__('user.Password')}}">
                                             <span id="show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
@@ -68,8 +68,8 @@
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Confirm Password')}}*</legend>
-                                            <input type="password" name="c_password" id="c_passowrd_input" placeholder="{{__('Confirm Password')}}">
+                                            <legend>{{__('user.Confirm Password')}}*</legend>
+                                            <input type="password" name="c_password" id="c_passowrd_input" placeholder="{{__('user.Confirm Password')}}">
                                             <span id="c_show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
                                     </div>
@@ -82,11 +82,11 @@
                                     </div>
                                 @endif
                                 <div class="col-12 mt-4">
-                                    <button type="submit" class="common_btn">{{__('Registration')}}</button>
+                                    <button type="submit" class="common_btn">{{__('user.Registration')}}</button>
                                 </div>
                             </div>
                         </form>
-                        <p class="other_login">{{__('Alrady have an Account')}}? <a href="{{ route('login') }}">{{__('Log In')}}</a></p>
+                        <p class="other_login">{{__('user.Already have an Account')}}? <a href="{{ route('login') }}">{{__('user.Log In')}}</a></p>
                     </div>
                 </div>
             </div>

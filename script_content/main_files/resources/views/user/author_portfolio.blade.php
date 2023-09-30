@@ -1,7 +1,7 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Seller Portfolio')}}</title>
-    <meta name="description" content="{{__('Seller Portfolio')}}">
+    <title>{{__('user.Seller Portfolio')}}</title>
+    <meta name="description" content="{{__('user.Seller Portfolio')}}">
 @endsection
 
 @section('frontend-content')
@@ -23,14 +23,14 @@
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a target="_blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                            <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                            <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                            <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="wsus__gallery_item_text">
                                         <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                                         <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                                        <p>{{__('user.By')}} <span>{{ $product->author->name }}</span> {{__('user.In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
@@ -49,7 +49,7 @@
                                                 </p>
                                             </li>
                                             <li>
-                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -57,7 +57,7 @@
                             </div>
                             @empty
                             <div class="col-12 text-center text-danger mt-5">
-                                <h2 class="mt-5">{{__('Product Not Found')}}</h2>
+                                <h2 class="mt-5">{{__('user.Product Not Found')}}</h2>
                             </div>
                             @endforelse
                         </div>
@@ -125,7 +125,7 @@
                             $('#submitBtn').removeClass('d-none');
                             $('#showSpain').addClass('d-none');
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
                             }
                         }
                     }

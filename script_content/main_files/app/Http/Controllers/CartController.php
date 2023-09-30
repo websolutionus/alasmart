@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Language;
 use App\Models\BankPayment;
 use App\Models\Flutterwave;
 use Illuminate\Http\Request;
@@ -21,7 +22,17 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function addToCart(Request $request, $product_id){
+        $this->translator();
         if(Session::has('coupon')){
             Session::forget('coupon');
          }
@@ -35,7 +46,7 @@ class CartController extends Controller
                 }
             }
             if($itemExist) {
-                $notification = trans('Item already exist');
+                $notification = trans('user_validation.Item already exist');
                 return response()->json(['status' => 0, 'message' => $notification]);
             }
             if($request->price_type=='regular price'){
@@ -58,10 +69,10 @@ class CartController extends Controller
                         'slug'=> $request->slug,
                         ]
                 ]);
-                $notification = trans('Product added successfully');
+                $notification = trans('user_validation.Product added successfully');
                 return response()->json(['status' => 1, 'message' => $notification]);
             }else{
-                //return $request->extend_price;
+                
                 Cart::add([
                     'id' => $product_id, 
                     'name' => $request->product_name,
@@ -81,7 +92,7 @@ class CartController extends Controller
                         'slug'=> $request->slug,
                         ]
                 ]);
-                $notification = trans('Product added successfully');
+                $notification = trans('user_validation.Product added successfully');
                 return response()->json(['status' => 1, 'message' => $notification]);
             }
         }else{
@@ -94,7 +105,7 @@ class CartController extends Controller
             $productStock = Product::find($request->product_id);
     
             if($itemExist) {
-                $notification = trans('Item already exist');
+                $notification = trans('user_validation.Item already exist');
                 return response()->json(['status' => 0, 'message' => $notification]);
             }
             Cart::add([
@@ -116,7 +127,7 @@ class CartController extends Controller
                     'slug'=> $request->slug,
                 ]
             ]);
-            $notification = trans('Product added successfully');
+            $notification = trans('user_validation.Product added successfully');
             return response()->json(['status' => 1, 'message' => $notification]);
         }
     }
@@ -129,6 +140,7 @@ class CartController extends Controller
     }
 
     public function cartView(){
+        $this->translator();
         $active_theme = 'layout';
         $setting=Setting::first();
         $carts=Cart::content();
@@ -164,6 +176,7 @@ class CartController extends Controller
     }
 
     public function cartRemove($rowId){
+        $this->translator();
         $cart=Cart::remove($rowId);
         if(Session::has('coupon')){
             $coupon_name =  Session()->get('coupon')['coupon_name'];
@@ -175,11 +188,12 @@ class CartController extends Controller
                 'total_amount'=>round(Cart::totalFloat() - Cart::totalFloat() * (int)$coupon->coupon_discount / 100),
             ]);
         }
-        $notification = trans('Product remove successfully');
+        $notification = trans('user_validation.Product removed successfully');
         return response()->json(['status' => 1, 'message' => $notification]);
     }
 
     public function couponApply(Request $request){
+        $this->translator();
         $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity','>=', Carbon::now()->format('Y-m-d'))->where('status', 1)->first();
      if($coupon){
         Session::put('coupon', [
@@ -188,15 +202,16 @@ class CartController extends Controller
             'discount_amount'=>round(Cart::totalFloat() * (int)$coupon->coupon_discount / 100),
             'total_amount'=>round(Cart::totalFloat() - Cart::totalFloat() * (int)$coupon->coupon_discount / 100)
         ]);
-        $notification = trans('Coupon apply successfully');
+        $notification = trans('user_validation.Coupon apply successfully');
         return response()->json(['status' => 1, 'message' => $notification]);
      }else{
-        $notification = trans('Invalid coupon');
+        $notification = trans('user_validation.Invalid coupon');
         return response()->json(['status' => 0, 'message' => $notification]);
      }
     }
 
     public function couponCalculation(){
+        $this->translator();
         $setting=Setting::select('currency_icon')->first();
         $cartTotal = str_replace(',', '', Cart::total());
         if(Session::has('coupon')){
@@ -217,12 +232,14 @@ class CartController extends Controller
 
     //remove coupon
     public function couponRemove(){
+        $this->translator();
         Session::forget("coupon");
-        $notification = trans('Coupon remove successfully');
+        $notification = trans('user_validation.Coupon remove successfully');
         return response()->json(['status' => 1, 'message' => $notification]);
     }
 
     public function checkout(){
+        $this->translator();
         if(Auth::guard('web')->check()){
             if(Cart::total()>0){
                 $personalCarts=Cart::content();
@@ -284,17 +301,17 @@ class CartController extends Controller
                         'sslcommerz' => $sslcommerz,
                     ]);
                 }else{
-                    $notification = trans("You can't purchase personal product");
+                    $notification = trans("user_validation.You can not purchase personal product");
                     $notification=array('messege'=>$notification,'alert-type'=>'error');
                     return back()->with($notification);
                 }
             }else{
-                $notification = trans('Cart is empty');
+                $notification = trans('user_validation.Cart is empty');
                 $notification=array('messege'=>$notification,'alert-type'=>'error');
                 return redirect()->route('products')->with($notification);
             }
         }else{
-            $notification = trans('Need to login first');
+            $notification = trans('user_validation.Need to login first');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('login')->with($notification);
         }

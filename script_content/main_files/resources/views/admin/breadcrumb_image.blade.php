@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Banner Image')}}</title>
+<title>{{__('admin.Banner Image')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Banner Image')}}</h1>
+            <h1>{{__('admin.Banner Image')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Banner Image')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Banner Image')}}</div>
             </div>
           </div>
 
@@ -24,10 +24,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="30%">{{__('Location')}}</th>
-                                    <th width="30%">{{__('Image')}}</th>
-                                    <th width="30%">{{__('New Image')}}</th>
-                                    <th width="10%">{{__('Action')}}</th>
+                                    <th width="30%">{{__('admin.Location')}}</th>
+                                    <th width="30%">{{__('admin.Image')}}</th>
+                                    <th width="30%">{{__('admin.New Image')}}</th>
+                                    <th width="10%">{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                                             <input type="file" class="form-control-file" name="image" required>
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary" type="submit">{{__('Update')}}</button>
+                                            <button class="btn btn-primary" type="submit">{{__('admin.Update')}}</button>
                                         </td>
                                     </form>
                                     </tr>

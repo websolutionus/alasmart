@@ -1,22 +1,22 @@
 
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('User Detail')}}</title>
+<title>{{__('admin.User Detail')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('User Detail')}}</h1>
+            <h1>{{__('admin.User Detail')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('User Detail')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.User Detail')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.customer-list') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('User List')}}</a>
+            <a href="{{ route('admin.customer-list') }}" class="btn btn-primary"><i class="fas fa-list"></i> {{__('admin.User List')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,7 +24,7 @@
                       <div class="table-responsive table-invoice">
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <td>{{__('Image')}}</td>
+                                <td>{{__('admin.Image')}}</td>
                                 <td>
                                     @if ($customer->image)
                                     <img src="{{ asset($customer->image) }}" class="rounded-circle" alt="" width="80px">
@@ -32,32 +32,32 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>{{__('Name')}}</td>
+                                <td>{{__('admin.Name')}}</td>
                                 <td>{{ html_decode($customer->name) }}</td>
                             </tr>
                             <tr>
-                                <td>{{__('Email')}}</td>
+                                <td>{{__('admin.Email')}}</td>
                                 <td>{{ html_decode($customer->email) }}</td>
                             </tr>
                             <tr>
-                                <td>{{__('Phone')}}</td>
+                                <td>{{__('admin.Phone')}}</td>
                                 <td>{{ html_decode($customer->phone) }}</td>
                             </tr>
                             <tr>
-                                <td>{{__('Address')}}</td>
+                                <td>{{__('admin.Address')}}</td>
                                 <td>{{ html_decode($customer->address) }}</td>
                             </tr>
 
                             <tr>
-                                <td>{{__('Status')}}</td>
+                                <td>{{__('admin.Status')}}</td>
                                 <td>
                                     @if($customer->status == 1)
                                         <a href="javascript:;" onclick="manageCustomerStatus({{ $customer->id }})">
-                                            <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                            <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
                                         </a>
                                         @else
                                         <a href="javascript:;" onclick="manageCustomerStatus({{ $customer->id }})">
-                                            <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                            <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
                                         </a>
                                     @endif
                                 </td>

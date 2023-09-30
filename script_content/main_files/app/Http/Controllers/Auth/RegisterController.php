@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use App\Rules\Captcha;
+use Str;
 use Auth;
-use App\Mail\UserRegistration;
-use App\Helpers\MailHelper;
-use App\Models\EmailTemplate;
+use Mail;
+use Session;
+use App\Models\User;
+use App\Rules\Captcha;
 use App\Models\Setting;
+use App\Models\Language;
+use App\Helpers\MailHelper;
+use Illuminate\Http\Request;
+use App\Models\EmailTemplate;
+use App\Mail\UserRegistration;
 use App\Models\BreadcrumbImage;
 use App\Models\GoogleRecaptcha;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Models\SocialLoginInformation;
-use Mail;
-use Str;
-use Session;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
 class RegisterController extends Controller
 {
 
@@ -35,7 +37,17 @@ class RegisterController extends Controller
         $this->middleware('guest:web');
     }
 
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
    public function registerPage(){
+    $this->translator();
     $recaptchaSetting = GoogleRecaptcha::first();
     
     $active_theme = 'layout';
@@ -47,6 +59,7 @@ class RegisterController extends Controller
    }
 
     public function loginPage(){
+        $this->translator();
         $recaptchaSetting = GoogleRecaptcha::first();
         $socialLogin = SocialLoginInformation::first();
 
@@ -67,6 +80,7 @@ class RegisterController extends Controller
     }
 
     public function storeRegister(Request $request){
+        $this->translator();
         $rules = [
             'name'=>'required',
             'email'=>'required|unique:users,email',
@@ -75,13 +89,13 @@ class RegisterController extends Controller
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'email.required' => trans('Email is required'),
-            'email.unique' => trans('Email already exist'),
-            'password.required' => trans('Password is required'),
-            'password.min' => trans('Password must be 4 characters'),
-            'c_password.required' => trans('Confirm password is required'),
-            'c_password.same' => trans('Confirm password does not match'),
+            'name.required' => trans('user_validation.Name is required'),
+            'email.required' => trans('user_validation.Email is required'),
+            'email.unique' => trans('user_validation.Email already exist'),
+            'password.required' => trans('user_validation.Password is required'),
+            'password.min' => trans('user_validation.Password must be 4 characters'),
+            'c_password.required' => trans('user_validation.Confirm password is required'),
+            'c_password.same' => trans('user_validation.Confirm password does not match'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -101,23 +115,24 @@ class RegisterController extends Controller
         $message = str_replace('{{user_name}}',$request->name,$message);
         Mail::to($user->email)->send(new UserRegistration($message,$subject,$user));
 
-        $notification = trans('Register Successfully. Please Verify your email');
+        $notification = trans('user_validation.Register Successfully. Please Verify your email');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
     public function userVerification($token){
+        $this->translator();
         $user = User::where('verify_token',$token)->first();
         if($user){
             $user->verify_token = null;
             $user->status = 1;
             $user->email_verified = 1;
             $user->save();
-            $notification = trans('Verification Successfully');
+            $notification = trans('user_validation.Verification Successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('login')->with($notification);
         }else{
-            $notification = trans('Invalid token');
+            $notification = trans('user_validation.Invalid token');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('login')->with($notification);
         }

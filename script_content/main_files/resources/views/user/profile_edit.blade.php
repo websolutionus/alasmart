@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Profile edit')}}</title>
-    <meta name="description" content="{{__('Profile edit')}}">
+    <title>{{__('user.Profile edit')}}</title>
+    <meta name="description" content="{{__('user.Profile edit')}}">
 @endsection
 
 @section('frontend-content')
@@ -12,7 +12,7 @@
     <div class="wsus__author_edit_profile mt_180 pb_120 xs_pb_80">
         <div class="container">
             <div class="wsus__author_edit_profile_bg">
-                <h2 class="edit_heading">{{__('Edit Your Profile')}}</h2>
+                <h2 class="edit_heading">{{__('user.Edit Your Profile')}}</h2>
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="wsus__author_edit_form">
@@ -22,7 +22,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Name')}}*</legend>
+                                                    <legend>{{__('user.Name')}}*</legend>
                                                     <input type="text" name="name" value="{{ html_decode($user->name) }}">
                                                 </fieldset>
                                             </div>
@@ -30,7 +30,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Designation')}}*</legend>
+                                                    <legend>{{__('user.Designation')}}*</legend>
                                                     <input type="text" name="designation" value="{{ html_decode($user->designation) }}">
                                                 </fieldset>
                                             </div>
@@ -39,7 +39,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Phone')}}*</legend>
+                                                    <legend>{{__('user.Phone')}}*</legend>
                                                     <input type="text" name="phone" value="{{ html_decode($user->phone) }}">
                                                 </fieldset>
                                             </div>
@@ -48,7 +48,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Country')}}</legend>
+                                                    <legend>{{__('user.Country')}}</legend>
                                                     <input type="text" name="country" value="{{ html_decode($user->country) }}">
                                                 </fieldset>
                                             </div>
@@ -57,7 +57,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('State')}}</legend>
+                                                    <legend>{{__('user.State')}}</legend>
                                                     <input type="text" name="state" value="{{ html_decode($user->state) }}">
                                                 </fieldset>
                                             </div>
@@ -66,7 +66,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Town/City')}}</legend>
+                                                    <legend>{{__('user.Town/City')}}</legend>
                                                     <input type="text" name="city" value="{{ html_decode($user->city) }}">
                                                 </fieldset>
                                             </div>
@@ -75,7 +75,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Address')}}*</legend>
+                                                    <legend>{{__('user.Address')}}*</legend>
                                                     <input type="text" name="address" value="{{ html_decode($user->address) }}">
                                                 </fieldset>
                                             </div>
@@ -84,7 +84,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Facebook')}}</legend>
+                                                    <legend>{{__('user.Facebook')}}</legend>
                                                     <input type="text" name="facebook" value="{{ html_decode($user->facebook )}}">
                                                 </fieldset>
                                             </div>
@@ -93,7 +93,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Pinterest')}}</legend>
+                                                    <legend>{{__('user.Pinterest')}}</legend>
                                                     <input type="text" name="pinterest" value="{{ html_decode($user->pinterest) }}">
                                                 </fieldset>
                                             </div>
@@ -102,7 +102,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Linkedin')}}</legend>
+                                                    <legend>{{__('user.Linkedin')}}</legend>
                                                     <input type="text" name="linkedIn" value="{{ html_decode($user->linkedIn) }}">
                                                 </fieldset>
                                             </div>
@@ -111,7 +111,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Dribbble')}}</legend>
+                                                    <legend>{{__('user.Dribbble')}}</legend>
                                                     <input type="text" name="dribbble" value="{{ html_decode($user->dribbble) }}">
                                                 </fieldset>
                                             </div>
@@ -120,7 +120,7 @@
                                         <div class="col-lg-6">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Twitter')}}</legend>
+                                                    <legend>{{__('user.Twitter')}}</legend>
                                                     <input type="text" name="twitter" value="{{ html_decode($user->twitter) }}">
                                                 </fieldset>
                                             </div>
@@ -129,7 +129,7 @@
                                         <div class="col-xl-12">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('About Me')}}*</legend>
+                                                    <legend>{{__('user.About Me')}}*</legend>
                                                     <textarea rows="4" name="about_me" id="editor">{{ html_decode($user->about_me) }}</textarea>
                                                 </fieldset>
                                             </div>
@@ -138,15 +138,15 @@
                                         <div class="col-xl-12">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('My Skills')}}*</legend>
+                                                    <legend>{{__('user.My Skills')}}*</legend>
                                                     <textarea rows="4" name="my_skill" rows="7" id="editor">{{ html_decode($user->my_skill) }}</textarea>
                                                 </fieldset>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <ul class="button_area d-flex flex-wrap align-items-center">
-                                                <li><a href="{{ url()->previous() }}" class="cancel">{{__('cancel')}}</a></li>
-                                                <li><button type="submit" class="common_btn">{{__('Save and change')}} </button></li>
+                                                <li><a href="{{ url()->previous() }}" class="cancel">{{__('user.cancel')}}</a></li>
+                                                <li><button type="submit" class="common_btn">{{__('user.Save and change')}} </button></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -167,10 +167,10 @@
                                         @endif
                                     </div>
                                     <input type="file" name="image" hidden id="user_image" onchange="userImageUpload()">
-                                    <label for="user_image"><i class="fal fa-upload"></i> {{__('Upload a Image')}}</label>
-                                    <h4>{{__('Upload Your Image')}}</h4>
-                                    <p>{{__('Choose a image PNG, JPEG, JPG')}}</p>
-                                    <p><span>{{__('Note')}}:</span> {{__('Max File Size 2MB')}}</p>
+                                    <label for="user_image"><i class="fal fa-upload"></i> {{__('user.Upload a Image')}}</label>
+                                    <h4>{{__('user.Upload Your Image')}}</h4>
+                                    <p>{{__('user.Choose a image PNG, JPEG, JPG')}}</p>
+                                    <p><span>{{__('user.Note')}}:</span> {{__('user.Max File Size 2MB')}}</p>
                                     <input type="submit" id="imageformsubmit" class="btn btn-primary d-none" value="submit">
                                 </div>
                             </form>

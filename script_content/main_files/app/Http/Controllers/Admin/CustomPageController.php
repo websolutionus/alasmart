@@ -38,12 +38,12 @@ class CustomPageController extends Controller
             'status' => 'required'
         ];
         $customMessages = [
-            'page_name.required' => trans('Page name is required'),
-            'page_name.unique' => trans('Page name already exist'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'description.required' => trans('Description is required'),
-            'banner_image.required' => trans('Banner image is required'),
+            'page_name.required' => trans('admin_validation.Page name is required'),
+            'page_name.unique' => trans('admin_validation.Page name already exists'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'banner_image.required' => trans('admin_validation.Banner image is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -62,7 +62,7 @@ class CustomPageController extends Controller
             $custom_page_language->save();
         }
 
-        $notification = trans('Created Successfully');
+        $notification = trans('admin_validation.Created Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.custom-page.index')->with($notification);
     }
@@ -88,11 +88,11 @@ class CustomPageController extends Controller
             'status' => session()->get('admin_lang') == $request->lang_code ? 'required':'',
         ];
         $customMessages = [
-            'page_name.required' => trans('Page name is required'),
-            'page_name.unique' => trans('Page name already exist'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'description.required' => trans('Description is required'),
+            'page_name.required' => trans('admin_validation.Page name is required'),
+            'page_name.unique' => trans('admin_validation.Page name already exists'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'description.required' => trans('admin_validation.Description is required'),
 
         ];
         $this->validate($request, $rules,$customMessages);
@@ -107,7 +107,7 @@ class CustomPageController extends Controller
         $custom_page_language->description = $request->description;
         $custom_page_language->save();
 
-        $notification = trans('Updated Successfully');
+        $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -119,7 +119,7 @@ class CustomPageController extends Controller
 
         $custom_page_language = CustomPageLanguage::where('custom_id', $id)->delete();
 
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.custom-page.index')->with($notification);
     }
@@ -130,11 +130,11 @@ class CustomPageController extends Controller
         if($customPage->status == 1){
             $customPage->status = 0;
             $customPage->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $customPage->status = 1;
             $customPage->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

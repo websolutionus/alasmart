@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Seller withdraw')}}</title>
-    <meta name="description" content="{{__('Seller withdraw')}}">
+    <title>{{__('user.Seller withdraw')}}</title>
+    <meta name="description" content="{{__('user.Seller withdraw')}}">
 @endsection
 
 @section('frontend-content')
@@ -19,9 +19,9 @@
                         <div class="icon">
                             <img src="{{ asset('frontend/images/payout_icon_1.png') }}" alt="payout" class="img-fluid w-100">
                         </div>
-                        <p>{{__('Current Balance')}}</p>
+                        <p>{{__('user.Current Balance')}}</p>
                         <h2>{{ $setting->currency_icon }}{{ $current_balance }}</h2>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">{{__('Make withdraw')}}</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#payoutModal">{{__('user.Make withdraw')}}</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -29,7 +29,7 @@
                         <div class="icon">
                             <img src="{{ asset('frontend/images/payout_icon_2.png') }}" alt="payout" class="img-fluid w-100">
                         </div>
-                        <p>{{__('Total Earning')}}</p>
+                        <p>{{__('user.Total Earning')}}</p>
                         <h2>{{ $setting->currency_icon }}{{ $total_balance }}</h2>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         <div class="icon">
                             <img src="{{ asset('frontend/images/payout_icon_3.png') }}" alt="payout" class="img-fluid w-100">
                         </div>
-                        <p>{{__('Total Withdraw')}}</p>
+                        <p>{{__('user.Total Withdraw')}}</p>
                         <h2>{{ $setting->currency_icon }}{{ $total_withdraw }}</h2>
                     </div>
                 </div>
@@ -46,18 +46,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__payout_table">
-                        <h2>{{__('My Withdrow')}}</h2>
+                        <h2>{{__('user.My Withdrow')}}</h2>
 
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tbody>
                                     <tr class="header_row">
-                                        <th class="number">{{__('Number')}}</th>
-                                        <th class="method">{{__('Method')}}</th>
-                                        <th class="method">{{__('Total Amount')}}</th>
-                                        <th class="charge">{{__('Charge')}}</th>
-                                        <th class="amount">{{__('Withdraw Amount')}}</th>
-                                        <th class="status">{{__('Status')}}</th>
+                                        <th class="number">{{__('user.Number')}}</th>
+                                        <th class="method">{{__('user.Method')}}</th>
+                                        <th class="method">{{__('user.Total Amount')}}</th>
+                                        <th class="charge">{{__('user.Charge')}}</th>
+                                        <th class="amount">{{__('user.Withdraw Amount')}}</th>
+                                        <th class="status">{{__('user.Status')}}</th>
                                     </tr>
 
                                     @foreach ($withdraws as $index=>$withdraw)
@@ -68,9 +68,9 @@
                                             <td class="charge">{{ $setting->currency_icon }}{{ $withdraw->total_amount-$withdraw->withdraw_amount }}</td>
                                             <td class="amount">{{ $setting->currency_icon }}{{ html_decode($withdraw->withdraw_amount) }}</td>
                                             @if ($withdraw->status==1)
-                                            <td class="status"><span class="success">{{__('Success')}}</span></td>
+                                            <td class="status"><span class="success">{{__('user.Success')}}</span></td>
                                             @else
-                                            <td class="status"><span class="pending">{{__('Pending')}}</span></td>
+                                            <td class="status"><span class="pending">{{__('user.Pending')}}</span></td>
                                             @endif
                                         </tr>
                                     @endforeach
@@ -100,9 +100,9 @@
                             <div class="col-12">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('Select Withdraw Method')}}*</legend>
+                                        <legend>{{__('user.Select Withdraw Method')}}*</legend>
                                         <select class="select_js" name="method_id" id="method_id">
-                                            <option value="">{{__('Select Withdraw Method')}}</option>
+                                            <option value="">{{__('user.Select Withdraw Method')}}</option>
                                             @foreach ($withdraw_methods as $withdraw_method)
                                             <option value="{{ $withdraw_method->id }}">{{ $withdraw_method->name }}</option>
                                             @endforeach
@@ -116,7 +116,7 @@
                             <div class="col-12">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('Withdraw Amount')}}*</legend>
+                                        <legend>{{__('user.Withdraw Amount')}}*</legend>
                                         <input type="text" name="withdraw_amount">
                                     </fieldset>
                                 </div>
@@ -124,13 +124,13 @@
                             <div class="col-12">
                                 <div class="wsus__comment_single_input">
                                     <fieldset>
-                                        <legend>{{__('Account information')}}*</legend>
+                                        <legend>{{__('user.Account information')}}*</legend>
                                         <textarea name="account_info" id="" cols="30" rows="5"></textarea>
                                     </fieldset>
                                 </div>
                             </div>
                         </div>
-                        <button class="common_btn" type="submit">{{__('Withdraw Now')}}</button>
+                        <button class="common_btn" type="submit">{{__('user.Withdraw Now')}}</button>
                     </form>
                 </div>
             </div>

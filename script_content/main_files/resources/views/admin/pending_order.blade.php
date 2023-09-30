@@ -19,15 +19,15 @@
                           <table class="table table-striped" id="dataTable">
                               <thead>
                                   <tr>
-                                      <th width="5%">{{__('SN')}}</th>
-                                      <th width="10%">{{__('Customer')}}</th>
-                                      <th width="10%">{{__('Order Id')}}</th>
-                                      <th width="10%">{{__('Date')}}</th>
-                                      <th width="10%">{{__('Quantity')}}</th>
-                                      <th width="10%">{{__('Amount')}}</th>
-                                      <th width="10%">{{__('Order Status')}}</th>
-                                      <th width="10%">{{__('Payment')}}</th>
-                                      <th width="15%">{{__('Action')}}</th>
+                                      <th width="5%">{{__('admin.SN')}}</th>
+                                      <th width="10%">{{__('admin.Customer')}}</th>
+                                      <th width="10%">{{__('admin.Order Id')}}</th>
+                                      <th width="10%">{{__('admin.Date')}}</th>
+                                      <th width="10%">{{__('admin.Quantity')}}</th>
+                                      <th width="10%">{{__('admin.Amount')}}</th>
+                                      <th width="10%">{{__('admin.Order Status')}}</th>
+                                      <th width="10%">{{__('admin.Payment')}}</th>
+                                      <th width="15%">{{__('admin.Action')}}</th>
                                     </tr>
                               </thead>
                               <tbody>
@@ -41,16 +41,16 @@
                                           <td>{{ $setting->currency_icon }}{{ round($order->total_amount) }}</td>
                                           <td>
                                               @if ($order->order_status == 1)
-                                              <span class="badge badge-success">{{__('Complete')}} </span>
+                                              <span class="badge badge-success">{{__('admin.Complete')}} </span>
                                               @elseif ($order->order_status == 0)
-                                              <span class="badge badge-danger">{{__('Pending')}} </span>
+                                              <span class="badge badge-danger">{{__('admin.Pending')}} </span>
                                               @endif
                                           </td>
                                           <td>
                                               @if($order->payment_status == 'success')
-                                              <span class="badge badge-success">{{__('success')}} </span>
+                                              <span class="badge badge-success">{{__('admin.success')}} </span>
                                               @else
-                                              <span class="badge badge-danger">{{__('Pending')}}</span>
+                                              <span class="badge badge-danger">{{__('admin.Pending')}}</span>
                                               @endif
                                           </td>
   
@@ -72,7 +72,7 @@
                   </div>
                 @else
                     <div class="col-12 text-center">
-                        <h4 class="text-danger">{{__('Order not found!')}}</h4>
+                        <h4 class="text-danger">{{__('admin.Order not found!')}}</h4>
                     </div>
                 @endif
 
@@ -91,7 +91,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">{{__('Order Status')}}</h5>
+                        <h5 class="modal-title">{{__('admin.Order Status')}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -102,17 +102,17 @@
                       @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="">{{__('Payment')}}</label>
+                            <label for="">{{__('admin.Payment')}}</label>
                             <select name="payment_status" id="" class="form-control">
-                                <option {{ $order->payment_status == 'pending' ? 'selected' : '' }} value="pending">{{__('Pending')}}</option>
-                                <option {{ $order->payment_status == 'success' ? 'selected' : '' }} value="success">{{__('Success')}}</option>
+                                <option {{ $order->payment_status == 'pending' ? 'selected' : '' }} value="pending">{{__('admin.Pending')}}</option>
+                                <option {{ $order->payment_status == 'success' ? 'selected' : '' }} value="success">{{__('admin.Success')}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">{{__('Order')}}</label>
+                            <label for="">{{__('admin.Order')}}</label>
                             <select name="order_status" id="" class="form-control">
-                              <option {{ $order->order_status == 0 ? 'selected' : '' }} value="0">{{__('Pending')}}</option>
-                              <option {{ $order->order_status == 1 ? 'selected' : '' }} value="1">{{__('Complete')}}</option>
+                              <option {{ $order->order_status == 0 ? 'selected' : '' }} value="0">{{__('admin.Pending')}}</option>
+                              <option {{ $order->order_status == 1 ? 'selected' : '' }} value="1">{{__('admin.Complete')}}</option>
                             </select>
                         </div>
 
@@ -120,8 +120,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
-                <button type="submit" class="btn btn-primary">{{__('Update Status')}}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('admin.Update Status')}}</button>
             </div>
           </form>
         </div>

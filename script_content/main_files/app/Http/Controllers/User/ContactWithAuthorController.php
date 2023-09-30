@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use Auth;
+use Session;
 use App\Rules\Captcha;
+use App\Models\Language;
 use App\Helpers\MailHelper;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
@@ -13,14 +15,26 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactWithAuthorController extends Controller
 {
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function contactWithAuthor(Request $request){
+
+        $this->translator();
+
         if(Auth::guard('web')->check()){
             $rules = [
                 'message'=>'required',
                 'g-recaptcha-response'=>new Captcha()
             ];
             $customMessages = [
-                'message.required' => trans('Message is required'),
+                'message.required' => trans('user_validation.Message is required'),
             ];
             $this->validate($request, $rules,$customMessages);
 
@@ -35,10 +49,10 @@ class ContactWithAuthorController extends Controller
             MailHelper::setMailConfig();
             Mail::to($request->email)->send(new ContactWithAuthor($subject,$message,$user_email));
 
-            $notification = trans('Message submit successfully');
+            $notification = trans('user_validation.Message submit successfully');
             return response()->json(['status' => 1, 'message' => $notification]);
        }else{
-            $notification = trans('Please login your account');
+            $notification = trans('user_validation.Please login your account');
             return response()->json(['status' => 0, 'message' => $notification]);
        }
     }

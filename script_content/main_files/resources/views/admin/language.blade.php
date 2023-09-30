@@ -1,16 +1,16 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Frontend Language')}}</title>
+<title>{{__('admin.Frontend Language')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Frontend Language')}}</h1>
+            <h1>{{__('admin.Frontend Language')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Frontend Language')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Frontend Language')}}</div>
             </div>
           </div>
 
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                       <div class="card-body">
-                        <h3 class="h3 mb-3 text-gray-800">{{__('Language')}}</h3>
+                        <h3 class="h3 mb-3 text-gray-800">{{__('admin.Language')}}</h3>
                         <hr>
                         <div class="lang_list_top">
                             <ul class="lang_list">
@@ -33,7 +33,7 @@
                             @php
                                 $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
                             @endphp
-                            <p>{{__('Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
+                            <p>{{__('admin.Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
                         </div> 
                       </div>
                     </div>
@@ -54,7 +54,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
                         </form>
                         </div>
 

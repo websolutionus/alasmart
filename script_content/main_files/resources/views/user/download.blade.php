@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Buying product')}}</title>
-    <meta name="description" content="{{__('Buying product')}}">
+    <title>{{__('user.Buying product')}}</title>
+    <meta name="description" content="{{__('user.Buying product')}}">
 @endsection
 
 @section('frontend-content')
@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-8">
                     <div class="wsus__profile_download">
-                        <h2>{{__('Buying Items')}}</h2>
+                        <h2>{{__('user.Buying Items')}}</h2>
 
                         @foreach ($order_items as $item)
                             @if ($item->order->order_status == 1)
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="text">
                                             <a href="{{ route('product-detail', $item->product->slug) }}">{{ html_decode($item->product->productlangfrontend->name) }}</a>
-                                            <p>{{__('Item by')}} {{ html_decode($item->author->name) }}</p>
+                                            <p>{{__('user.Item by')}} {{ html_decode($item->author->name) }}</p>
                                             @if ($item->variant_id!=null)
                                             <p>{{ html_decode($item->variant->variant_name) }}</p>
                                             @endif
@@ -39,10 +39,10 @@
                                     </div>
                                     <div class="wsus__download_item_right">
                                         @if ($item->product_type=='script')
-                                        <a class="common_btn" href="{{ route('download-script', $item->product->id) }}">{{__('Download File')}}</a>
+                                        <a class="common_btn" href="{{ route('download-script', $item->product->id) }}">{{__('user.Download File')}}</a>
                                         @else
                                             @if ($item->variant)
-                                                <a class="common_btn" href="{{ route('download-variant', $item->variant->id) }}">{{__('Download File')}}</a>
+                                                <a class="common_btn" href="{{ route('download-variant', $item->variant->id) }}">{{__('user.Download File')}}</a>
                                             @endif
                                         @endif
                                         @php
@@ -81,13 +81,13 @@
                                         <div class="col-xl-6">
                                             <div class="text">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('Review this Item')}}
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">{{__('user.Review this Item')}}
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{__('Your Rating')}}</p>
+                                                    <p>{{__('user.Your Rating')}}</p>
                                                     <p>
                                                         <i class="far fa-star text-dark s1"></i>
                                                         <i class="far fa-star text-dark s2"></i>
@@ -97,7 +97,7 @@
                                                     </p>
                                                     <form id="reviewForm" action="{{ route('user-product-review') }}" method="POST">
                                                         @csrf
-                                                        <label>{{__('Comment')}}*</label>
+                                                        <label>{{__('user.Comment')}}*</label>
                                                         <input type="hidden" class="star" name="rating" value="">
                                                         <input type="hidden" id="product_id" name="product_id" value="{{ $item->product->id }}">
                                                         <input type="hidden" id="order_id" name="order_id" value="{{ $item->order->id }}">
@@ -107,8 +107,8 @@
                                                         <input type="hidden" id="author_id" name="author_id" value="{{ $item->author->id }}">
                                                         
                                                         <textarea rows="7" name="review"
-                                                            placeholder="{{__('Type your message here')}}"></textarea>
-                                                        <button type="submit" class="common_btn">{{__('Save Review')}}</button>
+                                                            placeholder="{{__('user.Type your message here')}}"></textarea>
+                                                        <button type="submit" class="common_btn">{{__('user.Save Review')}}</button>
                                                     </form>
                                                 </div>
                                             </div>

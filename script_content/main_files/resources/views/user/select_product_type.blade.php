@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Select product type')}}</title>
-    <meta name="description" content="{{__('Select product type')}}">
+    <title>{{__('user.Select product type')}}</title>
+    <meta name="description" content="{{__('user.Select product type')}}">
 @endsection
 
 @section('frontend-content')
@@ -14,19 +14,19 @@
             <div class="row justify-content-between">
                 <div class="col-xl-5 col-lg-6 wow fadeInLeft" data-wow-duration="1s">
                     <form class="upload_product_text" action="{{ route('product-create') }}" method="GET">
-                        <h3>{{__('Prodcut Upload')}}</h3>
-                        <h6>{{__('Select product type')}}</h6>
+                        <h3>{{__('user.Prodcut Upload')}}</h3>
+                        <h6>{{__('user.Select product type')}}</h6>
                         <select class="select_js" name="product_type">
-                            <option value="script">{{__('Script')}}</option>
-                            <option value="image">{{__('Image')}}</option>
-                            <option value="video">{{__('Video')}}</option>
-                            <option value="audio">{{__('Audio')}}</option>
+                            <option value="script">{{__('user.Script')}}</option>
+                            <option value="image">{{__('user.Image')}}</option>
+                            <option value="video">{{__('user.Video')}}</option>
+                            <option value="audio">{{__('user.Audio')}}</option>
                         </select>
                         <h5>{{ $productType->pagelangfrontend->title }}</h5>
                         <p>{{ $productType->pagelangfrontend->description }}</p>
                         <ul class="d-flex flex-wrap align-items-center">
-                            <li><a class="cancel" href="{{ url()->previous() }}">{{__('cancel')}}</a></li>
-                            <li><button class="common_btn" type="submit">{{__('Next')}}</button></li>
+                            <li><a class="cancel" href="{{ url()->previous() }}">{{__('user.cancel')}}</a></li>
+                            <li><button class="common_btn" type="submit">{{__('user.Next')}}</button></li>
                         </ul>
                     </form>
                 </div>

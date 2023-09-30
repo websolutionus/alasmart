@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Terms And Conditions')}}</title>
+    <title>{{__('user.Terms And Conditions')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('terms and condition')}}</h1>
+                        <h1>{{__('user.terms and condition')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascritp:;">{{__('terms and condition')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascritp:;">{{__('user.terms and condition')}}</a></li>
                         </ul>
                     </div>
                 </div>

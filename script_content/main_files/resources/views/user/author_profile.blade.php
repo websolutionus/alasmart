@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('Seller Profile')}}</title>
-    <meta name="description" content="{{__('Seller Profile')}}">
+    <title>{{__('user.Seller Profile')}}</title>
+    <meta name="description" content="{{__('user.Seller Profile')}}">
 @endsection
 
 @section('frontend-content')
@@ -17,11 +17,11 @@
                 <div class="col-xl-8 col-lg-8">
                     <div class="wsus__profile_overview">
                         @if ($user->about_me!=null)
-                            <h2>{{__('About Me')}}</h2>
+                            <h2>{{__('user.About Me')}}</h2>
                             {!! clean(html_decode($user->about_me)) !!}
                         @endif
                         @if ($user->my_skill!=null)
-                            <h2>{{__('My Skills')}} :</h2>
+                            <h2>{{__('user.My Skills')}} :</h2>
                             {!! clean(html_decode($user->my_skill)) !!}
                         @endif
                     </div>
@@ -80,7 +80,7 @@
                             if(response.responseJSON.errors.email)toastr.error(response.responseJSON.errors.email[0])
                             if(response.responseJSON.errors.message)toastr.error(response.responseJSON.errors.message[0])
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
                             }
                             $('#submitBtn').removeClass('d-none');
                             $('#showSpain').addClass('d-none');

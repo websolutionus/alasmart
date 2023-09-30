@@ -29,7 +29,7 @@ class SubscriberController extends Controller
         $subscriber = Subscriber::find($id);
         $subscriber->delete();
 
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -40,8 +40,8 @@ class SubscriberController extends Controller
             'message' => 'required',
         ];
         $customMessages = [
-            'subject.required' => trans('Subject is required'),
-            'message.required' => trans('Message is required'),
+            'subject.required' => trans('admin_validation.Subject is required'),
+            'message.required' => trans('admin_validation.Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -51,12 +51,12 @@ class SubscriberController extends Controller
 
             Mail::to($subscriber->email)->send(new SubscirberSendMail($request->subject,$request->message));
 
-            $notification = trans('Email Send Successfully');
+            $notification = trans('admin_validation.Email Send Successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{
 
-            $notification = trans('Something Went Wrong');
+            $notification = trans('admin_validation.Something Went Wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -68,8 +68,8 @@ class SubscriberController extends Controller
             'message' => 'required',
         ];
         $customMessages = [
-            'subject.required' => trans('Subject is required'),
-            'message.required' => trans('Message is required'),
+            'subject.required' => trans('admin_validation.Subject is required'),
+            'message.required' => trans('admin_validation.Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -80,12 +80,12 @@ class SubscriberController extends Controller
                 Mail::to($subscriber->email)->send(new SubscirberSendMail($request->subject,$request->message));
             }
 
-            $notification = trans('Email Send Successfully');
+            $notification = trans('admin_validation.Email Send Successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{
 
-            $notification = trans('Something Went Wrong');
+            $notification = trans('admin_validation.Something Went Wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }

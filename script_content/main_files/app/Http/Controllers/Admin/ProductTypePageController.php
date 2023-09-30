@@ -38,8 +38,8 @@ class ProductTypePageController extends Controller
             'description'=>'required',
         ];
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'description.required' => trans('Description is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'description.required' => trans('admin_validation.Description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -61,7 +61,7 @@ class ProductTypePageController extends Controller
             }
         }
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

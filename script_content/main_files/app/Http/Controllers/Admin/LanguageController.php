@@ -77,7 +77,7 @@ class LanguageController extends Controller
         $dataArray = var_export($dataArray, true);
         file_put_contents('lang/'.$request->lang_code.'/admin.php', "<?php\n return {$dataArray};\n ?>");
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -97,7 +97,7 @@ class LanguageController extends Controller
         $dataArray = var_export($dataArray, true);
         file_put_contents('lang/'.$request->lang_code.'/admin_validation.php', "<?php\n return {$dataArray};\n ?>");
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -119,7 +119,7 @@ class LanguageController extends Controller
         $dataArray = var_export($dataArray, true);
         file_put_contents('lang/'.$request->lang_code.'/user.php', "<?php\n return {$dataArray};\n ?>");
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -141,7 +141,7 @@ class LanguageController extends Controller
         $dataArray = var_export($dataArray, true);
         file_put_contents('lang/'.$request->lang_code.'/user_validation.php', "<?php\n return {$dataArray};\n ?>");
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -164,10 +164,10 @@ class LanguageController extends Controller
             'lang_code'=>'required|unique:languages'
         ];
         $customMessages = [
-            'lang_name.required' => trans('Name is required'),
-            'lang_name.unique' => trans('Name already exist'),
-            'lang_code.required' => trans('Code is required'),
-            'lang_code.unique' => trans('Code already exist'),
+            'lang_name.required' => trans('admin_validation.Name is required'),
+            'lang_name.unique' => trans('admin_validation.Name already exist'),
+            'lang_code.required' => trans('admin_validation.Code is required'),
+            'lang_code.unique' => trans('admin_validation.Code already exist'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -534,7 +534,7 @@ class LanguageController extends Controller
         }
         
 
-        $notification=trans('Created Successfully');
+        $notification=trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.languages')->with($notification);
     }
@@ -549,14 +549,14 @@ class LanguageController extends Controller
     public function update(Request $request, $id){
         
         $rules = [
-            'lang_name'=>'required|unique:languages,id,'.$id,
+            'lang_name'=> $id != 1 ? 'required|unique:languages,id,'.$id : '',
             'lang_code'=> $id != 1 ? 'required|unique:languages,id,'.$id : '',
         ];
         $customMessages = [
-            'lang_name.required' => trans('Name is required'),
-            'lang_name.unique' => trans('Name already exist'),
-            'lang_code.required' => trans('Code is required'),
-            'lang_code.unique' => trans('Code already exist'),
+            'lang_name.required' => trans('admin_validation.Name is required'),
+            'lang_name.unique' => trans('admin_validation.Name already exist'),
+            'lang_code.required' => trans('admin_validation.Code is required'),
+            'lang_code.unique' => trans('admin_validation.Code already exist'),
         ];
 
         $this->validate($request, $rules,$customMessages);
@@ -602,14 +602,18 @@ class LanguageController extends Controller
         if($language->is_default == 'Yes' && $request->is_default == 'No'){
             DB::table('languages')->where('id', 1)->update(['is_default' => 'Yes']);
         }
-    
-        $language->lang_name = $request->lang_name;
+
+        if ($language->id != 1) {
+            $language->lang_name = $request->lang_name;
+        }
 
         if ($language->id != 1) {
             $language->lang_code = $request->lang_code;
         }
 
+        
         $language->is_default = $request->is_default;
+
         $language->lang_direction = $request->lang_direction;
 
         if ($language->id != 1) {
@@ -619,7 +623,7 @@ class LanguageController extends Controller
         $language->save();
 
         
-        $notification=trans('Updated Successfully');
+        $notification=trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.languages')->with($notification);
     }
@@ -659,7 +663,7 @@ class LanguageController extends Controller
         $product_type_language = ProductTypePageLanguage::where('lang_code', $language->lang_code)->delete();
         $footer_language = FooterLanguage::where('lang_code', $language->lang_code)->delete();
 
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.languages')->with($notification);
     }

@@ -9,7 +9,7 @@
           <div class="section-header">
             <h1>{{ $title }}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
               <div class="breadcrumb-item">{{ $title }}</div>
             </div>
           </div>
@@ -23,10 +23,10 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label for="">{{__('Column Title')}}</label>
+                                        <label for="">{{__('admin.Column Title')}}</label>
                                         <input type="text" name="title" class="form-control" value="{{ $columnTitle }}">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
                                 </form>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
 
 
           <div class="section-body">
-            <a href="javascript:;" data-toggle="modal" data-target="#createIcon" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="javascript:;" data-toggle="modal" data-target="#createIcon" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -45,10 +45,10 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('link')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Name')}}</th>
+                                    <th>{{__('admin.link')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -80,7 +80,7 @@
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                       <div class="modal-header">
-                              <h5 class="modal-title">{{__('Create Link')}}</h5>
+                              <h5 class="modal-title">{{__('admin.Create Link')}}</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                   </button>
@@ -90,16 +90,16 @@
                         <form action="{{ route('admin.footer-link.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="">{{__('Link Name')}}</label>
+                                <label for="">{{__('admin.Link Name')}}</label>
                                 <input type="text" class="form-control" name="name">
                                 <input type="hidden" name="column" value="{{ $column }}">
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('Link')}}</label>
+                                <label for="">{{__('admin.Link')}}</label>
                                 <input type="text" class="form-control" name="link">
                             </div>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin.Save')}}</button>
                         </form>
                       </div>
                   </div>
@@ -113,7 +113,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                                <h5 class="modal-title">{{__('Edit Link')}}</h5>
+                                <h5 class="modal-title">{{__('admin.Edit Link')}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -124,15 +124,15 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="">{{__('Link Name')}}</label>
+                                <label for="">{{__('admin.Link Name')}}</label>
                                 <input type="text" class="form-control" name="name" value="{{ $link->title }}">
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('Link')}}</label>
+                                <label for="">{{__('admin.Link')}}</label>
                                 <input type="text" class="form-control" name="link" value="{{ $link->link }}">
                             </div>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
                         </form>
                         </div>
                     </div>

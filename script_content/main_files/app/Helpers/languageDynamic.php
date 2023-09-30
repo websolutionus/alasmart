@@ -33,21 +33,18 @@ function generateLang($path = ''){
 
     // user panel
     $paths = getAllResourceFiles(resource_path('views/user'));
-    $paths = array_merge($paths, getAllResourceFiles(resource_path('views/provider')));
     $paths = array_merge($paths, getAllResourceFiles(resource_path('views/errors')));
     $paths = array_merge($paths, getAllResourceFiles(resource_path('views/test')));
     // end user panel
 
     // user validation
     $paths = getAllResourceFiles(app_path('Http/Controllers/User'));
-    $paths = array_merge($paths, getAllResourceFiles(app_path('Http/Controllers/Provider')));
     $paths = array_merge($paths, getAllResourceFiles(app_path('Http/Controllers/test')));
     $paths = array_merge($paths, getAllResourceFiles(app_path('Http/Controllers/Auth')));
-    $paths = array_merge($paths, getAllResourceFiles(app_path('Http/Controllers/API')));
     // end user validation
 
     // admin panel
-    $paths = getAllResourceFiles(resource_path('views/admin'));
+     $paths = getAllResourceFiles(resource_path('views/admin'));
     // end admin panel
 
     // admin validation
@@ -67,7 +64,8 @@ function generateLang($path = ''){
     }
 
     $modifiedData = var_export($modifiedData, true);
-    file_put_contents('lang/en/user_validation.php', "<?php\n return {$modifiedData};\n ?>");
+    file_put_contents('lang/en/admin_validation.php', "<?php\n return {$modifiedData};\n ?>");
+    file_put_contents('lang/bn/admin_validation.php', "<?php\n return {$modifiedData};\n ?>");
 
 }
 

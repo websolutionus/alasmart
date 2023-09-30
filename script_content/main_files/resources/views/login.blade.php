@@ -1,6 +1,6 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Login')}}</title>
+    <title>{{__('user.Login')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -12,10 +12,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('sign in')}}</h1>
+                        <h1>{{__('user.sign in')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('sign in')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.sign in')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -35,23 +35,23 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-9 m-auto">
                     <div class="wsus__signup_text">
-                        <h3>{{__('Login In')}}</h3>
-                        <p class="description">{{__('Welcome back! Login with your data you entered during registration')}}.</p>
+                        <h3>{{__('user.Login In')}}</h3>
+                        <p class="description">{{__('user.Welcome back! Login with your data you entered during registration')}}.</p>
                         <form action="{{ route('store-login') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Email address')}}*</legend>
-                                            <input type="email" name="email" placeholder="{{__('Email address')}}">
+                                            <legend>{{__('user.Email address')}}*</legend>
+                                            <input type="email" name="email" placeholder="{{__('user.Email address')}}">
                                         </fieldset>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="wsus__comment_single_input">
                                         <fieldset>
-                                            <legend>{{__('Password')}}*</legend>
+                                            <legend>{{__('user.Password')}}*</legend>
                                             <input type="password" name="password" id="passowrd_input" placeholder="Password">
                                             <span id="show_password"><i class="fas fa-eye-slash"></i></span>
                                         </fieldset>
@@ -61,8 +61,8 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="remember">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            {{__('Remember Me')}}
-                                            <a href="{{ route('forget-password') }}">{{__('Forget Password')}}</a>
+                                            {{__('user.Remember Me')}}
+                                            <a href="{{ route('forget-password') }}">{{__('user.Forget Password')}}</a>
                                         </label>
                                     </div>
                                 </div>
@@ -74,17 +74,17 @@
                                     </div>
                                 @endif
                                 <div class="col-12">
-                                    <button type="submit" class="common_btn">{{__('Login')}}</button>
+                                    <button type="submit" class="common_btn">{{__('user.Login')}}</button>
                                 </div>
                             </div>
                         </form>
-                        <p class="other_login">{{__("Don't have an Account")}}? <a href="{{ route('register') }}">{{__('Create Account')}}</a></p>
+                        <p class="other_login">{{__('user.I have no account .')}} <a href="{{ route('register') }}">{{__('user.Create Account')}}</a></p>
                         @if ($socialLogin->is_gmail == 1)
                         <ul>
                             <li>
                                 <a href="{{ route('login-google') }}">
                                     <span><img src="{{ asset('frontend/images/google_icon.png') }}" alt="google" class="img-fluid w-100"></span>
-                                    {{__('Sign In with Google')}}
+                                    {{__('user.Sign In with Google')}}
                                 </a>
                             </li>
                         </ul>

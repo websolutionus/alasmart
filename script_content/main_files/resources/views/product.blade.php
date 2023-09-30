@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('Our Products')}}</h1>
+                        <h1>{{__('user.Our Products')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('Our Products')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Our Products')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,19 +39,19 @@
                 <div class="col-xxl-6 col-xl-6 col-md-7 col-lg-6">
                     <div class="wsus__product_page_search">
                         <form id="search_form">
-                            <input type="text" name="keyword" id="search_keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('Search your products')}}...">
-                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('Search')}}</button>
+                            <input type="text" name="keyword" id="search_keyword" value="{{ request()->get('keyword') }}" placeholder="{{__('user.Search your products')}}...">
+                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('user.Search')}}</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-xl-3 col-md-5 col-lg-4">
                     <div class="wsus__product_page_search">
                         <select class="select_js" id="sorting">
-                            <option value="default" {{ request()->get('sorting')=='default'? 'selected':'' }}>{{__('Default sorting')}}</option>
-                            <option value="script" {{ request()->get('sorting')=='script'? 'selected':'' }}>{{__('Script product')}}</option>
-                            <option value="image" {{ request()->get('sorting')=='image'? 'selected':'' }}>{{__('Image product')}}</option>
-                            <option value="video" {{ request()->get('sorting')=='video'? 'selected':'' }}>{{__('Video product')}}</option>
-                            <option value="audio" {{ request()->get('sorting')=='audio'? 'selected':'' }}>{{__('Audio product')}}</option>
+                            <option value="default" {{ request()->get('sorting')=='default'? 'selected':'' }}>{{__('user.Default sorting')}}</option>
+                            <option value="script" {{ request()->get('sorting')=='script'? 'selected':'' }}>{{__('user.Script product')}}</option>
+                            <option value="image" {{ request()->get('sorting')=='image'? 'selected':'' }}>{{__('user.Image product')}}</option>
+                            <option value="video" {{ request()->get('sorting')=='video'? 'selected':'' }}>{{__('user.Video product')}}</option>
+                            <option value="audio" {{ request()->get('sorting')=='audio'? 'selected':'' }}>{{__('user.Audio product')}}</option>
                         </select>
                     </div>
                 </div>
@@ -65,14 +65,14 @@
                                 <div class="wsus__gallery_item_img">
                                     <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                     <ul class="wsus__gallery_item_overlay">
-                                        <li><a target="_blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                        <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                        <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                        <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                                     </ul>
                                 </div>
                                 <div class="wsus__gallery_item_text">
                                     <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                                     <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                                    <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                                    <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                             href="javascript:;" onclick="getCatSlug('{{ $product->category->slug }}')">{{ $product->category->catlangfrontend->name }}</a></p>
                                     <ul class="d-flex flex-wrap justify-content-between">
                                         @php
@@ -92,7 +92,7 @@
                                             </p>
                                         </li>
                                         <li>
-                                            <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                            <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -100,7 +100,7 @@
                         </div>
                         @empty
                         <div class="col-12 text-center mt-5">
-                            <h2 class="text-danger mt-5">{{__('Product Not Found')}}</h2>
+                            <h2 class="text-danger mt-5">{{__('user.Product Not Found')}}</h2>
                        </div>
                         @endforelse
                     </div>
@@ -113,7 +113,7 @@
                 <div class="col-xl-4 col-lg-4">
                     <div class="wsus__product_sidebar_area mt_25">
                         <div class="wsus__product_sidebar categories">
-                            <h3>{{__('Categories')}}</h3>
+                            <h3>{{__('user.Categories')}}</h3>
                             <ul>
                                 @foreach ($categories as $category)
                                 @php
@@ -124,10 +124,10 @@
                             </ul>
                         </div>
                         <div class="wsus__product_sidebar tags">
-                            <h3>{{__('Filter Price')}}</h3>
+                            <h3>{{__('user.Filter Price')}}</h3>
                             <div id="slider-range" class="price-filter-range"></div>
                             <div class="range_price_area d-flex">
-                                <p>{{__('Price')}}: <span>{{ $setting->currency_icon }}</span></p>
+                                <p>{{__('user.Price')}}: <span>{{ $setting->currency_icon }}</span></p>
                                 <div class="range_main_price d-flex">
                                     <input type="text" oninput="validity.valid||(value='0');" id="min_price"
                                         class="price-range-field" readonly />
@@ -140,7 +140,7 @@
                             <input type="hidden" id="get_min_price" value="{{ $min_price }}">
                             <input type="hidden" id="get_max_price" value="{{ $max_price }}">
                             <input type="hidden" id="product_max_price" value="{{ $product_max_price }}">
-                            <button class="common_btn mt-3 w-100" onclick="priceFilter()"  type="submit">{{__('Filter')}}</button>
+                            <button class="common_btn mt-3 w-100" onclick="priceFilter()"  type="submit">{{__('user.Filter')}}</button>
                         </div>
                     </div>
                     @if ($ad->status==1)

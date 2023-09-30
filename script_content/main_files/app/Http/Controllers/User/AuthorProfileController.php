@@ -18,10 +18,11 @@ use App\Rules\Captcha;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Wishlist;
 use App\Models\OrderItem;
-use App\Events\SellerToUser;
 
+use App\Events\SellerToUser;
 use Illuminate\Http\Request;
 use App\Models\RefundRequest;
 use App\Models\TicketMessage;
@@ -34,7 +35,22 @@ use Illuminate\Support\Facades\Response;
 
 class AuthorProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function profile($slug){
+        $this->translator();
 
         $user = User::where('user_name', $slug)->first();
         $setting = Setting::first();
@@ -52,6 +68,8 @@ class AuthorProfileController extends Controller
 
     public function portfolio($slug){
 
+        $this->translator();
+        
         $setting = Setting::first();
         $user = User::where('user_name', $slug)->first();
         $products = Product::with('category','author','productlangfrontend')->where(['author_id' => $user->id, 'status' => 1])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);

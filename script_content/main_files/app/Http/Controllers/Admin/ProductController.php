@@ -71,10 +71,10 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'link.required' => trans('Link is required'),
-            'offer.required' => trans('Offer is required'),
-            'end_time.required' => trans('End time is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'link.required' => trans('admin_validation.Link is required'),
+            'offer.required' => trans('admin_validation.Offer is required'),
+            'end_time.required' => trans('admin_validation.End time is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -103,7 +103,7 @@ class ProductController extends Controller
         $product_discount_language->title = $request->title;
         $product_discount_language->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('admin_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -124,8 +124,8 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'regular_content.required' => trans('Regular content is required'),
-            'extend_content.required' => trans('Extend content is required'),
+            'regular_content.required' => trans('admin_validation.Regular content is required'),
+            'extend_content.required' => trans('admin_validation.Extend content is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -134,7 +134,7 @@ class ProductController extends Controller
         $content_language->regular_content = $request->regular_content;
         $content_language->extend_content = $request->extend_content;
         $content_language->save();
-        $notification = trans('Updated successfully');
+        $notification = trans('admin_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -145,7 +145,7 @@ class ProductController extends Controller
 
     public function create(Request $request){
         if(!$request->product_type){
-            $notification = trans('Something went wrong');
+            $notification = trans('admin_validation.Something went wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('admin.select-product-type')->with($notification);
         }
@@ -206,24 +206,24 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'thumb_image.required' => trans('Thumbnail is required'),
-            'download_file_type.required' => trans('Upload file type is required'),
-            'product_icon.required' => trans('Product icon is required'),
-            'upload_file.required' => trans('Upload file is required'),
-            'download_link.required' => trans('Download link is required'),
-            'author.required' => trans('Author is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'extend_price.required' => trans('Extend price is required'),
-            'extend_price.numeric' => trans('Extend price should be numeric value'),
-            'regular_price.numeric' => trans('Regular price should be numeric value'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
-            'status.required' => trans('Status is required'),
+            'thumb_image.required' => trans('admin_validation.Thumbnail is required'),
+            'download_file_type.required' => trans('admin_validation.Upload file type is required'),
+            'product_icon.required' => trans('admin_validation.Product icon is required'),
+            'upload_file.required' => trans('admin_validation.Upload file is required'),
+            'download_link.required' => trans('admin_validation.Download link is required'),
+            'author.required' => trans('admin_validation.Author is required'),
+            'category.required' => trans('admin_validation.Category is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'preview_link.required' => trans('admin_validation.Preview link is required'),
+            'regular_price.required' => trans('admin_validation.Regular price is required'),
+            'extend_price.required' => trans('admin_validation.Extend price is required'),
+            'extend_price.numeric' => trans('admin_validation.Extend price should be numeric value'),
+            'regular_price.numeric' => trans('admin_validation.Regular price should be numeric value'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'tags.required' => trans('admin_validation.Tag is required'),
+            'status.required' => trans('admin_validation.Status is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -286,7 +286,7 @@ class ProductController extends Controller
         }
 
 
-        $notification = trans('Created successfully');
+        $notification = trans('admin_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -310,18 +310,18 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'thumb_image.required' => trans('Thumbnail is required'),
-            'product_icon.required' => trans('Product icon is required'),
-            'author.required' => trans('Author is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
-            'status.required' => trans('Status is required'),
+            'thumb_image.required' => trans('admin_validation.Thumbnail is required'),
+            'product_icon.required' => trans('admin_validation.Product icon is required'),
+            'author.required' => trans('admin_validation.Author is required'),
+            'category.required' => trans('admin_validation.Category is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'preview_link.required' => trans('admin_validation.Preview link is required'),
+            'regular_price.required' => trans('admin_validation.Regular price is required'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'tags.required' => trans('admin_validation.Tag is required'),
+            'status.required' => trans('admin_validation.Status is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -373,7 +373,7 @@ class ProductController extends Controller
             $product_language->save();
         }
 
-        $notification = trans('Created successfully');
+        $notification = trans('admin_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.product-variant', $product->id)->with($notification);
     }
@@ -429,21 +429,21 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'download_file_type.required' => trans('Upload file type is required'),
-            'upload_file.required' => trans('Upload file is required'),
-            'download_link.required' => trans('Download link is required'),
-            'author.required' => trans('Author is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'regular_price.required' => trans('Regular price is required'),
-            'extend_price.required' => trans('Extend price is required'),
-            'extend_price.numeric' => trans('Extend price should be numeric value'),
-            'regular_price.numeric' => trans('Regular price should be numeric value'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
-            'status.required' => trans('Status is required'),
+            'download_file_type.required' => trans('admin_validation.Upload file type is required'),
+            'upload_file.required' => trans('admin_validation.Upload file is required'),
+            'download_link.required' => trans('admin_validation.Download link is required'),
+            'author.required' => trans('admin_validation.Author is required'),
+            'category.required' => trans('admin_validation.Category is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'regular_price.required' => trans('admin_validation.Regular price is required'),
+            'extend_price.required' => trans('admin_validation.Extend price is required'),
+            'extend_price.numeric' => trans('admin_validation.Extend price should be numeric value'),
+            'regular_price.numeric' => trans('admin_validation.Regular price should be numeric value'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'tags.required' => trans('admin_validation.Tag is required'),
+            'status.required' => trans('admin_validation.Status is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -516,7 +516,7 @@ class ProductController extends Controller
         $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product_language->save();
         
-        $notification = trans('Updated successfully');
+        $notification = trans('admin_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -536,16 +536,16 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'author.required' => trans('Author is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
-            'status.required' => trans('Status is required'),
+            'author.required' => trans('admin_validation.Author is required'),
+            'category.required' => trans('admin_validation.Category is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'slug.required' => trans('admin_validation.Slug is required'),
+            'slug.unique' => trans('admin_validation.Slug already exist'),
+            'preview_link.required' => trans('admin_validation.Preview link is required'),
+            'regular_price.required' => trans('admin_validation.Regular price is required'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'tags.required' => trans('admin_validation.Tag is required'),
+            'status.required' => trans('admin_validation.Status is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -602,7 +602,7 @@ class ProductController extends Controller
         $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product_language->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('admin_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -651,10 +651,10 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'variant_name.required' => trans('Variant name is required'),
-            'file_name.required' => trans('Upload file is required'),
-            'price.required' => trans('Price is required'),
-            'price.numeric' => trans('Price should be numeric value'),
+            'variant_name.required' => trans('admin_validation.Variant name is required'),
+            'file_name.required' => trans('admin_validation.Upload file is required'),
+            'price.required' => trans('admin_validation.Price is required'),
+            'price.numeric' => trans('admin_validation.Price should be numeric value'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -672,7 +672,7 @@ class ProductController extends Controller
         $variant->product_id = $id;
         $variant->save();
 
-        $notification = trans('Created successfully');
+        $notification = trans('admin_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -685,9 +685,9 @@ class ProductController extends Controller
         ];
 
         $customMessages = [
-            'variant_name.required' => trans('Variant name is required'),
-            'price.required' => trans('Price is required'),
-            'price.numeric' => trans('Price should be numeric value'),
+            'variant_name.required' => trans('admin_validation.Variant name is required'),
+            'price.required' => trans('admin_validation.Price is required'),
+            'price.numeric' => trans('admin_validation.Price should be numeric value'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -712,7 +712,7 @@ class ProductController extends Controller
         $variant->price = $request->price;
         $variant->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('admin_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -730,7 +730,7 @@ class ProductController extends Controller
                 }
             }
 
-            $notification = trans('Deleted successfully');
+            $notification = trans('admin_validation.Deleted successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{
@@ -790,7 +790,7 @@ class ProductController extends Controller
         $product_review = Review::where('product_id', $id)->delete();
         $wishlist = Wishlist::where('product_id', $id)->delete();
 
-        $notification = trans('Deleted successfully');
+        $notification = trans('admin_validation.Deleted successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

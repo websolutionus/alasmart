@@ -24,7 +24,7 @@ class BlogCommentController extends Controller
         $blogComment = BlogComment::find($id);
         $blogComment->delete();
 
-        $notification= trans('Delete Successfully');
+        $notification= trans('admin_validation.Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.blog-comment.index')->with($notification);
     }
@@ -34,11 +34,11 @@ class BlogCommentController extends Controller
         if($blogComment->status == 1){
             $blogComment->status = 0;
             $blogComment->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $blogComment->status = 1;
             $blogComment->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

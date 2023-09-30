@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Social Link')}}</title>
+<title>{{__('admin.Social Link')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Social Link')}}</h1>
+            <h1>{{__('admin.Social Link')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Social Link')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Social Link')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="javascript:;" data-toggle="modal" data-target="#createIcon" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="javascript:;" data-toggle="modal" data-target="#createIcon" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,11 +24,11 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Link')}}</th>
-                                    <th>{{__('Media text')}}</th>
-                                    <th>{{__('Icon')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Link')}}</th>
+                                    <th>{{__('admin.Media text')}}</th>
+                                    <th>{{__('admin.Icon')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -61,7 +61,7 @@
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                       <div class="modal-header">
-                              <h5 class="modal-title">{{__('Create Social Link')}}</h5>
+                              <h5 class="modal-title">{{__('admin.Create Social Link')}}</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                   </button>
@@ -71,19 +71,19 @@
                         <form action="{{ route('admin.social-link.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="">{{__('Icon')}}</label>
+                                <label for="">{{__('admin.Icon')}}</label>
                                 <input type="text" class="form-control custom-icon-picker" name="icon" autocomplete="off">
                             </div>
                             <div class="form-group">
-                              <label for="">{{__('Media text')}}</label>
+                              <label for="">{{__('admin.Media text')}}</label>
                               <input type="text" class="form-control" name="text">
                           </div>
                             <div class="form-group">
-                                <label for="">{{__('Link')}}</label>
+                                <label for="">{{__('admin.Link')}}</label>
                                 <input type="text" class="form-control" name="link">
                             </div>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin.Save')}}</button>
                         </form>
                       </div>
                   </div>
@@ -97,7 +97,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
-                                <h5 class="modal-title">{{__('Edit Social Link')}}</h5>
+                                <h5 class="modal-title">{{__('admin.Edit Social Link')}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -108,19 +108,19 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="">{{__('Icon')}}</label>
+                                <label for="">{{__('admin.Icon')}}</label>
                                 <input type="text" class="form-control custom-icon-picker" name="icon" value="{{ $link->icon }}" autocomplete="off">
                             </div>
                             <div class="form-group">
-                              <label for="">{{__('Media text')}}</label>
+                              <label for="">{{__('admin.Media text')}}</label>
                               <input type="text" class="form-control" name="text" value="{{ $link->text }}">
                             </div>
                             <div class="form-group">
-                                <label for="">{{__('Link')}}</label>
+                                <label for="">{{__('admin.Link')}}</label>
                                 <input type="text" class="form-control" name="link" value="{{ $link->link }}">
                             </div>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('admin.Update')}}</button>
                         </form>
                         </div>
                     </div>

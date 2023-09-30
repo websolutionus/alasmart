@@ -1,7 +1,7 @@
 @extends($active_theme)
 @section('title')
-    <title>{{__('Dashboard')}}</title>
-    <meta name="description" content="{{__('Dashboard')}}">
+    <title>{{__('user.Dashboard')}}</title>
+    <meta name="description" content="{{__('user.Dashboard')}}">
 @endsection
 
 @section('frontend-content')
@@ -16,11 +16,11 @@
                 <div class="col-xl-8 col-lg-8">
                     <div class="wsus__profile_overview">
                         @if ($user->about_me!=null)
-                            <h2>{{__('About Me')}}</h2>
+                            <h2>{{__('user.About Me')}}</h2>
                             {!! clean(html_decode($user->about_me)) !!}
                         @endif
                         @if ($user->my_skill!=null)
-                            <h2>{{__('My Skills')}} :</h2>
+                            <h2>{{__('user.My Skills')}} :</h2>
                             {!! clean(html_decode($user->my_skill)) !!}
                         @endif
                     </div>

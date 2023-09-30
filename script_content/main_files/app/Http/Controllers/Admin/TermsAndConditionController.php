@@ -41,14 +41,14 @@ class TermsAndConditionController extends Controller
             'terms_and_condition' => 'required',
         ];
         $customMessages = [
-            'terms_and_condition.required' => trans('Terms and condition is required'),
+            'terms_and_condition.required' => trans('admin_validation.Terms and condition is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
         $terms_condition_language->terms_and_condition = $request->terms_and_condition;
         $terms_condition_language->save();
 
-        $notification = trans('Update Successfully');
+        $notification = trans('admin_validation.Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

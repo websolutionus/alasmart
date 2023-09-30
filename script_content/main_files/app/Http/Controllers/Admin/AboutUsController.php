@@ -39,13 +39,13 @@ class AboutUsController extends Controller
             'about_us' => 'required',
         ];
         $customMessages = [
-            'header1.required' => trans('Title is required'),
-            'header1.required' => trans('Header is required'),
-            'header2.required' => trans('Header is required'),
-            'header3.required' => trans('Header is required'),
-            'name.required' => trans('Name is required'),
-            'desgination.required' => trans('Desgination is required'),
-            'about_us.required' => trans('About us is required'),
+            'header1.required' => trans('admin_validation.Title is required'),
+            'header1.required' => trans('admin_validation.Header is required'),
+            'header2.required' => trans('admin_validation.Header is required'),
+            'header3.required' => trans('admin_validation.Header is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'desgination.required' => trans('admin_validation.Designation is required'),
+            'about_us.required' => trans('admin_validation.About us is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -103,7 +103,7 @@ class AboutUsController extends Controller
                 if(File::exists(public_path().'/'.$exist_signature))unlink(public_path().'/'.$exist_signature);
             }
         }
-        $notification = trans('Updated Successfully');
+        $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -132,16 +132,16 @@ class AboutUsController extends Controller
         ];
 
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'header1.required' => trans('Header is required'),
-            'header2.required' => trans('Header is required'),
-            'description.required' => trans('Description is required'),
-            'item1.required' => trans('Item is required'),
-            'item2.required' => trans('Item is required'),
-            'item3.required' => trans('Item is required'),
-            'item4.required' => trans('Item is required'),
-            'name.required' => trans('Name is required'),
-            'desgination.required' => trans('Desgination is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'header1.required' => trans('admin_validation.Header is required'),
+            'header2.required' => trans('admin_validation.Header is required'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'item1.required' => trans('admin_validation.Item is required'),
+            'item2.required' => trans('admin_validation.Item is required'),
+            'item3.required' => trans('admin_validation.Item is required'),
+            'item4.required' => trans('admin_validation.Item is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'desgination.required' => trans('admin_validation.Designation is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -286,7 +286,7 @@ class AboutUsController extends Controller
             }
         }
 
-        $notification = trans('Updated Successfully');
+        $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

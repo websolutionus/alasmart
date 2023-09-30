@@ -46,7 +46,7 @@ class ProviderWithdrawController extends Controller
     public function destroy($id){
         $withdraw = ProviderWithdraw::find($id);
         $withdraw->delete();
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.provider-withdraw')->with($notification);
     }
@@ -72,7 +72,7 @@ class ProviderWithdrawController extends Controller
         MailHelper::setMailConfig();
         Mail::to($user->email)->send(new ProviderWithdrawApproval($subject,$message));
 
-        $notification = trans('Withdraw request approval successfully');
+        $notification = trans('admin_validation.Withdraw request approval successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.provider-withdraw')->with($notification);
     }

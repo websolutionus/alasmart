@@ -7,26 +7,26 @@
           <div class="col-md-4">
 
             <div class="card card-primary">
-              <div class="card-header"><h4>{{__('Forgot Password')}}</h4></div>
+              <div class="card-header"><h4>{{__('admin.Forgot Password')}}</h4></div>
 
               <div class="card-body">
                 <form method="POST" action="{{ route('admin.send.forget.password') }}">
                     @csrf
                   <div class="form-group">
-                    <label for="email">{{__('Email')}}</label>
+                    <label for="email">{{__('admin.Email')}}</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" autofocus>
                   </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      {{__('Forgot Password')}}
+                      {{__('admin.Forgot Password')}}
                     </button>
                   </div>
                 </form>
               </div>
             </div>
             <div class="mt-5 text-muted text-center">
-                {{__('Back To Login Page')}}, <a href="{{ route('admin.login') }}">{{__('Click Here')}}</a>
+                {{__('admin.Back To Login Page')}}, <a href="{{ route('admin.login') }}">{{__('admin.Click Here')}}</a>
             </div>
 
             <div class="simple-footer">

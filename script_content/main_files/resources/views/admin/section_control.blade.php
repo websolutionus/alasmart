@@ -1,13 +1,13 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Section Control')}}</title>
+<title>{{__('admin.Section Control')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Section Control')}}</h1>
+            <h1>{{__('admin.Section Control')}}</h1>
 
           </div>
 
@@ -20,15 +20,15 @@
                         @method('PUT')
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="home_border">{{__('Homepage Section Control')}}</h5>
+                                <h5 class="home_border">{{__('admin.Homepage Section Control')}}</h5>
                                 <hr>
 
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th width="33%">{{__('Section')}}</th>
-                                            <th width="33%">{{__('Visibility')}}</th>
-                                            <th width="33%">{{__('Item Quantity')}}</th>
+                                            <th width="33%">{{__('admin.Section')}}</th>
+                                            <th width="33%">{{__('admin.Visibility')}}</th>
+                                            <th width="33%">{{__('admin.Item Quantity')}}</th>
                                         </tr>
                                     </thead>
                                     @foreach ($homepage as $section)
@@ -40,8 +40,8 @@
                                             <input type="hidden" name="ids[]" value="{{ $section->id }}">
                                             <td>
                                                 <select name="status[]" class="form-control">
-                                                    <option {{ $section->status == 1 ? 'selected' : '' }} value="1">{{__('Enable')}}</option>
-                                                    <option {{ $section->status == 0 ? 'selected' : '' }} value="0">{{__('Disable')}}</option>
+                                                    <option {{ $section->status == 1 ? 'selected' : '' }} value="1">{{__('admin.Enable')}}</option>
+                                                    <option {{ $section->status == 0 ? 'selected' : '' }} value="0">{{__('admin.Disable')}}</option>
                                                 </select>
                                             </td>
 
@@ -57,7 +57,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                                <button class="btn btn-primary" type="submit">{{__('Update')}}</button>
+                                <button class="btn btn-primary" type="submit">{{__('admin.Update')}}</button>
                             </div>
                         </div>
                     </form>

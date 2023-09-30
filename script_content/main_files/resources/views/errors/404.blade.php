@@ -5,7 +5,7 @@
 
 @extends($active_theme)
 @section('title')
-    <title>{{__('Sorry, Page Not Found')}}</title>
+    <title>{{__('user.Sorry, Page Not Found')}}</title>
 @endsection
 
 @section('frontend-content')
@@ -19,7 +19,7 @@
                     <div class="wsus__breadcrumb_text">
                         <h1>404</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
                             <li><a href="javascript:;">404</a></li>
                         </ul>
                     </div>

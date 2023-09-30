@@ -24,7 +24,7 @@ class ProductCommentController extends Controller
         $productComment = ProductComment::find($id);
         $productComment->delete();
 
-        $notification= trans('Delete Successfully');
+        $notification= trans('admin_validation.Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.product-comment.index')->with($notification);
     }
@@ -34,11 +34,11 @@ class ProductCommentController extends Controller
         if($productComment->status == 1){
             $productComment->status = 0;
             $productComment->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $productComment->status = 1;
             $productComment->save();
-            $message = trans('Active Successfully');
+            $message = trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

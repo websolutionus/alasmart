@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Language')}}</title>
+<title>{{__('admin.Language')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Language')}}</h1>
+            <h1>{{__('admin.Language')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Language')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Language')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.language.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="{{ route('admin.language.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,14 +24,14 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Name')}}</th>
 
-                                    <th>{{__('Language Code')}}</th>
-                                    <th>{{__('Language Direction')}}</th>
-                                    <th>{{__('Default')}}</th>
-                                    <th>{{__('Status')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.Language Code')}}</th>
+                                    <th>{{__('admin.Language Direction')}}</th>
+                                    <th>{{__('admin.Default')}}</th>
+                                    <th>{{__('admin.Status')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -44,25 +44,25 @@
 
                                         <td>
                                             @if ($language->lang_direction == 'left_to_right')
-                                                <span>{{__('Left to Right')}}</span>
+                                                <span>{{__('admin.Left to Right')}}</span>
                                             @else
-                                                <span>{{__('Right to Left')}}</span>
+                                                <span>{{__('admin.Right to Left')}}</span>
                                             @endif
                                         </td>
 
                                         <td>
                                             @if ($language->is_default == 'Yes')
-                                                <span class="badge badge-success">{{__('Yes')}}</span>
+                                                <span class="badge badge-success">{{__('admin.Yes')}}</span>
                                             @else
-                                            <span class="badge badge-danger">{{__('No')}}</span>
+                                            <span class="badge badge-danger">{{__('admin.No')}}</span>
                                             @endif
                                         </td>
                                         
                                         <td>
                                             @if ($language->status == 1)
-                                                <span class="badge badge-success">{{__('Active')}}</span>
+                                                <span class="badge badge-success">{{__('admin.Active')}}</span>
                                             @else
-                                            <span class="badge badge-danger">{{__('In-active')}}</span>
+                                            <span class="badge badge-danger">{{__('admin.In-active')}}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -92,11 +92,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                       <div class="modal-body">
-                          {{__('You can not delete default language')}}
+                          {{__('admin.You can not delete default language')}}
                       </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('Close')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{__('admin.Close')}}</button>
                 </div>
             </div>
         </div>

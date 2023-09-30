@@ -58,8 +58,8 @@ class ProviderController extends Controller
             'message'=>'required'
         ];
         $customMessages = [
-            'subject.required' => trans('Subject is required'),
-            'message.required' => trans('Message is required'),
+            'subject.required' => trans('admin_validation.Subject is required'),
+            'message.required' => trans('admin_validation.Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -69,7 +69,7 @@ class ProviderController extends Controller
             Mail::to($provider->email)->send(new SendSingleSellerMail($request->subject,$request->message));
         }
 
-        $notification = trans('Email Send Successfully');
+        $notification = trans('admin_validation.Email Send Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -85,8 +85,8 @@ class ProviderController extends Controller
             'message'=>'required'
         ];
         $customMessages = [
-            'subject.required' => trans('Subject is required'),
-            'message.required' => trans('Message is required'),
+            'subject.required' => trans('admin_validation.Subject is required'),
+            'message.required' => trans('admin_validation.Message is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -94,7 +94,7 @@ class ProviderController extends Controller
         MailHelper::setMailConfig();
         Mail::to($user->email)->send(new SendSingleSellerMail($request->subject,$request->message));
 
-        $notification = trans('Email Send Successfully');
+        $notification = trans('admin_validation.Email Send Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -137,15 +137,15 @@ class ProviderController extends Controller
             'address'=>'required',
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'email.required' => trans('Email is required'),
-            'email.unique' => trans('Email already exist'),
-            'phone.required' => trans('Phone is required'),
-            'country.required' => trans('Country or region is required'),
-            'state.required' => trans('State or province is required'),
-            'city.required' => trans('Service area is required'),
-            'designation.required' => trans('Desgination is required'),
-            'address.required' => trans('Address is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'email.required' => trans('admin_validation.Email is required'),
+            'email.unique' => trans('admin_validation.Email already exist'),
+            'phone.required' => trans('admin_validation.Phone is required'),
+            'country.required' => trans('admin_validation.Country or region is required'),
+            'state.required' => trans('admin_validation.State or province is required'),
+            'city.required' => trans('admin_validation.Service area is required'),
+            'designation.required' => trans('admin_validation.Designation is required'),
+            'address.required' => trans('admin_validation.Address is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -158,7 +158,7 @@ class ProviderController extends Controller
         $provider->address = $request->address;
         $provider->save();
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -182,7 +182,7 @@ class ProviderController extends Controller
         $orders=Order::whereIn('id',$order_id)->delete();
         OrderItem::where('author_id',$id)->delete();
         Product::where('author_id',$id)->delete();
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -192,11 +192,11 @@ class ProviderController extends Controller
         if($provider->status==1){
             $provider->status=0;
             $provider->save();
-            $message= trans('Inactive Successfully');
+            $message= trans('admin_validation.Inactive Successfully');
         }else{
             $provider->status=1;
             $provider->save();
-            $message= trans('Active Successfully');
+            $message= trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

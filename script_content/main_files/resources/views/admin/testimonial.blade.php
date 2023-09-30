@@ -1,21 +1,21 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('Testimonial')}}</title>
+<title>{{__('admin.Testimonial')}}</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('Testimonial')}}</h1>
+            <h1>{{__('admin.Testimonial')}}</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a></div>
-              <div class="breadcrumb-item">{{__('Testimonial')}}</div>
+              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
+              <div class="breadcrumb-item">{{__('admin.Testimonial')}}</div>
             </div>
           </div>
 
           <div class="section-body">
-            <a href="{{ route('admin.testimonial.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('Add New')}}</a>
+            <a href="{{ route('admin.testimonial.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> {{__('admin.Add New')}}</a>
             <div class="row mt-4">
                 <div class="col">
                   <div class="card">
@@ -24,12 +24,12 @@
                         <table class="table table-striped" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>{{__('SN')}}</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('Designation')}}</th>
-                                    <th>{{__('Image')}}</th>
-                                    <th>{{__('Status')}}</th>
-                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('admin.SN')}}</th>
+                                    <th>{{__('admin.Name')}}</th>
+                                    <th>{{__('admin.Designation')}}</th>
+                                    <th>{{__('admin.Image')}}</th>
+                                    <th>{{__('admin.Status')}}</th>
+                                    <th>{{__('admin.Action')}}</th>
                                   </tr>
                             </thead>
                             <tbody>
@@ -42,11 +42,11 @@
                                         <td>
                                             @if($testimonial->status == 1)
                                             <a href="javascript:;" onclick="changeFeatureStatus({{ $testimonial->id }})">
-                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" checked data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
                                             @else
                                             <a href="javascript:;" onclick="changeFeatureStatus({{ $testimonial->id }})">
-                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('Active')}}" data-off="{{__('InActive')}}" data-onstyle="success" data-offstyle="danger">
+                                                <input id="status_toggle" type="checkbox" data-toggle="toggle" data-on="{{__('admin.Active')}}" data-off="{{__('admin.InActive')}}" data-onstyle="success" data-offstyle="danger">
                                             </a>
                                             @endif
                                         </td>

@@ -46,14 +46,14 @@ class ProductItemController extends Controller
             'audio_description'=>'required',
         ];
         $customMessages = [
-            'script_title.required' => trans('Script product title is required'),
-            'script_description.required' => trans('Script product description is required'),
-            'image_title.required' => trans('Image product title is required'),
-            'image_description.required' => trans('Image product description is required'),
-            'video_title.required' => trans('Video product title is required'),
-            'video_description.required' => trans('Video product description is required'),
-            'audio_title.required' => trans('Audio product title is required'),
-            'audio_description.required' => trans('Audio product description is required'),
+            'script_title.required' => trans('admin_validation.Script product title is required'),
+            'script_description.required' => trans('admin_validation.Script product description is required'),
+            'image_title.required' => trans('admin_validation.Image product title is required'),
+            'image_description.required' => trans('admin_validation.Image product description is required'),
+            'video_title.required' => trans('admin_validation.Video product title is required'),
+            'video_description.required' => trans('admin_validation.Video product description is required'),
+            'audio_title.required' => trans('admin_validation.Audio product title is required'),
+            'audio_description.required' => trans('admin_validation.Audio product description is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -123,7 +123,7 @@ class ProductItemController extends Controller
             }
         }
 
-        $notification= trans('Updated Successfully');
+        $notification= trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

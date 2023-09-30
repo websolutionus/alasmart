@@ -27,8 +27,8 @@ class PopularBlogController extends Controller
             'blog_id'=>'required|unique:popular_posts',
         ];
         $customMessages = [
-            'blog_id.required' => trans('Blog is required'),
-            'blog_id.unique' => trans('Blog already exist'),
+            'blog_id.required' => trans('admin_validation.Blog is required'),
+            'blog_id.unique' => trans('admin_validation.Blog already exist'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -38,7 +38,7 @@ class PopularBlogController extends Controller
         $popularBlog->save();
 
 
-        $notification = trans('Added Successfully');
+        $notification = trans('admin_validation.Added Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.popular-blog.index')->with($notification);
     }
@@ -48,7 +48,7 @@ class PopularBlogController extends Controller
         $blog = PopularPost::find($id);
         $blog->delete();
 
-        $notification= trans('Delete Successfully');
+        $notification= trans('admin_validation.Delete Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.popular-blog.index')->with($notification);
     }
@@ -58,11 +58,11 @@ class PopularBlogController extends Controller
         if($blog->status==1){
             $blog->status=0;
             $blog->save();
-            $message= trans('Inactive Successfully');
+            $message= trans('admin_validation.Inactive Successfully');
         }else{
             $blog->status=1;
             $blog->save();
-            $message= trans('Active Successfully');
+            $message= trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

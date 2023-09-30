@@ -53,12 +53,12 @@ class PaymentMethodController extends Controller
             'currency_rate' => $request->status ? 'required|numeric' : '',
         ];
         $customMessages = [
-            'paypal_client_id.required' => trans('Paypal client id is required'),
-            'paypal_secret_key.required' => trans('Paypal secret key is required'),
-            'account_mode.required' => trans('Account mode is required'),
-            'country_name.required' => trans('Country name is required'),
-            'currency_name.required' => trans('Currency name is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
+            'paypal_client_id.required' => trans('admin_validation.Paypal client id is required'),
+            'paypal_secret_key.required' => trans('admin_validation.Paypal secret key is required'),
+            'account_mode.required' => trans('admin_validation.Account mode is required'),
+            'country_name.required' => trans('admin_validation.Country name is required'),
+            'currency_name.required' => trans('admin_validation.Currency name is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -89,7 +89,7 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $notification=trans('Updated Successfully');
+        $notification=trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -104,11 +104,11 @@ class PaymentMethodController extends Controller
             'currency_rate' => $request->status ? 'required|numeric' : '',
         ];
         $customMessages = [
-            'stripe_key.required' => trans('Stripe key is required'),
-            'stripe_secret.required' => trans('Stripe secret is required'),
-            'country_name.required' => trans('Country name is required'),
-            'currency_name.required' => trans('Currency name is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
+            'stripe_key.required' => trans('admin_validation.Stripe key is required'),
+            'stripe_secret.required' => trans('admin_validation.Stripe secret is required'),
+            'country_name.required' => trans('admin_validation.Country name is required'),
+            'currency_name.required' => trans('admin_validation.Currency name is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -139,7 +139,7 @@ class PaymentMethodController extends Controller
         }
 
 
-        $notification=trans('Updated Successfully');
+        $notification=trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -156,14 +156,14 @@ class PaymentMethodController extends Controller
             'country_name' => $request->status ? 'required' : '',
         ];
         $customMessages = [
-            'razorpay_key.required' => trans('Razorpay key is required'),
-            'razorpay_secret.required' => trans('Razorpay secret is required'),
-            'name.required' => trans('Name is required'),
-            'description.required' => trans('Description is required'),
-            'country_name.required' => trans('Country name is required'),
-            'currency_name.required' => trans('Currency name is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
-            'theme_color.required' => trans('Theme Color is required'),
+            'razorpay_key.required' => trans('admin_validation.Razorpay key is required'),
+            'razorpay_secret.required' => trans('admin_validation.Razorpay secret is required'),
+            'name.required' => trans('admin_validation.Name is required'),
+            'description.required' => trans('admin_validation.Description is required'),
+            'country_name.required' => trans('admin_validation.Country name is required'),
+            'currency_name.required' => trans('admin_validation.Currency name is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
+            'theme_color.required' => trans('admin_validation.Theme Color is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -192,7 +192,7 @@ class PaymentMethodController extends Controller
             if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -202,7 +202,7 @@ class PaymentMethodController extends Controller
             'account_info' => $request->status ? 'required' : ''
         ];
         $customMessages = [
-            'account_info.required' => trans('Account information is required'),
+            'account_info.required' => trans('admin_validation.Account information is required'),
         ];
         $this->validate($request, $rules,$customMessages);
         $bank = BankPayment::first();
@@ -227,7 +227,7 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
@@ -242,10 +242,10 @@ class PaymentMethodController extends Controller
         ];
 
         $customMessages = [
-            'mollie_key.required' => trans('Mollie key is required'),
-            'mollie_country_name.required' => trans('Country name is required'),
-            'mollie_currency_name.required' => trans('Currency name is required'),
-            'mollie_currency_rate.required' => trans('Currency rate is required'),
+            'mollie_key.required' => trans('admin_validation.Mollie key is required'),
+            'mollie_country_name.required' => trans('admin_validation.Country name is required'),
+            'mollie_currency_name.required' => trans('admin_validation.Currency name is required'),
+            'mollie_currency_rate.required' => trans('admin_validation.Currency rate is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -274,7 +274,7 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -289,11 +289,11 @@ class PaymentMethodController extends Controller
         ];
 
         $customMessages = [
-            'paystack_public_key.required' => trans('Paystack public key is required'),
-            'paystack_secret_key.required' => trans('Paystack secret key is required'),
-            'paystack_currency_rate.required' => trans('Currency rate is required'),
-            'paystack_currency_name.required' => trans('Currency name is required'),
-            'paystack_country_name.required' => trans('Country rate is required'),
+            'paystack_public_key.required' => trans('admin_validation.Paystack public key is required'),
+            'paystack_secret_key.required' => trans('admin_validation.Paystack secret key is required'),
+            'paystack_currency_rate.required' => trans('admin_validation.Currency rate is required'),
+            'paystack_currency_name.required' => trans('admin_validation.Currency name is required'),
+            'paystack_country_name.required' => trans('admin_validation.Country rate is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -323,7 +323,7 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -338,12 +338,12 @@ class PaymentMethodController extends Controller
             'country_name' => $request->status ? 'required' : '',
         ];
         $customMessages = [
-            'title.required' => trans('Title is required'),
-            'public_key.required' => trans('Public key is required'),
-            'secret_key.required' => trans('Secret key is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
-            'currency_name.required' => trans('Currency name is required'),
-            'country_name.required' => trans('Country name is required'),
+            'title.required' => trans('admin_validation.Title is required'),
+            'public_key.required' => trans('admin_validation.Public key is required'),
+            'secret_key.required' => trans('admin_validation.Secret key is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
+            'currency_name.required' => trans('admin_validation.Currency name is required'),
+            'country_name.required' => trans('admin_validation.Country name is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -370,7 +370,7 @@ class PaymentMethodController extends Controller
             if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -384,10 +384,10 @@ class PaymentMethodController extends Controller
             'currency_rate' => $request->status ? 'required|numeric' : '',
         ];
         $customMessages = [
-            'account_mode.required' => trans('Account mode is required'),
-            'api_key.required' => trans('Api key is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
-            'auth_token.required' => trans('Auth token is required'),
+            'account_mode.required' => trans('admin_validation.Account mode is required'),
+            'api_key.required' => trans('admin_validation.Api key is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
+            'auth_token.required' => trans('admin_validation.Auth token is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -417,7 +417,7 @@ class PaymentMethodController extends Controller
             }
         }
 
-        $notification=trans('Update Successfully');
+        $notification=trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -432,11 +432,11 @@ class PaymentMethodController extends Controller
             'currency_rate' => $request->status ? 'required|numeric' : '',
         ];
         $customMessages = [
-            'store_id.required' => trans('Stripe key is required'),
-            'store_password.required' => trans('Stripe secret is required'),
-            'country_name.required' => trans('Country name is required'),
-            'currency_name.required' => trans('Currency name is required'),
-            'currency_rate.required' => trans('Currency rate is required'),
+            'store_id.required' => trans('admin_validation.Stripe key is required'),
+            'store_password.required' => trans('admin_validation.Stripe secret is required'),
+            'country_name.required' => trans('admin_validation.Country name is required'),
+            'currency_name.required' => trans('admin_validation.Currency name is required'),
+            'currency_rate.required' => trans('admin_validation.Currency rate is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -465,7 +465,7 @@ class PaymentMethodController extends Controller
                 if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
             }
         }
-        $notification=trans('Updated Successfully');
+        $notification=trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-
-use App\Models\GoogleRecaptcha;
-use App\Models\User;
-use App\Rules\Captcha;
-use App\Mail\UserForgetPassword;
-use App\Helpers\MailHelper;
-use App\Models\EmailTemplate;
-use App\Models\SocialLoginInformation;
-use App\Models\Setting;
-use Mail;
 use Str;
-use Validator,Redirect,Response,File;
-use Socialite;
 use Auth;
 use Hash;
+use Mail;
+
 use Session;
+use Socialite;
+use App\Models\User;
+use App\Rules\Captcha;
+use App\Models\Setting;
+use App\Models\Language;
+use App\Helpers\MailHelper;
+use Illuminate\Http\Request;
+use App\Models\EmailTemplate;
+use App\Models\GoogleRecaptcha;
+use App\Mail\UserForgetPassword;
+use App\Http\Controllers\Controller;
+use Validator,Redirect,Response,File;
+use App\Models\SocialLoginInformation;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class LoginController extends Controller
 {
 
@@ -33,7 +35,17 @@ class LoginController extends Controller
         $this->middleware('guest:web')->except('userLogout');
     }
 
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function loginPage(){
+        $this->translator();
         $recaptchaSetting = GoogleRecaptcha::first();
         $socialLogin = SocialLoginInformation::first();
 
@@ -64,14 +76,15 @@ class LoginController extends Controller
     }
 
     public function storeLogin(Request $request){
+        $this->translator();
         $rules = [
             'email'=>'required',
             'password'=>'required',
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'email.required' => trans('Email is required'),
-            'password.required' => trans('Password is required'),
+            'email.required' => trans('user_validation.Email is required'),
+            'password.required' => trans('user_validation.Password is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -84,7 +97,7 @@ class LoginController extends Controller
             if($user->status==1){
                 if(Hash::check($request->password,$user->password)){
                     if(Auth::guard('web')->attempt($credential,$request->remember)){
-                        $notification = trans('Login Successfully');
+                        $notification = trans('user_validation.Login Successfully');
                         $notification=array('messege'=>$notification,'alert-type'=>'success');
                         if($user->is_provider == 1) {
                             return redirect()->route('provider.dashboard')->with($notification);
@@ -94,24 +107,25 @@ class LoginController extends Controller
 
                     }
                 }else{
-                    $notification = trans('Credentials does not exist');
+                    $notification = trans('user_validation.Credentials does not exist');
                     $notification=array('messege'=>$notification,'alert-type'=>'error');
                     return redirect()->back()->with($notification);
                 }
 
             }else{
-                $notification = trans('Disabled Account');
+                $notification = trans('user_validation.Disabled Account');
                 $notification=array('messege'=>$notification,'alert-type'=>'error');
                 return redirect()->back()->with($notification);
             }
         }else{
-            $notification = trans('Email does not exist');
+            $notification = trans('user_validation.Email does not exist');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
     }
 
     public function forgetPage(){
+        $this->translator();
         $recaptchaSetting = GoogleRecaptcha::first();
 
         $selected_theme = Session::get('selected_theme');
@@ -132,12 +146,13 @@ class LoginController extends Controller
     }
 
     public function sendForgetPassword(Request $request){
+        $this->translator();
         $rules = [
             'email'=>'required',
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'email.required' => trans('Email is required'),
+            'email.required' => trans('user_validation.Email is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -154,12 +169,12 @@ class LoginController extends Controller
             $message = str_replace('{{name}}',$user->name,$message);
             Mail::to($user->email)->send(new UserForgetPassword($message,$subject,$user));
 
-            $notification = trans('Reset password link send to your email.');
+            $notification = trans('user_validation.Reset password link send to your email.');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
 
         }else{
-            $notification = trans('Email does not exist');
+            $notification = trans('user_validation.Email does not exist');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -167,6 +182,7 @@ class LoginController extends Controller
 
 
     public function resetPasswordPage($token){
+        $this->translator();
         $user = User::select('id','name','email','forget_password_token')->where('forget_password_token', $token)->first();
         
         $recaptchaSetting = GoogleRecaptcha::first();
@@ -182,16 +198,17 @@ class LoginController extends Controller
     }
 
     public function storeResetPasswordPage(Request $request, $token){
+        $this->translator();
         $rules = [
             'email'=>'required',
             'password'=>'required|min:4|confirmed',
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'email.required' => trans('Email is required'),
-            'password.required' => trans('Password is required'),
-            'password.min' => trans('Password must be 4 characters'),
-            'password.confirmed' => trans('Confirm password does not match'),
+            'email.required' => trans('user_validation.Email is required'),
+            'password.required' => trans('user_validation.Password is required'),
+            'password.min' => trans('user_validation.Password must be 4 characters'),
+            'password.confirmed' => trans('user_validation.Confirm password does not match'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -201,19 +218,20 @@ class LoginController extends Controller
             $user->forget_password_token=null;
             $user->save();
 
-            $notification = trans('Password Reset successfully');
+            $notification = trans('user_validation.Password Reset successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('login')->with($notification);
         }else{
-            $notification = trans('Something went wrong');
+            $notification = trans('user_validation.Something went wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('login')->with($notification);
         }
     }
 
     public function userLogout(){
+        $this->translator();
         Auth::guard('web')->logout();
-        $notification= trans('Logout Successfully');
+        $notification= trans('user_validation.Logout Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('login')->with($notification);
     }

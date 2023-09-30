@@ -40,14 +40,14 @@ class PrivacyPolicyController extends Controller
             'privacy_policy' => 'required',
         ];
         $customMessages = [
-            'privacy_policy.required' => trans('Privacy policy is required'),
+            'privacy_policy.required' => trans('admin_validation.Privacy policy is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
         $privacy_policy_language->privacy_policy = $request->privacy_policy;
         $privacy_policy_language->save();
 
-        $notification = trans('Updated Successfully');
+        $notification = trans('admin_validation.Updated Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

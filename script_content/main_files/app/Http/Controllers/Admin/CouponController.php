@@ -58,7 +58,7 @@ class CouponController extends Controller
             'message'=>'Coupon add successfully.',
             'alert-type'=>'success',
         );
-        $notification=trans('Created Successfully');
+        $notification=trans('admin_validation.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
@@ -116,7 +116,7 @@ class CouponController extends Controller
             'message'=>'Coupon add successfully.',
             'alert-type'=>'success',
         );
-        $notification=trans('Updated Successfully');
+        $notification=trans('admin_validation.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.coupon.index')->with($notification);
     }
@@ -131,7 +131,7 @@ class CouponController extends Controller
     {
         $coupon = Coupon::find($id);
         $coupon->delete();
-        $notification = trans('Delete Successfully');
+        $notification = trans('admin_validation.Delete Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.coupon.index')->with($notification);
     }
@@ -141,11 +141,11 @@ class CouponController extends Controller
         if($coupon->status==1){
             $coupon->status=0;
             $coupon->save();
-            $message = trans('Inactive Successfully');
+            $message = trans('admin_validation.Inactive Successfully');
         }else{
             $coupon->status=1;
             $coupon->save();
-            $message= trans('Active Successfully');
+            $message= trans('admin_validation.Active Successfully');
         }
         return response()->json($message);
     }

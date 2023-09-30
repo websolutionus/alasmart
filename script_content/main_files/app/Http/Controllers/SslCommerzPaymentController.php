@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
+use Session;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Language;
 use App\Models\OrderItem;
 use App\Helpers\MailHelper;
 use Illuminate\Http\Request;
@@ -18,6 +20,15 @@ use App\Library\SslCommerz\SslCommerzNotification;
 
 class SslCommerzPaymentController extends Controller
 {
+
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
 
     public function exampleEasyCheckout()
     {
@@ -207,7 +218,7 @@ class SslCommerzPaymentController extends Controller
 
     public function success(Request $request)
     {
-        
+        $this->translator();
         echo "Transaction is Successful";
 
         $tran_id = $request->input('tran_id');
@@ -254,7 +265,7 @@ class SslCommerzPaymentController extends Controller
             }
             $this->sendMailToUser($user, $order_details);
             Cart::destroy();
-            $notification = trans('Thanks for your new order');
+            $notification = trans('user_validation.Thanks for your new order');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('payment-success')->with($notification);
             }
@@ -273,14 +284,16 @@ class SslCommerzPaymentController extends Controller
 
     public function fail(Request $request)
     {
-        $notification = trans('Payment Failed!');
+        $this->translator();
+        $notification = trans('user_validation.Payment Failed!');
         $notification = array('messege'=>$notification,'alert-type'=>'error');
         return back()->with($notification);
     }
 
     public function cancel(Request $request)
     {
-        $notification = trans('Payment Canceled!');
+        $this->translator();
+        $notification = trans('user_validation.Payment Canceled!');
         $notification = array('messege'=>$notification,'alert-type'=>'error');
         return back()->with($notification);
     }

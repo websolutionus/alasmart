@@ -20,7 +20,7 @@ class AdController extends Controller
             'link'=>'required',
         ];
         $customMessages = [
-            'link.required' => trans('Link is required'),
+            'link.required' => trans('admin_validation.Link is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -43,7 +43,7 @@ class AdController extends Controller
             }
         }
 
-        $notification= trans('Update Successfully');
+        $notification= trans('admin_validation.Update Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }

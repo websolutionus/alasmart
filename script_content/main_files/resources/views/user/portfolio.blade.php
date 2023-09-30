@@ -1,8 +1,8 @@
 @extends($active_theme)
 
 @section('title')
-    <title>{{__('User portfolio')}}</title>
-    <meta name="description" content="{{__('User portfolio')}}">
+    <title>{{__('user.User portfolio')}}</title>
+    <meta name="description" content="{{__('user.User portfolio')}}">
 @endsection
 
 @section('frontend-content')
@@ -24,14 +24,14 @@
                                     <div class="wsus__gallery_item_img">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                                         <ul class="wsus__gallery_item_overlay">
-                                            <li><a href="{{ route('product-edit', ['id' => $product->id, 'lang_code' => 'en']) }}">{{__('Edit')}}</a></li>
-                                            <li><a data-bs-toggle="modal" data-bs-target="#dataDelete" onclick="deleteData({{ $product->id }})" href="javascript:;">{{__('Delete')}}</a></li>
+                                            <li><a href="{{ route('product-edit', ['id' => $product->id, 'lang_code' => 'en']) }}">{{__('user.Edit')}}</a></li>
+                                            <li><a data-bs-toggle="modal" data-bs-target="#dataDelete" onclick="deleteData({{ $product->id }})" href="javascript:;">{{__('user.Delete')}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="wsus__gallery_item_text">
                                         <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                                         <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                                        <p>{{__('By')}} <span>{{ $product->author->name }}</span> {{__('In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
+                                        <p>{{__('user.By')}} <span>{{ $product->author->name }}</span> {{__('user.In')}} <a class="category" href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                                         <ul class="d-flex flex-wrap justify-content-between">
                                             @php
                                                 $review=App\Models\Review::where(['product_id' => $product->id, 'status' => 1])->get()->average('rating');
@@ -50,7 +50,7 @@
                                                 </p>
                                             </li>
                                             <li>
-                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                                <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             @empty
                             <div class="col-12 text-center mt-5">
-                                <h2 class="mt-5 text-danger">{{__('Product Not Found')}}</h2>
+                                <h2 class="mt-5 text-danger">{{__('user.Product Not Found')}}</h2>
                             </div>
                             @endforelse
                         </div>
@@ -87,15 +87,15 @@
           <div class="modal-content">
             <form id="deleteForm">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('Item Delete Confirmation')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('user.Item Delete Confirmation')}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {{__('Are You sure delete this item')}} ?
+                    {{__('user.Are You sure delete this item')}} ?
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('Close')}}</button>
-                <button type="submit" class="btn btn-primary">{{__('Yes, Delete')}}</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{__('user.Close')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('user.Yes, Delete')}}</button>
                 </div>
             </form>
           </div>

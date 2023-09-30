@@ -42,7 +42,18 @@ class UserProfileController extends Controller
     {
         $this->middleware('auth:web');
     }
+
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function dashboard(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $setting = Setting::first();
         
@@ -56,8 +67,8 @@ class UserProfileController extends Controller
     }
 
     public function portfolio($id=null){
+        $this->translator();
         $setting = Setting::first();
-
         $user = Auth::guard('web')->user();
         $products = Product::with('category','author','productlangfrontend')->where(['author_id' => $user->id])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
         
@@ -74,6 +85,7 @@ class UserProfileController extends Controller
     }
 
     public function download(){
+        $this->translator();
         $setting = Setting::first();
 
         $user = Auth::guard('web')->user();
@@ -92,7 +104,7 @@ class UserProfileController extends Controller
     }
 
     public function collection(){
-
+        $this->translator();
         $setting = Setting::first();
         $user = Auth::guard('web')->user();
         $wishlists=Wishlist::with('product')->where('user_id', $user->id)->paginate(6);
@@ -108,14 +120,16 @@ class UserProfileController extends Controller
     }
 
     public function delete_wishlist($id){
+       $this->translator();
        $wishlist=Wishlist::findOrFail($id);
        $wishlist->delete();
-       $notification = trans('Successfully deleted');
+       $notification = trans('user_validation.Successfully deleted');
        $notification = array('messege'=>$notification,'alert-type'=>'success');
        return redirect()->back()->with($notification);
     }
 
     public function select_product_type(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $productType = ProductTypePage::first();
         
@@ -129,12 +143,13 @@ class UserProfileController extends Controller
     }
 
     public function product_create(Request $request){
+        $this->translator();
         $rules = [
             'product_type'=>'required',
         ];
 
         $customMessages = [
-            'product_type.required' => trans('Product type is required'),
+            'product_type.required' => trans('user_validation.Product type is required'),
         ];
         $this->validate($request, $rules,$customMessages);
         $user = Auth::guard('web')->user();
@@ -142,7 +157,7 @@ class UserProfileController extends Controller
         $active_theme = 'layout';
 
         if(!$request->product_type){
-            $notification = trans('Something went wrong');
+            $notification = trans('user_validation.Something went wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('select-product-type')->with($notification);
         }
@@ -194,6 +209,7 @@ class UserProfileController extends Controller
     }
 
     public function store(Request $request){
+        $this->translator();
         $rules = [
             'thumb_image'=>'required',
             'upload_file'=> 'required|file|mimes:zip',
@@ -210,22 +226,22 @@ class UserProfileController extends Controller
         ];
 
         $customMessages = [
-            'thumb_image.required' => trans('Thumbnail is required'),
-            'download_file_type.required' => trans('Upload file type is required'),
-            'product_icon.required' => trans('Product icon is required'),
-            'upload_file.required' => trans('Upload file is required is required'),
-            'download_link.required' => trans('Download link is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'extend_price.required' => trans('Extend price is required'),
-            'extend_price.numeric' => trans('Extend price should be numeric value'),
-            'regular_price.numeric' => trans('Regular price should be numeric value'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
+            'thumb_image.required' => trans('user_validation.Thumbnail is required'),
+            'download_file_type.required' => trans('user_validation.Upload file type is required'),
+            'product_icon.required' => trans('user_validation.Product icon is required'),
+            'upload_file.required' => trans('user_validation.Upload file is required'),
+            'download_link.required' => trans('user_validation.Download link is required'),
+            'category.required' => trans('user_validation.Category is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'slug.required' => trans('user_validation.Slug is required'),
+            'slug.unique' => trans('user_validation.Slug already exist'),
+            'preview_link.required' => trans('user_validation.Preview link is required'),
+            'regular_price.required' => trans('user_validation.Regular price is required'),
+            'extend_price.required' => trans('user_validation.Extend price is required'),
+            'extend_price.numeric' => trans('user_validation.Extend price should be numeric value'),
+            'regular_price.numeric' => trans('user_validation.Regular price should be numeric value'),
+            'description.required' => trans('user_validation.Description is required'),
+            'tags.required' => trans('user_validation.Tag is required'),
         ];
         $this->validate($request, $rules,$customMessages);
         $user = Auth::guard('web')->user();
@@ -283,13 +299,14 @@ class UserProfileController extends Controller
             $product_language->save();
         }
 
-        $notification = trans('Created successfully');
+        $notification = trans('user_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
     }
 
     public function store_image_type_product(Request $request){
+        $this->translator();
         $rules = [
             'thumb_image'=>'required',
             'product_icon'=>'required',
@@ -304,16 +321,16 @@ class UserProfileController extends Controller
         ];
 
         $customMessages = [
-            'thumb_image.required' => trans('Thumbnail is required'),
-            'product_icon.required' => trans('Product icon is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'slug.required' => trans('Slug is required'),
-            'slug.unique' => trans('Slug already exist'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
+            'thumb_image.required' => trans('user_validation.Thumbnail is required'),
+            'product_icon.required' => trans('user_validation.Product icon is required'),
+            'category.required' => trans('user_validation.Category is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'slug.required' => trans('user_validation.Slug is required'),
+            'slug.unique' => trans('user_validation.Slug already exist'),
+            'preview_link.required' => trans('user_validation.Preview link is required'),
+            'regular_price.required' => trans('user_validation.Regular price is required'),
+            'description.required' => trans('user_validation.Description is required'),
+            'tags.required' => trans('user_validation.Tag is required'),
         ];
         $this->validate($request, $rules,$customMessages);
         $user = Auth::guard('web')->user();
@@ -361,12 +378,13 @@ class UserProfileController extends Controller
             $product_language->save();
         }
 
-        $notification = trans('Created successfully');
+        $notification = trans('user_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('product-edit', ['id' => $product->id, 'lang_code' => 'en'])->with($notification);
     }
 
     public function edit(Request $request, $id){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
         $product_language = ProductLanguage::where(['product_id' => $id, 'lang_code' => $request->lang_code])->first();
@@ -379,7 +397,7 @@ class UserProfileController extends Controller
 
         
         if(!$product->product_type){
-            $notification = trans('Something went wrong');
+            $notification = trans('user_validation.Something went wrong');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('select-product-type')->with($notification);
         }
@@ -449,11 +467,11 @@ class UserProfileController extends Controller
     }
 
     public function update(Request $request, $id){
-
+        $this->translator();
         $rules = [
             'category'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
-            'preview_link'=>session()->get('admin_lang') == $request->lang_code ? 'required':'',
+            'preview_link'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'regular_price'=>session()->get('front_lang') == $request->lang_code ? 'required|numeric':'',
             'extend_price'=>session()->get('front_lang') == $request->lang_code ? 'required|numeric':'',
             'description'=>'required',
@@ -462,18 +480,18 @@ class UserProfileController extends Controller
         ];
 
         $customMessages = [
-            'download_file_type.required' => trans('Upload file type is required'),
-            'upload_file.required' => trans('Upload file is required is required'),
-            'download_link.required' => trans('Download link is required'),
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'extend_price.required' => trans('Extend price is required'),
-            'extend_price.numeric' => trans('Extend price should be numeric value'),
-            'regular_price.numeric' => trans('Regular price should be numeric value'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
+            'download_file_type.required' => trans('user_validation.Upload file type is required'),
+            'upload_file.required' => trans('user_validation.Upload file is required'),
+            'download_link.required' => trans('user_validation.Download link is required'),
+            'category.required' => trans('user_validation.Category is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'preview_link.required' => trans('user_validation.Preview link is required'),
+            'regular_price.required' => trans('user_validation.Regular price is required'),
+            'extend_price.required' => trans('user_validation.Extend price is required'),
+            'extend_price.numeric' => trans('user_validation.Extend price should be numeric value'),
+            'regular_price.numeric' => trans('user_validation.Regular price should be numeric value'),
+            'description.required' => trans('user_validation.Description is required'),
+            'tags.required' => trans('user_validation.Tag is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -544,13 +562,14 @@ class UserProfileController extends Controller
         $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product_language->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('user_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
     }
 
     public function image_product_update(Request $request, $id){
+        $this->translator();
         $rules = [
             'category'=>session()->get('front_lang') == $request->lang_code ? 'required':'',
             'name'=>'required',
@@ -562,12 +581,12 @@ class UserProfileController extends Controller
         ];
 
         $customMessages = [
-            'category.required' => trans('Category is required'),
-            'name.required' => trans('Name is required'),
-            'preview_link.required' => trans('Preview link is required'),
-            'regular_price.required' => trans('Regular price is required'),
-            'description.required' => trans('Description is required'),
-            'tags.required' => trans('Tag is required'),
+            'category.required' => trans('user_validation.Category is required'),
+            'name.required' => trans('user_validation.Name is required'),
+            'preview_link.required' => trans('user_validation.Preview link is required'),
+            'regular_price.required' => trans('user_validation.Regular price is required'),
+            'description.required' => trans('user_validation.Description is required'),
+            'tags.required' => trans('user_validation.Tag is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -622,12 +641,13 @@ class UserProfileController extends Controller
         $product_language->seo_description = $request->seo_description ? $request->seo_description : $request->name;
         $product_language->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('user_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
     public function store_product_variant(Request $request, $id){
+        $this->translator();
         $rules = [
             'variant_name'=>'required',
             'file_name'=>'required',
@@ -635,10 +655,10 @@ class UserProfileController extends Controller
         ];
 
         $customMessages = [
-            'variant_name.required' => trans('Variant name is required'),
-            'file_name.required' => trans('Upload file is required'),
-            'price.required' => trans('Price is required'),
-            'price.numeric' => trans('Price should be numeric value'),
+            'variant_name.required' => trans('user_validation.Variant name is required'),
+            'file_name.required' => trans('user_validation.Upload file is required'),
+            'price.required' => trans('user_validation.Price is required'),
+            'price.numeric' => trans('user_validation.Price should be numeric value'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -656,13 +676,14 @@ class UserProfileController extends Controller
         $variant->product_id = $id;
         $variant->save();
 
-        $notification = trans('Created successfully');
+        $notification = trans('user_validation.Created successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
 
     }
 
     public function product_variant($id){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $active_theme = 'layout';
         return view('user.product_variant')->with([
@@ -671,15 +692,16 @@ class UserProfileController extends Controller
     }
 
     public function update_product_variant(Request $request, $id){
+        $this->translator();
         $rules = [
             'variant_name'=>'required',
             'price'=>'required|numeric',
         ];
 
         $customMessages = [
-            'variant_name.required' => trans('Variant name is required'),
-            'price.required' => trans('Price is required'),
-            'price.numeric' => trans('Price should be numeric value'),
+            'variant_name.required' => trans('user_validation.Variant name is required'),
+            'price.required' => trans('user_validation.Price is required'),
+            'price.numeric' => trans('user_validation.Price should be numeric value'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -707,12 +729,13 @@ class UserProfileController extends Controller
         $variant->price = $request->price;
         $variant->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('user_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
     public function delete_product_variant($id){
+        $this->translator();
         $order_item = OrderItem::where('variant_id', $id)->first();
         
         if (!$order_item) {
@@ -725,7 +748,7 @@ class UserProfileController extends Controller
                 }
             }
 
-            $notification = trans('Deleted successfully');
+            $notification = trans('user_validation.Deleted successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{
@@ -737,6 +760,7 @@ class UserProfileController extends Controller
 
 
     public function profileEdit(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $active_theme = 'layout';
         return view('user.profile_edit')->with([
@@ -747,6 +771,7 @@ class UserProfileController extends Controller
 
 
     public function updateProfile(Request $request){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $rules = [
             'name'=>'required',
@@ -758,14 +783,14 @@ class UserProfileController extends Controller
             'image' => 'file|mimes:png,jpg,jpeg|max:2048',
         ];
         $customMessages = [
-            'name.required' => trans('Name is required'),
-            'designation.required' => trans('Designation is required'),
-            'phone.required' => trans('Phone is required'),
-            'address.required' => trans('Address is required'),
-            'about_me.required' => trans('About is required'),
-            'my_skill.required' => trans('Skill is required'),
-            'image.mimes' => trans('File type must be: png, jpg,jpeg'),
-            'image.max' => trans('Maximum file size 2MB'),
+            'name.required' => trans('user_validation.Name is required'),
+            'designation.required' => trans('user_validation.Designation is required'),
+            'phone.required' => trans('user_validation.Phone is required'),
+            'address.required' => trans('user_validation.Address is required'),
+            'about_me.required' => trans('user_validation.About is required'),
+            'my_skill.required' => trans('user_validation.Skill is required'),
+            'image.mimes' => trans('user_validation.File type must be: png, jpg,jpeg'),
+            'image.max' => trans('user_validation.Maximum file size 2MB'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -807,19 +832,20 @@ class UserProfileController extends Controller
         $user = User::select('id','name','email','image','phone','address','status','is_provider')->where('id', $user->id)->first();
 
 
-        $notification = trans('Update Successfully');
+        $notification = trans('user_validation.Update Successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
     public function updateUserPhoto(Request $request){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $rules = [
             'image' => 'file|mimes:png,jpg,jpeg|max:2048',
         ];
         $customMessages = [
-            'image.mimes' => trans('File type must be: png, jpg,jpeg'),
-            'image.max' => trans('Maximum file size 2MB'),
+            'image.mimes' => trans('user_validation.File type must be: png, jpg,jpeg'),
+            'image.max' => trans('user_validation.Maximum file size 2MB'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -849,6 +875,7 @@ class UserProfileController extends Controller
     }
 
     public function changePassword(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $active_theme = 'layout';
         return view('user.change_password')->with([
@@ -858,17 +885,18 @@ class UserProfileController extends Controller
     }
 
     public function updatePassword(Request $request){
+        $this->translator();
         $rules = [
             'current_password'=>'required',
             'password'=>'required|min:4',
             'c_password' => 'required|same:password',
         ];
         $customMessages = [
-            'current_password.required' => trans('Current password is required'),
-            'password.required' => trans('Password is required'),
-            'password.min' => trans('Password minimum 4 character'),
-            'c_password.required' => trans('Confirm password is required'),
-            'c_password.same' => trans('Confirm password does not match'),
+            'current_password.required' => trans('user_validation.Current password is required'),
+            'password.required' => trans('user_validation.Password is required'),
+            'password.min' => trans('user_validation.Password minimum 4 character'),
+            'c_password.required' => trans('user_validation.Confirm password is required'),
+            'c_password.same' => trans('user_validation.Confirm password does not match'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -882,31 +910,33 @@ class UserProfileController extends Controller
             return redirect()->back()->with($notification);
 
         }else{
-            $notification = trans('Current password does not match');
+            $notification = trans('user_validation.Current password does not match');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
     }
 
     public function download_script($id){
+        $this->translator();
         if(Auth::guard('web')->check()){
             $product=Product::findOrFail($id);
             $file=public_path('uploads/custom-images/').'/'.$product->download_file;
             return Response::download($file);
         }else{
-            $notification = trans('Please login your account');
+            $notification = trans('user_validation.Please login your account');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
     }
 
     public function download_variant($id){
+        $this->translator();
         if(Auth::guard('web')->check()){
             $product_variant=ProductVariant::findOrFail($id);
             $file=public_path('uploads/custom-images/').'/'.$product_variant->file_name;
             return Response::download($file);
         }else{
-            $notification = trans('Please login your account');
+            $notification = trans('user_validation.Please login your account');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -914,6 +944,7 @@ class UserProfileController extends Controller
 
 
     public function myProfile(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $setting = Setting::first();
         $default_avatar = array(
@@ -924,6 +955,7 @@ class UserProfileController extends Controller
     }
 
     public function addToWishlist($id){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $product = Product::find($id);
         $isExist = Wishlist::where(['user_id' => $user->id, 'product_id' => $product->id])->count();
@@ -932,24 +964,26 @@ class UserProfileController extends Controller
             $wishlist->product_id = $id;
             $wishlist->user_id = $user->id;
             $wishlist->save();
-            $message = trans('Wishlist added successfully');
+            $message = trans('user_validation.Wishlist added successfully');
             return response()->json(['status' => 1, 'message' => $message]);
         }else{
-            $message = trans('Already added');
+            $message = trans('user_validation.Already added');
             return response()->json(['status' => 0, 'message' => $message]);
         }
     }
 
     public function removeWishlist($id){
+        $this->translator();
         $wishlist = Wishlist::find($id);
         $wishlist->delete();
-        $notification = trans('Removed successfully');
+        $notification = trans('user_validation.Removed successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
 
     public function review(){
+        $this->translator();
         $user = Auth::guard('web')->user();
         $reviews = ProductReview::orderBy('id','desc')->where(['user_id' => $user->id, 'status' => 1])->paginate(10);
         return view('user.review',compact('reviews'));
@@ -957,14 +991,15 @@ class UserProfileController extends Controller
 
 
     public function storeProductReview(Request $request){
+        $this->translator();
         $rules = [
             'rating'=>'required',
             'review'=>'required',
             'g-recaptcha-response'=>new Captcha()
         ];
         $customMessages = [
-            'rating.required' => trans('Rating is required'),
-            'review.required' => trans('Review is required'),
+            'rating.required' => trans('user_validation.Rating is required'),
+            'review.required' => trans('user_validation.Review is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -982,7 +1017,7 @@ class UserProfileController extends Controller
         if($isExistOrder){
             $isReview = ProductReview::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
             if($isReview > 0){
-                $message = trans('You have already submited review');
+                $message = trans('user_validation.You have already submited review');
                 return response()->json(['status' => 0, 'message' => $message]);
             }
             $review = new ProductReview();
@@ -992,16 +1027,17 @@ class UserProfileController extends Controller
             $review->product_vendor_id = $request->seller_id;
             $review->product_id = $request->product_id;
             $review->save();
-            $message = trans('Review Submited successfully');
+            $message = trans('user_validation.Review Submited successfully');
             return response()->json(['status' => 1, 'message' => $message]);
         }else{
-            $message = trans('Opps! You can not review this product');
+            $message = trans('user_validation.Oops! You can not review this product');
             return response()->json(['status' => 0, 'message' => $message]);
         }
 
     }
 
     public function updateReview(Request $request, $id){
+        $this->translator();
         $rules = [
             'rating'=>'required',
             'review'=>'required',
@@ -1013,20 +1049,21 @@ class UserProfileController extends Controller
         $review->review = $request->review;
         $review->save();
 
-        $notification = trans('Updated successfully');
+        $notification = trans('user_validation.Updated successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
 
 
     public function productReview(Request $request){
+        $this->translator();
         $rules = [
             'rating'=>'required',
             'review'=>'required',
         ];
         $customMessages = [
-            'rating.required' => trans('Rating is required'),
-            'review.required' => trans('Review is required'),
+            'rating.required' => trans('user_validation.Rating is required'),
+            'review.required' => trans('user_validation.Review is required'),
         ];
         $this->validate($request, $rules,$customMessages);
 
@@ -1034,7 +1071,7 @@ class UserProfileController extends Controller
         
         $isReview = Review::where(['product_id' => $request->product_id, 'user_id' => $user->id])->count();
         if($isReview > 0){
-            $notification = trans('You have already submited review');
+            $notification = trans('user_validation.You have already submited review');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -1048,14 +1085,14 @@ class UserProfileController extends Controller
         $review->variant_id = $request->variant_id;
         $review->author_id = $request->author_id;
         $review->save();
-        $notification = trans('Review Submited successfully');
+        $notification = trans('user_validation.Review Submited successfully');
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
         
     }
 
     public function payment_success(){
-        
+        $this->translator();
         $active_theme = 'layout';
         
         return view('user.payment_success')->with([
@@ -1074,6 +1111,7 @@ class UserProfileController extends Controller
     }
 
     public function delete_product($id){
+        $this->translator();
         $order_item = OrderItem::where('product_id', $id)->first();
         if(!$order_item){
             $product = Product::findOrFail($id);
@@ -1119,7 +1157,7 @@ class UserProfileController extends Controller
             $product_review = Review::where('product_id', $id)->delete();
             $wishlist = Wishlist::where('product_id', $id)->delete();
     
-            $notification = trans('Deleted successfully');
+            $notification = trans('user_validation.Deleted successfully');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->back()->with($notification);
         }else{

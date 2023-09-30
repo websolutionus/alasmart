@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__breadcrumb_text">
-                        <h1>{{__('Our Products')}}</h1>
+                        <h1>{{__('user.Our Products')}}</h1>
                         <ul class="d-flex flex-wrap">
-                            <li><a href="{{ route('home') }}">{{__('home')}}</a></li>
-                            <li><a href="javascript:;">{{__('Our Products')}}</a></li>
+                            <li><a href="{{ route('home') }}">{{__('user.home')}}</a></li>
+                            <li><a href="javascript:;">{{__('user.Our Products')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,24 +46,24 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true"><i class="fal fa-layer-group"></i> {{__('Description')}}</button>
+                                    aria-selected="true"><i class="fal fa-layer-group"></i> {{__('user.Description')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-profile" type="button" role="tab"
                                     aria-controls="pills-profile" aria-selected="false"><i class="far fa-comments"></i>
-                                    {{__('Comments')}} ({{ $productComments->count() }})</button>
+                                    {{__('user.Comments')}} ({{ $productComments->count() }})</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-contact" type="button" role="tab"
                                     aria-controls="pills-contact" aria-selected="false"><i class="far fa-star"></i>
-                                    {{__('Review')}} ({{ $productReviews->count() }})</button>
+                                    {{__('user.Review')}} ({{ $productReviews->count() }})</button>
                             </li>
 
                             <li class="nav-item" role="presentation">
                                 <button onclick="addWishlist({{ $product->id }})"><i class="far fa-heart" aria-hidden="true"></i>
-                                    {{__('Wishlist')}}</button>
+                                    {{__('user.Wishlist')}}</button>
                             </li>
 
                         </ul>
@@ -77,7 +77,7 @@
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab" tabindex="0">
                                 <div class="wsus__pro_det_comment">
-                                    <h4>{{__('Comments')}}</h4>
+                                    <h4>{{__('user.Comments')}}</h4>
                                     @foreach ($productComments as $productComment)
                                     <div class="wsus__single_comment">
                                         <div class="comment_footer d-flex flex-wrap">
@@ -97,7 +97,7 @@
                                         </div>
                                         <p class="comment_des">{!! html_decode($productComment->comment) !!}</p>
                                         <p class="comment_date"> <span class="date"><i class="far fa-calendar-alt"></i>
-                                            {{ Carbon\Carbon::parse($productComment->created_at)->format('F d,Y') }} {{__('At')}}
+                                            {{ Carbon\Carbon::parse($productComment->created_at)->format('F d,Y') }} {{__('user.At')}}
                                             {{  Carbon\Carbon::parse($productComment->created_at)->format('h:ia') }} </span>
                                         </p>
                                     </div>
@@ -112,13 +112,13 @@
                                 </div>
                                 <form class="wsus__comment_input_area" id="productCommentForm" method="POST">
                                     @csrf
-                                    <h3>{{__('Leave a Comment')}}</h3>
+                                    <h3>{{__('user.Leave a Comment')}}</h3>
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('Comment')}}*</legend>
-                                                    <textarea rows="7" name="comment" placeholder="{{__('Type here')}}.."></textarea>
+                                                    <legend>{{__('user.Comment')}}*</legend>
+                                                    <textarea rows="7" name="comment" placeholder="{{__('user.Type here')}}.."></textarea>
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                 </fieldset>
                                             </div>
@@ -127,7 +127,7 @@
                                                 <div class="g-recaptcha mt-2" data-sitekey="{{ $recaptchaSetting->site_key }}"></div>
                                             </div>
                                             @endif
-                                            <button class="common_btn" id="submitBtn" type="submit">{{__('Submit Comment')}}</button>
+                                            <button class="common_btn" id="submitBtn" type="submit">{{__('user.Submit Comment')}}</button>
                                             <button class="common_btn d-none" id="showSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                 aria-labelledby="pills-contact-tab" tabindex="0">
                                 <div class="wsus__pro_det_review">
-                                    <h3>{{__('Reviews')}}</h3>
+                                    <h3>{{__('user.Reviews')}}</h3>
                                     @foreach ($productReviews as $productReview)
                                     <div class="wsus__single_comment">
                                         <div class="comment_footer d-flex flex-wrap">
@@ -166,7 +166,7 @@
                                         </div>
                                         <p class="comment_des">{{ html_decode($productReview->review) }}</p>
                                         <p class="comment_date"> <span class="date"><i class="far fa-calendar-alt"></i>
-                                            {{ Carbon\Carbon::parse($productReview->created_at)->format('F d,Y') }} {{__('At')}} {{  Carbon\Carbon::parse($productReview->created_at)->format('h:ia') }} </span>
+                                            {{ Carbon\Carbon::parse($productReview->created_at)->format('F d,Y') }} {{__('user.At')}} {{  Carbon\Carbon::parse($productReview->created_at)->format('h:ia') }} </span>
                                         </p>
                                     </div>
                                     @endforeach
@@ -182,7 +182,7 @@
 
                                 <form class="wsus__comment_input_area" id="productReviewForm" method="POST">
                                     @csrf
-                                    <h3>{{__('Write Your Reviews')}}</h3>
+                                    <h3>{{__('user.Write Your Reviews')}}</h3>
                                     <p>
                                         <i class="fas fa-star s1"></i>
                                         <i class="fas fa-star s2"></i>
@@ -195,8 +195,8 @@
                                         <div class="col-xl-12">
                                             <div class="wsus__comment_single_input">
                                                 <fieldset>
-                                                    <legend>{{__('comment')}}*</legend>
-                                                    <textarea rows="7" name="review" placeholder="{{__('Type here')}}.."></textarea>
+                                                    <legend>{{__('user.comment')}}*</legend>
+                                                    <textarea rows="7" name="review" placeholder="{{__('user.Type here')}}.."></textarea>
                                                     <input type="hidden" class="star" name="rating" value="">
                                                     <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
                                                     <input type="hidden" id="author_id" name="author_id" value="{{ $product->author->id }}">
@@ -209,7 +209,7 @@
                                             </div>
                                             @endif
 
-                                            <button class="common_btn" id="reviewSubmitBtn" type="submit">{{__('Submit Review')}}</button>
+                                            <button class="common_btn" id="reviewSubmitBtn" type="submit">{{__('user.Submit Review')}}</button>
                                             <button class="common_btn d-none" id="reviewShowSpain" type="submit"><i class="fas fa-spinner fa-spin"></i></button>
                                         </div>
                                     </div>
@@ -236,8 +236,8 @@
                             @if ($product->product_type == 'script')
                             <div class="select_licance">
                                 <select class="select_js" name="price_type" id="price_type">
-                                    <option value="regular price">{{__('Regular Price')}}</option>
-                                    <option value="extend price">{{__('extend Price')}}</option>
+                                    <option value="regular price">{{__('user.Regular Price')}}</option>
+                                    <option value="extend price">{{__('user.extend Price')}}</option>
                                 </select>
                             </div>
 
@@ -261,8 +261,8 @@
                             <input type="hidden" value="{{ $product->author->name }}" id="author_name">
                             <input type="hidden" value="{{ $product->author->id }}" id="author_id">
                             <ul class="button_area mt_50 d-flex flex-wrap {{ $product->product_type=='script' ? '':'mt-3' }}">
-                                <li><a class="live" target="__blank" href="{{ $product->preview_link }}">{{__('Live Preview')}}</a></li>
-                                <li><a class="common_btn" href="javascript:;" onclick="addToCard({{ $product->id }})">{{__('add to cart')}}</a></li>
+                                <li><a class="live" target="__blank" href="{{ $product->preview_link }}">{{__('user.Live Preview')}}</a></li>
+                                <li><a class="common_btn" href="javascript:;" onclick="addToCard({{ $product->id }})">{{__('user.add to cart')}}</a></li>
                             </ul>
                             <ul class="sell_rating mt_20 d-flex flex-wrap justify-content-between">
                                 <li><i class="far fa-cart-arrow-down"></i> {{ $total_sale }}</li>
@@ -272,7 +272,7 @@
                         </div>
 
                         <div class="wsus__sidebar_author_info mt_30">
-                            <h3>{{__('Author Profile')}}</h3>
+                            <h3>{{__('user.Author Profile')}}</h3>
                             <div class="wsus__sidebar_author_text">
                                 <div class="img">
                                     @if($product->author->image!=null)
@@ -285,7 +285,7 @@
                                 </div>
                                 <div class="text">
                                     <h4>{{ html_decode($product->author->name) }}</h4>
-                                    <p>{{__('Joined')}} - {{ Carbon\Carbon::parse($product->author->created_at)->format('F Y') }}</p>
+                                    <p>{{__('user.Joined')}} - {{ Carbon\Carbon::parse($product->author->created_at)->format('F Y') }}</p>
                                 </div>
                             </div>
                             <ul class="d-flex flex-wrap justify-content-center">
@@ -295,27 +295,27 @@
                                 @endphp
                                 <li>
                                     <h4>{{ $total_product }}</h4>
-                                    <p>{{__('products')}}</p>
+                                    <p>{{__('user.products')}}</p>
                                 </li>
                                 <li>
                                     <h4>{{ $total_sold }}</h4>
-                                    <p>{{__('Total sale')}}</p>
+                                    <p>{{__('user.Total sale')}}</p>
                                 </li>
                             </ul>
-                            <a class="common_btn w-100" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('View Profile')}}</a>
+                            <a class="common_btn w-100" href="{{ route('author-profile', $product->author->user_name ) }}"><i class="fal fa-stars"></i> {{__('user.View Profile')}}</a>
                         </div>
 
                         <div class="wsus__sidebar_pro_info mt_30">
-                            <h3>{{__('product Info')}}</h3>
+                            <h3>{{__('user.product Info')}}</h3>
                             <ul>
-                                <li><span>{{__('Released')}}</span> {{ Carbon\Carbon::parse($product->created_at)->format('F d,Y') }}</li>
-                                <li><span>{{__('Updated')}}</span> {{ Carbon\Carbon::parse($product->updated_at)->format('F d,Y') }}</li>
-                                <li><span>{{__('File Type')}}</span> {{ $product->product_type }}</li>
-                                <li><span>{{__('High Resolution')}}</span> {{ $product->high_resolution == 1 ? 'Yes' : 'No' }}</li>
-                                <li><span>{{__('Cross browser')}}</span> {{ $product->cross_browser == 1 ? 'Yes' : 'No' }}</li>
-                                <li><span>{{__('Documentation')}}</span> {{ $product->documentation == 1 ? 'Yes' : 'No' }}</li>
-                                <li><span>{{__('Responsive')}}</span> {{ $product->layout == 1 ? 'Yes' : 'No' }}</li>
-                                <li><span>{{__('Tags')}}</span>
+                                <li><span>{{__('user.Released')}}</span> {{ Carbon\Carbon::parse($product->created_at)->format('F d,Y') }}</li>
+                                <li><span>{{__('user.Updated')}}</span> {{ Carbon\Carbon::parse($product->updated_at)->format('F d,Y') }}</li>
+                                <li><span>{{__('user.File Type')}}</span> {{ $product->product_type }}</li>
+                                <li><span>{{__('user.High Resolution')}}</span> {{ $product->high_resolution == 1 ? 'Yes' : 'No' }}</li>
+                                <li><span>{{__('user.Cross browser')}}</span> {{ $product->cross_browser == 1 ? 'Yes' : 'No' }}</li>
+                                <li><span>{{__('user.Documentation')}}</span> {{ $product->documentation == 1 ? 'Yes' : 'No' }}</li>
+                                <li><span>{{__('user.Responsive')}}</span> {{ $product->layout == 1 ? 'Yes' : 'No' }}</li>
+                                <li><span>{{__('user.Tags')}}</span>
                                     @php
                                         $tag_arr=[];
                                         $tags=explode(',', $product->productlangfrontend->tags);
@@ -351,8 +351,8 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-8">
                     <div class="wsus__section_heading mb_15">
-                        <h5>{{__('Save time with pre-installed software')}}.</h5>
-                        <h2>{{__('Related Products')}}.</h2>
+                        <h5>{{__('user.Save time with pre-installed software')}}.</h5>
+                        <h2>{{__('user.Related Products')}}.</h2>
                     </div>
                 </div>
             </div>
@@ -363,8 +363,8 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
@@ -375,7 +375,7 @@
 
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
 
-                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             
                             <p class="rating">
@@ -391,7 +391,7 @@
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             
                             <div class="like_and_sell">
-                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('Sale')}}</span>
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
                             
                         </div>
@@ -399,7 +399,7 @@
                 </div>
                 @endforeach
             </div>
-            <a href="{{ route('products', ['category' => $product->category->slug]) }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+            <a href="{{ route('products', ['category' => $product->category->slug]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     @endif
@@ -452,7 +452,7 @@
                             $('#submitBtnn').removeClass('d-none');
                             $('#showSpainn').addClass('d-none');
                             if(!response.responseJSON.errors.message){
-                                toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
+                                toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
                             }
                         }
                     }
@@ -490,7 +490,7 @@
                         $('#submitBtn').removeClass('d-none');
                         if(response.responseJSON.errors.comment)toastr.error(response.responseJSON.errors.comment[0])
                         if(!response.responseJSON.errors.comment){
-                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });
@@ -528,7 +528,7 @@
                         if(response.responseJSON.errors.rating)toastr.error(response.responseJSON.errors.rating[0])
                         if(response.responseJSON.errors.review)toastr.error(response.responseJSON.errors.review[0])
                         if(!response.responseJSON.errors.comment){
-                            toastr.error("{{__('Please complete the recaptcha to submit the form')}}")
+                            toastr.error("{{__('user.Please complete the recaptcha to submit the form')}}")
                         }
                     }
                 });

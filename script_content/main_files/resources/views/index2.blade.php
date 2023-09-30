@@ -19,24 +19,24 @@
                         <P>{{ $intro_section->content->sliderlangfrontend->home2_description }}</P>
                         <form action="{{ route('products') }}" method="GET">
                             <select class="select_js" name="category">
-                                <option value="">{{__('All Categories')}}</option>
+                                <option value="">{{__('user.All Categories')}}</option>
                                 @foreach ($intro_section->categories as $category)
                                 <option value="{{ $category->slug }}">{{ $category->catlangfrontend->name }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" name="keyword" placeholder="{{__('Search your products')}}...">
-                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('Search')}}</button>
+                            <input type="text" name="keyword" placeholder="{{__('user.Search your products')}}...">
+                            <button class="common_btn" type="submit"><i class="far fa-search"></i> {{__('user.Search')}}</button>
                         </form>
                         <ul class="wsus__banner_counter d-flex flex-wrap">
                             <li>
                                 <span class="counter">{{ $intro_section->content->total_user }}</span>
-                                <span>{{__('k')}}+</span>
-                                {{__('Users')}}
+                                <span>{{__('user.k')}}+</span>
+                                {{__('user.Users')}}
                             </li>
                             <li>
                                 <span class="counter">{{ $intro_section->content->total_sold }}</span>
                                 <span>+</span>
-                                {{__('Million Sells')}}
+                                {{__('user.Million Sells')}}
                             </li>
                         </ul>
                     </div>
@@ -45,8 +45,8 @@
                     <div class="wsus__banner_img">
                         <img src="{{ asset('frontend/images/banner_img.png') }}" alt="banner" class="img-fluid w-100">
                         <p>
-                            <span>{{ $intro_section->content->total_product }}{{__('k')}}+</span>
-                            {{__('Prodcuts')}}
+                            <span>{{ $intro_section->content->total_product }}{{__('user.k')}}+</span>
+                            {{__('user.Prodcuts')}}
                         </p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                 <img src="{{ asset($category->icon) }}" alt="category" class="img-fluid w-100">
                             </div>
                             <h3>{{ $category->catlangfrontend->name }}</h3>
-                            <a class="view_all" href="{{ route('products', ['category' => $category->slug]) }}">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+                            <a class="view_all" href="{{ route('products', ['category' => $category->slug]) }}">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
                         </div>
                     </div>
                     @endforeach
@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-xl-7 m-auto">
                     <div class="gallery_filter d-flex flex-wrap mb_5">
-                        <button class=" active" data-filter="*">{{__('All Categories')}}</button>
+                        <button class=" active" data-filter="*">{{__('user.All Categories')}}</button>
                         @foreach ($product_section->categories as $category)
                         <button data-filter=".{{ $category->id }}">{{ $category->catlangfrontend->name }}</button>
                         @endforeach
@@ -120,14 +120,14 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="_blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
-                            <p class="category">{{__('By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             <ul class="d-flex flex-wrap justify-content-between">
                                 @php
@@ -147,7 +147,7 @@
                                     </p>
                                 </li>
                                 <li>
-                                    <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('Sale')}}</span>
+                                    <span class="download"><i class="far fa-download"></i> {{ $sale }} {{__('user.Sale')}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -236,19 +236,19 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true"> <i class="far fa-bars"></i> {{__('New Items')}}</button>
+                                    aria-selected="true"> <i class="far fa-bars"></i> {{__('user.New Items')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-profile" type="button" role="tab"
                                     aria-controls="pills-profile" aria-selected="false"><i class="fas fa-bolt"></i>
-                                    {{__('Tranding')}}</button>
+                                    {{__('user.Tranding')}}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-contact" type="button" role="tab"
                                     aria-controls="pills-contact" aria-selected="false"><i class="fas fa-magic"></i>
-                                    {{__('Popular')}}</button>
+                                    {{__('user.Popular')}}</button>
                             </li>
                         </ul>
                     </div>
@@ -346,8 +346,8 @@
                         <div class="wsus__gallery_item_img">
                             <img src="{{ asset($product->thumbnail_image) }}" alt="gallery" class="img-fluid w-100">
                             <ul class="wsus__gallery_item_overlay">
-                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('Preview')}}</a></li>
-                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('Buy Now')}}</a></li>
+                                <li><a target="__blank" href="{{ $product->preview_link }}">{{__('user.Preview')}}</a></li>
+                                <li><a href="{{ route('product-detail', $product->slug) }}">{{__('user.Buy Now')}}</a></li>
                             </ul>
                         </div>
                         <div class="wsus__gallery_item_text">
@@ -358,7 +358,7 @@
 
                             <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
 
-                            <p class="category">{{__('use.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('In')}} <a class="category"
+                            <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
                             
                             <p class="rating">
@@ -374,7 +374,7 @@
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
                             
                             <div class="like_and_sell">
-                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('Sale')}}</span>
+                                <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
                             
                         </div>
@@ -382,7 +382,7 @@
                 </div>
                 @endforeach
             </div>
-            <a href="{{ route('products', ['featured' => 1]) }}" class="common_btn">{{__('View All')}} <i class="far fa-long-arrow-right"></i></a>
+            <a href="{{ route('products', ['featured' => 1]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right"></i></a>
         </div>
     </section>
     <!--=============================
@@ -553,7 +553,7 @@
                             <ul class="d-flex flex-wrap">
                                 <li>
                                     <i class="far fa-user"></i>
-                                    {{__('By')}} {{ $home2_blog_section->blog->admin->name }}
+                                    {{__('user.By')}} {{ $home2_blog_section->blog->admin->name }}
                                 </li>
                                 <li>
                                     <i class="far fa-calendar-alt"></i>
@@ -580,7 +580,7 @@
                                     <ul class="d-flex flex-wrap">
                                         <li>
                                             <i class="far fa-user"></i>
-                                            {{__('By')}} {{ $blog->admin->name }}
+                                            {{__('user.By')}} {{ $blog->admin->name }}
                                         </li>
                                         <li>
                                             <i class="far fa-calendar-alt"></i>

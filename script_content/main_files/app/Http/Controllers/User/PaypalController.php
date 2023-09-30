@@ -18,14 +18,15 @@ use App\Models\Setting;
 
 use PayPal\Api\Details;
 use PayPal\Api\Payment;
+use App\Models\Language;
 use PayPal\Api\ItemList;
 use App\Models\OrderItem;
 use App\Helpers\MailHelper;
 use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
 use Illuminate\Http\Request;
-use PayPal\Api\RedirectUrls;
 
+use PayPal\Api\RedirectUrls;
 use App\Models\EmailTemplate;
 use App\Models\PaypalPayment;
 use App\Mail\OrderSuccessfully;
@@ -59,6 +60,15 @@ class PaypalController extends Controller
         $this->apiContext->setConfig($setting);
     }
 
+    public function translator(){
+        $front_lang = Session::get('front_lang');
+        $language = Language::where('is_default', 'Yes')->first();
+        if($front_lang == ''){
+            $front_lang = Session::put('front_lang', $language->lang_code);
+        }
+        config(['app.locale' => $front_lang]);
+    }
+
     public function sendMailToUser($user, $order){
         MailHelper::setMailConfig();
 
@@ -74,8 +84,9 @@ class PaypalController extends Controller
     }
     
     public function payWithPaypal(Request $request){
+        $this->translator();
         if(env('APP_MODE') == 'DEMO'){
-            $notification = trans('This Is Demo Version. You Can Not Change Anything');
+            $notification = trans('user_validation.This Is Demo Version. You Can Not Change Anything');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -121,7 +132,7 @@ class PaypalController extends Controller
             $payment->create($this->apiContext);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
 
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
@@ -136,13 +147,13 @@ class PaypalController extends Controller
     }
 
     public function paypalPaymentSuccess(Request $request){
-
+        $this->translator();
         Session::put('return_from_mollie','payment_faild');
         $total_amount = Session::get('total_amount');
         $cart_qty = Session::get('cart_qty');
         $paypalSetting = PaypalPayment::first();
         if (empty($request->get('PayerID')) || empty($request->get('token'))) {
-            $notification = trans('Payment Faild');
+            $notification = trans('user_validation.Payment Faild');
             $notification = array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->route('payment', $service->slug)->with($notification);
         }
@@ -199,21 +210,22 @@ class PaypalController extends Controller
             $this->sendMailToUser($user, $order);
             Cart::destroy();
 
-            $notification = trans('Thanks for your new order');
+            $notification = trans('user_validation.Thanks for your new order');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
             return redirect()->route('payment-success')->with($notification);
         }
     }
 
     public function paypalPaymentCancled(){
-        $notification = trans('Payment Faild');
+        $this->translator();
+        $notification = trans('user_validation.Payment Faild');
         $notification = array('messege'=>$notification,'alert-type'=>'error');
         return redirect()->route('payment', $service->slug)->with($notification);
     }
 
 
     public function createOrder($user, $service, $order_info, $provider_id, $client_id, $payment_method, $payment_status, $tnx_info){
-
+        
         $extra_services = json_decode($order_info->extras);
         $additional_amount = $order_info->extra_price;
         $additional_services = array();
