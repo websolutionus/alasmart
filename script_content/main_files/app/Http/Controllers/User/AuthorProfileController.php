@@ -35,11 +35,6 @@ use Illuminate\Support\Facades\Response;
 
 class AuthorProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:web');
-    }
-
     public function translator(){
         $front_lang = Session::get('front_lang');
         $language = Language::where('is_default', 'Yes')->first();

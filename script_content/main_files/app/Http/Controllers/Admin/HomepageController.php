@@ -693,6 +693,10 @@ class HomepageController extends Controller
             $homepage->about_offer_link = $request->about_offer_link;
         }
 
+        if($request->link){
+            $homepage->offer_link = $request->link;
+        }
+
         $homepage->save();
 
         if($request->home3_background){
@@ -801,6 +805,11 @@ class HomepageController extends Controller
 
         $homepage_language->trending_offer_title1 = $request->title1;
         $homepage_language->trending_offer_title2 = $request->title2;
+
+        if($request->link){
+            $homepage->trending_offer_link = $request->link;
+            $homepage->save();
+        }
 
         $homepage_language->save();
 

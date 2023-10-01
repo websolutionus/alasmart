@@ -211,7 +211,7 @@
   'Our team' => 'আমাদের টিম',
   'Facebook' => 'ফেসবুক',
   'Twitter' => 'টুইটার',
-  'Instagram' => 'ইনস্টাগ্রাম',
+  'Linkedin' => 'লিঙ্কডইন',
   'Create Template' => 'টেমপ্লেট তৈরি করুন',
   'Template' => 'টেমপ্লেট',
   'Testimonial' => 'প্রশংসাপত্র',

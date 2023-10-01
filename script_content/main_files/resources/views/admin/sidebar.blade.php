@@ -182,11 +182,11 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown {{ Route::is('admin.blog-category.*') || Route::is('admin.blog.*') || Route::is('admin.popular-blog.*') || Route::is('admin.popular-tags.*') || Route::is('admin.blog-comment.*') ? 'active' : '' }}">
+          <li class="nav-item dropdown {{ Route::is('admin.blog-category.*') || Route::is('admin.edit.blog.category') || Route::is('admin.blog.*') || Route::is('admin.popular-blog.*') || Route::is('admin.popular-tags.*') || Route::is('admin.blog-comment.*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i><span>{{__('admin.Blogs')}}</span></a>
 
             <ul class="dropdown-menu">
-                <li class="{{ Route::is('admin.blog-category.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-category.index') }}">{{__('admin.Categories')}}</a></li>
+                <li class="{{ Route::is('admin.blog-category.*') || Route::is('admin.edit.blog.category') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-category.index') }}">{{__('admin.Categories')}}</a></li>
 
                 <li class="{{ Route::is('admin.blog.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog.index') }}">{{__('admin.Blogs')}}</a></li>
 

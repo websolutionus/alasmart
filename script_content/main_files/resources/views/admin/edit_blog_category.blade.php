@@ -26,7 +26,7 @@
                       <div class="lang_list_top">
                         <ul class="lang_list">
                             @foreach ($languages as $language)
-                            <li><a href="{{ route('admin.blog.category.edit', ['edit_id' => $blog_category->id, 'lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
+                            <li><a href="{{ route('admin.edit.blog.category', ['edit_id' => $blog_category->id, 'lang_code' => $language->lang_code]) }}"><i class="fas fa-edit"></i> {{ $language->lang_name }}</a></li>
                             @endforeach
                         </ul>
                       </div>

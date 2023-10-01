@@ -313,7 +313,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::put('update-email-template/{id}',[EmailTemplateController::class,'update'])->name('update-email-template');
 
     Route::resource('blog-category', BlogCategoryController::class);
-    Route::get('blog-category-edit', [BlogCategoryController::class,'blog_category_edit'])->name('blog.category.edit');
+    Route::get('blog-category-edit', [BlogCategoryController::class,'blog_category_edit'])->name('edit.blog.category');
     Route::put('blog-category-status/{id}', [BlogCategoryController::class,'changeStatus'])->name('blog.category.status');
 
     Route::resource('blog', BlogController::class);

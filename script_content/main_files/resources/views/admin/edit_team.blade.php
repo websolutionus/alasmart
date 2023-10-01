@@ -80,8 +80,8 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Instagram')}}</label>
-                                    <input type="text" class="form-control"  name="instagram" value="{{ $team->instagram }}">
+                                    <label>{{__('admin.Linkedin')}}</label>
+                                    <input type="text" class="form-control"  name="linkedin" value="{{ $team->linkedin }}">
                                 </div>
 
                                 <div class="form-group col-12">

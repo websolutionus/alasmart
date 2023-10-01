@@ -61,7 +61,7 @@ class TeamController extends Controller
         $team->status = $request->status;
         $team->facebook = $request->facebook;
         $team->twitter = $request->twitter;
-        $team->instagram = $request->instagram;
+        $team->linkedin = $request->linkedin;
         $team->save();
 
         $languages = Language::get();
@@ -132,8 +132,8 @@ class TeamController extends Controller
             $team->twitter = $request->twitter;
         }
 
-        if($request->instagram){
-            $team->instagram = $request->instagram;
+        if($request->linkedin){
+            $team->linkedin = $request->linkedin;
         }
 
         $team->save();

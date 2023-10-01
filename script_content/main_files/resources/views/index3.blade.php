@@ -96,14 +96,20 @@
                 <div class="wsus__new_product_area">
                     <div class="row justify-content-between">
                         @foreach ($new_product_section->new_products as $product)
-                        <div class="col">
-                            <a class="wsus__recent_product_item" href="{{ route('product-detail', $product->slug) }}">
-                                <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
-                            </a>
+                        <div class="col-xl-4 col-md-6 col-lg-4">
+                            <div class="wsus__recent_product_2_item">
+                                <div class="img">
+                                    <img src="{{ asset($product->product_icon) }}" alt="product" class="img-fluid w-100">
+                                </div>
+                                <div class="text">
+                                    <a href="{{ route('product-detail', $product->slug) }}">{{ $product->productlangfrontend->name }}</a>
+                                    <p>{{ $setting->currency_icon }}{{ $product->regular_price }}</p>
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('products', ['new' => 1]) }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('products') }}" class="common_btn">{{__('user.View All')}} <i class="far fa-long-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>

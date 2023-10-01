@@ -211,7 +211,7 @@
   'Our team' => 'Our team',
   'Facebook' => 'Facebook',
   'Twitter' => 'Twitter',
-  'Instagram' => 'Instagram',
+  'Linkedin' => 'Linkedin',
   'Create Template' => 'Create Template',
   'Template' => 'Template',
   'Testimonial' => 'Testimonial',
