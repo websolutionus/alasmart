@@ -257,7 +257,7 @@
                 <div class="row mb_10">
                     <div class="col-xl-12">
                         <div class="wsus__megapack_text">
-                            <p>{!! strip_tags(clean($partner_section->offer_title1)) !!} <span>{!! strip_tags(clean($partner_section->offer_title2)) !!}</span></p>
+                            <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
                             <a target="_blank" href="{{ $special_offer->link }}">{{__('user.Go to Offer page')}}</a>
                         </div>
                     </div>
@@ -326,7 +326,7 @@
 
                             <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
-                            
+
                             <p class="rating">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $review)
@@ -338,11 +338,11 @@
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            
+
                             <div class="like_and_sell">
                                 <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

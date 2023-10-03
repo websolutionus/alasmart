@@ -60,14 +60,13 @@
                             @if ($home1 || $home3)
                             <div class="row">
 
-                                <div class="form-group col-12">
-                                    <label><span class="font-weight-bold">{{__('admin.Title one')}} </span> <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="title1" value="{{ $offer->title1 }}">
-                                </div>
+                                @php
+                                    $notify = trans('For bold text, write the text inside "<span>bold text here</span>" tag');
+                                @endphp
 
                                 <div class="form-group col-12">
-                                    <label><span class="font-weight-bold">{{__('admin.Title two')}}</span> <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control"  name="title2" value="{{ $offer->title2 }}">
+                                    <label>{{__('admin.Title')}} <span class="text-danger">*</span> <span class="text-danger">({{ $notify }}) </span></label>
+                                    <input type="text" class="form-control"  name="title1" value="{{ $offer->title1 }}">
                                 </div>
 
                                 @if (session()->get('admin_lang') == request()->get('lang_code'))
@@ -164,8 +163,12 @@
                                 </div>
                                 @endif
 
+                                @php
+                                    $notify = trans('For bold text, write the text inside "<span>bold text here</span>" tag');
+                                @endphp
+
                                 <div class="form-group col-12">
-                                    <label for=""> <span class="font-weight-bold">{{__('admin.Header')}}</span> <span class="text-danger">*</span></label>
+                                    <label for="">{{__('admin.Header')}} <span class="text-danger">*</span> <span class="text-danger">({{ $notify }}) </span></label>
                                     <input type="text" name="about_offer_title1" class="form-control" value="{{ $offer->about_offer_title1 }}">
                                 </div>
 

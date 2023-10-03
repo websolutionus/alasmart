@@ -346,7 +346,7 @@
 
                             <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                     href="{{ route('products', ['category' => $product->category->slug]) }}">{{ $product->category->catlangfrontend->name }}</a></p>
-                            
+
                             <p class="rating">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $review)
@@ -358,11 +358,11 @@
                                 <span>({{ $review == 0 ? 0 : $review }})</span>
                             </p>
                             <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
-                            
+
                             <div class="like_and_sell">
                                 <span class="download"><i class="fas fa-arrow-to-bottom"></i>{{ $sale }} {{__('user.Sale')}}</span>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -481,7 +481,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="wsus__go_offer">
-                        <p>{!! strip_tags(clean($partner_section->offer_title1)) !!} <span>{!! strip_tags(clean($partner_section->offer_title2)) !!}</span></p>
+                        <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
                         <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('user.Go to Offer page')}}</a>
                     </div>
                 </div>
@@ -510,23 +510,24 @@
             </div>
             <div class="row">
                 @foreach ($home1_blog_section->blogs as $blog)
-                <div class="col-xl-6 col-md-6">
-                    <div class="wsus__blog_1">
-                        <div class="wsus__blog_1_img">
+                <div class="col-xl-4 col-md-6">
+                    <div class="wsus__blog_3">
+                        <div class="wsus__blog_3_img">
                             <img src="{{ asset($blog->image) }}" alt="blog" class="img-fluid w-100">
                         </div>
-                        <div class="wsus__blog_1_text">
-                            <ul class="d-flex flex-wrap">
+                        <div class="wsus__blog_3_text">
+                            <a class="categori" href="javascript:;">{{ \Carbon\Carbon::parse($blog->created_at)->format('d M') }}</a>
+                            <a class="title" href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
+                            <p class="description">{{ $blog->bloglanguagefrontend->short_description }}</p>
+                            <ul>
+                                <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
                                 <li>
-                                    <i class="far fa-user"></i>
-                                    {{__('user.By')}} {{ $blog->admin->name }}
-                                </li>
-                                <li>
-                                    <i class="far fa-calendar-alt"></i>
-                                    {{ \Carbon\Carbon::parse($blog->created_at)->format('d M Y') }}
+                                    <div class="img">
+                                        <img src="{{ asset($blog->admin->image) }}" alt="author" class="img-fluid w-100">
+                                    </div>
+                                    <p><span>{{__('user.By')}}</span> {{ $blog->admin->name }} </p>
                                 </li>
                             </ul>
-                            <a href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                         </div>
                     </div>
                 </div>

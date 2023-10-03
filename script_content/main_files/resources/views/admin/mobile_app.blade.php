@@ -72,8 +72,13 @@
                                         <input type="file" name="home1_foreground" class="form-control-file">
                                     </div>
                                     @endif
+
+                                    @php
+                                        $notify = trans('For colorfull title, write the title inside "<span>colorfull title here</span>" tag');
+                                    @endphp
+
                                     <div class="form-group">
-                                        <label for=""><span class="font-weight-bold">{{__('admin.Title')}}</span> <span class="text-danger">*</span> </label>
+                                        <label for="">{{__('admin.Title')}} <span class="text-danger">*</span> <span class="text-danger">({{ $notify }}) </span> </label>
                                         <input type="text" name="title1" class="form-control" value="{{ $mobile_app->title1 }}">
                                     </div>
 

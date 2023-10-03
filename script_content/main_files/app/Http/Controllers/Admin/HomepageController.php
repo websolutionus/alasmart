@@ -645,7 +645,6 @@ class HomepageController extends Controller
 
         $rules = [
             'title1'=> $home1 || $home3 ? 'required':'',
-            'title2'=> $home1 || $home3 ? 'required':'',
             'link'=>session()->get('admin_lang') == $request->lang_code && ($home1 || $home3) ? 'required':'',
             'home3_item1_title'=> $home3 ? 'required':'',
             'home3_item1_description'=>$home3 ? 'required':'',
@@ -730,9 +729,9 @@ class HomepageController extends Controller
 
         if ($home1 || $home3) {
             $homepage_language->offer_title1 = $request->title1;
-            $homepage_language->offer_title2 = $request->title2;
+            $homepage_language->offer_title2 = $request->title1;
         }
-        
+
         if($home3){
             $homepage_language->offer_home3_item1_title = $request->home3_item1_title;
             $homepage_language->offer_home3_item1_description = $request->home3_item1_description;

@@ -67,12 +67,12 @@
                             }else if($setting->selected_theme==2){
                                 $route = route('home',['theme' => 2]);
                             }else if($setting->selected_theme==3){
-                                $route = route('home',['theme' => 3]);    
+                                $route = route('home',['theme' => 3]);
                             }else if($setting->selected_theme==0){
                                 $route = route('home',['theme' => 1]);
                             }
                         @endphp
-                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('user.Home')}} 
+                        <a class="nav-link {{ Route::is('home') ? 'active':'' }}" href="{{ $route }}">{{__('user.Home')}}
                             @if ($setting->selected_theme==0)
                             <i class="far fa-chevron-down"></i>
                             @endif
@@ -91,7 +91,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:;">{{__('user.Pages')}} <i class="far fa-chevron-down"></i></a>
                         <ul class="wsus__droap_menu">
-                            <li><a class="{{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('user.about us')}}</a></li>
+
                             <li><a class="{{ Route::is('become-author-page') ? 'active':'' }}" href="{{ route('become-author-page') }}">{{__('user.become an author')}}</a></li>
 
                             @if ($setting->blog_left_right == 0)
@@ -115,6 +115,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('blogs') }}">{{__('user.Blog')}}</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('about-us') ? 'active':'' }}" href="{{ route('about-us') }}">{{__('user.About Us')}}</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact-us') }}">{{__('user.Contact')}}</a>
                     </li>
@@ -362,12 +367,12 @@
                         toastr.error('This Is Demo Version. You Can Not Change Anything');
                         return;
                     }
-    
+
                     let loading = "{{__('user.Processing...')}}"
-    
+
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
-    
+
                     $.ajax({
                         type: 'POST',
                         data: $('#fsubscriberForm').serialize(),
@@ -382,7 +387,7 @@
                                 $('#fsubShowSpain').addClass('d-none');
                                 $('#fsubSubmitBtn').removeClass('d-none');
                             }
-    
+
                             if(response.status == 0){
                                 toastr.error(response.message);
                                 let subscribe = "{{__('user.Subscribe')}}"
@@ -405,7 +410,7 @@
                     });
                 });
 
-                
+
                 $("#footerTopSubscriberForm").on('submit', function(e){
                     e.preventDefault();
                     $('#footerTopSubShowSpain').removeClass('d-none');
@@ -415,12 +420,12 @@
                         toastr.error('This Is Demo Version. You Can Not Change Anything');
                         return;
                     }
-    
+
                     let loading = "{{__('user.Processing...')}}"
-    
+
                     $("#fsubscribe_btn").html(loading);
                     $("#fsubscribe_btn").attr('disabled',true);
-    
+
                     $.ajax({
                         type: 'POST',
                         data: $('#footerTopSubscriberForm').serialize(),
@@ -435,7 +440,7 @@
                                 $('#footerTopSubShowSpain').addClass('d-none');
                                 $('#footerTopSubSubmitBtn').removeClass('d-none');
                             }
-    
+
                             if(response.status == 0){
                                 toastr.error(response.message);
                                 let subscribe = "{{__('user.Subscribe')}}"
@@ -457,7 +462,7 @@
                         }
                     });
                 });
-    
+
                 $("#country_id").on("change",function(){
                     var countryId = $("#country_id").val();
                     if(countryId){
@@ -468,16 +473,16 @@
                                 $("#state_id").html(response.states);
                             },
                             error:function(err){
-    
+
                             }
                         })
                     }else{
                         var response= "<option value=''>{{__('user.Select a State')}}</option>";
                         $("#state_id").html(response);
                     }
-    
+
                 });
-    
+
                 $("#state_id").on("change",function(){
                     var stateId = $("#state_id").val();
                     if(stateId){
@@ -488,16 +493,16 @@
                                 $("#city_id").html(response.cities);
                             },
                             error:function(err){
-    
+
                             }
                         })
                     }else{
                         var response= "<option value=''>{{__('user.Select a city')}}</option>";
                         $("#state_id").html(response);
                     }
-    
+
                 });
-    
+
                 $('.select2').select2();
                 tinymce.init({
                     selector: '#editor',
@@ -513,9 +518,9 @@
                 $('.tags').tagify();
             });
         })(jQuery);
-    
+
     </script>
-    
+
     <script>
         "use strict";
             //wishlist start
@@ -601,7 +606,7 @@
         }
         miniCart();
         //mini cart function end
-    
+
         //cart item  function start
         function cartItem(){
             $.ajax({
@@ -626,7 +631,7 @@
                                             <b class="${value.options.variant_name!=null?'':'d-none'}">${value.options.variant_name!=null?value.options.variant_name:''}</b>
                                             <b class="${value.options.price_type!=null?'':'d-none'}">${value.options.price_type!=null?value.options.price_type:''}</b>
                                         </p>
-    
+
                                     </td>
                                     <td class="price">
                                         <p>${response.setting.currency_icon+value.price}</p>
@@ -644,7 +649,7 @@
             });
         }
         cartItem();
-    
+
         function cartRemove(rowId){
             $.ajax({
                 type:"GET",
@@ -692,7 +697,7 @@
                 toastr.error(coupon_valid);
             }
         };
-    
+
         function couponCalculation(){
             $.ajax({
                type:"GET",
