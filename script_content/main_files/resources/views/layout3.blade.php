@@ -147,11 +147,11 @@
     <!--=============================
         SUBSCRIBE 3 START
     ==============================-->
-    <section class="wsus__subscribe mt_120 xs_mt_30 mb_120 xs_mb_30">
-        <div class="container">
-            <div class="wsus__subscribe_3_bg" style="background: url({{ asset('frontend/images/subscribe_bg_3.jpg') }});">
+    <section class="wsus__subscribe wsus__subscribe_3 mt_120 xs_mt_30">
+        <div class="wsus__subscribe_3_bg" style="background: url({{ asset('frontend/images/subscribe_bg_3.jpg') }});">
+            <div class="container">
                 <div class="row">
-                    <div class="col-xl-7">
+                    <div class="col-xxl-6 col-sm-10 col-md-8 col-xl-6">
                         <div class="wsus__subscribe_text">
                             @php
                                 $setting = App\Models\Setting::with('settinglangfrontend')->first();

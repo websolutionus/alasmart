@@ -693,6 +693,11 @@
     border-left: 1px solid #DCDCDC;
 }
 
+.wsus__megapack_card .img {
+    right: auto;
+    left: 20px;
+}
+
 .profile_sedebar_social ul li a {
     margin-right: 0;
     margin-left: 15px;

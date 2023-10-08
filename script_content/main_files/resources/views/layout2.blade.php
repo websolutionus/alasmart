@@ -257,7 +257,7 @@
 
 
 @yield('frontend-content')
-
+ 
 
     <!--=============================
         SUBSCRIBE START
@@ -265,7 +265,7 @@
     <section class="wsus__subscribe pt_85 pb_90" style="background: url({{ asset('frontend/images/subscribe_bg.jpg') }});">
         <div class="container">
             <div class="row">
-                <div class="col-xxl-6 col-sm-10 col-md-9 col-xl-8">
+                <div class="col-xxl-6 col-sm-10 col-md-8 col-xl-7">
                     <div class="wsus__subscribe_text">
                         @php
                             $setting = App\Models\Setting::with('settinglangfrontend')->first();

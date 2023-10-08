@@ -306,13 +306,13 @@
     <!--=============================
         FOOTER START
     ==============================-->
-    <footer class="pt_120 xs_pt_80" style="background: url({{ asset('frontend/images/footer_bg.jpg') }});">
+    <footer class="mt_145" style="background: url({{ asset('frontend/images/footer_bg.jpg') }});">
         <div class="container">
 
             @if (Route::is('home'))
             <div class="row">
                 <div class="col-12">
-                    <div class="wsus__subscribe_2 mb_80">
+                    <div class="wsus__subscribe_2 mb_80" style="background: url(https://i.ibb.co/bm22gcq/Subscribe-bg-2.jpg);">
                         <div class="wsus__subscribe_2_text">
                             <h2>{{ $setting->settinglangfrontend->subscriber_title }}</h2>
                             <p>{{ $setting->settinglangfrontend->subscriber_description }}</p>

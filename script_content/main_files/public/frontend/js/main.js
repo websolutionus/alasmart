@@ -213,7 +213,7 @@ $(function () {
 
     //=======CATEGORY 2 SLIDER======
     $('.category_slider_2').slick({
-        slidesToShow: 5,
+        slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,

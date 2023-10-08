@@ -252,7 +252,7 @@
         MEGAPACK START
     ==============================-->
     <section class="wsus__megapack">
-        <div class="wsus__megapack_bg pt_105 xs_pt_65 pb_250" style="background: url({{ asset($special_offer->home3_background) }});">
+        <div class="wsus__megapack_bg pt_105 xs_pt_65 pb_195" style="background: url({{ asset($special_offer->home3_background) }});">
             <div class="container">
                 <div class="row mb_10">
                     <div class="col-xl-12">
@@ -272,6 +272,9 @@
                             <h4>{{ $special_offer->home3_item1_title }}</h4>
                             <p>{{ $special_offer->home3_item1_description }}</p>
                             <a class="common_btn" target="_blank" href="{{ $special_offer->home3_item1_link }}">{{__('user.Buy Goods')}}</a>
+                            <div class="img">
+                                <img src="https://i.ibb.co/qYndhvm/Group-1.png" alt="mega pack" classimg-fluid w-100>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6">
@@ -279,6 +282,9 @@
                             <h4>{{ $special_offer->home3_item2_title }}</h4>
                             <p>{{ $special_offer->home3_item2_description }}</p>
                             <a class="common_btn" target="_blank" href="{{ $special_offer->home3_item2_link }}">{{__('user.Buy Goods')}}</a>
+                            <div class="img">
+                                <img src="https://i.ibb.co/rdncVFp/Group-2.png" alt="mega pack" classimg-fluid w-100>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2014,9 +2014,9 @@ HOME PAGE END
 }
 
 .wsus__about_us_img {
-    width: 800px;
-    height: 440px;
-    margin-left: 50px;
+    width: 585px;
+    height: 480px;
+    margin-left: 150px;
 }
 
 /* about us */
@@ -2522,7 +2522,7 @@ HOME PAGE END
 
 .wsus__pro_description {
     background: #EFF3F8;
-    border-radius: 0;
+    border-radius: 5px;
     padding: 30px;
     padding-top: 0;
     overflow: hidden;
@@ -3751,7 +3751,7 @@ HOME PAGE END
 .wsus__blog_3 {
     padding: 8px;
     background: var(--colorWhite);
-    box-shadow: 0px 4px 84px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.10);
     border-radius: 8px;
     margin-bottom: 25px;
 }
@@ -5714,7 +5714,7 @@ HOME PAGE END
 
 .wsus__template_item a {
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--paraColor);
     text-transform: capitalize;
     transition: all linear .3s;
@@ -5817,7 +5817,10 @@ HOME PAGE END
 }
 
 .wsus__go_offer {
-    background: var(--colorWhite);
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    /* background: var(--colorWhite); */
     padding: 60px;
     border-radius: 5px;
     box-shadow: var(--boxShadow);
@@ -5825,16 +5828,22 @@ HOME PAGE END
     bottom: -120px;
 }
 
-.wsus__go_offer p {
+.wsus__go_offer p,
+.wsus__go_offer p span {
     font-size: 42px;
-    color: var(--colorBlack);
+    color: var(--colorWhite);
     max-width: 70%;
 }
 
 .wsus__go_offer p span {
     font-weight: 700;
     font-size: 42px;
-    color: var(--colorBlack);
+    color: var(--colorWhite);
+}
+
+.wsus__go_offer .support {
+    color: var(--colorWhite);
+    font-size: 20px;
 }
 
 .wsus__go_offer a {
@@ -5846,16 +5855,25 @@ HOME PAGE END
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
+    background: var(--colorWhite);
+    color: var(--colorBlack);
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .wsus__subscribe_2 {
-    background: var(--colorWhite);
-    padding: 60px;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    padding: 70px 100px;
     border-radius: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    overflow: hidden;
+    margin-top: -170px;
 }
 
 .wsus__subscribe_2_text {
@@ -5864,13 +5882,19 @@ HOME PAGE END
 
 .wsus__subscribe_2_text h2 {
     font-weight: 700;
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: var(--colorWhite);
+}
+
+.wsus__subscribe_2_text p {
+    color: var(--colorWhite);
 }
 
 .wsus__subscribe_2 form {
-    width: 50%;
+    width: 47%;
     position: relative;
+    margin-top: 40px;
 }
 
 .wsus__subscribe_2 form input {
@@ -6044,6 +6068,7 @@ HOME PAGE END
     background: var(--colorWhite);
     box-shadow: var(--boxShadow);
     padding: 40px 40px 35px 40px;
+    position: relative;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -6053,12 +6078,20 @@ HOME PAGE END
 
 .wsus__megapack_card h4 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .wsus__megapack_card p {
-    margin-top: 25px;
+    margin-top: 15px;
     margin-bottom: 45px;
+}
+
+.wsus__megapack_card .img {
+    width: 230px;
+    height: 115px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 .wsus__download_3 .wsus__download_text {
@@ -6094,7 +6127,6 @@ HOME PAGE END
     background-repeat: no-repeat !important;
     background-size: cover !important;
     box-shadow: 15px 15px 50px rgba(46, 7, 204, 0.25);
-    border-radius: 5px;
     padding: 80px 100px !important;
 }
 
@@ -6103,7 +6135,7 @@ HOME PAGE END
 }
 
 .wsus__subscribe_3_bg .wsus__subscribe_text form {
-    width: 90%;
+    /* width: 90%; */
 }
 
 /*==========================

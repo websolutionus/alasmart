@@ -393,7 +393,7 @@
             </div>
             <div class="row">
                 @foreach ($template_section->templates as $template)
-                <div class="col-xl-3">
+                <div class="col-xl-3 col-md-6">
                     <div class="wsus__template_item">
                         <div class="icon">
                             <img src="{{ asset($template->image) }}" alt="template" class="img-fluid w-100">
@@ -480,8 +480,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="wsus__go_offer">
+                    <div class="wsus__go_offer" style="background: url(https://i.ibb.co/pWN05Bf/subs-bg.jpg);">
                         <p>{!! strip_tags(clean($partner_section->offer_title1),'<span>') !!}</p>
+                        <span class="support">Lifetime update and 6 months support.</span>
                         <a class="common_btn" href="{{ $partner_section->offer_link }}" target="__blank">{{__('user.Go to Offer page')}}</a>
                     </div>
                 </div>
