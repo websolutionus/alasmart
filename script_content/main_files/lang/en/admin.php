@@ -620,6 +620,8 @@
   'Send Email to All Subscriber' => 'Send Email to All Subscriber',
   'Verified' => 'Verified',
   'Background Image' => 'Background Image',
+  'Home One Background Image' => 'Home One Background Image',
+  'Home Two Background Image' => 'Home Two Background Image',
   'Home Three Background Image' => 'Home Three Background Image',
   'Existing blog page Image' => 'Existing blog page Image',
   'Blog page subscription box Image' => 'Blog page subscription box Image',
@@ -631,5 +633,7 @@
   'Why choose us' => 'Why choose us',
   'Item three title' => 'Item three title',
   'Item three description' => 'Item three description',
+  'Item one existing image' => 'Item one existing image',
+  'Item two existing image' => 'Item two existing image',
 );
  ?>

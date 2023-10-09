@@ -141,7 +141,7 @@ class CartController extends Controller
 
     public function cartView(){
         $this->translator();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         $setting=Setting::first();
         $carts=Cart::content();
         $product_arr=[];
@@ -253,7 +253,7 @@ class CartController extends Controller
                 $is_id=in_array($user_id, $author_id_arr);
                 
                 if(!$is_id){
-                    $active_theme = 'layout';
+                    $active_theme = 'layout2';
                     $setting=Setting::first();
                     $carts=Cart::content();
                     $cartQty=Cart::count();

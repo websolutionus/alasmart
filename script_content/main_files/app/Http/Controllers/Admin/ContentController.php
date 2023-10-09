@@ -136,6 +136,20 @@ class ContentController extends Controller
             }
         }
 
+        if($request->home2_background_image){
+            $old_image = $setting->home2_subscription_bg;
+            $extention=$request->home2_background_image->getClientOriginalExtension();
+            $image_name = 'sub-background'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+            $image_name ='uploads/website-images/'.$image_name;
+            Image::make($request->home2_background_image)
+                ->save(public_path().'/'.$image_name);
+            $setting->home2_subscription_bg = $image_name;
+            $setting->save();
+            if($old_image){
+                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+            }
+        }
+
         if($request->background_image3){
             $old_image = $setting->home3_subscription_bg;
             $extention=$request->background_image3->getClientOriginalExtension();

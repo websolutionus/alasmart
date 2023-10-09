@@ -273,7 +273,7 @@
                             <p>{{ $special_offer->home3_item1_description }}</p>
                             <a class="common_btn" target="_blank" href="{{ $special_offer->home3_item1_link }}">{{__('user.Buy Goods')}}</a>
                             <div class="img">
-                                <img src="https://i.ibb.co/qYndhvm/Group-1.png" alt="mega pack" classimg-fluid w-100>
+                                <img src="{{ asset($special_offer->home3_item1_image) }}" alt="mega pack" classimg-fluid w-100>
                             </div>
                         </div>
                     </div>
@@ -283,7 +283,7 @@
                             <p>{{ $special_offer->home3_item2_description }}</p>
                             <a class="common_btn" target="_blank" href="{{ $special_offer->home3_item2_link }}">{{__('user.Buy Goods')}}</a>
                             <div class="img">
-                                <img src="https://i.ibb.co/rdncVFp/Group-2.png" alt="mega pack" classimg-fluid w-100>
+                                <img src="{{ asset($special_offer->home3_item2_image) }}" alt="mega pack" classimg-fluid w-100>
                             </div>
                         </div>
                     </div>

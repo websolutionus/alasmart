@@ -58,13 +58,13 @@ class LoginController extends Controller
 
         $selected_theme = Session::get('selected_theme');
         if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
+            $active_theme = 'layout2';
         }elseif($selected_theme == 'theme_two'){
             $active_theme = 'layout2';
         }elseif($selected_theme == 'theme_three'){
             $active_theme = 'layout3';
         }else{
-            $active_theme = 'layout';
+            $active_theme = 'layout2';
         }
 
         return view('login')->with([
@@ -130,13 +130,13 @@ class LoginController extends Controller
 
         $selected_theme = Session::get('selected_theme');
         if ($selected_theme == 'theme_one'){
-            $active_theme = 'layout';
+            $active_theme = 'layout2';
         }elseif($selected_theme == 'theme_two'){
             $active_theme = 'layout2';
         }elseif($selected_theme == 'theme_three'){
             $active_theme = 'layout3';
         }else{
-            $active_theme = 'layout';
+            $active_theme = 'layout2';
         }
 
         return view('forget_password')->with([
@@ -187,7 +187,7 @@ class LoginController extends Controller
         
         $recaptchaSetting = GoogleRecaptcha::first();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('reset_password')->with([
             'active_theme' => $active_theme,

@@ -57,7 +57,7 @@ class UserProfileController extends Controller
         $user = Auth::guard('web')->user();
         $setting = Setting::first();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.dashboard')->with([
             'active_theme' => $active_theme,
@@ -74,7 +74,7 @@ class UserProfileController extends Controller
         
         
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.portfolio')->with([
             'active_theme' => $active_theme,
@@ -93,7 +93,7 @@ class UserProfileController extends Controller
 
         $order_items=OrderItem::with('product', 'variant', 'order')->where('user_id', $user->id)->latest()->paginate(10);
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.download')->with([
             'active_theme' => $active_theme,
@@ -109,7 +109,7 @@ class UserProfileController extends Controller
         $user = Auth::guard('web')->user();
         $wishlists=Wishlist::with('product')->where('user_id', $user->id)->paginate(6);
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.collection')->with([
             'active_theme' => $active_theme,
@@ -133,7 +133,7 @@ class UserProfileController extends Controller
         $user = Auth::guard('web')->user();
         $productType = ProductTypePage::first();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.select_product_type')->with([
             'active_theme' => $active_theme,
@@ -154,7 +154,7 @@ class UserProfileController extends Controller
         $this->validate($request, $rules,$customMessages);
         $user = Auth::guard('web')->user();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         if(!$request->product_type){
             $notification = trans('user_validation.Something went wrong');
@@ -393,7 +393,7 @@ class UserProfileController extends Controller
         $setting=Setting::first();
 
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         
         if(!$product->product_type){
@@ -685,7 +685,7 @@ class UserProfileController extends Controller
     public function product_variant($id){
         $this->translator();
         $user = Auth::guard('web')->user();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         return view('user.product_variant')->with([
             'active_theme' => $active_theme,
         ]);
@@ -762,7 +762,7 @@ class UserProfileController extends Controller
     public function profileEdit(){
         $this->translator();
         $user = Auth::guard('web')->user();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         return view('user.profile_edit')->with([
             'active_theme' => $active_theme,
             'user' => $user,
@@ -877,7 +877,7 @@ class UserProfileController extends Controller
     public function changePassword(){
         $this->translator();
         $user = Auth::guard('web')->user();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         return view('user.change_password')->with([
             'active_theme' => $active_theme,
             'user' => $user,
@@ -1093,7 +1093,7 @@ class UserProfileController extends Controller
 
     public function payment_success(){
         $this->translator();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         
         return view('user.payment_success')->with([
             'active_theme' => $active_theme,

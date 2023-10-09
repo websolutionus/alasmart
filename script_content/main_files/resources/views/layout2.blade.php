@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     @yield('title')
     @php
         $setting = App\Models\Setting::with('settinglangfrontend')->first();
@@ -262,7 +264,7 @@
     <!--=============================
         SUBSCRIBE START
     ==============================-->
-    <section class="wsus__subscribe pt_85 pb_90" style="background: url({{ asset('frontend/images/subscribe_bg.jpg') }});">
+    <section class="wsus__subscribe pt_85 pb_90" style="background: url({{ asset($setting->home2_subscription_bg) }});">
         <div class="container">
             <div class="row">
                 <div class="col-xxl-6 col-sm-10 col-md-8 col-xl-7">
@@ -467,8 +469,6 @@
 
     @stack('frontend_js')
 
-
-
     <script>
         (function($) {
             "use strict";
@@ -630,7 +630,6 @@
                         { value: 'Email', title: 'Email' },
                     ]
                 });
-                $('.tags').tagify();
             });
         })(jQuery);
 
@@ -821,15 +820,15 @@
                success:function(data){
                 if(data.total){
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('user.subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
+                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.total}</span></span></p>
                         <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} 0</span></p>
                         <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}<span>${data.total}</span></span></p>
                         <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>
                     `);
                 }else{
                     $('#calprice').html(`
-                        <p class="subtotal">{{__('user.subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
-                        <p class="subtotal">{{__('user.coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
+                        <p class="subtotal">{{__('user.Subtotal')}} <span>${data.setting.currency_icon}<span id="cartTotal">${data.sub_total}</span></span></p>
+                        <p class="subtotal">{{__('user.Coupon')}} <span>${data.coupon_name} <button type="submit" class="btn btn-danger btn-sm" onclick="couponRemove()"><i class="fa fa-times"></i></button></span></p>
                         <p class="discount">{{__('user.Discount')}} <span>(-)${data.setting.currency_icon} ${data.discount_amount}</span></p>
                         <p class="total">{{__('user.Total')}} <span><span>${data.setting.currency_icon}</span>${data.total_amount}</span></p>
                         <a class="common_btn" href="{{ route('checkout') }}">{{__('user.Proceed to Checkout')}}</a>

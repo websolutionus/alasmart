@@ -200,6 +200,8 @@ class HomeController extends Controller
             'home1_foreground2' => $homepage->offer_home1_foreground2,
             'home2_background' => $homepage->offer_home2_background,
             'home3_background' => $homepage->offer_home3_background,
+            'home3_item1_image' => $homepage->offer_home3_item1_image,
+            'home3_item2_image' => $homepage->offer_home3_item2_image,
             'home3_item1_title' => $homepage->homelangfrontend->offer_home3_item1_title,
             'home3_item2_title' => $homepage->homelangfrontend->offer_home3_item2_title,
             'home3_item1_description' => $homepage->homelangfrontend->offer_home3_item1_description,
@@ -676,7 +678,7 @@ class HomeController extends Controller
 
         $seo_setting = SeoSetting::where('id', 5)->first();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('product')->with([
             'active_theme' => $active_theme,
@@ -715,7 +717,7 @@ class HomeController extends Controller
         $script_content = ScriptContent::first();
         $recaptchaSetting = GoogleRecaptcha::first();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('product_detail')->with([
             'active_theme' => $active_theme,
@@ -738,7 +740,7 @@ class HomeController extends Controller
 
         $this->translator();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         $contents = SectionContent::with('contentlangfrontend')->get();
         $control = SectionControl::get();
         $setting = Setting::first();
@@ -991,7 +993,7 @@ class HomeController extends Controller
  
  
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
         
         $about_us=AboutUs::with('aboutlangfrontend')->first();
         $homepage = Homepage::first();
@@ -1022,7 +1024,7 @@ class HomeController extends Controller
 
         $seo_setting = SeoSetting::where('id', 3)->first();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('contact_us')->with([
             'active_theme' => $active_theme,
@@ -1134,7 +1136,7 @@ class HomeController extends Controller
         $categories = BlogCategory::with('blogcategorylanguagefrontend')->where(['status' => 1])->orderBy('name','asc')->get();
         $popular_tags=PopularTag::latest()->get();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('blog')->with([
             'active_theme' => $active_theme,
@@ -1182,7 +1184,7 @@ class HomeController extends Controller
         $popular_tags=PopularTag::latest()->get();
         $setting = Setting::first();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('show_blog')->with([
             'active_theme' => $active_theme,
@@ -1315,7 +1317,7 @@ class HomeController extends Controller
 
         $recaptchaSetting = GoogleRecaptcha::first();
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('faq')->with([
             'active_theme' => $active_theme,
@@ -1331,7 +1333,7 @@ class HomeController extends Controller
         $terms_conditions = TermsAndCondition::first();
         $terms_conditions = $terms_conditions->termslangfrontend->terms_and_condition;
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('terms_and_conditions')->with([
             'active_theme' => $active_theme,
@@ -1346,7 +1348,7 @@ class HomeController extends Controller
         $privacyPolicy = PrivacyPolicy::with('privacylangfrontend')->first();
         $privacyPolicy = $privacyPolicy->privacylangfrontend->privacy_policy;
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('privacy_policy')->with([
             'active_theme' => $active_theme,
@@ -1358,7 +1360,7 @@ class HomeController extends Controller
     public function customPage($slug){
         $this->translator();
         $page = CustomPage::with('customlangfrontend')->where(['slug' => $slug, 'status' => 1])->first();
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('custom_page')->with([
             'active_theme' => $active_theme,

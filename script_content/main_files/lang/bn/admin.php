@@ -619,6 +619,8 @@
   'Send Email to All Subscriber' => 'সমস্ত গ্রাহককে ইমেল পাঠান',
   'Verified' => 'যাচাই',
   'Background Image' => 'ব্যাকগ্রাউন্ড ইমেজ',
+  'Home One Background Image' => 'হোম ওয়ান ব্যাকগ্রাউন্ড ইমেজ',
+  'Home Two Background Image' => 'হোম টু ব্যাকগ্রাউন্ড ইমেজ',
   'Home Three Background Image' => 'হোম থ্রি ব্যাকগ্রাউন্ড ইমেজ',
   'Existing blog page Image' => 'বিদ্যমান ব্লগ পৃষ্ঠা চিত্র',
   'Blog page subscription box Image' => 'ব্লগ পাতা সাবস্ক্রিপশন বক্স ছবি',
@@ -630,5 +632,7 @@
   'Why choose us' => 'কেন আমাদের নির্বাচন করেছে',
   'Item three title' => 'আইটেম তিন শিরোনাম',
   'Item three description' => 'আইটেম তিন বিবরণ',
+  'Item one existing image' => 'আইটেম ওয়ান এক্সিস্টিং ইমেজ',
+  'Item two existing image' => 'আইটেম টু এক্সিস্টিং ইমেজ',
 );
  ?>

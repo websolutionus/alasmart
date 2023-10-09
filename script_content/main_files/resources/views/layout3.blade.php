@@ -148,7 +148,7 @@
         SUBSCRIBE 3 START
     ==============================-->
     <section class="wsus__subscribe wsus__subscribe_3 mt_120 xs_mt_30">
-        <div class="wsus__subscribe_3_bg" style="background: url({{ asset('frontend/images/subscribe_bg_3.jpg') }});">
+        <div class="wsus__subscribe_3_bg" style="background: url({{ asset($setting->home3_subscription_bg) }});">
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-6 col-sm-10 col-md-8 col-xl-6">

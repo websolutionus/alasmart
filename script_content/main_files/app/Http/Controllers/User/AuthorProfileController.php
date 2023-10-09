@@ -51,7 +51,7 @@ class AuthorProfileController extends Controller
         $setting = Setting::first();
         $recaptchaSetting = GoogleRecaptcha::first();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.author_profile')->with([
             'active_theme' => $active_theme,
@@ -71,7 +71,7 @@ class AuthorProfileController extends Controller
         
         $recaptchaSetting = GoogleRecaptcha::first();
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.author_portfolio')->with([
             'active_theme' => $active_theme,

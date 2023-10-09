@@ -48,8 +48,10 @@
                                     <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
 
                                     @if (session()->get('admin_lang') == request()->get('lang_code'))
+
+                                    @if ($selected_theme == 0 || $selected_theme == 1)
                                     <div class="form-group">
-                                        <label for="">{{__('admin.Background Image')}}</label>
+                                        <label for="">{{__('admin.Home One Background Image')}}</label>
                                         <div>
                                             <img class="w_200" src="{{ asset($subscriber->background_image) }}" alt="">
                                         </div>
@@ -59,6 +61,21 @@
                                         <label for="">{{__('admin.New Background')}}</label>
                                         <input type="file" name="background_image" class="form-control-file">
                                     </div>
+                                    @endif
+
+                                    @if ($selected_theme == 0 || $selected_theme == 2)
+                                    <div class="form-group">
+                                        <label for="">{{__('admin.Home Two Background Image')}}</label>
+                                        <div>
+                                            <img class="w_200" src="{{ asset($subscriber->home2_background_image) }}" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">{{__('admin.New Background')}}</label>
+                                        <input type="file" name="home2_background_image" class="form-control-file">
+                                    </div>
+                                    @endif
 
 
                                     @if ($selected_theme == 0 || $selected_theme == 3)

@@ -1,6 +1,6 @@
 @php
     $error_404=App\Models\ErrorPage::first();
-    $active_theme = 'layout';
+    $active_theme = 'layout2';
 @endphp
 
 @extends($active_theme)

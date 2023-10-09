@@ -50,7 +50,7 @@ class RegisterController extends Controller
     $this->translator();
     $recaptchaSetting = GoogleRecaptcha::first();
     
-    $active_theme = 'layout';
+    $active_theme = 'layout2';
 
     return view('register')->with([
         'active_theme' => $active_theme,
@@ -69,7 +69,7 @@ class RegisterController extends Controller
         );
         $login_page = (object) $login_page;
 
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('register')->with([
             'active_theme' => $active_theme,

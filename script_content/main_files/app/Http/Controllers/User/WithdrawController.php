@@ -55,7 +55,7 @@ class WithdrawController extends Controller
         $total_withdraw = ProviderWithdraw::where('user_id', $author->id)->sum('total_amount');
         $current_balance = $total_balance - $total_withdraw;
         
-        $active_theme = 'layout';
+        $active_theme = 'layout2';
 
         return view('user.withdraw')->with([
             'active_theme' => $active_theme,

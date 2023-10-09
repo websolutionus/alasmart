@@ -610,6 +610,8 @@ class HomepageController extends Controller
             'title2' => $homepage_language->offer_title2,
             'link' => $homepage->offer_link,
             'home3_background' => $homepage->offer_home3_background,
+            'home3_item1_image' => $homepage->offer_home3_item1_image,
+            'home3_item2_image' => $homepage->offer_home3_item2_image,
             'home3_item1_title' => $homepage_language->offer_home3_item1_title,
             'home3_item1_description' => $homepage_language->offer_home3_item1_description,
             'home3_item1_link' => $homepage->offer_home3_item1_link,
@@ -706,6 +708,34 @@ class HomepageController extends Controller
             Image::make($request->home3_background)
                 ->save(public_path().'/'.$image_name);
             $homepage->offer_home3_background = $image_name;
+            $homepage->save();
+            if($old_image){
+                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+            }
+        }
+
+        if($request->home3_item1_image){
+            $old_image = $homepage->home3_item1_image;
+            $extention=$request->home3_item1_image->getClientOriginalExtension();
+            $image_name = 'offer-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+            $image_name ='uploads/website-images/'.$image_name;
+            Image::make($request->home3_item1_image)
+                ->save(public_path().'/'.$image_name);
+            $homepage->offer_home3_item1_image = $image_name;
+            $homepage->save();
+            if($old_image){
+                if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+            }
+        }
+
+        if($request->home3_item2_image){
+            $old_image = $homepage->home3_item2_image;
+            $extention=$request->home3_item2_image->getClientOriginalExtension();
+            $image_name = 'offer-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+            $image_name ='uploads/website-images/'.$image_name;
+            Image::make($request->home3_item2_image)
+                ->save(public_path().'/'.$image_name);
+            $homepage->offer_home3_item2_image = $image_name;
             $homepage->save();
             if($old_image){
                 if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);

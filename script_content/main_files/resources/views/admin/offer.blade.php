@@ -103,6 +103,21 @@
                                 </div>
 
                             <div class="row">
+
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
+                                    <div class="form-group col-12">
+                                        <label for="">{{__('admin.Item one existing image')}}</label>
+                                        <div>
+                                            <img src="{{ asset($offer->home3_item1_image) }}" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="">{{__('admin.New image')}}</label>
+                                        <input type="file" name="home3_item1_image" class="form-control-file">
+                                    </div>
+                                @endif
+
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Item one title')}} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control"  name="home3_item1_title" value="{{ $offer->home3_item1_title }}">
@@ -124,6 +139,20 @@
 
 
                             <div class="row">
+
+                                @if (session()->get('admin_lang') == request()->get('lang_code'))
+                                    <div class="form-group col-12">
+                                        <label for="">{{__('admin.Item two existing image')}}</label>
+                                        <div>
+                                            <img src="{{ asset($offer->home3_item2_image) }}" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="">{{__('admin.New image')}}</label>
+                                        <input type="file" name="home3_item2_image" class="form-control-file">
+                                    </div>
+                                @endif
 
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Item two title')}} <span class="text-danger">*</span></label>
