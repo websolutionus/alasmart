@@ -373,7 +373,7 @@
             </div>
         </div>
 
-        <div class="wsus__footer_link mt_115 xs_mt_25">
+        <div class="wsus__footer_link mt_75 xs_mt_0">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6">

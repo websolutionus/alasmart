@@ -521,13 +521,15 @@
                             <a class="title" href="{{ route('blog', $blog->slug) }}">{{ $blog->bloglanguagefrontend->title }}</a>
                             <p class="description">{{ $blog->bloglanguagefrontend->short_description }}</p>
                             <ul>
-                                <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
                                 <li>
                                     <div class="img">
                                         <img src="{{ asset($blog->admin->image) }}" alt="author" class="img-fluid w-100">
                                     </div>
                                     <p><span>{{__('user.By')}}</span> {{ $blog->admin->name }} </p>
                                 </li>
+
+                                <li><a href="{{ route('blog', $blog->slug) }}">{{__('user.Read More')}}</a></li>
+                                
                             </ul>
                         </div>
                     </div>
