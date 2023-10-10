@@ -50,16 +50,9 @@ use App\Http\Controllers\Provider\ServiceController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Admin\BlogCommentController;
 
-
-
-
 use App\Http\Controllers\Admin\ContactPageController;
 
-
-
 use App\Http\Controllers\Admin\PopularBlogController;
-
-
 
 use App\Http\Controllers\Admin\ProductItemController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -69,20 +62,9 @@ use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\CountryStateController;
 
-
-
-
-
-
-
 // frontend start
 
 use App\Http\Controllers\User\AuthorProfileController;
-
-
-
-
-
 
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\PaymentMethodController;
@@ -90,7 +72,6 @@ use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductReviewController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\MenuVisibilityController;
-
 
 use App\Http\Controllers\Admin\ProductCommentController;
 use App\Http\Controllers\Admin\WithdrawMethodController;
@@ -116,7 +97,6 @@ Route::group(['middleware' => ['maintainance']], function () {
 
     Route::get('/download-file/{file}', [HomeController::class, 'downloadListingFile'])->name('download-file');
 
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
     Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
@@ -134,14 +114,12 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('/product/{slug}', [HomeController::class, 'product_detail'])->name('product-detail');
     Route::get('/variant-price/{variant_id}', [HomeController::class, 'variant_price'])->name('variant-price');
     Route::get('/become-author', [HomeController::class, 'become_author'])->name('become-author-page');
-    
+
     Route::post('/subscribe-request', [HomeController::class, 'subscribeRequest'])->name('subscribe-request');
     Route::get('/subscriber-verification/{token}', [HomeController::class, 'subscriberVerifcation'])->name('subscriber-verification');
 
-
    Route::get('language-change',[HomeController::class,'language_change'])->name('language.change');
 
-   
     Route::get('/payment/{slug}', [PaymentController::class, 'payment'])->name('payment');
     Route::post('/bank-payment', [PaymentController::class, 'bankPayment'])->name('bank-payment');
     Route::post('/pay-with-stripe', [PaymentController::class, 'payWithStripe'])->name('pay-with-stripe');
@@ -184,7 +162,7 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('login/google',[LoginController::class, 'redirectToGoogle'])->name('login-google');
     Route::get('/callback/google',[LoginController::class,'googleCallBack'])->name('callback-google');
 
-   
+
     Route::get('dashboard', [UserProfileController::class, 'dashboard'])->name('dashboard');
     Route::get('portfolio', [UserProfileController::class, 'portfolio'])->name('portfolio');
     Route::get('download', [UserProfileController::class, 'download'])->name('download');
@@ -197,13 +175,12 @@ Route::group(['middleware' => ['maintainance']], function () {
 
     Route::get('/user/logout', [LoginController::class, 'userLogout'])->name('user.logout');
     Route::get('edit-profile', [UserProfileController::class, 'profileEdit'])->name('edit-profile');
-    Route::post('update-profile', [UserProfileController::class, 'updateProfile'])->name('update-profile');
-    Route::post('update-user-photo', [UserProfileController::class, 'updateUserPhoto'])->name('update-user-photo');
+    Route::post('profile-update', [UserProfileController::class, 'updateProfile'])->name('update-profile');
+    Route::post('user-photo-update', [UserProfileController::class, 'updateUserPhoto'])->name('update-user-photo');
     Route::get('change-password', [UserProfileController::class, 'changePassword'])->name('change-password');
-    Route::post('update-password', [UserProfileController::class, 'updatePassword'])->name('update-password');
+    Route::post('password-update', [UserProfileController::class, 'updatePassword'])->name('update-password');
     Route::get('download-script/{id}', [UserProfileController::class, 'download_script'])->name('download-script');
     Route::get('download-variant/{id}', [UserProfileController::class, 'download_variant'])->name('download-variant');
-    
 
     Route::post('contact-with-author', [ContactWithAuthorController::class, 'contactWithAuthor'])->name('contact-with-author');
 
@@ -219,17 +196,17 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('payment-success', [UserProfileController::class, 'payment_success'])->name('payment-success');
 
     Route::post('store-product-variant/{product_id}', [UserProfileController::class, 'store_product_variant'])->name('store-product-variant');
-    Route::put('update-product-variant/{variant_id}', [UserProfileController::class, 'update_product_variant'])->name('update-product-variant');
+    Route::put('product-variant-update/{variant_id}', [UserProfileController::class, 'update_product_variant'])->name('update-product-variant');
     Route::delete('delete-product-variant/{variant_id}', [UserProfileController::class, 'delete_product_variant'])->name('delete-product-variant');
 
     Route::get('delete-product/{id}', [UserProfileController::class, 'delete_product'])->name('delete-product');
 
     Route::get('download-existing-file/{file_name}', [UserProfileController::class, 'download_existing_file'])->name('download-existing-file');
     Route::get('download-existing-variant-file/{file_name}', [UserProfileController::class, 'download_existing_variant_file'])->name('download-existing-variant-file');
-    
+
     Route::post('/add/wishlist/{product_id}', [WishlistController::class, 'add_wishlist'])->name('add-wishlist');
     Route::get('/delete/wishlist/{id}', [UserProfileController::class, 'delete_wishlist'])->name('delete-wishlist');
-    
+
     Route::post('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/mini-cart', [CartController::class, 'miniCart'])->name('mini-cart');
     Route::get('/cart-view', [CartController::class, 'cartView'])->name('cart-view');
@@ -240,14 +217,12 @@ Route::group(['middleware' => ['maintainance']], function () {
     Route::get('/coupon-remove', [CartController::class, 'couponRemove'])->name('coupon-remove');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
-    
+
     Route::get('/withdraw', [WithdrawController::class, 'index'])->name('withdraw');
     Route::get('/get-withdraw-account-info/{id}', [WithdrawController::class, 'getWithDrawAccountInfo']);
     Route::post('/withdraw-store', [WithdrawController::class, 'store'])->name('withdraw.store');
 
     });
-
-
 });
 
 // start admin routes
@@ -286,7 +261,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::put('update-cookie-consent',[SettingController::class,'updateCookieConset'])->name('update-cookie-consent');
     Route::put('update-tawk-chat',[SettingController::class,'updateTawkChat'])->name('update-tawk-chat');
     Route::put('update-google-recaptcha',[SettingController::class,'updateGoogleRecaptcha'])->name('update-google-recaptcha');
-    
+
     Route::put('update-google-analytic',[SettingController::class,'updateGoogleAnalytic'])->name('update-google-analytic');
     Route::put('update-custom-pagination',[SettingController::class,'updateCustomPagination'])->name('update-custom-pagination');
     Route::put('update-social-login',[SettingController::class,'updateSocialLogin'])->name('update-social-login');
@@ -496,7 +471,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
     Route::resource('product', ProductController::class);
 
     Route::resource('product-type', ProductItemController::class);
-    
+
     Route::get('active-product', [ProductController::class, 'active_product'])->name('active.product');
     Route::get('pending-product', [ProductController::class, 'pending_product'])->name('pending.product');
 
@@ -511,7 +486,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
 
     Route::resource('product-review', ProductReviewController::class);
     Route::put('product-review-status/{id}', [ProductReviewController::class,'changeStatus'])->name('product-review.status');
-    
+
     Route::get('select-product-type', [ProductController::class, 'select_product_type'])->name('select-product-type');
     Route::post('store-image-type-product', [ProductController::class, 'store_image_type_product'])->name('store-image-type-product');
     Route::put('image-product-update/{id}', [ProductController::class, 'image_product_update'])->name('image-product-update');

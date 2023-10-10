@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+RewriteRule ^update - [L]
 
     RewriteCond %{REQUEST_FILENAME} -d [OR]
     RewriteCond %{REQUEST_FILENAME} -f
