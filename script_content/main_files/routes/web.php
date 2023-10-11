@@ -322,7 +322,9 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
 
     Route::resource('error-page', ErrorPageController::class);
 
-    Route::resource('footer', FooterController::class);
+    Route::get('footer', [FooterController::class, 'index'])->name('footer.index');
+    Route::put('footer-update/{id}', [FooterController::class, 'update'])->name('footer.update');
+
     Route::resource('social-link', FooterSocialLinkController::class);
     Route::resource('footer-link', FooterLinkController::class);
     Route::get('second-col-footer-link', [FooterLinkController::class, 'secondColFooterLink'])->name('second-col-footer-link');

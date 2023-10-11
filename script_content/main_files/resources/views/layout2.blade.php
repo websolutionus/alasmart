@@ -11,7 +11,6 @@
     @php
         $setting = App\Models\Setting::with('settinglangfrontend')->first();
         $languages = App\Models\Language::where('status', 1)->get();
-
         $front_lang = Session::get('front_lang');
         $language = App\Models\Language::where('is_default', 'Yes')->first();
         if($front_lang == ''){
@@ -29,6 +28,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/price_range_style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/price_range_ui.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/summernote.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/select2.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -435,10 +437,14 @@
     <!--summernote js-->
     <script src="{{ asset('frontend/js/summernote.min.js') }}"></script>
 
+    <script src="{{ asset('frontend/js/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('backend/js/select2.min.js') }}"></script>
+
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
     <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('backend/tinymce/js/tinymce/tinymce.min.js') }}"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
         @if(Session::has('messege'))
