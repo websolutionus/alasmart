@@ -16,6 +16,7 @@ class XSSProtection
      */
     public function handle(Request $request, Closure $next)
     {
+
         $input = array_filter($request->all());
 
         array_walk_recursive($input, function(&$input) {

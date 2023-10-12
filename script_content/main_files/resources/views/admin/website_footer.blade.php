@@ -33,8 +33,8 @@
                           @php
                               $current_language = App\Models\Language::where('lang_code', request()->get('lang_code'))->first();
                           @endphp
-                          <p>{{__('admin.Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p> 
-                      </div> 
+                          <p>{{__('admin.Your editing mode')}} : <b>{{ $current_language->lang_name }}</b></p>
+                      </div>
                     </div>
                   </div>
               </div>
@@ -45,7 +45,7 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="lang_code" value="{{ request()->get('lang_code') }}">
-                            
+
                             <div class="row">
                               @if(session()->get('admin_lang') == request()->get('lang_code'))
                                 <div class="form-group col-12">
@@ -67,7 +67,7 @@
 
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Description')}} <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="description" id="" cols="30" rows="5">{{ $footer_language->description }}</textarea>
+                                    <textarea class="form-control text-area-5" name="description" id="" cols="30" rows="5">{{ $footer_language->description }}</textarea>
                                 </div>
                             </div>
                             <div class="row">
