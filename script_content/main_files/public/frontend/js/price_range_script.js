@@ -45,14 +45,16 @@ $(document).ready(function () {
 
 	$(function () {
 
+		let session_currency_rate = $('#session_currency_rate').val();
 		let min_price=$('#get_min_price').val();
 		let max_price=$('#get_max_price').val();
-		let product_max_price=$('#product_max_price').val();
+		let product_max_price=$('#product_max_price').val() * session_currency_rate;
+		let product_min_price = 0 * session_currency_rate;
 
 		$("#slider-range").slider({
 			range: true,
 			orientation: "horizontal",
-			min: 0,
+			min: product_min_price,
 			max: product_max_price,
 			values: [min_price, max_price],
 			step: 10,

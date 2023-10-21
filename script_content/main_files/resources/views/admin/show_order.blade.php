@@ -89,7 +89,7 @@
                             
                             <tr>
                                 <td>{{ ++$index }}</td>
-                                <td><a href="{{ route('admin.product.edit',$item->product->id) }}">{{ $item->product->name }}</a></td>
+                                <td><a href="{{ route('admin.product.edit',$item->product->id) }}">{{ $item->product->productlangadmin->name }}</a></td>
                                 <td>{{ ucfirst($item->product->product_type) }} </td>
                                 <td>
                                   @if ($item->product->product_type=='script')

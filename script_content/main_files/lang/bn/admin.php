@@ -634,5 +634,15 @@
   'Item three description' => 'আইটেম তিন বিবরণ',
   'Item one existing image' => 'আইটেম ওয়ান এক্সিস্টিং ইমেজ',
   'Item two existing image' => 'আইটেম টু এক্সিস্টিং ইমেজ',
+
+  'Currencies' => 'Currencies',
+  'Create Currency' => 'Create Currency',
+  'Currency' => 'Currency',
+  'Country Code' => 'Country Code',
+  'Currency Code' => 'Currency Code',
+  'Before Price' => 'Before Price',
+  'After Price' => 'After Price',
+  'Edit Currency' => 'Edit Currency',
+  'You can not delete default currency' => 'You can not delete default currency',
 );
  ?>

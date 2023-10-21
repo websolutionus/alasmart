@@ -18,9 +18,7 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->text('store_id')->nullable();
             $table->text('store_password')->nullable();
-            $table->text('country_code');
-            $table->text('currency_code');
-            $table->float('currency_rate');
+            $table->integer('currency_id')->nullable();
             $table->text('image')->nullable();
             $table->timestamps();
         });

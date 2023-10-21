@@ -70,7 +70,13 @@
                                     </ul>
                                 </div>
                                 <div class="wsus__gallery_item_text">
-                                    <p class="price">{{ $setting->currency_icon }}{{ html_decode($product->regular_price) }}</p>
+                                    <p class="price">
+                                        @if (session()->get('currency_position') == 'right')
+                                            {{ html_decode($product->regular_price * session()->get('currency_rate')) }}{{ session()->get('currency_icon') }}
+                                        @else
+                                            {{ session()->get('currency_icon') }}{{ html_decode($product->regular_price * session()->get('currency_rate')) }}
+                                        @endif
+                                    </p>
                                     <a class="title" href="{{ route('product-detail', $product->slug) }}">{{ html_decode($product->productlangfrontend->name) }}</a>
                                     <p class="category">{{__('user.By')}} <span>{{ html_decode($product->author->name) }}</span> {{__('user.In')}} <a class="category"
                                             href="javascript:;" onclick="getCatSlug('{{ $product->category->slug }}')">{{ $product->category->catlangfrontend->name }}</a></p>
@@ -127,7 +133,7 @@
                             <h3>{{__('user.Filter Price')}}</h3>
                             <div id="slider-range" class="price-filter-range"></div>
                             <div class="range_price_area d-flex">
-                                <p>{{__('user.Price')}}: <span>{{ $setting->currency_icon }}</span></p>
+                                <p>{{__('user.Price')}}: <span>{{ session()->get('currency_icon') }}</span></p>
                                 <div class="range_main_price d-flex">
                                     <input type="text" oninput="validity.valid||(value='0');" id="min_price"
                                         class="price-range-field" readonly />
@@ -136,10 +142,11 @@
                                 </div>
                             </div>
                             <input type="hidden" id="filter_min_price" name="min_price" value="0">
-                            <input type="hidden" id="filter_max_price" name="max_price" value="1000">
+                            <input type="hidden" id="filter_max_price" name="max_price" value="{{ $product_max_price * session()->get('currency_rate') }}">
                             <input type="hidden" id="get_min_price" value="{{ $min_price }}">
                             <input type="hidden" id="get_max_price" value="{{ $max_price }}">
                             <input type="hidden" id="product_max_price" value="{{ $product_max_price }}">
+                            <input type="hidden" id="session_currency_rate" value="{{ session()->get('currency_rate') }}">
                             <button class="common_btn mt-3 w-100" onclick="priceFilter()"  type="submit">{{__('user.Filter')}}</button>
                         </div>
                     </div>

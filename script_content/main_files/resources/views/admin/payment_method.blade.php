@@ -94,32 +94,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $paypal->country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{ __('admin.Currency Name')}}</label>
                                                                 <select name="currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $paypal->currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $paypal->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency rate')}} ( {{__('admin.Per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $paypal->currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -168,32 +151,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $stripe->country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
                                                                 <select name="currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $stripe->currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $stripe->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency rate')}} ( {{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $stripe->currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -266,32 +232,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $razorpay->country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
                                                                 <select name="currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $razorpay->currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $razorpay->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency Rate')}} ({{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $razorpay->currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -350,32 +299,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $flutterwave->country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
                                                                 <select name="currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $flutterwave->currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $flutterwave->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency Rate')}} ({{__('admin.Per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $flutterwave->currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -418,17 +350,7 @@
                                                                 <input type="text" class="form-control" name="mollie_key" value="{{ $paystackAndMollie->mollie_key }}">
                                                             </div>
 
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="mollie_country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $paystackAndMollie->mollie_country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
+                                                    
 
                                                             <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
@@ -436,15 +358,10 @@
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $paystackAndMollie->mollie_currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $paystackAndMollie->mollie_currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency Rate')}} ({{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="mollie_currency_rate" value="{{ $paystackAndMollie->mollie_currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -493,32 +410,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="paystack_country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $paystackAndMollie->paystack_country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
                                                                 <select name="paystack_currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $paystackAndMollie->paystack_currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $paystackAndMollie->paystack_currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency Rate')}} ({{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="paystack_currency_rate" value="{{ $paystackAndMollie->paystack_currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">
@@ -577,8 +477,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.INR Currency Rate')}} ({{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $instamojo->currency_rate }}">
+                                                                <label for="">{{__('admin.Currency Name')}}</label>
+                                                                <select name="currency_name" id="" class="form-control select2">
+                                                                    <option value="">{{__('admin.Select Currency')}}
+                                                                  </option>
+                                                                  @foreach ($currencies as $currency)
+                                                                  <option {{ $instamojo->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
+                                                                  </option>
+                                                                  @endforeach
+                                                                </select>
                                                             </div>
 
                                                             <div class="form-group">
@@ -656,32 +563,15 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="">{{__('admin.Country Name')}}</label>
-                                                                <select name="country_name" id="" class="form-control select2">
-                                                                    <option value="">{{__('admin.Select Country')}}
-                                                                  </option>
-                                                                  @foreach ($countires as $country)
-                                                                  <option {{ $sslcommerzPayment->country_code == $country->code ? 'selected' : '' }} value="{{ $country->code }}">{{ $country->name }}
-                                                                  </option>
-                                                                  @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
                                                                 <label for="">{{__('admin.Currency Name')}}</label>
                                                                 <select name="currency_name" id="" class="form-control select2">
                                                                     <option value="">{{__('admin.Select Currency')}}
                                                                   </option>
                                                                   @foreach ($currencies as $currency)
-                                                                  <option {{ $sslcommerzPayment->currency_code == $currency->code ? 'selected' : '' }} value="{{ $currency->code }}">{{ $currency->name }}
+                                                                  <option {{ $sslcommerzPayment->currency_id == $currency->id ? 'selected' : '' }} value="{{ $currency->id }}">{{ $currency->currency_name }}
                                                                   </option>
                                                                   @endforeach
                                                                 </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="">{{__('admin.Currency rate')}} ( {{__('admin.per')}} {{ $setting->currency_name }})</label>
-                                                                <input type="text" class="form-control" name="currency_rate" value="{{ $sslcommerzPayment->currency_rate }}">
                                                             </div>
 
                                                             <div class="form-group">

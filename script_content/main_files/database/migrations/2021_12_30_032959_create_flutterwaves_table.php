@@ -17,6 +17,7 @@ class CreateFlutterwavesTable extends Migration
             $table->id();
             $table->text('public_key');
             $table->text('secret_key');
+            $table->integer('currency_id')->nullable();
             $table->string('title');
             $table->string('logo');
             $table->integer('status')->default(1);

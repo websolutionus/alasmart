@@ -21,6 +21,8 @@ class CreatePaystackAndMolliesTable extends Migration
             $table->string('paystact_secret_key');
             $table->string('paystact_marchant_email');
             $table->integer('paystack_status')->default(0);
+            $table->integer('paystack_currency_id')->nullable();
+            $table->integer('mollie_currency_id')->nullable();
             $table->timestamps();
         });
     }
