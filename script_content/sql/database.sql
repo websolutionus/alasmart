@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2023 at 06:26 AM
+-- Generation Time: Oct 22, 2023 at 06:24 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.19
 
@@ -1555,15 +1555,16 @@ CREATE TABLE `flutterwaves` (
   `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `flutterwaves`
 --
 
-INSERT INTO `flutterwaves` (`id`, `public_key`, `secret_key`, `currency_rate`, `country_code`, `currency_code`, `title`, `logo`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'FLWPUBK_TEST-5760e3ff9888aa1ab5e5cd1ec3f99cb1-X', 'FLWSECK_TEST-81cb5da016d0a51f7329d4a8057e766d-X', 417.35, 'NG', 'NGN', 'Ecommerce', 'uploads/website-images/flutterwave-2023-05-11-05-34-35-1898.png', 1, NULL, '2023-05-11 11:34:36');
+INSERT INTO `flutterwaves` (`id`, `public_key`, `secret_key`, `currency_rate`, `country_code`, `currency_code`, `title`, `logo`, `status`, `created_at`, `updated_at`, `currency_id`) VALUES
+(1, 'FLWPUBK_TEST-5760e3ff9888aa1ab5e5cd1ec3f99cb1-X', 'FLWSECK_TEST-81cb5da016d0a51f7329d4a8057e766d-X', 417.35, 'NG', 'NGN', 'Ecommerce', 'uploads/website-images/flutterwave-2023-05-11-05-34-35-1898.png', 1, NULL, '2023-10-18 06:14:56', 4);
 
 -- --------------------------------------------------------
 
@@ -1836,15 +1837,16 @@ CREATE TABLE `instamojo_payments` (
   `status` int(11) NOT NULL DEFAULT 1,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `instamojo_payments`
 --
 
-INSERT INTO `instamojo_payments` (`id`, `api_key`, `auth_token`, `currency_rate`, `account_mode`, `status`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'test_5f4a2c9a58ef216f8a1a688910f', 'test_994252ada69ce7b3d282b9941c2', '74.66', 'Sandbox', 1, 'uploads/website-images/instamojo-2023-05-11-05-36-17-4376.png', NULL, '2023-05-11 11:36:17');
+INSERT INTO `instamojo_payments` (`id`, `api_key`, `auth_token`, `currency_rate`, `account_mode`, `status`, `image`, `created_at`, `updated_at`, `currency_id`) VALUES
+(1, 'test_5f4a2c9a58ef216f8a1a688910f', 'test_994252ada69ce7b3d282b9941c2', '74.66', 'Sandbox', 1, 'uploads/website-images/instamojo-2023-05-11-05-36-17-4376.png', NULL, '2023-10-18 06:22:28', 3);
 
 -- --------------------------------------------------------
 
@@ -2046,7 +2048,47 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (177, '2023_08_26_081730_create_script_content_languages_table', 112),
 (178, '2023_08_26_101941_create_product_item_languages_table', 113),
 (179, '2023_08_26_113850_create_product_type_page_languages_table', 114),
-(180, '2023_08_27_053238_create_footer_languages_table', 115);
+(180, '2023_08_27_053238_create_footer_languages_table', 115),
+(181, '2023_10_12_110032_create_multi_currencies_table', 116),
+(182, '2023_10_17_111424_add_currency_id_to_paypal_payments', 116),
+(183, '2023_10_17_112628_add_currency_id_to_stripe_payments', 116),
+(184, '2023_10_17_113812_add_currency_id_to_razorpay_payments', 116),
+(185, '2023_10_17_114304_add_currency_id_to_paystack_and_mollies', 116),
+(186, '2023_10_17_114839_add_currency_id_to_flutterwaves', 116),
+(187, '2023_10_17_115359_add_currency_id_to_instamojo_payments', 116),
+(188, '2023_10_17_115802_add_currency_id_to_sslcommerz_payments', 116),
+(189, '2023_10_18_051816_add_app_version_to_settings', 116);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `multi_currencies`
+--
+
+CREATE TABLE `multi_currencies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `currency_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency_icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_default` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency_rate` double NOT NULL,
+  `currency_position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `multi_currencies`
+--
+
+INSERT INTO `multi_currencies` (`id`, `currency_name`, `country_code`, `currency_code`, `currency_icon`, `is_default`, `currency_rate`, `currency_position`, `status`, `created_at`, `updated_at`) VALUES
+(1, '$-USD', 'USD', 'USD', '$', 'Yes', 1, 'left', 1, '2023-10-18 05:27:46', '2023-10-18 05:27:46'),
+(2, '৳-BDT', 'BD', 'BDT', '৳', 'No', 110, 'left', 1, '2023-10-18 05:44:31', '2023-10-18 05:44:31'),
+(3, '₹-INR', 'IN', 'INR', '₹', 'No', 100, 'left', 1, '2023-10-18 06:06:41', '2023-10-18 06:10:51'),
+(4, '₦-NGN', 'NG', 'NGN', '₦', 'No', 400, 'left', 1, '2023-10-18 06:13:25', '2023-10-18 06:21:27'),
+(5, '$-CAD', 'CAD', 'CAD', 'C$', 'No', 1.5, 'left', 1, '2023-10-18 06:20:00', '2023-10-18 06:20:00');
 
 -- --------------------------------------------------------
 
@@ -2089,7 +2131,16 @@ INSERT INTO `orders` (`id`, `order_id`, `user_id`, `name`, `email`, `phone`, `to
 (3, 119325, 2, 'John doe', 'user2@gmail.com', '22-402-667', 110, 'Stripe', 'success', 'txn_3NtQOUBsmz7k2BTD3LQabJml', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:36:48', '2023-09-23 07:36:48'),
 (4, 116811, 2, 'John doe', 'user2@gmail.com', '22-402-667', 50, 'Stripe', 'success', 'txn_3NtQQbBsmz7k2BTD1BkiNdqz', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:38:59', '2023-09-23 07:38:59'),
 (5, 289440, 2, 'John doe', 'user2@gmail.com', '22-402-667', 179, 'Stripe', 'success', 'txn_3NtQSPBsmz7k2BTD0SAXodH1', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 3, '2023-09-23 07:40:52', '2023-09-23 07:40:52'),
-(6, 783473, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Stripe', 'success', 'txn_3Nvw3DBsmz7k2BTD13PXksk7', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-30', '09', '2023', 1, '2023-09-30 05:49:15', '2023-09-30 05:49:15');
+(6, 783473, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Stripe', 'success', 'txn_3Nvw3DBsmz7k2BTD13PXksk7', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-30', '09', '2023', 1, '2023-09-30 05:49:15', '2023-09-30 05:49:15'),
+(8, 651201, 2, 'John doe', 'user2@gmail.com', '22-402-667', 65, 'sslcommerz', 'pending', '652f7a9ede8ac', '$', 'BD', 'BDT', 110, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(9, 745687, 2, 'John doe', 'user2@gmail.com', '22-402-667', 65, 'sslcommerz', 'pending', '652f7afecdb27', '$', 'BD', 'BDT', 110, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(10, 174997, 2, 'John doe', 'user2@gmail.com', '22-402-667', 65, 'sslcommerz', 'pending', '652f7b2146150', '$', 'BD', 'BDT', 110, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(11, 505035, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 80, 'sslcommerz', 'pending', '65349aabd845f', '$', 'BD', 'BDT', 110, '0', NULL, '0', '0', '0', 2, NULL, NULL),
+(12, 142673, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 80, 'sslcommerz', 'success', '65349c6147e74', '$', 'BD', 'BDT', 110, '1', NULL, '0', '0', '0', 2, NULL, NULL),
+(13, 366251, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'Stripe', 'success', 'txn_3O3sq2Bsmz7k2BTD2JOYd0aD', '$', 'USD', 'USD', 1, '1', NULL, '2023-10-22', '10', '2023', 1, '2023-10-22 04:00:35', '2023-10-22 04:00:35'),
+(14, 152225, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'Mollie', 'success', 'tr_Dfe6LDuTCx', NULL, 'CAD', 'CAD', 1.5, '1', NULL, '2023-10-22', '10', '2023', 1, '2023-10-22 04:02:11', '2023-10-22 04:02:11'),
+(15, 886636, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 20, 'Instamojo', 'success', 'MOJO3a22P05A80592904', NULL, NULL, NULL, 100, '1', NULL, '2023-10-22', '10', '2023', 1, '2023-10-22 04:03:37', '2023-10-22 04:03:37'),
+(16, 873844, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 20, 'Razorpay', 'success', 'pay_Mr7CQA3yvNf1pw', NULL, 'IN', 'INR', 100, '1', NULL, '2023-10-22', '10', '2023', 1, '2023-10-22 04:08:18', '2023-10-22 04:08:18');
 
 -- --------------------------------------------------------
 
@@ -2129,7 +2180,13 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `author_id`, `user_id
 (9, 5, 11, 1, 2, 'video', NULL, 13, 'Holiday Package', 60, '1', '2023-09-23 07:40:52', '2023-09-23 07:40:52'),
 (10, 5, 9, 1, 2, 'image', NULL, 8, '1920x1080 pixels', 50, '1', '2023-09-23 07:40:52', '2023-09-23 07:40:52'),
 (11, 5, 8, 1, 2, 'image', NULL, 6, '1920x1080 pixels', 69, '1', '2023-09-23 07:40:52', '2023-09-23 07:40:52'),
-(12, 6, 5, 2, 1, 'script', 'regular price', NULL, NULL, 15, '1', '2023-09-30 05:49:15', '2023-09-30 05:49:15');
+(12, 6, 5, 2, 1, 'script', 'regular price', NULL, NULL, 15, '1', '2023-09-30 05:49:15', '2023-09-30 05:49:15'),
+(13, 12, 22, 2, 1, 'script', 'regular price', NULL, NULL, 60, '1', '2023-10-22 03:52:18', '2023-10-22 03:52:18'),
+(14, 12, 17, 2, 1, 'audio', NULL, 24, '30 Audio Song', 20, '1', '2023-10-22 03:52:18', '2023-10-22 03:52:18'),
+(15, 13, 22, 2, 1, 'script', 'regular price', NULL, NULL, 60, '1', '2023-10-22 04:00:35', '2023-10-22 04:00:35'),
+(16, 14, 22, 2, 1, 'script', 'regular price', NULL, NULL, 60, '1', '2023-10-22 04:02:11', '2023-10-22 04:02:11'),
+(17, 15, 19, 2, 1, 'audio', NULL, 28, '100 Audio Song', 20, '1', '2023-10-22 04:03:37', '2023-10-22 04:03:37'),
+(18, 16, 17, 2, 1, 'audio', NULL, 24, '30 Audio Song', 20, '1', '2023-10-22 04:08:18', '2023-10-22 04:08:18');
 
 -- --------------------------------------------------------
 
@@ -2249,15 +2306,16 @@ CREATE TABLE `paypal_payments` (
   `currency_rate` double NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `paypal_payments`
 --
 
-INSERT INTO `paypal_payments` (`id`, `status`, `account_mode`, `client_id`, `secret_id`, `country_code`, `currency_code`, `currency_rate`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'sandbox', 'AWlV5x8Lhj9BRF8-TnawXtbNs-zt69mMVXME1BGJUIoDdrAYz8QIeeTBQp0sc2nIL9E529KJZys32Ipy', 'EEvn1J_oIC6alxb-FoF4t8buKwy4uEWHJ4_Jd_wolaSPRMzFHe6GrMrliZAtawDDuE-WKkCKpWGiz0Yn', 'US', 'USD', 1, 'uploads/website-images/paypal-2023-05-11-05-35-31-8176.png', NULL, '2023-05-11 11:35:31');
+INSERT INTO `paypal_payments` (`id`, `status`, `account_mode`, `client_id`, `secret_id`, `country_code`, `currency_code`, `currency_rate`, `image`, `created_at`, `updated_at`, `currency_id`) VALUES
+(1, 1, 'sandbox', 'AWlV5x8Lhj9BRF8-TnawXtbNs-zt69mMVXME1BGJUIoDdrAYz8QIeeTBQp0sc2nIL9E529KJZys32Ipy', 'EEvn1J_oIC6alxb-FoF4t8buKwy4uEWHJ4_Jd_wolaSPRMzFHe6GrMrliZAtawDDuE-WKkCKpWGiz0Yn', 'US', 'USD', 1, 'uploads/website-images/paypal-2023-05-11-05-35-31-8176.png', NULL, '2023-10-18 06:03:47', 1);
 
 -- --------------------------------------------------------
 
@@ -2281,15 +2339,17 @@ CREATE TABLE `paystack_and_mollies` (
   `mollie_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paystack_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `paystack_currency_id` int(11) DEFAULT NULL,
+  `mollie_currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `paystack_and_mollies`
 --
 
-INSERT INTO `paystack_and_mollies` (`id`, `mollie_key`, `mollie_status`, `mollie_currency_rate`, `paystack_public_key`, `paystack_secret_key`, `paystack_currency_rate`, `paystack_status`, `mollie_country_code`, `mollie_currency_code`, `paystack_country_code`, `paystack_currency_code`, `mollie_image`, `paystack_image`, `created_at`, `updated_at`) VALUES
-(1, 'test_4VDJypzqbsjjHpCJyx3vwjVuurqj3R', 1, 1.27, 'pk_test_057dfe5dee14eaf9c3b4573df1e3760c02c06e38', 'sk_test_77cb93329abbdc18104466e694c9f720a7d69c97', 417.35, 1, 'AS', 'CAD', 'NG', 'NGN', 'uploads/website-images/mollie-2023-05-11-05-36-00-2447.png', 'uploads/website-images/paystact-2023-05-11-05-36-37-1884.png', NULL, '2023-05-11 11:36:37');
+INSERT INTO `paystack_and_mollies` (`id`, `mollie_key`, `mollie_status`, `mollie_currency_rate`, `paystack_public_key`, `paystack_secret_key`, `paystack_currency_rate`, `paystack_status`, `mollie_country_code`, `mollie_currency_code`, `paystack_country_code`, `paystack_currency_code`, `mollie_image`, `paystack_image`, `created_at`, `updated_at`, `paystack_currency_id`, `mollie_currency_id`) VALUES
+(1, 'test_4VDJypzqbsjjHpCJyx3vwjVuurqj3R', 1, 1.27, 'pk_test_057dfe5dee14eaf9c3b4573df1e3760c02c06e38', 'sk_test_77cb93329abbdc18104466e694c9f720a7d69c97', 417.35, 1, 'AS', 'CAD', 'NG', 'NGN', 'uploads/website-images/mollie-2023-05-11-05-36-00-2447.png', 'uploads/website-images/paystact-2023-05-11-05-36-37-1884.png', NULL, '2023-10-18 06:22:17', 4, 5);
 
 -- --------------------------------------------------------
 
@@ -2865,15 +2925,16 @@ CREATE TABLE `razorpay_payments` (
   `key` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `secret_key` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `razorpay_payments`
 --
 
-INSERT INTO `razorpay_payments` (`id`, `status`, `name`, `currency_rate`, `country_code`, `currency_code`, `description`, `image`, `color`, `key`, `secret_key`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Ecommerce', 74.66, 'IN', 'INR', 'This is description', 'uploads/website-images/razorpay-2023-05-11-05-37-00-6286.png', '#2d15e5', 'rzp_test_K7CipNQYyyMPiS', 'zSBmNMorJrirOrnDrbOd1ALO', NULL, '2023-05-11 11:37:00');
+INSERT INTO `razorpay_payments` (`id`, `status`, `name`, `currency_rate`, `country_code`, `currency_code`, `description`, `image`, `color`, `key`, `secret_key`, `created_at`, `updated_at`, `currency_id`) VALUES
+(1, 1, 'Ecommerce', 74.66, 'IN', 'INR', 'This is description', 'uploads/website-images/razorpay-2023-05-11-05-37-00-6286.png', '#2d15e5', 'rzp_test_K7CipNQYyyMPiS', 'zSBmNMorJrirOrnDrbOd1ALO', NULL, '2023-10-18 06:12:14', 3);
 
 -- --------------------------------------------------------
 
@@ -3179,15 +3240,16 @@ CREATE TABLE `settings` (
   `footer_logo_two` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `footer_logo_three` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `app_version` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1.1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `maintenance_mode`, `logo`, `logo_two`, `logo_three`, `favicon`, `contact_email`, `enable_subscription_notify`, `enable_save_contact_message`, `text_direction`, `timezone`, `sidebar_lg_header`, `sidebar_sm_header`, `topbar_phone`, `topbar_email`, `opening_time`, `currency_name`, `currency_icon`, `currency_rate`, `theme_one`, `subscriber_image`, `subscription_bg`, `home2_subscription_bg`, `home3_subscription_bg`, `blog_page_subscription_image`, `default_avatar`, `home2_contact_foreground`, `home2_contact_background`, `home2_contact_call_as`, `home2_contact_phone`, `home2_contact_available`, `home2_contact_form_title`, `home2_contact_form_description`, `how_it_work_background`, `how_it_work_foreground`, `how_it_work_title`, `how_it_work_description`, `how_it_work_items`, `selected_theme`, `blog_left_right`, `theme_one_color`, `theme_two_color`, `theme_three_color`, `login_image`, `footer_logo`, `footer_logo_two`, `footer_logo_three`, `created_at`, `updated_at`) VALUES
-(1, 1, 'uploads/website-images/logo-2023-08-08-04-45-31-7094.png', 'uploads/website-images/logo-2023-08-09-09-30-43-8505.png', 'uploads/website-images/logo-2023-08-09-09-30-43-4591.png', 'uploads/website-images/favicon-2023-08-08-05-14-26-7280.png', 'contact@gmail.com', 1, 1, 'ltr', 'Asia/Dhaka', 'ALASMAET', 'DM', '+1347-430-9510', 'websolutionus1@gmail.com', '10.00 AM-7.00PM', 'USD', '$', 85.76, '#009bc2', 'uploads/website-images/sub-foreground--2023-01-22-01-32-17-2063.png', 'uploads/website-images/sub-background-2023-10-09-10-31-56-4622.jpg', 'uploads/website-images/sub-background-2023-10-09-10-32-44-4402.jpg', 'uploads/website-images/sub-background-2023-10-09-10-26-45-3495.jpg', 'uploads/website-images/blog-sub-background-2023-07-19-04-43-08-8818.png', 'uploads/website-images/default-avatar-2023-06-06-06-05-18-9960.png', 'uploads/website-images/home2-contact-foreground--2022-12-03-06-08-24-3082.png', 'uploads/website-images/home2-contact-background-2022-09-22-12-08-16-6090.jpg', 'Call as now', '+90 456 789 251', 'We are available 24/7', 'Do you have any question ?', 'Fill the form now & Request an Estimate', 'uploads/website-images/home3-hiw-background-2022-09-22-12-52-40-5965.jpg', 'uploads/website-images/home3-hiw-foreground--2022-09-29-01-06-00-1394.jpg', 'Enjoy Services', 'If you are going to use a passage of you need to be sure there isn\'t anything emc barrassing hidden in the middle', '[{\"title\":\"Select The Service\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"},{\"title\":\"Pick Your Schedule\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"},{\"title\":\"Place Your Booking & Relax\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"}]', 0, 1, '#378fff', '#00bf8c', '#2251f2', 'uploads/website-images/login-page-2022-11-06-04-12-11-6638.png', 'uploads/website-images/logo-2023-08-08-05-12-32-2674.png', 'uploads/website-images/logo-2023-08-09-09-30-43-2035.png', 'uploads/website-images/logo-2023-08-09-09-30-43-2579.png', NULL, '2023-10-09 05:40:02');
+INSERT INTO `settings` (`id`, `maintenance_mode`, `logo`, `logo_two`, `logo_three`, `favicon`, `contact_email`, `enable_subscription_notify`, `enable_save_contact_message`, `text_direction`, `timezone`, `sidebar_lg_header`, `sidebar_sm_header`, `topbar_phone`, `topbar_email`, `opening_time`, `currency_name`, `currency_icon`, `currency_rate`, `theme_one`, `subscriber_image`, `subscription_bg`, `home2_subscription_bg`, `home3_subscription_bg`, `blog_page_subscription_image`, `default_avatar`, `home2_contact_foreground`, `home2_contact_background`, `home2_contact_call_as`, `home2_contact_phone`, `home2_contact_available`, `home2_contact_form_title`, `home2_contact_form_description`, `how_it_work_background`, `how_it_work_foreground`, `how_it_work_title`, `how_it_work_description`, `how_it_work_items`, `selected_theme`, `blog_left_right`, `theme_one_color`, `theme_two_color`, `theme_three_color`, `login_image`, `footer_logo`, `footer_logo_two`, `footer_logo_three`, `created_at`, `updated_at`, `app_version`) VALUES
+(1, 1, 'uploads/website-images/logo-2023-08-08-04-45-31-7094.png', 'uploads/website-images/logo-2023-08-09-09-30-43-8505.png', 'uploads/website-images/logo-2023-08-09-09-30-43-4591.png', 'uploads/website-images/favicon-2023-08-08-05-14-26-7280.png', 'contact@gmail.com', 1, 1, 'ltr', 'Asia/Dhaka', 'ALASMAET', 'DM', '+1347-430-9510', 'websolutionus1@gmail.com', '10.00 AM-7.00PM', 'USD', '$', 85.76, '#009bc2', 'uploads/website-images/sub-foreground--2023-01-22-01-32-17-2063.png', 'uploads/website-images/sub-background-2023-10-09-10-31-56-4622.jpg', 'uploads/website-images/sub-background-2023-10-09-10-32-44-4402.jpg', 'uploads/website-images/sub-background-2023-10-09-10-26-45-3495.jpg', 'uploads/website-images/blog-sub-background-2023-07-19-04-43-08-8818.png', 'uploads/website-images/default-avatar-2023-06-06-06-05-18-9960.png', 'uploads/website-images/home2-contact-foreground--2022-12-03-06-08-24-3082.png', 'uploads/website-images/home2-contact-background-2022-09-22-12-08-16-6090.jpg', 'Call as now', '+90 456 789 251', 'We are available 24/7', 'Do you have any question ?', 'Fill the form now & Request an Estimate', 'uploads/website-images/home3-hiw-background-2022-09-22-12-52-40-5965.jpg', 'uploads/website-images/home3-hiw-foreground--2022-09-29-01-06-00-1394.jpg', 'Enjoy Services', 'If you are going to use a passage of you need to be sure there isn\'t anything emc barrassing hidden in the middle', '[{\"title\":\"Select The Service\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"},{\"title\":\"Pick Your Schedule\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"},{\"title\":\"Place Your Booking & Relax\",\"description\":\"There are many variations of passages of Lorem Ipsum available, but the majority have\"}]', 0, 1, '#378fff', '#00bf8c', '#2251f2', 'uploads/website-images/login-page-2022-11-06-04-12-11-6638.png', 'uploads/website-images/logo-2023-08-08-05-12-32-2674.png', 'uploads/website-images/logo-2023-08-09-09-30-43-2035.png', 'uploads/website-images/logo-2023-08-09-09-30-43-2579.png', NULL, '2023-10-09 05:40:02', '1.1');
 
 -- --------------------------------------------------------
 
@@ -3306,15 +3368,16 @@ CREATE TABLE `sslcommerz_payments` (
   `currency_rate` double(8,2) NOT NULL,
   `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sslcommerz_payments`
 --
 
-INSERT INTO `sslcommerz_payments` (`id`, `status`, `store_id`, `store_password`, `country_code`, `currency_code`, `currency_rate`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'degma645b10929dcac', 'degma645b10929dcac@ssl', 'US', 'USD', 1.00, 'uploads/website-images/sslcommerz-2023-05-11-05-11-25-6099.png', '2023-05-11 10:42:00', '2023-05-11 11:42:17');
+INSERT INTO `sslcommerz_payments` (`id`, `status`, `store_id`, `store_password`, `country_code`, `currency_code`, `currency_rate`, `image`, `created_at`, `updated_at`, `currency_id`) VALUES
+(1, 1, 'degma645b10929dcac', 'degma645b10929dcac@ssl', 'US', 'USD', 1.00, 'uploads/website-images/sslcommerz-2023-05-11-05-11-25-6099.png', '2023-05-11 10:42:00', '2023-10-18 06:22:39', 2);
 
 -- --------------------------------------------------------
 
@@ -3332,15 +3395,16 @@ CREATE TABLE `stripe_payments` (
   `country_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `currency_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `currency_rate` double NOT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `stripe_payments`
 --
 
-INSERT INTO `stripe_payments` (`id`, `status`, `stripe_key`, `stripe_secret`, `created_at`, `updated_at`, `country_code`, `currency_code`, `currency_rate`, `image`) VALUES
-(1, 1, 'pk_test_51LBgDoBsmz7k2BTD4eYrzmvswQIIm6nNmYTCMNSaMXTGde9ay60iJBP2iZhY2Fg6FM1hjk9BE1fudSWSxe6vxojG00gQN55ihb', 'sk_test_51LBgDoBsmz7k2BTDEu7pmlecAU84RwZhOx869Bz0ujoP4hDpyxePhOsepBYANVNey5W9OmUQ6112dZqzcdq4xRmX00l6OEWd8b', NULL, '2023-05-11 11:35:11', 'US', 'USD', 1, 'uploads/website-images/stripe-2023-05-11-05-35-11-6150.png');
+INSERT INTO `stripe_payments` (`id`, `status`, `stripe_key`, `stripe_secret`, `created_at`, `updated_at`, `country_code`, `currency_code`, `currency_rate`, `image`, `currency_id`) VALUES
+(1, 1, 'pk_test_51LBgDoBsmz7k2BTD4eYrzmvswQIIm6nNmYTCMNSaMXTGde9ay60iJBP2iZhY2Fg6FM1hjk9BE1fudSWSxe6vxojG00gQN55ihb', 'sk_test_51LBgDoBsmz7k2BTDEu7pmlecAU84RwZhOx869Bz0ujoP4hDpyxePhOsepBYANVNey5W9OmUQ6112dZqzcdq4xRmX00l6OEWd8b', NULL, '2023-10-18 06:03:52', 'US', 'USD', 1, 'uploads/website-images/stripe-2023-05-11-05-35-11-6150.png', 1);
 
 -- --------------------------------------------------------
 
@@ -3978,6 +4042,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `multi_currencies`
+--
+ALTER TABLE `multi_currencies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -4414,7 +4484,7 @@ ALTER TABLE `complete_requests`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contact_pages`
@@ -4624,19 +4694,25 @@ ALTER TABLE `message_documents`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+
+--
+-- AUTO_INCREMENT for table `multi_currencies`
+--
+ALTER TABLE `multi_currencies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `our_teams`
