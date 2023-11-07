@@ -17,5 +17,11 @@ class VerifyCsrfToken extends Middleware
         '/fail',
         '/ipn',
         '/pay-via-ajax',
+        '/payment-api/success',
+        '/payment-api/cancel',
+        '/payment-api/fail',
+        '/payment-api/ipn',
+        '/payment-api/pay-via-ajax',
+        
     ];
 }

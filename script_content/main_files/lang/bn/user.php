@@ -331,5 +331,8 @@
   'I have no account .' => 'আমার কোন অ্যাকাউন্ট নেই ।',
 
   'USD Amount' => 'ইউএসডি এমাউন্ট',
+  'Razorpay Payment' => 'রেজারপে পেমেন্ট',
+  'Flutterwave Payment' => 'ফ্লাটারওয়েভ পেমেন্ট',
+  'Paystack Payment' => 'পেস্ট্যাক পেমেন্ট',
 );
  ?>

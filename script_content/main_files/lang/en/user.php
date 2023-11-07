@@ -331,5 +331,8 @@
   'I have no account .' => 'I have no account .',
 
   'USD Amount' => 'USD Amount',
+  'Razorpay Payment' => 'Razorpay Payment',
+  'Flutterwave Payment' => 'Flutterwave Payment',
+  'Paystack Payment' => 'Paystack Payment',
 );
  ?>

@@ -96,6 +96,7 @@
   'Disabled Account' => 'Disabled Account',
   'Email does not exist' => 'Email does not exist',
   'Reset password link send to your email.' => 'Reset password link send to your email.',
+  'Reset password otp send to your email.' => 'Reset password otp send to your email.',
   'Password must be 4 characters' => 'Password must be 4 characters',
   'Password Reset successfully' => 'Password Reset successfully',
   'Logout Successfully' => 'Logout Successfully',
@@ -105,5 +106,22 @@
   'Successfully added your wishlist' => 'Successfully added your wishlist',
   'This product allready exist' => 'This product allready exist',
   'At first login your account' => 'At first login your account',
+  'Token is required' => 'Token is required',
+
+
+  'Coupon name is required' => 'Coupon name is required',
+  'Product remove successfully' => 'Product remove successfully',
+  'Password change successfully' => 'Password change successfully',
+  'Image change successfully' => 'Image change successfully',
+  'Product type is required' => 'Product type is required',
+  'You can not delete sold product' => 'You can not delete sold product',
+  'You can not delete sold product variant' => 'You can not delete sold product variant',
+  'Code resend successfully' => 'Code resend successfully',
+  'Card number is required' => 'Card number is required',
+  'Year is required' => 'Year is required',
+  'Month is required' => 'Month is required',
+  'CVC is required' => 'CVC is required',
+  'Please provide valid card information' => 'Please provide valid card information',
+  'Payment Failed' => 'Payment Failed',
 );
  ?>
