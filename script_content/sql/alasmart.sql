@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 06:33 AM
+-- Generation Time: Nov 07, 2023 at 05:17 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -630,6 +630,13 @@ CREATE TABLE `contact_messages` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `name`, `email`, `phone`, `subject`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'Ripon', 'ripon@gmail.com', '01722222222', 'test', 'test message', '2023-10-26 05:40:07', '2023-10-26 05:40:07');
+
 -- --------------------------------------------------------
 
 --
@@ -797,7 +804,7 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `coupon_name`, `coupon_discount`, `coupon_validity`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'EID SPASIAL', 10, '2023-10-18', 1, '2023-10-15 11:49:48', '2023-10-15 11:49:48');
+(1, 'EID SPASIAL', 10, '2023-10-31', 1, '2023-10-15 11:49:48', '2023-10-28 11:28:23');
 
 -- --------------------------------------------------------
 
@@ -1350,7 +1357,7 @@ CREATE TABLE `email_configurations` (
 --
 
 INSERT INTO `email_configurations` (`id`, `mail_type`, `mail_host`, `mail_port`, `email`, `email_password`, `smtp_username`, `smtp_password`, `mail_encryption`, `created_at`, `updated_at`) VALUES
-(1, 2, 'sandbox.smtp.mailtrap.io', '587', 'riponchandra667@gmail.com', 'mary+pass@', '0a637ee7f5df06', 'f145f6825f44f1', 'tls', NULL, '2023-04-05 04:58:21');
+(1, 2, 'sandbox.smtp.mailtrap.io', '587', 'riponchandra667@gmail.com', 'mary+pass@', 'cfdf2590a1b52e', '1ac7e8b88e34c2', 'tls', NULL, '2023-11-04 16:23:39');
 
 -- --------------------------------------------------------
 
@@ -1372,7 +1379,7 @@ CREATE TABLE `email_templates` (
 --
 
 INSERT INTO `email_templates` (`id`, `name`, `subject`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Password Reset', 'Password Reset', '<h4>Dear <b>{{name}}</b>,</h4>\r\n    <p>Do you want to reset your password? Please Click the following link and Reset Your Password.</p>', NULL, '2021-12-09 10:06:57'),
+(1, 'Password Reset', 'Password Reset', '<h4>Dear <b>{{name}}</b>,</h4>\n    <p>Do you want to reset your password? Please Click the following link and Reset Your Password.</p>', NULL, '2021-12-09 10:06:57'),
 (2, 'Contact Email', 'Contact Email', '<p>Name: <b>{{name}}</b></p><p>\r\n\r\nEmail: <b>{{email}}</b></p><p>\r\n\r\nPhone: <b>{{phone}}</b></p><p><span style=\"background-color: transparent;\">Subject: <b>{{subject}}</b></span></p><p>\r\n\r\nMessage: <b>{{message}}</b></p>', NULL, '2021-12-10 23:44:34'),
 (3, 'Subscribe Notification', 'Subscribe Notification', '<h2><b>Hi there</b>,</h2><p>\r\nCongratulations! Your Subscription has been created successfully. Please Click the following link and Verified Your Subscription. If you won\'t approve this link, after 24hourse your subscription will be denay</p>', NULL, '2021-12-10 23:44:53'),
 (4, 'User Verification', 'User Verification', '<p>Dear <b>{{user_name}}</b>,\n</p><p>Congratulations! Your Account has been created successfully. Please Click the following link and Active your Account.</p>', NULL, '2021-12-10 23:45:25'),
@@ -1849,7 +1856,7 @@ CREATE TABLE `instamojo_payments` (
 --
 
 INSERT INTO `instamojo_payments` (`id`, `api_key`, `auth_token`, `account_mode`, `status`, `image`, `created_at`, `updated_at`, `currency_id`) VALUES
-(1, 'test_5f4a2c9a58ef216f8a1a688910f', 'test_994252ada69ce7b3d282b9941c2', 'Sandbox', 1, 'uploads/website-images/instamojo-2023-05-11-05-36-17-4376.png', NULL, '2023-10-17 11:55:50', 3);
+(1, 'test_02b926f41f9be9c68fca4b1743c', 'test_a27114d30dc98e5d4d4d301639d', 'Sandbox', 1, 'uploads/website-images/instamojo-2023-05-11-05-36-17-4376.png', NULL, '2023-11-05 15:32:46', 3);
 
 -- --------------------------------------------------------
 
@@ -2059,7 +2066,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (186, '2023_10_17_114304_add_currency_id_to_paystack_and_mollies', 120),
 (187, '2023_10_17_114839_add_currency_id_to_flutterwaves', 121),
 (188, '2023_10_17_115359_add_currency_id_to_instamojo_payments', 122),
-(189, '2023_10_17_115802_add_currency_id_to_sslcommerz_payments', 123);
+(189, '2023_10_17_115802_add_currency_id_to_sslcommerz_payments', 123),
+(190, '2023_07_31_060838_create_shopping_carts_table', 124),
+(191, '2023_11_06_114954_add_two_new_col_to_orders', 125);
 
 -- --------------------------------------------------------
 
@@ -2119,41 +2128,47 @@ CREATE TABLE `orders` (
   `order_year` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cart_qty` int(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `sub_total_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `discount_amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_id`, `user_id`, `name`, `email`, `phone`, `total_amount`, `payment_method`, `payment_status`, `transection_id`, `currency_icon`, `country_code`, `currency_code`, `currency_rate`, `order_status`, `order_approval_date`, `order_date`, `order_month`, `order_year`, `cart_qty`, `created_at`, `updated_at`) VALUES
-(1, 755179, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 131, 'Stripe', 'success', 'txn_3NtPzABsmz7k2BTD2CH3SXsa', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:10:42', '2023-09-23 07:10:42'),
-(2, 209265, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 49, 'Stripe', 'success', 'txn_3NtQ4cBsmz7k2BTD2ZZQ2qEu', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:16:16', '2023-09-23 07:16:16'),
-(3, 119325, 2, 'John doe', 'user2@gmail.com', '22-402-667', 110, 'Stripe', 'success', 'txn_3NtQOUBsmz7k2BTD3LQabJml', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:36:48', '2023-09-23 07:36:48'),
-(4, 116811, 2, 'John doe', 'user2@gmail.com', '22-402-667', 50, 'Stripe', 'success', 'txn_3NtQQbBsmz7k2BTD1BkiNdqz', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:38:59', '2023-09-23 07:38:59'),
-(5, 289440, 2, 'John doe', 'user2@gmail.com', '22-402-667', 179, 'Stripe', 'success', 'txn_3NtQSPBsmz7k2BTD0SAXodH1', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 3, '2023-09-23 07:40:52', '2023-09-23 07:40:52'),
-(6, 783473, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Stripe', 'success', 'txn_3Nvw3DBsmz7k2BTD13PXksk7', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-30', '09', '2023', 1, '2023-09-30 05:49:15', '2023-09-30 05:49:15'),
-(8, 736195, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 135, 'sslcommerz', 'pending', '652b7ec05954f', '$', 'US', 'USD', 1, '0', NULL, '0', '0', '0', 3, NULL, NULL),
-(9, 472760, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 20, 'Stripe', 'success', 'txn_3O1OpyBsmz7k2BTD1jGbXI0m', '$', NULL, 'USD', 1, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 07:34:11', '2023-10-15 07:34:11'),
-(10, 311732, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'Flutterwave', 'success', '4660347', NULL, 'NGN', 'NGN', 417.35, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 08:07:48', '2023-10-15 08:07:48'),
-(11, 504654, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Mollie', 'success', 'tr_ZpxmzncSsq', NULL, 'US Dolar', 'USD', 1, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 09:42:09', '2023-10-15 09:42:09'),
-(12, 542332, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Paystack', 'success', '3195039685', NULL, 'NGN', 'NGN', 417.35, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 10:06:40', '2023-10-15 10:06:40'),
-(13, 334205, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'sslcommerz', 'pending', '652bd0b85a164', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL),
-(14, 622153, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 90, 'sslcommerz', 'pending', '652cc7178cdcb', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 3, NULL, NULL),
-(15, 529131, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 54, 'Stripe', 'success', 'txn_3O1l5aBsmz7k2BTD0mfi0k0T', '$', 'USD', 'USD', 1, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:19:48', '2023-10-16 07:19:48'),
-(16, 426199, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 25, 'Mollie', 'success', 'tr_f6WAzfxiSp', NULL, 'USD', 'USD', 1, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:21:38', '2023-10-16 07:21:38'),
-(17, 339134, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 24, 'Paystack', 'success', '3197524377', NULL, NULL, 'NGN', 417.35, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:33:59', '2023-10-16 07:33:59'),
-(18, 682023, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 26, 'Razorpay', 'success', 'pay_MonalINLG22gx5', NULL, 'INR', 'INR', 83.24, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:39:38', '2023-10-16 07:39:38'),
-(19, 636390, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'Flutterwave', 'success', '4661991', NULL, NULL, 'NGN', 417.35, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:52:28', '2023-10-16 07:52:28'),
-(20, 928922, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'sslcommerz', 'pending', '652f7bd52cf90', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL),
-(21, 944846, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'sslcommerz', 'pending', '652f7c62e632d', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL),
-(22, 698108, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 27, 'sslcommerz', 'pending', '652f894332510', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL),
-(23, 328267, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'pending', '652f9134af7e9', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL),
-(24, 226784, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'success', '652f930642909', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL),
-(25, 911972, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'success', '652f93653949e', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL),
-(26, 191581, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'sslcommerz', 'success', '652f94104f739', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL),
-(27, 874704, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 18, 'sslcommerz', 'success', '652f96af8515a', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL),
-(28, 146394, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 18, 'bank_acount', 'success', '12345678', NULL, NULL, NULL, NULL, '1', NULL, '2023-10-18', '10', '2023', 1, '2023-10-18 08:30:19', '2023-10-18 08:31:12');
+INSERT INTO `orders` (`id`, `order_id`, `user_id`, `name`, `email`, `phone`, `total_amount`, `payment_method`, `payment_status`, `transection_id`, `currency_icon`, `country_code`, `currency_code`, `currency_rate`, `order_status`, `order_approval_date`, `order_date`, `order_month`, `order_year`, `cart_qty`, `created_at`, `updated_at`, `sub_total_amount`, `discount_amount`) VALUES
+(1, 755179, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 131, 'Stripe', 'success', 'txn_3NtPzABsmz7k2BTD2CH3SXsa', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:10:42', '2023-09-23 07:10:42', '0', '0'),
+(2, 209265, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 49, 'Stripe', 'success', 'txn_3NtQ4cBsmz7k2BTD2ZZQ2qEu', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:16:16', '2023-09-23 07:16:16', '0', '0'),
+(3, 119325, 2, 'John doe', 'user2@gmail.com', '22-402-667', 110, 'Stripe', 'success', 'txn_3NtQOUBsmz7k2BTD3LQabJml', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:36:48', '2023-09-23 07:36:48', '0', '0'),
+(4, 116811, 2, 'John doe', 'user2@gmail.com', '22-402-667', 50, 'Stripe', 'success', 'txn_3NtQQbBsmz7k2BTD1BkiNdqz', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 2, '2023-09-23 07:38:59', '2023-09-23 07:38:59', '0', '0'),
+(5, 289440, 2, 'John doe', 'user2@gmail.com', '22-402-667', 179, 'Stripe', 'success', 'txn_3NtQSPBsmz7k2BTD0SAXodH1', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-23', '09', '2023', 3, '2023-09-23 07:40:52', '2023-09-23 07:40:52', '0', '0'),
+(6, 783473, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Stripe', 'success', 'txn_3Nvw3DBsmz7k2BTD13PXksk7', NULL, 'US', 'usd', 1, '1', NULL, '2023-09-30', '09', '2023', 1, '2023-09-30 05:49:15', '2023-09-30 05:49:15', '0', '0'),
+(8, 736195, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 135, 'sslcommerz', 'pending', '652b7ec05954f', '$', 'US', 'USD', 1, '0', NULL, '0', '0', '0', 3, NULL, NULL, '0', '0'),
+(9, 472760, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 20, 'Stripe', 'success', 'txn_3O1OpyBsmz7k2BTD1jGbXI0m', '$', NULL, 'USD', 1, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 07:34:11', '2023-10-15 07:34:11', '0', '0'),
+(10, 311732, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'Flutterwave', 'success', '4660347', NULL, 'NGN', 'NGN', 417.35, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 08:07:48', '2023-10-15 08:07:48', '0', '0'),
+(11, 504654, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Mollie', 'success', 'tr_ZpxmzncSsq', NULL, 'US Dolar', 'USD', 1, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 09:42:09', '2023-10-15 09:42:09', '0', '0'),
+(12, 542332, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'Paystack', 'success', '3195039685', NULL, 'NGN', 'NGN', 417.35, '1', NULL, '2023-10-15', '10', '2023', 1, '2023-10-15 10:06:40', '2023-10-15 10:06:40', '0', '0'),
+(13, 334205, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 15, 'sslcommerz', 'pending', '652bd0b85a164', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(14, 622153, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 90, 'sslcommerz', 'pending', '652cc7178cdcb', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 3, NULL, NULL, '0', '0'),
+(15, 529131, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 54, 'Stripe', 'success', 'txn_3O1l5aBsmz7k2BTD0mfi0k0T', '$', 'USD', 'USD', 1, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:19:48', '2023-10-16 07:19:48', '0', '0'),
+(16, 426199, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 25, 'Mollie', 'success', 'tr_f6WAzfxiSp', NULL, 'USD', 'USD', 1, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:21:38', '2023-10-16 07:21:38', '0', '0'),
+(17, 339134, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 24, 'Paystack', 'success', '3197524377', NULL, NULL, 'NGN', 417.35, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:33:59', '2023-10-16 07:33:59', '0', '0'),
+(18, 682023, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 26, 'Razorpay', 'success', 'pay_MonalINLG22gx5', NULL, 'INR', 'INR', 83.24, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:39:38', '2023-10-16 07:39:38', '0', '0'),
+(19, 636390, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'Flutterwave', 'success', '4661991', NULL, NULL, 'NGN', 417.35, '1', NULL, '2023-10-16', '10', '2023', 1, '2023-10-16 07:52:28', '2023-10-16 07:52:28', '0', '0'),
+(20, 928922, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'sslcommerz', 'pending', '652f7bd52cf90', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(21, 944846, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 30, 'sslcommerz', 'pending', '652f7c62e632d', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(22, 698108, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 27, 'sslcommerz', 'pending', '652f894332510', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(23, 328267, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'pending', '652f9134af7e9', '$', 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(24, 226784, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'success', '652f930642909', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(25, 911972, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 2700, 'sslcommerz', 'success', '652f93653949e', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(26, 191581, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'sslcommerz', 'success', '652f94104f739', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(27, 874704, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 18, 'sslcommerz', 'success', '652f96af8515a', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(28, 146394, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 18, 'bank_acount', 'success', '12345678', NULL, NULL, NULL, NULL, '1', NULL, '2023-10-18', '10', '2023', 1, '2023-10-18 08:30:19', '2023-10-18 08:31:12', '0', '0'),
+(91, 513229, 5, NULL, NULL, NULL, 20, 'Paypal', 'success', 'PAYID-MVE2UOI1GM63662V51632526', NULL, NULL, NULL, NULL, '1', NULL, '2023-11-07', '11', '2023', 1, '2023-11-07 03:09:35', '2023-11-07 03:09:35', '0', '0'),
+(92, 768982, 5, 'Ripon', 'ripon@gmail.com', '22-402-6666', 20, 'sslcommerz', 'pending', '6549acffec177', NULL, 'BDT', 'BDT', 100, '0', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(93, 778069, 5, 'Ripon', 'ripon@gmail.com', '22-402-6666', 20, 'sslcommerz', 'success', '6549ae86336d6', NULL, 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0'),
+(94, 453037, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 60, 'sslcommerz', 'success', '6549b622d859d', '$', 'BDT', 'BDT', 100, '1', NULL, '0', '0', '0', 1, NULL, NULL, '0', '0');
 
 -- --------------------------------------------------------
 
@@ -2207,7 +2222,22 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `author_id`, `user_id
 (23, 25, 3, 2, 1, 'script', 'extend price', NULL, NULL, 30, '1', '2023-10-18 08:12:54', '2023-10-18 08:12:54'),
 (24, 26, 22, 2, 1, 'script', 'regular price', NULL, NULL, 60, '1', '2023-10-18 08:15:27', '2023-10-18 08:15:27'),
 (25, 27, 19, 2, 1, 'audio', NULL, 28, '100 Audio Song', 20, '1', '2023-10-18 08:27:11', '2023-10-18 08:27:11'),
-(26, 28, 19, 2, 1, 'audio', NULL, 28, '100 Audio Song', 20, '1', '2023-10-18 08:30:19', '2023-10-18 08:30:19');
+(26, 28, 19, 2, 1, 'audio', NULL, 28, '100 Audio Song', 20, '1', '2023-10-18 08:30:19', '2023-10-18 08:30:19'),
+(44, 705746, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:08:29', '2023-11-06 08:08:29'),
+(45, 284547, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:15:12', '2023-11-06 08:15:12'),
+(46, 599335, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:16:24', '2023-11-06 08:16:24'),
+(47, 291821, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:17:05', '2023-11-06 08:17:05'),
+(48, 838587, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:18:13', '2023-11-06 08:18:13'),
+(49, 157987, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:21:15', '2023-11-06 08:21:15'),
+(50, 720229, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:28:52', '2023-11-06 08:28:52'),
+(51, 992216, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 08:40:39', '2023-11-06 08:40:39'),
+(52, 167596, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 09:02:45', '2023-11-06 09:02:45'),
+(53, 507509, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 10:22:35', '2023-11-06 10:22:35'),
+(61, 156682, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 11:29:40', '2023-11-06 11:29:40'),
+(62, 636666, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-06 11:35:05', '2023-11-06 11:35:05'),
+(63, 91, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-07 03:09:35', '2023-11-07 03:09:35'),
+(64, 778069, 6, 2, 5, 'image', NULL, 1, NULL, 20, '1', '2023-11-07 03:27:27', '2023-11-07 03:27:27'),
+(65, 94, 22, 2, 1, 'script', 'regular price', NULL, NULL, 60, '1', '2023-11-07 03:59:44', '2023-11-07 03:59:44');
 
 -- --------------------------------------------------------
 
@@ -2543,7 +2573,8 @@ INSERT INTO `products` (`id`, `author_id`, `category_id`, `product_type`, `name`
 (20, 1, 1, 'audio', NULL, 'singlebranch-restaurant-management-software', 15, NULL, 'https://codecanyon.net/user/quomodotheme/portfolio', 'uploads/custom-images/thumb_image-2023-09-21-05-01-30-6034.png', NULL, 'uploads/custom-images/product_icon-2023-09-21-05-01-30-9541.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '1', '1', NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, '2023-09-21 11:01:30', '2023-10-01 08:54:54'),
 (21, 2, 3, 'script', NULL, 'apps-premium-landing-theme', 33, '41', 'https://codecanyon.net/user/quomodotheme/portfolio', 'uploads/custom-images/thumb_image-2023-09-21-05-25-29-4176.png', 'Script-2023-09-21-05-25-30-1155.zip', 'uploads/custom-images/product_icon-2023-09-21-05-25-30-4102.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '1', '1', NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, '2023-09-21 11:25:30', '2023-10-01 08:54:35'),
 (22, 2, 3, 'script', NULL, 'oifoliodigital-marketing-theme', 60, '90', 'https://codecanyon.net/user/quomodotheme/portfolio', 'uploads/custom-images/thumb_image-2023-09-21-05-38-15-3857.png', 'Script-2023-09-21-05-38-15-7744.zip', 'uploads/custom-images/product_icon-2023-09-21-05-38-15-2185.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '1', '1', NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, '2023-09-21 11:38:15', '2023-10-01 08:54:19'),
-(23, 1, 5, 'script', NULL, 'saas-landing-software-theme', 50, '85', 'https://codecanyon.net/user/quomodotheme/portfolio', 'uploads/custom-images/thumb_image-2023-09-21-05-44-14-9303.png', 'Script-2023-09-21-05-44-15-4728.zip', 'uploads/custom-images/product_icon-2023-09-21-05-44-15-3547.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '1', '1', NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, '2023-09-21 11:44:15', '2023-10-01 08:54:00');
+(23, 1, 5, 'script', NULL, 'saas-landing-software-theme', 50, '85', 'https://codecanyon.net/user/quomodotheme/portfolio', 'uploads/custom-images/thumb_image-2023-09-21-05-44-14-9303.png', 'Script-2023-09-21-05-44-15-4728.zip', 'uploads/custom-images/product_icon-2023-09-21-05-44-15-3547.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '1', '1', NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, '2023-09-21 11:44:15', '2023-10-01 08:54:00'),
+(26, 1, 2, 'image', NULL, 'demo-special-product', 50, NULL, 'https://codecanyon.net/user/quomodotheme', 'uploads/custom-images/thumb_image-2023-10-31-12-49-16-2367.png', NULL, 'uploads/custom-images/product_icon-2023-10-31-12-49-16-5499.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '0', '1', '0', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, '2023-10-31 04:59:05', '2023-10-31 06:49:16');
 
 -- --------------------------------------------------------
 
@@ -2557,9 +2588,9 @@ CREATE TABLE `product_comments` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -2573,7 +2604,12 @@ INSERT INTO `product_comments` (`id`, `product_id`, `user_id`, `name`, `email`, 
 (1, 22, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 'California, Los Angeles', 'Oifolio-Digital Marketing Theme has been a fantastic addition to my toolkit. It&#039;s made managing my online marketing a breeze', 1, '2023-09-23 08:27:50', '2023-09-23 08:27:56'),
 (2, 19, 1, 'Abdullah Mamun', 'user@gmail.com', '22-402-666', 'California, Los Angeles', 'Absolutely love it! This software is incredibly user-friendly. Makes everything so much simpler!', 1, '2023-09-23 08:31:44', '2023-09-23 08:31:49'),
 (3, 23, 2, 'John doe', 'user2@gmail.com', '22-402-667', 'California, Los Angeles', 'The SaaS Landing Software Theme is user-friendly and budget-friendly, making it a practical choice for creating an effective landing page for my SaaS product.', 1, '2023-09-23 08:40:17', '2023-09-23 08:40:22'),
-(4, 20, 2, 'John doe', 'user2@gmail.com', '22-402-667', 'California, Los Angeles', 'Small but mighty! This supporting product empowers single-branch restaurants to compete with the big players and serve up top-notch dining experiences.', 1, '2023-09-23 08:57:44', '2023-09-23 08:57:59');
+(4, 20, 2, 'John doe', 'user2@gmail.com', '22-402-667', 'California, Los Angeles', 'Small but mighty! This supporting product empowers single-branch restaurants to compete with the big players and serve up top-notch dining experiences.', 1, '2023-09-23 08:57:44', '2023-09-23 08:57:59'),
+(5, 1, 5, 'Ripon', 'ripon@gmail.com', NULL, NULL, 'test comment', 0, '2023-10-28 07:17:35', '2023-10-28 07:17:35'),
+(6, 1, 5, 'Ripon', 'ripon@gmail.com', NULL, NULL, 'test comment', 0, '2023-10-28 07:19:43', '2023-10-28 07:19:43'),
+(7, 1, 5, 'Ripon', 'ripon@gmail.com', NULL, NULL, 'test comment', 0, '2023-10-28 07:19:55', '2023-10-28 07:19:55'),
+(8, 1, 5, 'Ripon', 'ripon@gmail.com', NULL, NULL, 'test comment', 0, '2023-10-28 07:20:02', '2023-10-28 07:20:02'),
+(9, 1, 5, '', '', NULL, NULL, 'test comment', 1, '2023-10-28 07:21:52', '2023-10-28 07:22:47');
 
 -- --------------------------------------------------------
 
@@ -2746,7 +2782,9 @@ INSERT INTO `product_languages` (`id`, `product_id`, `lang_code`, `name`, `descr
 (44, '21', 'bn', 'অ্যাপস প্রিমিয়াম ল্যান্ডিং মানেজমেন্ট  থিম', '<p>\"অ্যাপস প্রিমিয়াম ল্যান্ডিং থিম\" হল একটি সূক্ষ্মভাবে তৈরি এবং দৃশ্যত অত্যাশ্চর্য ওয়েব ডিজাইন টেমপ্লেট যা মোবাইল অ্যাপ্লিকেশন, সফ্টওয়্যার পণ্য বা ডিজিটাল পরিষেবাগুলি প্রদর্শনের জন্য বিশেষভাবে তৈরি করা হয়েছে৷ এটি ডিজাইনের উৎকর্ষতা এবং ব্যবহারকারীর সম্পৃক্ততার শীর্ষকে উপস্থাপন করে, এটি ডেভেলপার, স্টার্টআপ এবং ব্যবসার জন্য একটি আদর্শ পছন্দ করে যা একটি আকর্ষণীয় অনলাইন উপস্থিতি তৈরি করার লক্ষ্যে।</p>\r\n<p>সংক্ষেপে, \"অ্যাপস প্রিমিয়াম ল্যান্ডিং থিম\" হল একটি বহুমুখী এবং দৃষ্টিনন্দন টেমপ্লেট যা আপনাকে আপনার মোবাইল অ্যাপ্লিকেশন বা ডিজিটাল পণ্যকে কার্যকরভাবে প্রচার করতে সাহায্য করার জন্য ডিজাইন করা হয়েছে৷ এর বৈশিষ্ট্যগুলির পরিসর, কাস্টমাইজেশন বিকল্প এবং প্রতিক্রিয়াশীল ডিজাইনের সাথে, এটি আপনাকে একটি বাধ্যতামূলক অনলাইন উপস্থিতি তৈরি করার ক্ষমতা দেয় যা দর্শকদের বিশ্বস্ত ব্যবহারকারীতে রূপান্তর করে।</p>\r\n<p>অনুগ্রহ করে মনে রাখবেন যে এই বিবরণটি একটি সাধারণ উপস্থাপনা এবং 2023 সালে উপলব্ধ একটি নির্দিষ্ট প্রিমিয়াম ল্যান্ডিং থিমের বৈশিষ্ট্য বা সুনির্দিষ্ট বৈশিষ্ট্যগুলি সঠিকভাবে প্রতিফলিত নাও হতে পারে৷ একটি নির্দিষ্ট থিম সম্পর্কে বিস্তারিত তথ্য পেতে, আমি থিম প্রদানকারীর অফিসিয়াল ওয়েবসাইট পরিদর্শন করার বা তাদের সাথে যোগাযোগ করার পরামর্শ দিচ্ছি৷ সর্বশেষ এবং সবচেয়ে সঠিক বিবরণের জন্য সমর্থন।</p>\r\n<p>কী ফিচারস:</p>\r\n<ul>\r\n<li>মসৃণ এবং আধুনিক ডিজাইন: আমাদের থিমটি একটি মসৃণ এবং আধুনিক ডিজাইনের গর্ব করে যা অবিলম্বে দর্শকদের দৃষ্টি আকর্ষণ করে। এর পরিষ্কার বিন্যাস, প্রাণবন্ত রঙ এবং স্বজ্ঞাত নেভিগেশন একটি স্মরণীয় প্রথম ছাপ নিশ্চিত করে।</li>\r\n<li>প্রতিক্রিয়াশীল এবং মোবাইল-বন্ধুত্বপূর্ণ: আজকের মোবাইল-কেন্দ্রিক বিশ্বে, আপনার ল্যান্ডিং পৃষ্ঠাটি অবশ্যই সমস্ত ডিভাইসে ত্রুটিহীন দেখতে হবে৷ অ্যাপস প্রিমিয়াম ল্যান্ডিং থিম সম্পূর্ণরূপে প্রতিক্রিয়াশীল, স্মার্টফোন, ট্যাবলেট এবং ডেস্কটপে একটি নিরবচ্ছিন্ন অভিজ্ঞতার গ্যারান্টি দেয়।</li>\r\n<li>অ্যাপ শোকেস: আপনার অ্যাপের বৈশিষ্ট্য, স্ক্রিনশট এবং সুবিধাগুলি মার্জিতভাবে হাইলাইট করুন। কাস্টমাইজযোগ্য বিভাগগুলি আপনাকে আপনার অ্যাপের কার্যকারিতা এমনভাবে উপস্থাপন করতে দেয় যা আপনার লক্ষ্য দর্শকদের সাথে অনুরণিত হয়।</li>\r\n<li>মসৃণ অ্যানিমেশন: মসৃণ অ্যানিমেশন এবং ট্রানজিশনের সাথে ব্যবহারকারীদের জড়িত করুন যা আপনার ল্যান্ডিং পৃষ্ঠায় ইন্টারঅ্যাক্টিভিটির স্পর্শ যোগ করে। এই অ্যানিমেশনগুলি ব্যবহারকারীর ব্যস্ততা বাড়াতে এবং একটি স্মরণীয় ব্রাউজিং অভিজ্ঞতা তৈরি করার জন্য ডিজাইন করা হয়েছে৷</li>\r\n<li>কল-টু-অ্যাকশন (CTA) উপাদান: কৌশলগতভাবে স্থাপন করা CTA বোতাম এবং ফর্ম দর্শকদের পদক্ষেপ নিতে উৎসাহিত করে, তা আপনার অ্যাপ ডাউনলোড করা, নিউজলেটারের জন্য সাইন আপ করা বা কেনাকাটা করা হোক না কেন।</li>\r\n<li>প্রশংসাপত্র এবং সামাজিক প্রমাণ: ক্লায়েন্ট প্রশংসাপত্র, ব্যবহারকারীর পর্যালোচনা এবং আপনার অ্যাপের বিশ্বাসযোগ্যতা এবং নির্ভরযোগ্যতা হাইলাইট করে এমন ট্রাস্ট ব্যাজগুলির মাধ্যমে সম্ভাব্য ব্যবহারকারীদের সাথে বিশ্বাস তৈরি করুন।</li>\r\n<li>ইন্টিগ্রেশন-প্রস্তুত: ব্যবহারকারীর ইন্টারঅ্যাকশন ট্র্যাক করতে এবং বৃহত্তর শ্রোতাদের কাছে পৌঁছানোর জন্য জনপ্রিয় ইমেল বিপণন সরঞ্জাম, বিশ্লেষণ প্ল্যাটফর্ম এবং সোশ্যাল মিডিয়া নেটওয়ার্কগুলির সাথে নির্বিঘ্নে সংহত করুন৷</li>\r\n<li>এসইও অপ্টিমাইজড: থিমটি সার্চ ইঞ্জিনের জন্য অপ্টিমাইজ করা হয়েছে, যাতে আপনার ল্যান্ডিং পৃষ্ঠা সার্চের ফলাফলে ভালোভাবে স্থান পায়, আপনার অ্যাপ বা পণ্যে অর্গানিক ট্রাফিক চালনা করে।</li>\r\n<li>কাস্টমাইজেশন বিকল্প: রঙের স্কিম, ফন্ট এবং লেআউট বৈচিত্র সহ সহজেই ব্যবহারযোগ্য কাস্টমাইজেশন বিকল্পগুলির সাথে আপনার ব্র্যান্ড পরিচয়ের সাথে মেলে থিমটি সাজান।</li>\r\n<li>ডেডিকেটেড সাপোর্ট: অ্যাপস প্রিমিয়াম ল্যান্ডিং থিম সেট আপ এবং ব্যবহার করার সময় আপনি যেকোন প্রশ্ন বা সমস্যার সম্মুখীন হতে পারেন সেই বিষয়ে আমাদের গ্রাহক সহায়তা দল আপনাকে সহায়তা করতে প্রস্তুত।</li>\r\n</ul>', 'অ্যাপস  ,প্রিমিয়াম  ,ল্যান্ডিং  থিম,লারাভেল  ,শপিফাই', 'অ্যাপস প্রিমিয়াম ল্যান্ডিং মানেজমেন্ট  থিম', 'অ্যাপস প্রিমিয়াম ল্যান্ডিং মানেজমেন্ট  থিম', '2023-09-23 09:52:17', '2023-10-14 04:20:48'),
 (45, '22', 'bn', 'Oifolio-ডিজিটাল মার্কেটিং মানেজমেন্ট থিম', '<p>\"Oifolio-ডিজিটাল মার্কেটিং থিম: একটি শক্তিশালী এবং বহুমুখী ওয়ার্ডপ্রেস থিম দিয়ে আপনার অনলাইন উপস্থিতি উন্নত করুন\"</p>\r\n<p>আজকের ডিজিটাল ল্যান্ডস্কেপে, একটি শক্তিশালী অনলাইন উপস্থিতি প্রতিষ্ঠা করা ব্যবসা এবং ব্যক্তিদের জন্য একইভাবে গুরুত্বপূর্ণ। আপনি একজন অভিজ্ঞ ডিজিটাল বিপণনকারী, একজন উদীয়মান উদ্যোক্তা, বা একজন সৃজনশীল পেশাদার হোন না কেন, সঠিক ডিজিটাল মার্কেটিং থিম আপনার ব্র্যান্ড, পণ্য বা পরিষেবাগুলিকে কার্যকরভাবে প্রদর্শনে সমস্ত পার্থক্য আনতে পারে৷ সেখানেই Oifolio-ডিজিটাল মার্কেটিং থিম কার্যকর হয়।</p>\r\n<p>Oifolio শুধুমাত্র আরেকটি ওয়ার্ডপ্রেস থিম নয়; এটি একটি বিস্তৃত সমাধান যা আপনাকে ডিজিটাল মার্কেটিং এর প্রতিযোগিতামূলক বিশ্বে দক্ষতা অর্জনের জন্য প্রয়োজনীয় সরঞ্জাম এবং বৈশিষ্ট্যগুলির সাথে ক্ষমতায়নের জন্য ডিজাইন করা হয়েছে। এই থিমটি হল শিল্প অভিজ্ঞতা, বিশেষজ্ঞ ডিজাইন এবং ব্যবহারকারী-কেন্দ্রিক উন্নয়নের চূড়ান্ত পরিণতি, এটি তাদের অনলাইন উপস্থিতির পূর্ণ সম্ভাবনাকে কাজে লাগাতে চায় এমন যেকোন ব্যক্তির জন্য আদর্শ পছন্দ করে তুলেছে৷</p>\r\n<p>Oifolio-ডিজিটাল মার্কেটিং থিমের মূল বৈশিষ্ট্য:</p>\r\n<ul>\r\n<li>প্রতিক্রিয়াশীল ডিজাইন: Oifolio সম্পূর্ণরূপে প্রতিক্রিয়াশীল, এটি নিশ্চিত করে যে আপনার ওয়েবসাইটটি ডেস্কটপ কম্পিউটার থেকে স্মার্টফোন এবং ট্যাবলেট পর্যন্ত সমস্ত ডিভাইসে অত্যাশ্চর্য দেখাচ্ছে৷ এই বৈশিষ্ট্যটি আপনার শ্রোতাদের ক্যাপচার এবং আকর্ষিত করার জন্য অপরিহার্য, তারা আপনার সাইটে যেভাবে অ্যাক্সেস করুক না কেন।</li>\r\n<li>বহুমুখী লেআউট বিকল্প: Oifolio-এর সাথে, আপনি লেআউট বিকল্পগুলির একটি বিস্তৃত পরিসরে অ্যাক্সেস করতে পারেন, যা আপনাকে আপনার অনন্য প্রয়োজন অনুসারে আপনার ওয়েবসাইট কাস্টমাইজ করার অনুমতি দেয়। আপনি একটি মসৃণ এবং আধুনিক ডিজাইন বা আরও ঐতিহ্যগত চেহারা চান না কেন, Oifolio আপনাকে আচ্ছাদিত করেছে।</li>\r\n<li>SEO-বন্ধুত্বপূর্ণ: Oifolio তৈরি করা হয়েছে সার্চ ইঞ্জিন অপ্টিমাইজেশান (SEO) মাথায় রেখে। এটিতে বৈশিষ্ট্য এবং সরঞ্জাম রয়েছে যা সার্চ ইঞ্জিন ফলাফলে আপনার ওয়েবসাইটের দৃশ্যমানতা উন্নত করতে সাহায্য করে, আপনাকে আরও বৃহত্তর দর্শকদের কাছে পৌঁছাতে এবং আরও দর্শকদের আকর্ষণ করতে সহায়তা করে৷</li>\r\n<li>গতি এবং কর্মক্ষমতা: স্লো-লোডিং ওয়েবসাইট দর্শকদের দূরে সরিয়ে দিতে পারে। Oifolio গতি এবং কর্মক্ষমতা জন্য অপ্টিমাইজ করা হয়েছে, আপনার সাইট দ্রুত লোড হয় এবং একটি চমৎকার ব্যবহারকারীর অভিজ্ঞতা প্রদান করে তা নিশ্চিত করে।</li>\r\n<li>বিপণন সরঞ্জামগুলির সাথে একীকরণ: Oifolio নিরবিচ্ছিন্নভাবে জনপ্রিয় ডিজিটাল বিপণন সরঞ্জামগুলির সাথে সংহত করে, যা আপনাকে আপনার বিপণন কৌশলগুলি সহজে বাস্তবায়ন করতে দেয়৷ এটি ইমেল মার্কেটিং, সোশ্যাল মিডিয়া ইন্টিগ্রেশন বা বিশ্লেষণ যাই হোক না কেন, Oifolio আপনাকে কভার করেছে।</li>\r\n<li>কাস্টমাইজেশন বিকল্প: Oifolio-এর ব্যাপক কাস্টমাইজেশন বিকল্পগুলি ব্যবহার করে সহজেই আপনার ওয়েবসাইটকে ব্যক্তিগতকৃত করুন। আপনি রঙ, ফন্ট, লেআউট এবং আরও কিছু পরিবর্তন করতে পারেন এমন একটি ওয়েবসাইট তৈরি করতে যা আপনার ব্র্যান্ডের পরিচয়কে পুরোপুরি প্রতিফলিত করে।</li>\r\n<li>ডেডিকেটেড সাপোর্ট: যখন আপনি Oifolio বেছে নেন, আপনি শুধু একটি থিম পাচ্ছেন না; আপনি একটি ডেডিকেটেড সাপোর্ট টিম পাচ্ছেন যা আপনার সম্মুখীন হতে পারে এমন কোনো প্রশ্ন বা সমস্যায় আপনাকে সহায়তা করার জন্য প্রস্তুত</li>\r\n</ul>\r\n<p>সংক্ষেপে, Oifolio-Digital Marketing Theme হল তাদের জন্য চূড়ান্ত পছন্দ যারা একটি শক্তিশালী অনলাইন উপস্থিতির গুরুত্ব বোঝেন। এটি আপনাকে এমন একটি ওয়েবসাইট তৈরি করতে সাহায্য করার জন্য বিস্তৃত বৈশিষ্ট্য এবং কাস্টমাইজেশন বিকল্পগুলি অফার করে যা শুধুমাত্র দুর্দান্ত দেখায় না কিন্তু ফলাফলগুলিও চালায়৷ Oifolio-এর সাথে আপনার ডিজিটাল মার্কেটিং প্রচেষ্টাকে উন্নত করুন এবং আপনার অনলাইন উপস্থিতি পরবর্তী স্তরে নিয়ে যান।</p>', 'Oifolio, ডিজিটাল মার্কেটিং,থিম,শপিফাই ,পিএইচপি ,জে এস', 'Oifolio-ডিজিটাল মার্কেটিং থিম', 'Oifolio-ডিজিটাল মার্কেটিং থিম', '2023-09-23 09:52:17', '2023-10-14 04:20:48');
 INSERT INTO `product_languages` (`id`, `product_id`, `lang_code`, `name`, `description`, `tags`, `seo_title`, `seo_description`, `created_at`, `updated_at`) VALUES
-(46, '23', 'bn', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', '&lt;p&gt;একটি পরিষেবা (SaaS) ল্যান্ডিং পৃষ্ঠা হিসাবে একটি চিত্তাকর্ষক এবং কার্যকর সফ্টওয়্যার তৈরি করা আপনার লক্ষ্য দর্শকদের দৃষ্টি আকর্ষণ করার জন্য এবং দর্শকদের গ্রাহকে রূপান্তর করার জন্য অত্যন্ত গুরুত্বপূর্ণ। এটি অর্জন করার জন্য, আপনার একটি সতর্কতার সাথে তৈরি করা SaaS ল্যান্ডিং সফ্টওয়্যার থিম প্রয়োজন যা শুধুমাত্র আপনার পণ্যের বৈশিষ্ট্যগুলি প্রদর্শন করে না বরং আপনার ব্র্যান্ডের পরিচয় এবং মূল্য প্রস্তাবও প্রকাশ করে৷&lt;/p&gt;\r\n&lt;p&gt;আমাদের SaaS ল্যান্ডিং সফ্টওয়্যার থিম এই সঠিক চাহিদা মেটাতে ডিজাইন করা হয়েছে। একটি মসৃণ এবং আধুনিক ডিজাইনের সাথে, এটি নিশ্চিত করে যে আপনার SaaS পণ্যটি ডিজিটাল ল্যান্ডস্কেপে জ্বলছে। আমাদের থিম থেকে আপনি যা আশা করতে পারেন তা এখানে&lt;/p&gt;\r\n&lt;p&gt;কী ফিচারস:&lt;/p&gt;\r\n&lt;ul&gt;\r\n&lt;li&gt;দৃশ্যত অত্যাশ্চর্য: আমাদের থিমে নজরকাড়া গ্রাফিক্স, মার্জিত টাইপোগ্রাফি এবং একটি পরিষ্কার বিন্যাস রয়েছে যাতে আপনার SaaS অফারটিকে দৃশ্যত আকর্ষণীয় করে তোলা যায়। এটি একটি দীর্ঘস্থায়ী প্রথম ছাপ তৈরি করার জন্য ডিজাইন করা হয়েছে যা দর্শকদের আরও অন্বেষণ করতে উত্সাহিত করে৷&lt;/li&gt;\r\n&lt;li&gt;প্রতিক্রিয়াশীল ডিজাইন: আজকের মোবাইল-চালিত বিশ্বে, আপনার ল্যান্ডিং পৃষ্ঠাটিকে বিভিন্ন ডিভাইস এবং স্ক্রিনের আকারে ত্রুটিহীনভাবে দেখতে এবং কাজ করতে হবে। আমাদের থিমটি সম্পূর্ণরূপে প্রতিক্রিয়াশীল, স্মার্টফোন, ট্যাবলেট এবং ডেস্কটপে একটি বিরামহীন ব্যবহারকারীর অভিজ্ঞতার গ্যারান্টি দেয়।&lt;/li&gt;\r\n&lt;li&gt;ব্যবহারকারী-বান্ধব: আমরা ব্যবহারকারী-বন্ধুত্বকে অগ্রাধিকার দিই, নিশ্চিত করে যে আপনার দর্শকরা আপনার ল্যান্ডিং পৃষ্ঠাটি অনায়াসে নেভিগেট করতে পারে, আপনার সফ্টওয়্যারের বৈশিষ্ট্যগুলি সম্পর্কে জানতে পারে এবং পছন্দসই পদক্ষেপ নিতে পারে, যেমন একটি ট্রায়ালের জন্য সাইন আপ করা বা আপনার পরিষেবাতে সদস্যতা নেওয়া৷&lt;/li&gt;\r\n&lt;li&gt;কাস্টমাইজেশন বিকল্প: আপনার ব্র্যান্ডের পরিচয়ের সাথে মেলে আপনার ল্যান্ডিং পৃষ্ঠাটি সাজানো অপরিহার্য। আমাদের থিম কাস্টমাইজেশন বিকল্পগুলি অফার করে, যা আপনাকে আপনার ব্র্যান্ড নির্দেশিকাগুলির সাথে সারিবদ্ধ করার জন্য রঙ, ফন্ট এবং চিত্রগুলিকে পরিবর্তন করতে দেয়৷&lt;/li&gt;\r\n&lt;li&gt;রূপান্তর-চালিত: শেষ পর্যন্ত, আপনার ল্যান্ডিং পৃষ্ঠার সাফল্য দর্শকদের গ্রাহকে রূপান্তর করার ক্ষমতার উপর নির্ভর করে। আমাদের থিম রূপান্তর অপ্টিমাইজেশন মাথায় রেখে ডিজাইন করা হয়েছে, সাইন-আপ, অনুসন্ধান বা ক্রয়কে উৎসাহিত করতে প্রমাণিত কৌশলগুলি ব্যবহার করে৷&lt;/li&gt;\r\n&lt;li&gt;এসইও-বন্ধুত্বপূর্ণ: সার্চ ইঞ্জিনে আপনার ল্যান্ডিং পৃষ্ঠাটি ভালভাবে স্থান পেয়েছে তা নিশ্চিত করতে, আমরা থিমের মধ্যে SEO সেরা অনুশীলনগুলিকে একীভূত করেছি। এটি আপনার দৃশ্যমানতা উন্নত করতে এবং জৈব ট্রাফিককে আকর্ষণ করতে সহায়তা করে৷&lt;/li&gt;\r\n&lt;li&gt;ইন্টিগ্রেশন রেডি: আপনাকে থার্ড-পার্টি টুলস, পেমেন্ট গেটওয়ে বা অ্যানালিটিক্স প্ল্যাটফর্মের সাথে একীভূত করতে হবে না কেন, আমাদের থিম বিরামবিহীন ইন্টিগ্রেশন সমর্থন করে, আপনার বৃহত্তর প্রযুক্তিগত ইকোসিস্টেমের অংশ হিসেবে আপনার SaaS ল্যান্ডিং পৃষ্ঠার কার্যকারিতা নিশ্চিত করে।&lt;/li&gt;\r\n&lt;li&gt;পারফরম্যান্স-অরিয়েন্টেড: স্লো-লোডিং পেজ দর্শকদের দূরে সরিয়ে দিতে পারে। আমাদের থিম গতি এবং কর্মক্ষমতা জন্য অপ্টিমাইজ করা হয়েছে আপনার বাউন্স রেট কম এবং আপনার ব্যস্ততা উচ্চ রাখতে।&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;সংক্ষেপে, আমাদের SaaS ল্যান্ডিং সফ্টওয়্যার থিম হল তাদের জন্য আদর্শ পছন্দ যারা সফ্টওয়্যার-এ-সার্ভিস-এর প্রতিযোগিতামূলক বিশ্বে একটি শক্তিশালী প্রভাব ফেলতে চান৷ এটি আপনাকে আপনার ব্যবসার লক্ষ্য অর্জনে সহায়তা করার জন্য অত্যাশ্চর্য ভিজ্যুয়াল, ব্যবহারযোগ্যতা এবং রূপান্তর-কেন্দ্রিক নকশাকে একত্রিত করে। আমাদের থিমের সাথে, আপনার SaaS পণ্যের অনলাইন উপস্থিতি এটির প্রাপ্য থাকবে, কার্যকরভাবে গ্রাহকদের আকর্ষণ করবে এবং ধরে রাখবে।&lt;/p&gt;', 'সাস ,ল্যান্ডিং ,সফটওয়্যার,থিম ,জুমলা ,শপিফাই', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', '2023-09-23 09:52:17', '2023-10-14 04:20:48');
+(46, '23', 'bn', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', '&lt;p&gt;একটি পরিষেবা (SaaS) ল্যান্ডিং পৃষ্ঠা হিসাবে একটি চিত্তাকর্ষক এবং কার্যকর সফ্টওয়্যার তৈরি করা আপনার লক্ষ্য দর্শকদের দৃষ্টি আকর্ষণ করার জন্য এবং দর্শকদের গ্রাহকে রূপান্তর করার জন্য অত্যন্ত গুরুত্বপূর্ণ। এটি অর্জন করার জন্য, আপনার একটি সতর্কতার সাথে তৈরি করা SaaS ল্যান্ডিং সফ্টওয়্যার থিম প্রয়োজন যা শুধুমাত্র আপনার পণ্যের বৈশিষ্ট্যগুলি প্রদর্শন করে না বরং আপনার ব্র্যান্ডের পরিচয় এবং মূল্য প্রস্তাবও প্রকাশ করে৷&lt;/p&gt;\r\n&lt;p&gt;আমাদের SaaS ল্যান্ডিং সফ্টওয়্যার থিম এই সঠিক চাহিদা মেটাতে ডিজাইন করা হয়েছে। একটি মসৃণ এবং আধুনিক ডিজাইনের সাথে, এটি নিশ্চিত করে যে আপনার SaaS পণ্যটি ডিজিটাল ল্যান্ডস্কেপে জ্বলছে। আমাদের থিম থেকে আপনি যা আশা করতে পারেন তা এখানে&lt;/p&gt;\r\n&lt;p&gt;কী ফিচারস:&lt;/p&gt;\r\n&lt;ul&gt;\r\n&lt;li&gt;দৃশ্যত অত্যাশ্চর্য: আমাদের থিমে নজরকাড়া গ্রাফিক্স, মার্জিত টাইপোগ্রাফি এবং একটি পরিষ্কার বিন্যাস রয়েছে যাতে আপনার SaaS অফারটিকে দৃশ্যত আকর্ষণীয় করে তোলা যায়। এটি একটি দীর্ঘস্থায়ী প্রথম ছাপ তৈরি করার জন্য ডিজাইন করা হয়েছে যা দর্শকদের আরও অন্বেষণ করতে উত্সাহিত করে৷&lt;/li&gt;\r\n&lt;li&gt;প্রতিক্রিয়াশীল ডিজাইন: আজকের মোবাইল-চালিত বিশ্বে, আপনার ল্যান্ডিং পৃষ্ঠাটিকে বিভিন্ন ডিভাইস এবং স্ক্রিনের আকারে ত্রুটিহীনভাবে দেখতে এবং কাজ করতে হবে। আমাদের থিমটি সম্পূর্ণরূপে প্রতিক্রিয়াশীল, স্মার্টফোন, ট্যাবলেট এবং ডেস্কটপে একটি বিরামহীন ব্যবহারকারীর অভিজ্ঞতার গ্যারান্টি দেয়।&lt;/li&gt;\r\n&lt;li&gt;ব্যবহারকারী-বান্ধব: আমরা ব্যবহারকারী-বন্ধুত্বকে অগ্রাধিকার দিই, নিশ্চিত করে যে আপনার দর্শকরা আপনার ল্যান্ডিং পৃষ্ঠাটি অনায়াসে নেভিগেট করতে পারে, আপনার সফ্টওয়্যারের বৈশিষ্ট্যগুলি সম্পর্কে জানতে পারে এবং পছন্দসই পদক্ষেপ নিতে পারে, যেমন একটি ট্রায়ালের জন্য সাইন আপ করা বা আপনার পরিষেবাতে সদস্যতা নেওয়া৷&lt;/li&gt;\r\n&lt;li&gt;কাস্টমাইজেশন বিকল্প: আপনার ব্র্যান্ডের পরিচয়ের সাথে মেলে আপনার ল্যান্ডিং পৃষ্ঠাটি সাজানো অপরিহার্য। আমাদের থিম কাস্টমাইজেশন বিকল্পগুলি অফার করে, যা আপনাকে আপনার ব্র্যান্ড নির্দেশিকাগুলির সাথে সারিবদ্ধ করার জন্য রঙ, ফন্ট এবং চিত্রগুলিকে পরিবর্তন করতে দেয়৷&lt;/li&gt;\r\n&lt;li&gt;রূপান্তর-চালিত: শেষ পর্যন্ত, আপনার ল্যান্ডিং পৃষ্ঠার সাফল্য দর্শকদের গ্রাহকে রূপান্তর করার ক্ষমতার উপর নির্ভর করে। আমাদের থিম রূপান্তর অপ্টিমাইজেশন মাথায় রেখে ডিজাইন করা হয়েছে, সাইন-আপ, অনুসন্ধান বা ক্রয়কে উৎসাহিত করতে প্রমাণিত কৌশলগুলি ব্যবহার করে৷&lt;/li&gt;\r\n&lt;li&gt;এসইও-বন্ধুত্বপূর্ণ: সার্চ ইঞ্জিনে আপনার ল্যান্ডিং পৃষ্ঠাটি ভালভাবে স্থান পেয়েছে তা নিশ্চিত করতে, আমরা থিমের মধ্যে SEO সেরা অনুশীলনগুলিকে একীভূত করেছি। এটি আপনার দৃশ্যমানতা উন্নত করতে এবং জৈব ট্রাফিককে আকর্ষণ করতে সহায়তা করে৷&lt;/li&gt;\r\n&lt;li&gt;ইন্টিগ্রেশন রেডি: আপনাকে থার্ড-পার্টি টুলস, পেমেন্ট গেটওয়ে বা অ্যানালিটিক্স প্ল্যাটফর্মের সাথে একীভূত করতে হবে না কেন, আমাদের থিম বিরামবিহীন ইন্টিগ্রেশন সমর্থন করে, আপনার বৃহত্তর প্রযুক্তিগত ইকোসিস্টেমের অংশ হিসেবে আপনার SaaS ল্যান্ডিং পৃষ্ঠার কার্যকারিতা নিশ্চিত করে।&lt;/li&gt;\r\n&lt;li&gt;পারফরম্যান্স-অরিয়েন্টেড: স্লো-লোডিং পেজ দর্শকদের দূরে সরিয়ে দিতে পারে। আমাদের থিম গতি এবং কর্মক্ষমতা জন্য অপ্টিমাইজ করা হয়েছে আপনার বাউন্স রেট কম এবং আপনার ব্যস্ততা উচ্চ রাখতে।&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;সংক্ষেপে, আমাদের SaaS ল্যান্ডিং সফ্টওয়্যার থিম হল তাদের জন্য আদর্শ পছন্দ যারা সফ্টওয়্যার-এ-সার্ভিস-এর প্রতিযোগিতামূলক বিশ্বে একটি শক্তিশালী প্রভাব ফেলতে চান৷ এটি আপনাকে আপনার ব্যবসার লক্ষ্য অর্জনে সহায়তা করার জন্য অত্যাশ্চর্য ভিজ্যুয়াল, ব্যবহারযোগ্যতা এবং রূপান্তর-কেন্দ্রিক নকশাকে একত্রিত করে। আমাদের থিমের সাথে, আপনার SaaS পণ্যের অনলাইন উপস্থিতি এটির প্রাপ্য থাকবে, কার্যকরভাবে গ্রাহকদের আকর্ষণ করবে এবং ধরে রাখবে।&lt;/p&gt;', 'সাস ,ল্যান্ডিং ,সফটওয়্যার,থিম ,জুমলা ,শপিফাই', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', 'সাস ল্যান্ডিং সফটওয়্যার মানেজমেন্ট থিম', '2023-09-23 09:52:17', '2023-10-14 04:20:48'),
+(51, '26', 'en', 'Demo Product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'HTML, CSS, PHP, JS', 'Demo Product', 'Demo Product', '2023-10-31 04:59:05', '2023-10-31 06:49:02'),
+(52, '26', 'bn', 'Demo Product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'HTML, CSS, PHP, JS', 'Demo Product', 'Demo Product', '2023-10-31 04:59:05', '2023-10-31 06:49:34');
 
 -- --------------------------------------------------------
 
@@ -2893,7 +2931,8 @@ INSERT INTO `provider_withdraws` (`id`, `user_id`, `method`, `total_amount`, `wi
 (4, 2, 'Bank Payment', 20, 18, 10, 'Test Account', 1, '2023-09-23', '2023-09-23 07:49:23', '2023-09-23 07:49:40'),
 (5, 1, 'Bank Payment', 100, 90, 10, 'My test account number', 1, '2023-09-23', '2023-09-23 07:52:09', '2023-09-23 07:53:39'),
 (6, 1, 'Bank Payment', 60, 54, 10, 'My test account number', 0, NULL, '2023-09-23 07:52:41', '2023-09-23 07:52:41'),
-(7, 1, 'Bank Payment', 25, 22.5, 10, 'My test account number', 1, '2023-09-23', '2023-09-23 07:53:13', '2023-09-23 07:53:27');
+(7, 1, 'Bank Payment', 25, 22.5, 10, 'My test account number', 1, '2023-09-23', '2023-09-23 07:53:13', '2023-09-23 07:53:27'),
+(8, 1, 'Bank Payment', 10, 9, 10, '2222-333-444', 0, NULL, '2023-11-04 15:21:34', '2023-11-04 15:21:34');
 
 -- --------------------------------------------------------
 
@@ -3000,7 +3039,9 @@ INSERT INTO `reviews` (`id`, `product_id`, `order_id`, `variant_id`, `user_id`, 
 (1, 22, 1, NULL, 1, 2, 'Oifolio-Digital Marketing Theme is a robust and user-friendly tool for enhancing your online presence. Its sleek design, extensive features, and excellent customer support make it a strong contender in the digital marketing theme market. While it could benefit from some performance improvements, it offers great value for the investment.', 5, 1, '2023-09-23 08:03:25', '2023-09-23 08:03:41'),
 (2, 19, 2, 29, 1, 2, 'I recently had the opportunity to use Multi-Branch Restaurant Software, and overall, I was quite impressed with its performance and capabilities. This software offers a range of features that make it a valuable tool for various tasks, but it does have a few areas where it could improve.', 5, 1, '2023-09-23 08:20:49', '2023-09-23 08:20:56'),
 (3, 23, 3, NULL, 2, 1, 'The SaaS Landing Software Theme is a cost-effective solution for crafting a sleek SaaS landing page. It&#039;s user-friendly and offers responsive customer support.', 5, 1, '2023-09-23 08:38:44', '2023-09-23 08:38:53'),
-(4, 20, 3, 31, 2, 1, 'It is a great supporting product for single-branch restaurants.', 5, 1, '2023-09-23 08:53:54', '2023-09-23 08:54:01');
+(4, 20, 3, 31, 2, 1, 'It is a great supporting product for single-branch restaurants.', 5, 1, '2023-09-23 08:53:54', '2023-09-23 08:54:01'),
+(6, 1, NULL, NULL, 5, 1, 'test review', 5, 0, '2023-10-28 07:39:37', '2023-10-28 07:39:37'),
+(7, 1, NULL, NULL, 1, 0, 'Test review', 5, 0, '2023-11-04 15:45:50', '2023-11-04 15:45:50');
 
 -- --------------------------------------------------------
 
@@ -3286,6 +3327,32 @@ INSERT INTO `setting_languages` (`id`, `setting_id`, `lang_code`, `subscriber_ti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shopping_carts`
+--
+
+CREATE TABLE `shopping_carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `variant_id` int(11) NOT NULL DEFAULT 0,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  `product_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author_id` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shopping_carts`
+--
+
+INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `variant_id`, `category_id`, `product_type`, `price_type`, `author_id`, `created_at`, `updated_at`) VALUES
+(8, 5, 6, 1, 7, 'image', NULL, 2, '2023-11-05 05:44:01', '2023-11-05 05:44:01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sliders`
 --
 
@@ -3406,7 +3473,7 @@ CREATE TABLE `stripe_payments` (
 --
 
 INSERT INTO `stripe_payments` (`id`, `status`, `stripe_key`, `stripe_secret`, `created_at`, `updated_at`, `image`, `currency_id`) VALUES
-(1, 1, 'pk_test_51LBgDoBsmz7k2BTD4eYrzmvswQIIm6nNmYTCMNSaMXTGde9ay60iJBP2iZhY2Fg6FM1hjk9BE1fudSWSxe6vxojG00gQN55ihb', 'sk_test_51LBgDoBsmz7k2BTDEu7pmlecAU84RwZhOx869Bz0ujoP4hDpyxePhOsepBYANVNey5W9OmUQ6112dZqzcdq4xRmX00l6OEWd8b', NULL, '2023-10-17 11:31:40', 'uploads/website-images/stripe-2023-05-11-05-35-11-6150.png', 1);
+(1, 1, 'pk_test_51LBgDoBsmz7k2BTD4eYrzmvswQIIm6nNmYTCMNSaMXTGde9ay60iJBP2iZhY2Fg6FM1hjk9BE1fudSWSxe6vxojG00gQN55ihb', 'sk_test_51LBgDoBsmz7k2BTDEu7pmlecAU84RwZhOx869Bz0ujoP4hDpyxePhOsepBYANVNey5W9OmUQ6112dZqzcdq4xRmX00l6OEWd8b', NULL, '2023-11-05 15:03:53', 'uploads/website-images/stripe-2023-05-11-05-35-11-6150.png', 1);
 
 -- --------------------------------------------------------
 
@@ -3645,7 +3712,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `email_verified_at`, `password`, `remember_token`, `forget_password_token`, `forget_password_otp`, `status`, `provider_id`, `provider`, `provider_avatar`, `image`, `phone`, `country`, `state`, `city`, `zip_code`, `address`, `is_provider`, `verify_token`, `otp_mail_verify_token`, `email_verified`, `agree_policy`, `designation`, `about_me`, `facebook`, `pinterest`, `linkedIn`, `dribbble`, `twitter`, `my_skill`, `created_at`, `updated_at`) VALUES
 (1, 'Abdullah Mamun', 'abdullah_mamun_577210', 'user@gmail.com', NULL, '$2y$10$YZAEBhLB88UIfCeGdlgfVODPHRFwpO9..wi2yTlcLccDtu9GQZrKm', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'uploads/custom-images/-2023-10-10-10-22-46-7799.png', '22-402-666', 'United State', 'California', 'Los Angeles', NULL, 'California, Los Angeles', 0, NULL, NULL, 1, 0, 'PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.', 'Hello, I’m Abdullah Mamun.\r\nUI, UX, Frontend Development, Backend Development and much more...\r\n\r\nPHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.\r\n\r\nI have been working as a freelancer for more than 10 years. And I have experience at this level as well. If you have special requests, you can contact me by e-mail. I can do what you want in a short time and deliver it in a very clean way.\r\n\r\nYou can contact me faster on Instagram. If you follow and send a message, I will respond to messages within 30 minutes. If you don&#039;t follow me, I won&#039;t see the message because it goes to your other folder.\r\n\r\nThank you.', 'https://facebook.com', 'https://pinterest.com', 'https://linkedin.com', 'https://dribble.com', 'https://twitter.com', 'This is one of the best WordPress Theme. It is clean, user friendly, fully responsive, pixel perfect, modern design with latest WordPress Technologies\r\n\r\nYou can contact me faster on Instagram. If you follow and send a message, I will respond to messages within 30 minutes. If you don&#039;t follow me, I won&#039;t see the message because it goes to your other folder.\r\n\r\n&lt;ul&gt;\r\n&lt;li&gt;Fully Responsive Bootstrap Based (3.x) Latest&lt;/li&gt;\r\n&lt;li&gt;Clean, Modern &amp;amp; Beautiful Design&lt;/li&gt;\r\n&lt;li&gt;4 Unique Header Style&lt;/li&gt;\r\n&lt;li&gt;Elementor Page Builder&lt;/li&gt;\r\n&lt;li&gt;4 Footer Copyright Style&lt;/li&gt;\r\n&lt;li&gt;100% Valid Code&lt;/li&gt;\r\n&lt;li&gt;3000+ Font Icon&lt;/li&gt;\r\n&lt;li&gt;One Click Demo Import&lt;/li&gt;\r\n&lt;li&gt;Powerful Options Panel&lt;/li&gt;\r\n&lt;/ul&gt;', '2023-09-20 06:02:23', '2023-10-10 04:22:46'),
-(2, 'John doe', 'john_doe_926000', 'user2@gmail.com', NULL, '$2y$10$wfqmoO726EWubhQJwEx//ePcGSZyjHRf3oDTe2SaLh3uTnwwflsXS', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'uploads/custom-images/-2023-09-20-12-20-31-4682.jpg', '22-402-667', 'United State', 'California', 'Los Angeles', NULL, 'California, Los Angeles', 0, NULL, NULL, 1, 0, 'John doe', '&lt;p&gt;Hello, I&amp;rsquo;m John Doe.&lt;/p&gt;\r\n&lt;p&gt;UI, UX, Frontend Development, Backend Development and much more...&lt;/p&gt;\r\n&lt;p&gt;PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.&lt;/p&gt;\r\n&lt;p&gt;I have been working as a freelancer for more than 10 years. And I have experience at this level as well. If you have special requests, you can contact me by e-mail. I can do what you want in a short time and deliver it in a very clean way.&lt;/p&gt;\r\n&lt;p&gt;Mail: Demoemail@mail.com&lt;/p&gt;\r\n&lt;p&gt;You can contact me faster on Instagram. If you follow and send a message, I will respond to messages within 30 minutes. If you don&#039;t follow me, I won&#039;t see the message because it goes to your other folder.&lt;/p&gt;\r\n&lt;p&gt;Contact me on Instagram!&lt;/p&gt;\r\n&lt;p&gt;Thank you.&lt;/p&gt;', 'https://facebook.com', 'https://pinterest.com', 'https://linkedin.com', 'https://dribble.com', 'https://twitter.com', '&lt;p&gt;This is one of the best WordPress Theme. It is clean, user friendly, fully responsive, pixel perfect, modern design with latest WordPress Technologies&lt;/p&gt;\r\n&lt;p&gt;Fully Responsive Bootstrap Based (3.x) Latest&lt;/p&gt;\r\n&lt;ul&gt;\r\n&lt;li&gt;Clean, Modern &amp;amp; Beautiful Design&lt;/li&gt;\r\n&lt;li&gt;4 Unique Header Style&lt;/li&gt;\r\n&lt;li&gt;Elementor Page Builder&lt;/li&gt;\r\n&lt;li&gt;4 Footer Copyright Style&lt;/li&gt;\r\n&lt;li&gt;100% Valid Code&lt;/li&gt;\r\n&lt;li&gt;3000+ Font Icon&lt;/li&gt;\r\n&lt;li&gt;One Click Demo Import&lt;/li&gt;\r\n&lt;li&gt;Powerful Options Panel&lt;/li&gt;\r\n&lt;/ul&gt;', '2023-09-20 06:16:49', '2023-09-20 06:20:31');
+(2, 'John doe', 'john_doe_926000', 'user2@gmail.com', NULL, '$2y$10$wfqmoO726EWubhQJwEx//ePcGSZyjHRf3oDTe2SaLh3uTnwwflsXS', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'uploads/custom-images/-2023-09-20-12-20-31-4682.jpg', '22-402-667', 'United State', 'California', 'Los Angeles', NULL, 'California, Los Angeles', 0, NULL, NULL, 1, 0, 'John doe', '&lt;p&gt;Hello, I&amp;rsquo;m John Doe.&lt;/p&gt;\r\n&lt;p&gt;UI, UX, Frontend Development, Backend Development and much more...&lt;/p&gt;\r\n&lt;p&gt;PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.&lt;/p&gt;\r\n&lt;p&gt;I have been working as a freelancer for more than 10 years. And I have experience at this level as well. If you have special requests, you can contact me by e-mail. I can do what you want in a short time and deliver it in a very clean way.&lt;/p&gt;\r\n&lt;p&gt;Mail: Demoemail@mail.com&lt;/p&gt;\r\n&lt;p&gt;You can contact me faster on Instagram. If you follow and send a message, I will respond to messages within 30 minutes. If you don&#039;t follow me, I won&#039;t see the message because it goes to your other folder.&lt;/p&gt;\r\n&lt;p&gt;Contact me on Instagram!&lt;/p&gt;\r\n&lt;p&gt;Thank you.&lt;/p&gt;', 'https://facebook.com', 'https://pinterest.com', 'https://linkedin.com', 'https://dribble.com', 'https://twitter.com', '&lt;p&gt;This is one of the best WordPress Theme. It is clean, user friendly, fully responsive, pixel perfect, modern design with latest WordPress Technologies&lt;/p&gt;\r\n&lt;p&gt;Fully Responsive Bootstrap Based (3.x) Latest&lt;/p&gt;\r\n&lt;ul&gt;\r\n&lt;li&gt;Clean, Modern &amp;amp; Beautiful Design&lt;/li&gt;\r\n&lt;li&gt;4 Unique Header Style&lt;/li&gt;\r\n&lt;li&gt;Elementor Page Builder&lt;/li&gt;\r\n&lt;li&gt;4 Footer Copyright Style&lt;/li&gt;\r\n&lt;li&gt;100% Valid Code&lt;/li&gt;\r\n&lt;li&gt;3000+ Font Icon&lt;/li&gt;\r\n&lt;li&gt;One Click Demo Import&lt;/li&gt;\r\n&lt;li&gt;Powerful Options Panel&lt;/li&gt;\r\n&lt;/ul&gt;', '2023-09-20 06:16:49', '2023-09-20 06:20:31'),
+(5, 'Ripon', 'ripon_161847', 'ripon@gmail.com', NULL, '$2y$10$x/pX3cVjk3A4r7InARGR9ureUGWYxEFdPkaChpg.IWFSSA.5pWCXa', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'uploads/custom-images/-2023-10-30-07-31-13-2181.png', '22-402-6666', 'United State', 'California', 'Los Angeles', NULL, 'California, Los Angeles', 0, NULL, '440110', 0, 0, 'PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.', 'Hello, I’m Abdullah Mamun.', 'https://facebook.com', 'https://pinterest.com', 'https://linkedin.com', 'https://dribble.com', 'https://twitter.com', 'PHP, HTML5, CSS3, jQuery, Web Design, UI - UX Design.', '2023-10-22 03:41:28', '2023-11-05 04:17:42'),
+(7, 'Chandra', 'chandra_984570', 'chandra@gmail.com', NULL, '$2y$10$MaSzRjPA/3RGNhpGfHvD5.ovaensLiVvSTtbYxkJ6rW.HpRFHlbiG', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-04 16:24:15', '2023-11-04 16:30:34');
 
 -- --------------------------------------------------------
 
@@ -3684,8 +3753,7 @@ INSERT INTO `wishlists` (`id`, `user_id`, `author_id`, `product_id`, `created_at
 (16, 2, 1, 4, '2023-09-23 07:20:50', '2023-09-23 07:20:50'),
 (17, 1, 2, 22, '2023-09-30 03:53:04', '2023-09-30 03:53:04'),
 (18, 1, 1, 23, '2023-09-30 04:01:02', '2023-09-30 04:01:02'),
-(19, 1, 1, 20, '2023-09-30 04:18:23', '2023-09-30 04:18:23'),
-(20, 1, 2, 21, '2023-09-30 04:49:10', '2023-09-30 04:49:10');
+(19, 1, 1, 20, '2023-09-30 04:18:23', '2023-09-30 04:18:23');
 
 -- --------------------------------------------------------
 
@@ -4274,6 +4342,12 @@ ALTER TABLE `setting_languages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shopping_carts`
+--
+ALTER TABLE `shopping_carts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -4486,7 +4560,7 @@ ALTER TABLE `complete_requests`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contact_pages`
@@ -4696,7 +4770,7 @@ ALTER TABLE `message_documents`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
 -- AUTO_INCREMENT for table `multi_currencies`
@@ -4708,13 +4782,13 @@ ALTER TABLE `multi_currencies`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `our_teams`
@@ -4780,13 +4854,13 @@ ALTER TABLE `privacy_policy_languages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `product_discounts`
@@ -4816,7 +4890,7 @@ ALTER TABLE `product_item_languages`
 -- AUTO_INCREMENT for table `product_languages`
 --
 ALTER TABLE `product_languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `product_type_pages`
@@ -4834,7 +4908,7 @@ ALTER TABLE `product_type_page_languages`
 -- AUTO_INCREMENT for table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `provider_client_reports`
@@ -4846,7 +4920,7 @@ ALTER TABLE `provider_client_reports`
 -- AUTO_INCREMENT for table `provider_withdraws`
 --
 ALTER TABLE `provider_withdraws`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pusher_credentails`
@@ -4870,7 +4944,7 @@ ALTER TABLE `refund_requests`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `script_contents`
@@ -4919,6 +4993,12 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `setting_languages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `shopping_carts`
+--
+ALTER TABLE `shopping_carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -5002,13 +5082,13 @@ ALTER TABLE `testimonial_languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `withdraw_methods`
