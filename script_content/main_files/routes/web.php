@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\User\PaypalController;
-use App\Http\Controllers\API\User\PaypalController as APIPaypalController;
+use App\Http\Controllers\Api\User\PaypalController as APIPaypalController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\SliderController;
@@ -92,7 +92,7 @@ use App\Http\Controllers\Provider\ProviderDashboardController;
 use App\Http\Controllers\Provider\AppointmentScheduleController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 
-use App\Http\Controllers\API\User\PaymentController as APIPaymentController;
+use App\Http\Controllers\Api\User\PaymentController as APIPaymentController;
 
 Route::group(['middleware' => ['demo','XSS']], function () {
 
