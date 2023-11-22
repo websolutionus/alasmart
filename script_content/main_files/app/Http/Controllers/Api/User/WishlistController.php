@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use Auth;
 use Session;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\Language;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -13,9 +14,27 @@ use App\Http\Controllers\Controller;
 class WishlistController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function translator($lang_code){
         $front_lang = Session::put('front_lang', $lang_code);
         config(['app.locale' => $lang_code]);
+    }
+
+    public function wishlist(Request $request){
+        $this->translator($request->lang_code);
+        $setting = Setting::first();
+        $user = Auth::guard('api')->user();
+        $wishlists=Wishlist::with('product')->where('user_id', $user->id)->get();
+
+        return response()->json([
+            'user' => $user,
+            'wishlists' => $wishlists,
+            'setting' => $setting,
+        ]);
     }
 
     public function add_wishlist(Request $request, $product_id){

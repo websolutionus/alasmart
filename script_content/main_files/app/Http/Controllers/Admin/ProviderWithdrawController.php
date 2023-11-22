@@ -26,6 +26,7 @@ class ProviderWithdrawController extends Controller
         if($request->provider_id){
             $withdraws = $withdraws->where('user_id', $request->provider_id);
         }
+        
         $setting = Setting::first();
 
         return view('admin.provider_withdraw', compact('withdraws','setting'));

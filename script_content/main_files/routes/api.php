@@ -98,7 +98,7 @@ Route::group(['middleware' => ['maintainance']], function () {
 
     Route::get('download-existing-file/{file_name}', [UserProfileController::class, 'download_existing_file'])->name('download-existing-file');
 
-
+    Route::get('wishlist', [WishlistController::class, 'wishlist'])->name('wishlist');
     Route::post('/add/wishlist/{product_id}', [WishlistController::class, 'add_wishlist'])->name('add-wishlist');
     Route::delete('/delete/wishlist/{id}', [WishlistController::class, 'delete_wishlist'])->name('delete-wishlist');
 
