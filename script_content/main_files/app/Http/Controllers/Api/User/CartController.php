@@ -141,11 +141,23 @@ class CartController extends Controller
         $discount_amount = 0.00;
         $total_amount = $sub_total_amount - $discount_amount;
 
+        $product_arr=[];
+        foreach($carts as $cart){
+            $product_arr[]=$cart->id;
+        }
+        $products=Product::whereIn('id', $product_arr)->groupBy('category_id')->select('category_id')->get();
+        $category_arr=[];
+        foreach($products as $product){
+            $category_arr[]=$product->category_id;
+        }
+        $products=Product::with('productlangfrontend','category', 'author', 'variants')->whereIn('category_id', $category_arr)->whereNotIn('id', $product_arr)->where('status', 1)->get()->take(3);
+
         return response()->json([
             'cart_items' => $carts,
             'sub_total_amount' => $sub_total_amount,
             'discount_amount' => $discount_amount,
             'total_amount' => $total_amount,
+            'related_products' => $products,
         ]);
     }
 

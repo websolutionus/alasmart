@@ -751,7 +751,7 @@ class UserProfileController extends Controller
             'address'=>'required',
             'about_me'=>'required',
             'my_skill'=>'required',
-            'image' => 'file|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
         ];
         $customMessages = [
             'name.required' => trans('user_validation.Name is required'),

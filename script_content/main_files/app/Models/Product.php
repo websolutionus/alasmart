@@ -11,6 +11,28 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $appends = ['totalSold','averageRating','totalRating','totalComment'];
+
+    public function getTotalSoldAttribute()
+    {
+        return $this->sold_items();
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->average_rating();
+    }
+
+    public function getTotalRatingAttribute()
+    {
+        return $this->total_rating();
+    }
+
+    public function getTotalCommentAttribute()
+    {
+        return $this->total_comment();
+    }
+
     public function category(){
         return $this->belongsTo(Category::class, 'category_id')->with('catlangfrontend');
     }
@@ -21,6 +43,22 @@ class Product extends Model
 
     public function variants(){
         return $this->hasMany(ProductVariant::class);
+    }
+
+    public function sold_items(){
+        return $this->hasMany(OrderItem::class)->count();
+    }
+
+    public function average_rating(){
+        return $this->hasMany(Review::class)->where('status', 1)->average('rating');
+    }
+
+    public function total_rating(){
+        return $this->hasMany(Review::class)->where('status', 1)->count();
+    }
+
+    public function total_comment(){
+        return $this->hasMany(ProductComment::class)->where('status', 1)->count();
     }
 
     public function productlangfrontend()

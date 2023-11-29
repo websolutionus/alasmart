@@ -61,7 +61,6 @@ class AuthorProfileController extends Controller
         $setting = Setting::first();
         $seller = User::where('user_name', $slug)->first();
         $products = Product::with('productlangfrontend', 'category','author')->where(['author_id' => $seller->id, 'status' => 1])->orderBy('id','desc')->select('id','name','slug','thumbnail_image','regular_price','category_id','author_id','status','approve_by_admin')->paginate(10);
-        
         $recaptchaSetting = GoogleRecaptcha::first();
 
         return response()->json([

@@ -645,7 +645,7 @@ class HomeController extends Controller
 
         $this->translator($request->lang_code);
 
-        $user = Auth::guard('web')->user();
+        $user = Auth::guard('api')->user();
 
         $paginateComentQty = CustomPagination::whereId('7')->first()->qty;
 
@@ -658,7 +658,7 @@ class HomeController extends Controller
         $variants=ProductVariant::where('product_id', $product->id)->get();
         $first_variant=ProductVariant::where('product_id', $product->id)->first();
         $productComments=ProductComment::with('user')->where(['product_id'=>$product->id, 'status'=>1])->latest()->paginate($paginateComentQty);
-        $productReviews=Review::where(['product_id'=>$product->id, 'status'=>1])->latest()->paginate($paginateReviewQty);
+        $productReviews=Review::with('user')->where(['product_id'=>$product->id, 'status'=>1])->latest()->paginate($paginateReviewQty);
         $total_sale=OrderItem::where('Product_id', $product->id)->get()->count();
         $script_content = ScriptContent::first();
         $recaptchaSetting = GoogleRecaptcha::first();

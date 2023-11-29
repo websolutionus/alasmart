@@ -42,6 +42,7 @@ use App\Models\RazorpayPayment;
 use App\Models\InstamojoPayment;
 use App\Models\AdditionalService;
 use App\Models\PaystackAndMollie;
+use App\Models\SslcommerzPayment;
 use Illuminate\Support\Facades\DB;
 use Mollie\Laravel\Facades\Mollie;
 use App\Models\AppointmentSchedule;
@@ -69,6 +70,7 @@ class PaymentController extends Controller
         $instamojo = InstamojoPayment::with('currency')->first();
         $flutterwave = Flutterwave::with('currency')->first();
         $bankPayment = BankPayment::first();
+        $sslcommerz = SslcommerzPayment::with('currency')->first();
 
         return response()->json([
             'paypal' => $paypal,
@@ -79,6 +81,7 @@ class PaymentController extends Controller
             'instamojo' => $instamojo,
             'flutterwave' => $flutterwave,
             'bankPayment' => $bankPayment,
+            'sslcommerz' => $sslcommerz,
         ]);
     }
 
