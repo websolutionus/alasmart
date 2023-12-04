@@ -571,7 +571,7 @@ class HomeController extends Controller
         if($request->max_price){
             $max_price = $request->max_price;
         }else if($get_max_product_price){
-            $max_price = $get_max_product_price->regular_price * session()->get('currency_rate');
+            $max_price = $get_max_product_price->regular_price * $request->currency_rate;
         }else{
             $max_price = 0;
         }
@@ -595,13 +595,13 @@ class HomeController extends Controller
             if($request->min_price == 0){
                 $minPrice = $request->min_price;
             }else{
-                $minPrice = $request->min_price / session()->get('currency_rate');
+                $minPrice = $request->min_price / $request->currency_rate;
             }
             $products = $products->where('regular_price', '>=', $minPrice);
         }
 
         if($request->max_price){
-            $maxPrice = $request->max_price / session()->get('currency_rate');
+            $maxPrice = $request->max_price / $request->currency_rate;
             $products = $products->where('regular_price', '<=', $maxPrice);
         }
 
